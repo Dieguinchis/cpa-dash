@@ -1,0 +1,28 @@
+<ion-content>
+  <ion-row>
+    <ion-col size=5></ion-col>
+    <ion-col size=2>
+      <ion-card>
+        <ion-item (click)="crear_servicio()" lines="none">
+          <ion-label><b>Crear un nuevo servicio</b></ion-label>
+          <ion-button class="boton_nuevo_servicio" slot="end">    
+            <ion-icon color="primary" name="duplicate-outline"></ion-icon>
+          </ion-button>
+       </ion-item>
+      </ion-card>
+    </ion-col>
+    <ion-col size=5></ion-col>
+  </ion-row>
+
+  <div>
+    <ion-item lines="none" class="titulo_lista_servicios">
+      <ion-label style="text-align: center;">Lista de servicios</ion-label>  
+    </ion-item>
+    <ion-item lines="full" *ngFor="let servicio of servicios" class="lista_servicios">
+      <ion-label>
+        {{servicio}}
+      </ion-label> 
+    </ion-item>
+  </div>
+
+</ion-content>

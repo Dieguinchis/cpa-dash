@@ -1,0 +1,59 @@
+<div>
+  <ion-item lines="full">
+    <ion-label position="floating" style="text-align: center;">Ingrese el nombre del servicio</ion-label>
+    <ion-input></ion-input>
+  </ion-item>
+
+  <div *ngFor="let campo of campos; let i = index">
+    <ion-item lines="full">
+      <ion-grid>
+        <ion-row>
+          <ion-item lines="none">
+            <ion-col>
+              <ion-label>Ingrese titulo del campo:  </ion-label>
+            </ion-col>
+            <ion-col>
+              <ion-input [(ngModel)]="campo.nombre"></ion-input>
+            </ion-col>
+          </ion-item>
+        </ion-row>
+        <ion-row>
+          <ion-item lines="none">
+            <ion-label>
+              Seleccione tipo de campo
+            </ion-label>
+            <ion-select [(ngModel)]="campo.tipo">
+              <ion-select-option value="input">Input</ion-select-option>
+              <ion-select-option value="select">Select</ion-select-option>
+            </ion-select>
+          </ion-item>
+        </ion-row>
+        <div *ngIf="campo.tipo == 'select'">
+          <ion-item lines="none" *ngFor="let opcion of campo.opciones; let j = index">
+              <ion-label>Ingrese la opcion:  </ion-label>
+              <ion-input [(ngModel)]="campo.opciones[j].opcion"></ion-input>
+          </ion-item>  
+          <ion-item lines="none">
+              <ion-label style="text-align: center;">
+                Agregar opcion
+              </ion-label>
+              <ion-button (click)="agregar_opcion_select(i)">
+                <ion-icon name="add-outline"></ion-icon>
+              </ion-button>
+          </ion-item>
+        </div>
+      </ion-grid>  
+    </ion-item>
+  </div>
+
+  <ion-item lines="full">
+    <ion-label>
+      Agregar campo
+    </ion-label>
+    <ion-button (click)="agregar_campo_formulario()">
+      <ion-icon name="add-outline"></ion-icon>
+    </ion-button>
+  </ion-item>
+</div>
+
+<ion-button (click)="faf()">FAFA</ion-button>

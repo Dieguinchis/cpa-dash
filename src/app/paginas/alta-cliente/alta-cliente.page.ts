@@ -1,0 +1,31 @@
+import { Component, OnInit } from '@angular/core';
+import { AltaClientesApiService } from './servicios/alta-clientes-api.service'
+
+@Component({
+  selector: 'app-alta-cliente',
+  templateUrl: './alta-cliente.page.html',
+  styleUrls: ['./alta-cliente.page.scss'],
+})
+export class AltaClientePage implements OnInit {
+
+  constructor(private api_clientes: AltaClientesApiService) { }
+
+  razon_social: string;
+  telefono: number;
+  email: string;
+  direccion: string;
+
+  ngOnInit() {
+  }
+
+  cargar_cliente(){
+    this.api_clientes.alta_cliente({'razon_social_cliente':this.razon_social,
+                                  'telefono':this.telefono, 
+                                  'email': this.email,
+                                  'direccion': this.direccion}).subscribe(data => {
+
+      console.log(data)}),(error =>
+        console.log(error))
+  }
+
+}
