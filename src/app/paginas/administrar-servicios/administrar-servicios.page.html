@@ -15,13 +15,16 @@
   </ion-row>
 
   <div>
-    <ion-item lines="none" class="titulo_lista_servicios">
-      <ion-label style="text-align: center;">Lista de servicios</ion-label>  
+    <ion-item lines="full" class="titulo_lista_servicios">
+      <ion-label style="text-align: center;"><b>Servicios</b></ion-label>  
     </ion-item>
     <ion-item lines="full" *ngFor="let servicio of servicios" class="lista_servicios">
-      <ion-label>
-        {{servicio}}
+      <ion-label style="text-align: center;">
+        <b>{{servicio.nombre_servicio}}</b>
       </ion-label> 
+      <ion-buttons>
+        <ion-icon name="enter-outline"></ion-icon>
+      </ion-buttons>
     </ion-item>
   </div>
 

@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { ApiServiciosService } from './servicios/api-servicios.service'
+import { ApiServiciosService } from '../servicios/api-servicios.service'
 
 @Component({
   selector: 'app-crear-servicio',
@@ -24,7 +24,7 @@ export class CrearServicioPage implements OnInit {
   }
 
   agregar_opcion_select(i){
-    this.formulario[i].opciones.push('');
+    this.formulario[i].opciones.push({opcion: ''});
   }
 
   crear_servicio(){

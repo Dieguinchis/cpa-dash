@@ -31,7 +31,7 @@
         <div *ngIf="campo.tipoCampo == 'select'">
           <ion-item lines="none" *ngFor="let opcion of campo.opciones; let j = index">
             <ion-label>Ingrese la opcion: </ion-label>
-            <ion-input [(ngModel)]="campo.opciones[j]"></ion-input>  
+            <ion-input [(ngModel)]="campo.opciones[j].opcion"></ion-input>  
           </ion-item>  
           <ion-item lines="none">
             <ion-label style="text-align: center;">

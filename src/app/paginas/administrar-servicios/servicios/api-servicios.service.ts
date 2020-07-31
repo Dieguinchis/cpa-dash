@@ -24,5 +24,9 @@ export class ApiServiciosService {
   crear_servicio(parametros){
     return this.http.post(this.apiDir+'/servicios/crear',parametros,this.requestOptions);
   }
+
+  mostrar_servicios(){
+    return this.http.get(this.apiDir+'/servicios');
+  }
    
 }
