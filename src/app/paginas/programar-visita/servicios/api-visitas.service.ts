@@ -5,7 +5,7 @@ import { HttpClientModule } from '@angular/common/http'
 @Injectable({
   providedIn: 'root'
 })
-export class ApiClientesService {
+export class ApiVisitasService {
   private requestOptions
   headers : any
 
@@ -28,8 +28,14 @@ export class ApiClientesService {
     return this.http.get(this.apiDir+'/clientes/'+id);
   }
 
-  alta_sucursal(datos){
-    return this.http.post(this.apiDir+'/sucursales/crear',datos,this.requestOptions);
+  mostrar_servicios(){
+    return this.http.get(this.apiDir+'/servicios');
   }
+
+  crear_visita(parametros){
+    return this.http.post(this.apiDir+'/visitas/crear',parametros,this.requestOptions);
+  }
+
+
 
 }

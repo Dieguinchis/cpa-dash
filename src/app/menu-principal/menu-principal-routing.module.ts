@@ -30,13 +30,17 @@ const routes: Routes = [
       loadChildren: () => import('../paginas/programar-visita/programar-visita.module').then( m => m.ProgramarVisitaPageModule)
     },
     {
+      path: 'ver-cliente/:id_cliente',
+      loadChildren: () => import('../paginas/administrar-clientes/ver-cliente/ver-cliente.module').then( m => m.VerClientePageModule)
+    },
+    {
       path: 'alta-cliente',
       loadChildren: () => import('../paginas/alta-cliente/alta-cliente.module').then( m => m.AltaClientePageModule)
     },
-      {
-        path: 'administrar-servicios',
-        loadChildren: () => import('../paginas/administrar-servicios/administrar-servicios.module').then( m => m.AdministrarServiciosPageModule)
-      }
+    {
+      path: 'administrar-servicios',
+      loadChildren: () => import('../paginas/administrar-servicios/administrar-servicios.module').then( m => m.AdministrarServiciosPageModule)
+    }  
     ]
   },
   {

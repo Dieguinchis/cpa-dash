@@ -1,3 +1,40 @@
 <ion-content>
 
+    <ion-item style="margin-top: 15px;">
+        <ion-label fixed style="text-align: center;">Seleccionar un cliente</ion-label>
+        <ion-select (ionChange)="sucursalesCliente($event.target.value)">
+            <ion-select-option *ngFor="let cliente of listado_clientes" value="{{cliente.id_cliente}}">{{cliente.razon_social_cliente}}</ion-select-option>
+        </ion-select>
+    </ion-item>
+    
+    <ion-item>
+        <ion-label fixed style="text-align: center;">Seleccionar una sucursal</ion-label>
+        <ion-select [(ngModel)]="sucursal_elegida">
+            <ion-select-option *ngFor="let sucursal of listado_sucursales_cliente" value="{{sucursal.id_sucursal}}">{{sucursal.razon_social_sucursal}}</ion-select-option>
+        </ion-select>
+    </ion-item>
+
+    <ion-item>
+        <ion-label fixed style="text-align: center;">Seleccionar servicios a ofrecer</ion-label>
+        <ion-select [(ngModel)]="servicios_elegidos"multiple="true">
+            <ion-select-option *ngFor="let servicio of listado_servicios" value="{{servicio.id_servicio}}">{{servicio.nombre_servicio}}</ion-select-option>
+        </ion-select>
+    </ion-item>
+
+    <ion-item>
+        <ion-label fixed style="text-align: center;">Elegir una fecha</ion-label>
+        <ion-datetime [(ngModel)]="fecha_elegida" [monthNames]="monthNames" [dayNames]="dayNames" displayFormat="DDDD D MMMM YYYY HH:mm" min="{{fecha_actual}}" max="2022" value="{{fecha_actual}}"></ion-datetime>
+    </ion-item>
+
+    <div style="width: 100%; text-align: center;">
+        <ion-button>Cancelar</ion-button>  
+        <ion-button (click)="programarVisita()">Programar</ion-button>
+    </div>
+     
+        
+    <div style="margin-top: 25px">
+        <img class="imagen_empresa" src='../../../assets/LogoCPA-01.png'>
+    </div>
+    
+
 </ion-content>
