@@ -3,6 +3,7 @@ import { ActivatedRoute } from '@angular/router';
 import { ApiClientesService } from '../servicios/api-clientes.service'
 import { ModalController } from '@ionic/angular';
 import { AltaSucursalPage } from './alta-sucursal/alta-sucursal.page'
+import { VerSucursalPage } from './ver-sucursal/ver-sucursal.page'
 
 @Component({
   selector: 'app-ver-cliente',
@@ -33,6 +34,18 @@ export class VerClientePage implements OnInit {
       cssClass: 'my-custom-class',
       componentProps: {
         'id_cliente': id_cliente
+      }
+    });
+    return await modal.present();
+  }
+
+  async verSucursal(id_sucursal) {
+    let id_cliente = this.activatedRoute.snapshot.paramMap.get('id_cliente');
+    const modal = await this.modalController.create({
+      component: VerSucursalPage,
+      cssClass: 'my-custom-class',
+      componentProps: {
+        'id_sucursal': id_sucursal
       }
     });
     return await modal.present();

@@ -11,6 +11,10 @@ const routes: Routes = [
   {
     path: 'alta-sucursal',
     loadChildren: () => import('./alta-sucursal/alta-sucursal.module').then( m => m.AltaSucursalPageModule)
+  },
+  {
+    path: 'ver-sucursal',
+    loadChildren: () => import('./ver-sucursal/ver-sucursal.module').then( m => m.VerSucursalPageModule)
   }
 ];
 
