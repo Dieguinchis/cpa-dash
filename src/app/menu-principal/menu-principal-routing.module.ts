@@ -22,10 +22,6 @@ const routes: Routes = [
       loadChildren: () => import('../paginas/administrar-clientes/administrar-clientes.module').then( m => m.AdministrarClientesPageModule)
     },
     {
-      path: 'ver-visitas',
-      loadChildren: () => import('../paginas/ver-visitas/ver-visitas.module').then( m => m.VerVisitasPageModule)
-    },
-    {
       path: 'programar-visita',
       loadChildren: () => import('../paginas/programar-visita/programar-visita.module').then( m => m.ProgramarVisitaPageModule)
     },

@@ -1,9 +1,40 @@
-<ion-header>
-  <ion-toolbar>
-    <ion-title></ion-title>
-  </ion-toolbar>
-</ion-header>
-
 <ion-content>
-
+  <ion-item lines="full">
+    <ion-grid>
+      <ion-row style="margin-bottom: 10px;margin-top: 10px;">
+        <ion-label><b>Sucursal:</b> {{sucursal.sucursal[0].razon_social_sucursal}}</ion-label>
+      </ion-row>
+      <ion-row style="margin-bottom: 10px;">
+        <ion-label><b>Telefono de la sucursal:</b> {{sucursal.sucursal[0].telefono_sucursal}}</ion-label>
+      </ion-row>  
+      <ion-row style="margin-bottom: 10px;">
+        <ion-label style="text-align: center;"><b>Email de la sucursal:</b> {{sucursal.sucursal[0].email_sucursal}}</ion-label>
+      </ion-row> 
+    </ion-grid>
+  </ion-item>
+  <div *ngIf="sucursal">
+    <ion-item style="text-align: center;" lines="none">
+      <ion-label><b>Planos de la sucursal</b></ion-label>
+      <ion-icon slot="end" name="add-circle-outline" color="primary"></ion-icon>
+    </ion-item>
+    <ion-slides pager="true" [options]="sliderConfig" style="background-color: secondary">
+      <ion-slide *ngFor= "let plano of sucursal.planos">
+        <ion-card>
+          <img src={{plano.url_imagen_plano}}  class="qr">
+        </ion-card>  
+      </ion-slide>
+    </ion-slides>
+  </div>
+  <ion-card>
+    <ion-card-header style="text-align: center;">
+      <ion-label style="text-align: center;">
+        <b>Codigo QR de la sucursal</b>
+      </ion-label>
+    </ion-card-header>
+    <ion-card-content>
+      <div class="imagen_qr">
+        <img [src]='sucursal.sucursal[0].codigo_qr'>
+      </div>
+    </ion-card-content> 
+  </ion-card>
 </ion-content>

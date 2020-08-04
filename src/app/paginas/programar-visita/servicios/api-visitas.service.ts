@@ -25,7 +25,7 @@ export class ApiVisitasService {
   }
 
   informacion_cliente(id){
-    return this.http.get(this.apiDir+'/clientes/'+id);
+    return this.http.get(this.apiDir+'/clientes/id/'+id);
   }
 
   mostrar_servicios(){

@@ -63,6 +63,7 @@ export class ProgramarVisitaPage implements OnInit {
                            'servicios': this.servicios_elegidos,
                            'fecha_visita': this.fecha_elegida}).subscribe(data => {
                               console.log(data)
+                              location.reload();
                            }), (error =>{
                              console.log(error)
                            })

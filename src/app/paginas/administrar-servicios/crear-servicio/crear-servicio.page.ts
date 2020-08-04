@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ApiServiciosService } from '../servicios/api-servicios.service'
+import { NavController } from '@ionic/angular';
 
 @Component({
   selector: 'app-crear-servicio',
@@ -8,7 +9,7 @@ import { ApiServiciosService } from '../servicios/api-servicios.service'
 })
 export class CrearServicioPage implements OnInit {
 
-  constructor(private api_servicios: ApiServiciosService) { }
+  constructor(private api_servicios: ApiServiciosService, private navCtrl: NavController) { }
 
   private formulario = [];
   private servicio : {}
@@ -28,10 +29,9 @@ export class CrearServicioPage implements OnInit {
   }
 
   crear_servicio(){
-
-  
      this.api_servicios.crear_servicio(this.servicio).subscribe(data => {
       console.log(data)
+      location.reload();
     }), (error =>
       console.log(error))
   }

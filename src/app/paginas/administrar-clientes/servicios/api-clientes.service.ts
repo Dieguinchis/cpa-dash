@@ -25,11 +25,15 @@ export class ApiClientesService {
   }
 
   informacion_cliente(id){
-    return this.http.get(this.apiDir+'/clientes/'+id);
+    return this.http.get(this.apiDir+'/clientes/id/'+id);
   }
 
   alta_sucursal(datos){
     return this.http.post(this.apiDir+'/sucursales/crear',datos,this.requestOptions);
+  }
+
+  informacion_sucursal(id){
+    return this.http.get(this.apiDir+'/sucursales/id/'+id);
   }
 
 }

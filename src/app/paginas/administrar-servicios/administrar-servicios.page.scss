@@ -1,8 +1,6 @@
 .titulo_lista_servicios{
     text-align: center;
     font-size: 35px;
-    width: 40%;
-    margin-left: 30%;
     --background: transparent;
 }
 
@@ -15,4 +13,8 @@
 
 .boton_nuevo_servicio{
     --background: transparent;
+}
+
+ion-item{
+    width: 100%;
 }
