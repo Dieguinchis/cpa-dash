@@ -5,6 +5,14 @@ const routes: Routes = [
   {
     path: '',
     loadChildren: () => import('./menu-principal/menu-principal.module').then( m => m.MenuPrincipalPageModule)
+  },
+  {
+    path: 'login',
+    loadChildren: () => import('./login/login.module').then( m => m.LoginPageModule)
+  },
+  {
+    path: 'administrar-tecnicos',
+    loadChildren: () => import('./paginas/administrar-tecnicos/administrar-tecnicos.module').then( m => m.AdministrarTecnicosPageModule)
   }
 ];
 

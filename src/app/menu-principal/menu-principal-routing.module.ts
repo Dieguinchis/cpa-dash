@@ -36,6 +36,10 @@ const routes: Routes = [
     {
       path: 'administrar-servicios',
       loadChildren: () => import('../paginas/administrar-servicios/administrar-servicios.module').then( m => m.AdministrarServiciosPageModule)
+    },
+    {
+      path: 'administrar-tecnicos',
+      loadChildren: () => import('../paginas/administrar-tecnicos/administrar-tecnicos.module').then( m => m.AdministrarTecnicosPageModule)
     }  
     ]
   },

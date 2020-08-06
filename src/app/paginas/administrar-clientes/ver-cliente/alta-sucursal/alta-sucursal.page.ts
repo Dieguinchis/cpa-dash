@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { NavParams } from '@ionic/angular';
+import { NavParams, ModalController } from '@ionic/angular';
 import { ApiClientesService } from '.././../servicios/api-clientes.service'
 
 @Component({
@@ -9,7 +9,7 @@ import { ApiClientesService } from '.././../servicios/api-clientes.service'
 })
 export class AltaSucursalPage implements OnInit {
 
-  constructor(private navParams: NavParams, private api: ApiClientesService) { }
+  constructor(private navParams: NavParams, private api: ApiClientesService, private modalCtrl: ModalController) { }
 
   public id_cliente = this.navParams.get('id_cliente');
   public razon_social: string;
@@ -28,9 +28,18 @@ export class AltaSucursalPage implements OnInit {
                             'telefono_sucursal': this.telefono,
                             'email_sucursal': this.email}).subscribe(data => {
                               console.log(data)
+                              location.reload();
                             }), (error => {
                               console.log(error)
                             })
   }
+
+  cancelar(){
+    // using the injected ModalController this page
+    // can "dismiss" itself and optionally pass back data
+    this.modalCtrl.dismiss({
+      'dismissed': true
+    });
+}
 
 }
