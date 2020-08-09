@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
+import { Storage } from '@ionic/storage';
 
 @Component({
   selector: 'app-menu-principal',
@@ -7,9 +9,17 @@ import { Component, OnInit } from '@angular/core';
 })
 export class MenuPrincipalPage implements OnInit {
 
-  constructor() { }
+  constructor(
+    public router:Router,
+    public storage: Storage) { }
 
   ngOnInit() {
+  }
+
+  logout(){
+    this.storage.remove('token');
+    this.router.navigate(['/login']);
+    console.log('te deslogueaste capo');
   }
 
 }

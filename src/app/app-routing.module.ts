@@ -1,10 +1,12 @@
 import { NgModule } from '@angular/core';
 import { PreloadAllModules, RouterModule, Routes } from '@angular/router';
+import { LoginGuardsGuard } from "./guards/login-guards.guard";
 
 const routes: Routes = [
   {
     path: '',
-    loadChildren: () => import('./menu-principal/menu-principal.module').then( m => m.MenuPrincipalPageModule)
+    loadChildren: () => import('./menu-principal/menu-principal.module').then( m => m.MenuPrincipalPageModule),
+    canActivate: [LoginGuardsGuard]
   },
   {
     path: 'login',
