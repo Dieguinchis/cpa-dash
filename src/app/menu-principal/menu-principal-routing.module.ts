@@ -9,12 +9,12 @@ const routes: Routes = [
     component: MenuPrincipalPage,
     children: [
      {
-      path: 'inicio',
-      loadChildren: () => import('../paginas/inicio/inicio.module').then(m => m.InicioPageModule)
+      path: 'administrar-clientes',
+      loadChildren: () => import('../paginas/administrar-clientes/administrar-clientes.module').then(m => m.AdministrarClientesPageModule)
      },
      {
        path: '',
-       redirectTo: '/menu-inferior/inicio',
+       redirectTo: '/menu-inferior/administrar-clientes',
        pathMatch: 'full'
      },
     {
@@ -45,7 +45,7 @@ const routes: Routes = [
   },
   {
     path: '',
-    redirectTo: '/menu-principal/inicio',
+    redirectTo: '/menu-principal/administrar-clientes',
     pathMatch: 'full'
   }
 ];

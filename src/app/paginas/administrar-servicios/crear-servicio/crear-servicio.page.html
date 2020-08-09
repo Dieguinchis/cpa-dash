@@ -4,6 +4,13 @@
       <ion-label style="text-align: left;">Nombre del servicio: </ion-label>
       <ion-input [(ngModel)]="servicio.nombreDelServicio"></ion-input>
     </ion-item>
+    <ion-item lines="full">
+      <ion-label style="text-align: left;">Requiere QR?</ion-label>
+      <ion-select [(ngModel)]="servicio.requiereQR">
+        <ion-select-option value="1">Si</ion-select-option>
+        <ion-select-option value="0">No</ion-select-option>
+      </ion-select>
+    </ion-item>
 
     <div *ngFor="let campo of formulario; let i = index">
       <ion-item lines="full">
@@ -24,8 +31,8 @@
                 Seleccione tipo de campo
               </ion-label>
               <ion-select [(ngModel)]="campo.tipoCampo">
-                <ion-select-option value="input">Input</ion-select-option>
-                <ion-select-option value="select">Select</ion-select-option>
+                <ion-select-option value="input">Escritura</ion-select-option>
+                <ion-select-option value="select">Seleccionable</ion-select-option>
               </ion-select>
             </ion-item>
           </ion-row>
