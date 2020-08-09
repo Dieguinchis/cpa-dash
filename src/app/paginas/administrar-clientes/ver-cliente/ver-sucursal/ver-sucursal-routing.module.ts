@@ -7,6 +7,10 @@ const routes: Routes = [
   {
     path: '',
     component: VerSucursalPage
+  },
+  {
+    path: 'alta-workstation',
+    loadChildren: () => import('./alta-workstation/alta-workstation.module').then( m => m.AltaWorkstationPageModule)
   }
 ];
 

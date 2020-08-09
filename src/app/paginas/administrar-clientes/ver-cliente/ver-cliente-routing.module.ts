@@ -15,6 +15,10 @@ const routes: Routes = [
   {
     path: 'ver-sucursal',
     loadChildren: () => import('./ver-sucursal/ver-sucursal.module').then( m => m.VerSucursalPageModule)
+  },
+  {
+    path: 'ver-visita',
+    loadChildren: () => import('./ver-visita/ver-visita.module').then( m => m.VerVisitaPageModule)
   }
 ];
 

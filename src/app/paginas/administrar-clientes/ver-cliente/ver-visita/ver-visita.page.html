@@ -1,0 +1,37 @@
+<ion-content>
+  <div *ngIf="!visita" style="text-align: center;">
+    <ion-spinner></ion-spinner>
+  </div>
+  <div *ngIf="visita">
+    <ion-item lines="full">
+      <ion-label><b>Técnico a cargo de la visita:</b> {{visita.visitas.nombre_tecnico}} {{visita.visitas.apellido_tecnico}}</ion-label>
+    </ion-item>
+    <ion-item lines="full">
+      <ion-label><b>Fecha de concluida la visita:</b></ion-label>
+    </ion-item>
+    <ion-item lines="full">
+      <ion-label><b>Cliente:</b> {{visita.visitas.razon_social_cliente}}</ion-label>
+    </ion-item>
+    <ion-item lines="full">
+      <ion-label><b>Sucursal:</b> {{visita.visitas.razon_social_sucursal}}</ion-label>
+    </ion-item>
+    <ion-item lines="full">
+      <ion-label><b>Servicios ofrecidos:</b>
+        <div *ngFor="let servicio of visita.servicios" style="margin-left:10px; margin-top: 10px">
+          <ion-icon name="document-outline" color="primary"></ion-icon>
+          {{servicio.nombre_servicio}}
+        </div>
+      </ion-label>
+    </ion-item>
+    <div>
+      <ion-button expand="full">Ver PDF</ion-button>
+    </div>
+  </div>
+
+  <div>
+    <img class="imagen_empresa" src='../../../assets/LogoCPA-01.png'>
+  </div>
+
+</ion-content>
+
+

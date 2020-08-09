@@ -4,15 +4,14 @@
       <ion-label style="text-align: center;"><b>Tecnicos</b></ion-label>
       <ion-button (click)="altaTecnico()">Agregar tecnico</ion-button>
     </ion-item>
-    <ion-item lines="full">
+    <ion-item lines="full" class="titulos">
       <ion-col size="1"></ion-col>
-      <ion-col size="2"><b>Nombre</b></ion-col>
-      <ion-col size="2"><b>Apellido</b></ion-col>
-      <ion-col size="2"><b>DNI</b></ion-col>
-      <ion-col size="2"><b>Email</b></ion-col>
-      <ion-col size="2"><b>Telefono</b></ion-col>
+      <ion-col size="2"><ion-label><b>Nombre</b></ion-label></ion-col>
+      <ion-col size="2"><ion-label><b>Apellido</b></ion-label></ion-col>
+      <ion-col size="2"><ion-label><b>DNI</b></ion-label></ion-col>
+      <ion-col size="2"><ion-label><b>Email</b></ion-label></ion-col>
+      <ion-col size="2"><ion-label><b>Telefono</b></ion-label></ion-col>
     </ion-item>     
-  
     <div *ngIf="tecnicos">
         <div *ngFor="let tecnico of tecnicos">
           <ion-item lines="full">

@@ -1,0 +1,19 @@
+<ion-content>
+  <ion-item lines="full">
+    <ion-label>Nombre del workstation: </ion-label>
+    <ion-input [(ngModel)]="nombre_workstation"></ion-input>
+  </ion-item>
+  <ion-item lines="full">
+    <ion-label>Servicio que cumple</ion-label>
+    <ion-select [(ngModel)]="id_servicio">
+      <div *ngFor="let servicio of servicios">
+        <div *ngIf="servicio.qr == 1">
+          <ion-select-option value={{servicio.id_servicio}}>{{servicio.nombre_servicio}}</ion-select-option>
+        </div>
+      </div>
+    </ion-select>
+  </ion-item>
+  <div style="text-align: center;">
+    <ion-button expand="full" (click)="alta_workstation()">Dar de alta</ion-button>
+  </div>
+</ion-content>

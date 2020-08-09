@@ -36,4 +36,8 @@ export class ApiClientesService {
     return this.http.get(this.apiDir+'/sucursales/id/'+id);
   }
 
+  informacion_visita(id){
+    return this.http.get(this.apiDir+'/visitas/id/'+id);
+  }
+
 }

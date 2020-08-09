@@ -23,7 +23,7 @@ export class LoginPage implements OnInit {
       this.status = data;
       this.status = this.status.status;
       if(this.status == 'OK'){
-        console.log('FAFA')
+        
       }
       
     }),(error => {

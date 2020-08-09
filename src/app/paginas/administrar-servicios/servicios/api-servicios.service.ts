@@ -28,5 +28,9 @@ export class ApiServiciosService {
   mostrar_servicios(){
     return this.http.get(this.apiDir+'/servicios');
   }
+
+  alta_workstation(parametros){
+    return this.http.post(this.apiDir+'/servicios/equipos/crear',parametros,this.requestOptions);
+  }
    
 }

@@ -96,7 +96,9 @@
             <ion-col size="4">{{visita.razon_social_sucursal}}</ion-col>
             <ion-col size="3">{{visita.estado_visita}}</ion-col>
             <ion-col size="1">
-              <ion-icon color="primary" name="enter-outline"></ion-icon>
+              <div *ngIf="visita.estado_visita == 'finalizada'">
+                <ion-icon color="primary" name="enter-outline" (click)="verVisita(visita.id_visita)"></ion-icon>
+              </div>
             </ion-col>
           </ion-item>
         </div>
