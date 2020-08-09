@@ -30,7 +30,7 @@ export class AltaWorkstationPage implements OnInit {
   }
 
   alta_workstation(){
-    this.object = {nombre_equipo:this.nombre_workstation, id_servicio: this.id_servicio, id_sucursal:this.id_sucursal};
+    this.object = {nombre_equipos:this.nombre_workstation, id_servicio: this.id_servicio, id_sucursal:this.id_sucursal};
     this.api_servicios.alta_workstation(this.object).subscribe(data => {
       console.log(data)
     }), (error => {

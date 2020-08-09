@@ -15,18 +15,25 @@ export class VerSucursalPage implements OnInit {
   public id_sucursal = this.navParams.get('id_sucursal');
   public sucursal: any;
   public QR
-  public workstations = []
+  public workstations: any;
 
   ngOnInit() {
     this.api_sucursales.informacion_sucursal(this.id_sucursal).subscribe(data => {
       this.sucursal = data;
       this.sucursal = this.sucursal.result;
-      console.log(this.sucursal.sucursal[0].codigo_qr)
-      this.workstations = []
+    }), (error => {
+      console.log(error)
+    })
+    this.api_sucursales.listado_workstations(this.id_sucursal).subscribe(data => {
+      console.log(data)
+      this.workstations = data;
+      this.workstations = this.workstations.result;
+      console.log(this.workstations)
     }), (error => {
       console.log(error)
     })
   }
+  
 
   async altaWorkstation(){
     const modal = await this.modalController.create({

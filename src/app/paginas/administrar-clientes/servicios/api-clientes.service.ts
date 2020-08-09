@@ -40,4 +40,8 @@ export class ApiClientesService {
     return this.http.get(this.apiDir+'/visitas/id/'+id);
   }
 
+  listado_workstations(id){
+    return this.http.get(this.apiDir+'/servicios/equipos/sucursal/'+id);
+  }
+
 }
