@@ -44,4 +44,12 @@ export class ApiClientesService {
     return this.http.get(this.apiDir+'/servicios/equipos/sucursal/'+id);
   }
 
+  borrar_equipo(id_equipo){
+    return this.http.post(this.apiDir+'/servicios/eliminarEquipos/'+id_equipo,this.requestOptions);
+  }
+
+  subir_planos(parametros){
+    return this.http.post(this.apiDir+'/planos/crear', parametros, this.requestOptions)
+  }
+
 }

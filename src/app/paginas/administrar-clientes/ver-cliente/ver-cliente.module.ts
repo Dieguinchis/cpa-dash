@@ -7,6 +7,7 @@ import { IonicModule } from '@ionic/angular';
 import { VerClientePageRoutingModule } from './ver-cliente-routing.module';
 
 import { VerClientePage } from './ver-cliente.page';
+import { NgxImageCompressService } from 'ngx-image-compress';
 
 @NgModule({
   imports: [
@@ -15,6 +16,7 @@ import { VerClientePage } from './ver-cliente.page';
     IonicModule,
     VerClientePageRoutingModule
   ],
+  providers: [NgxImageCompressService],
   declarations: [VerClientePage]
 })
 export class VerClientePageModule {}
