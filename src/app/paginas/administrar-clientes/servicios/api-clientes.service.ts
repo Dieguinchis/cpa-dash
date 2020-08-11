@@ -52,4 +52,13 @@ export class ApiClientesService {
     return this.http.post(this.apiDir+'/planos/crear', parametros, this.requestOptions)
   }
 
+  crear_pdf(id_visita){
+    return this.http.post(this.apiDir+'/pdf/create-pdf',id_visita,this.requestOptions);
+  }
+
+  ver_pdf(id_visita){
+    return this.http.get(this.apiDir+'/pdf/fetch-pdf/'+id_visita);
+  }
+
+
 }

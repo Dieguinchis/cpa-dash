@@ -22,6 +22,7 @@ export class VerSucursalPage implements OnInit {
   public workstations: any;
   public loading;
   imagen = [];
+  object:any;
 
   ngOnInit() {
     this.actualizar_informacion();
@@ -75,8 +76,8 @@ export class VerSucursalPage implements OnInit {
       this.imageCompress.compressFile(image, orientation, 50, 50).then(
         result => {
           console.log(result);
-          this.imagen.push({url: result})
-          console.log('rodri1', this.imagen);
+          this.imagen[0] = {url: result}
+          console.log('rodri1', this.imagen[0]);
           console.log('rodri2', this.sucursal.sucursal[0].id_sucursal)
           this.subirPlano(this.imagen);
         }
@@ -92,8 +93,11 @@ export class VerSucursalPage implements OnInit {
     });
     await this.loading.present();
     if (this.imagen.length > 0){
-      this.api_sucursales.subir_planos({"id_sucursal": this.sucursal.sucursal[0].id_sucursal, "imagen": this.imagen[0].url}).subscribe(data =>{
+      this.object = {id_sucursal:this.sucursal.sucursal[0].id_sucursal, imagen: this.imagen[0].url}
+      console.log(this.object);
+      this.api_sucursales.subir_planos(this.object).subscribe(data =>{
         console.log(data)
+        this.actualizar_informacion();
         this.loading.dismiss();
       }, (error =>{
         this.loading.dismiss();
