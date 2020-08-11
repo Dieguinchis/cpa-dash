@@ -23,11 +23,11 @@
         </div>
       </ion-label>
     </ion-item>
-    <div>
+    <div *ngIf="!pdf_generado">
       <ion-button expand="full" (click)="generar_pdf()">Generar PDF</ion-button>
     </div>
-    <div>
-      <ion-button expand="full" (click)="ver_pdf()">Ver PDF</ion-button>
+    <div *ngIf="pdf_generado">
+      <ion-button expand="full" (click)="ver_pdf()" color="success">Ver PDF</ion-button>
     </div>
   </div>
 
