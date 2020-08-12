@@ -28,4 +28,8 @@ export class ServicioTecnicosService {
   alta_tecnico(datos){
     return this.http.post(this.apiDir+'/tecnicos/crear',datos,this.requestOptions);
   }
+
+  baja_tecnico(id_tecnico){
+    return this.http.delete(this.apiDir+'/tecnicos/eliminar/'+id_tecnico)
+  }
 }

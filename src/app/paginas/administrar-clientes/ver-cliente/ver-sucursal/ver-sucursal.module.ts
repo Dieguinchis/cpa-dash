@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
+import { NgxImageCompressService } from "ngx-image-compress";
 
 import { IonicModule } from '@ionic/angular';
 
@@ -15,6 +16,7 @@ import { VerSucursalPage } from './ver-sucursal.page';
     IonicModule,
     VerSucursalPageRoutingModule
   ],
+  providers: [NgxImageCompressService],
   declarations: [VerSucursalPage]
 })
 export class VerSucursalPageModule {}
