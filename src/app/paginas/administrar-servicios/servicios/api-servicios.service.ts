@@ -10,7 +10,7 @@ export class ApiServiciosService {
   private requestOptions
   headers : any
 
-  private apiDir = "http://appbackendcpa.herokuapp.com";
+  private apiDir = "http://186.60.130.65:3000";
 
 
   constructor(public http: HttpClient) {
