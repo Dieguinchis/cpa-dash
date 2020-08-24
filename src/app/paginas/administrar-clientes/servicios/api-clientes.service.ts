@@ -9,7 +9,7 @@ export class ApiClientesService {
   private requestOptions
   headers : any
 
-  private apiDir = "http://186.60.130.65:3000";
+  private apiDir = "http://cpaserver1.ddns.net:3000";
 
 
   constructor(public http: HttpClient) {

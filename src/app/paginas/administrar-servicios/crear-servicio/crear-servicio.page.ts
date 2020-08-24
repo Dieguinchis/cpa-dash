@@ -11,8 +11,8 @@ export class CrearServicioPage implements OnInit {
 
   constructor(private api_servicios: ApiServiciosService, private navCtrl: NavController) { }
 
-  private formulario = [];
-  private servicio : {}
+  public formulario = [];
+  public servicio:any = {}
 
   
 

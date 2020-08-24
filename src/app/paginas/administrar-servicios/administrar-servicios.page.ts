@@ -12,7 +12,7 @@ export class AdministrarServiciosPage implements OnInit {
 
   constructor(public modalController: ModalController, private api: ApiServiciosService) { }
 
-  private servicios: any;
+  public servicios: any;
 
   ngOnInit() {
 

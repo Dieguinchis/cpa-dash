@@ -104,7 +104,7 @@
       <ion-label><b>Planos de la sucursal</b></ion-label>
       <ion-icon slot="end" name="add-circle-outline" color="primary" (click)="agregar_plano()"></ion-icon>
     </ion-item>
-    <ion-slides pager="true" [options]="sliderConfig" style="background-color: secondary">
+    <ion-slides pager="true" style="background-color: secondary">
       <ion-slide *ngFor= "let plano of sucursal.planos">
         <ion-card>
           <img src={{plano.url_imagen_plano}}  class="planos">
