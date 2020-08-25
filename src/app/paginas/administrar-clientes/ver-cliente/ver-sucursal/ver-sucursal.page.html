@@ -39,7 +39,9 @@
           <ion-col size="2">
             <ion-card style="width: 50px; margin-top: 0px;">
               <div>
-                <img [src]='sucursal.sucursal[0].codigo_qr'>
+                <a [href]="sucursal.sucursal[0].codigo_qr" download>
+                  <img [src]='sucursal.sucursal[0].codigo_qr'>
+                </a>
               </div>
             </ion-card>
           </ion-col>
@@ -85,7 +87,9 @@
           <ion-col size="2">
             <ion-card style="width: 50px; margin-top: 0px;">
               <div>
-                <img [src]='equipo.codigo_qr_equipo'>
+                <a [href]="equipo.codigo_qr_equipo" download>
+                  <img [src]='equipo.codigo_qr_equipo'>
+                </a>
               </div>
             </ion-card>
           </ion-col>
