@@ -1,0 +1,48 @@
+<ion-header>
+  <ion-toolbar style="text-align: center;">
+    <ion-title>Modificar sucursal</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content *ngIf="sucursal">
+  <ion-item lines="full">
+    <ion-label class="titulos">
+      Razon social:
+    </ion-label>
+    <ion-input [(ngModel)]="razon_social">
+    </ion-input>
+  </ion-item>
+
+  <ion-item lines="full">
+    <ion-label class="titulos" >
+      Telefono:
+    </ion-label>
+    <ion-input [(ngModel)]="telefono">
+    </ion-input>
+  </ion-item>
+
+  <ion-item lines="full">
+    <ion-label class="titulos" >
+      Email:
+    </ion-label>
+    <ion-input [(ngModel)]="email">
+    </ion-input>
+  </ion-item>
+
+  <ion-item lines="full">
+    <ion-label class="titulos" >
+      Direccion:
+    </ion-label>
+    <ion-input [(ngModel)]="direccion">
+    </ion-input>
+  </ion-item>
+
+  <div style="width: 100%; text-align: center; margin-top: 10px;">
+    <ion-button (click)="modificar_sucursal()">Modificar</ion-button>   
+  </div>
+
+  <div style="margin-top: 25px">
+    <img class="imagen_empresa" src='../../../assets/LogoCPA-01.png'>
+  </div>
+
+</ion-content>

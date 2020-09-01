@@ -19,6 +19,10 @@ const routes: Routes = [
   {
     path: 'ver-visita',
     loadChildren: () => import('./ver-visita/ver-visita.module').then( m => m.VerVisitaPageModule)
+  },
+  {
+    path: 'modificar-sucursal',
+    loadChildren: () => import('./modificar-sucursal/modificar-sucursal.module').then( m => m.ModificarSucursalPageModule)
   }
 ];
 

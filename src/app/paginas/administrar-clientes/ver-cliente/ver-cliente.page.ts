@@ -5,6 +5,7 @@ import { ModalController, AlertController } from '@ionic/angular';
 import { AltaSucursalPage } from './alta-sucursal/alta-sucursal.page'
 import { VerSucursalPage } from './ver-sucursal/ver-sucursal.page'
 import { VerVisitaPage } from './ver-visita/ver-visita.page'
+import { ModificarSucursalPage } from './modificar-sucursal/modificar-sucursal.page'
 
 @Component({
   selector: 'app-ver-cliente',
@@ -92,6 +93,17 @@ export class VerClientePage implements OnInit {
 
     }), (error =>
       console.log(error))
+  }
+
+  async modificar_sucursal(id_sucursal){
+    const modal = await this.modalController.create({
+      component: ModificarSucursalPage,
+      cssClass: 'my-custom-class',
+      componentProps: {
+        'id_sucursal': id_sucursal
+      }
+    });
+    return await modal.present();
   }
 
 }

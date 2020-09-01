@@ -35,7 +35,7 @@ export class ModificarClientePage implements OnInit {
 
   modificar_cliente(){
     this.objeto = {id_cliente: this.id_cliente, razon_social_cliente: this.razon_social,
-    direccion: this.direccion, telefono: this.direccion, email: this.email}
+    direccion: this.direccion, telefono: this.telefono, email: this.email}
     console.log(this.objeto);
     this.api_clientes.modificar_cliente(this.objeto).subscribe(data => {
       console.log(data);

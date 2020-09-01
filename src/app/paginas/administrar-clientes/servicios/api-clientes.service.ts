@@ -52,6 +52,10 @@ export class ApiClientesService {
     return this.http.post(this.apiDir+'/planos/crear', parametros, this.requestOptions)
   }
 
+  ver_sucursal(id_sucursal){
+    return this.http.get(this.apiDir+'/sucursales/id/'+id_sucursal)
+  }
+
   crear_pdf(id_visita){
     return this.http.post(this.apiDir+'/pdf/create-pdf',id_visita,this.requestOptions);
   }
@@ -66,6 +70,10 @@ export class ApiClientesService {
 
   eliminar_cliente(id_cliente){
     return this.http.post(this.apiDir+'/clientes/eliminar/'+id_cliente,this.requestOptions)
+  }
+
+  modificar_sucursal(parametros){
+    return this.http.post(this.apiDir+'/sucursales/actualizar',parametros,this.requestOptions)
   }
 
 
