@@ -26,14 +26,12 @@ export class AdministrarClientesPage implements OnInit {
        { 
           text: 'No',
           handler: () => {
-            
           }
         },
         {
           text: 'Si',
           handler: () => {
             this.eliminar_cliente(id_cliente);
-            this.actualizar_informacion();
           }
         }
       ]
@@ -42,7 +40,11 @@ export class AdministrarClientesPage implements OnInit {
   }
 
   eliminar_cliente(id_cliente){
-    console.log(id_cliente)
+    this.api_clientes.eliminar_cliente(id_cliente).subscribe(data =>{
+      this.actualizar_informacion(), (error =>{
+      console.log(error)
+      })
+    })
   }
 
   actualizar_informacion(){

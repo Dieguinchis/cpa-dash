@@ -60,5 +60,13 @@ export class ApiClientesService {
     return this.http.get(this.apiDir+'/pdf/fetch-pdf/'+id_visita);
   }
 
+  modificar_cliente(parametros){
+    return this.http.post(this.apiDir+'/clientes/actualizar',parametros,this.requestOptions)
+  }
+
+  eliminar_cliente(id_cliente){
+    return this.http.post(this.apiDir+'/clientes/eliminar/'+id_cliente,this.requestOptions)
+  }
+
 
 }
