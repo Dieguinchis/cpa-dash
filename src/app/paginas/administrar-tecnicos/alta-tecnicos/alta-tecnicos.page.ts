@@ -14,6 +14,8 @@ export class AltaTecnicosPage implements OnInit {
   dni: number;
   telefono: number;
   email: string;
+  usuario: any;
+  password: any;
 
   constructor(private api_tecnicos: ServicioTecnicosService, public modalCtrl: ModalController) { }
 
@@ -21,11 +23,14 @@ export class AltaTecnicosPage implements OnInit {
   }
 
   alta_tecnico(){
+    console.log(this.usuario)
     this.api_tecnicos.alta_tecnico({nombre_tecnico: this.nombre,
                                   apellido_tecnico: this.apellido,
                                   dni: this.dni,
                                   telefono: this.telefono,
-                                  email: this.email}).subscribe(data => {
+                                  email: this.email,
+                                  user: this.usuario,
+                                  clave: this.password}).subscribe(data => {
                                     console.log(data)
                                     location.reload();
                                   }), (error =>
