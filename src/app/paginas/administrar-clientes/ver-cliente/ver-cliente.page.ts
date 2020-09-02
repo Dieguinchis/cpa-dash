@@ -81,7 +81,11 @@ export class VerClientePage implements OnInit {
   }
 
   eliminar_sucursal(id_sucursal){
-    console.log(id_sucursal)
+    this.api_clientes.eliminar_sucursal(id_sucursal).subscribe(data => {
+      console.log(data)
+    }, (error =>{
+      console.log(error)
+    }))
   }
 
   actualizar_informacion(){
@@ -103,6 +107,9 @@ export class VerClientePage implements OnInit {
         'id_sucursal': id_sucursal
       }
     });
+    modal.onDidDismiss().then(data =>{
+      this.actualizar_informacion();
+    })
     return await modal.present();
   }
 
