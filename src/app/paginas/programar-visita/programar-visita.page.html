@@ -22,6 +22,13 @@
     </ion-item>
 
     <ion-item>
+        <ion-label fixed style="text-align: center;">Seleccionar técnico a cargo</ion-label>
+        <ion-select [(ngModel)]="tecnico_elegido">
+            <ion-select-option *ngFor="let tecnico of listado_tecnicos" value="{{tecnico.id_tecnico}}">{{tecnico.nombre_tecnico}} {{tecnico.apellido_tecnico}}</ion-select-option>
+        </ion-select>
+    </ion-item>
+
+    <ion-item>
         <ion-label fixed style="text-align: center;">Elegir una fecha</ion-label>
         <ion-datetime [(ngModel)]="fecha_elegida" [monthNames]="monthNames" [dayNames]="dayNames" displayFormat="DDDD D MMMM YYYY HH:mm" min="{{fecha_actual}}" max="2022" value="{{fecha_actual}}"></ion-datetime>
     </ion-item>
@@ -29,7 +36,7 @@
     <div style="width: 100%; text-align: center;">
         <ion-button (click)="programarVisita()">Agendar</ion-button>
     </div>
-     
+
         
     <div style="margin-top: 25px">
         <img class="imagen_empresa" src='../../../assets/LogoCPA-01.png'>
