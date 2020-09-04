@@ -69,6 +69,7 @@ export class ProgramarVisitaPage implements OnInit {
   }
 
   programarVisita(){
+    console.log(this.servicios_elegidos)
     this.api.crear_visita({'id_cliente': this.id_cliente_elegido,
                           'id_tecnico': this.tecnico_elegido,
                           'id_sucursal': this.sucursal_elegida,

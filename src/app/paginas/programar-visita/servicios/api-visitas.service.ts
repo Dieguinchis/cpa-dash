@@ -36,6 +36,10 @@ export class ApiVisitasService {
     return this.http.post(this.apiDir+'/visitas/crear',parametros,this.requestOptions);
   }
 
+  modificar_visita(parametros){
+    return this.http.post(this.apiDir+'/visitas/update',parametros,this.requestOptions);
+  }
+
 
 
 }

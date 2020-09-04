@@ -23,6 +23,10 @@ const routes: Routes = [
   {
     path: 'modificar-sucursal',
     loadChildren: () => import('./modificar-sucursal/modificar-sucursal.module').then( m => m.ModificarSucursalPageModule)
+  },
+  {
+    path: 'modificar-visita',
+    loadChildren: () => import('./modificar-visita/modificar-visita.module').then( m => m.ModificarVisitaPageModule)
   }
 ];
 

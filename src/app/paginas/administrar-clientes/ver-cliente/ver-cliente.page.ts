@@ -6,6 +6,7 @@ import { AltaSucursalPage } from './alta-sucursal/alta-sucursal.page'
 import { VerSucursalPage } from './ver-sucursal/ver-sucursal.page'
 import { VerVisitaPage } from './ver-visita/ver-visita.page'
 import { ModificarSucursalPage } from './modificar-sucursal/modificar-sucursal.page'
+import { ModificarVisitaPage } from './modificar-visita/modificar-visita.page'
 
 @Component({
   selector: 'app-ver-cliente',
@@ -105,6 +106,20 @@ export class VerClientePage implements OnInit {
       cssClass: 'my-custom-class',
       componentProps: {
         'id_sucursal': id_sucursal
+      }
+    });
+    modal.onDidDismiss().then(data =>{
+      this.actualizar_informacion();
+    })
+    return await modal.present();
+  }
+
+  async modificarVisita(id_visita){
+    const modal = await this.modalController.create({
+      component: ModificarVisitaPage,
+      cssClass: 'my-custom-class',
+      componentProps: {
+        'id_visita': id_visita
       }
     });
     modal.onDidDismiss().then(data =>{
