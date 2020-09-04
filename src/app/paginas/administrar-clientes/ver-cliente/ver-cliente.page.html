@@ -98,12 +98,7 @@
             <ion-col size="4">{{visita.razon_social_sucursal}}</ion-col>
             <ion-col size="3">{{visita.estado_visita}}</ion-col>
             <ion-col size="1">
-              <div *ngIf="visita.estado_visita == 'pendiente'">
-                <ion-icon name="create-outline" (click)="modificarVisita(visita.id_visita)"></ion-icon>
-              </div>
-              <div *ngIf="visita.estado_visita == 'finalizada'">
-                <ion-icon color="primary" name="enter-outline" (click)="verVisita(visita.id_visita)"></ion-icon>
-              </div>
+              <ion-icon color="primary" name="enter-outline" (click)="verVisita(visita.id_visita)"></ion-icon>
             </ion-col>
           </ion-item>
         </div>

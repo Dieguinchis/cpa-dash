@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { NavParams } from '@ionic/angular';
+import { NavParams, ModalController } from '@ionic/angular';
 import { ApiClientesService } from '../../servicios/api-clientes.service'
+import { ModificarVisitaPage } from '../modificar-visita/modificar-visita.page'
 
 
 
@@ -16,20 +17,12 @@ export class VerVisitaPage implements OnInit {
   public url;
   public pdf_generado:boolean = false;
 
-  constructor(private navParams: NavParams, private api_visitas: ApiClientesService) { }
+  constructor(private navParams: NavParams, private api_visitas: ApiClientesService, private modalController: ModalController) { }
 
   
 
   ngOnInit() {
-    
-    console.log(this.id_visita)
-    this.api_visitas.informacion_visita(this.id_visita).subscribe(data => {
-      this.visita = data;
-      this.visita = this.visita.result;
-      console.log(this.visita)
-    }), (error => {
-      console.log(error)
-    })
+    this.actualizar_informacion()
   }
 
   generar_pdf(){
@@ -52,8 +45,30 @@ export class VerVisitaPage implements OnInit {
     }, error => {
       console.log(error)
     })
+  }
 
-    
+  actualizar_informacion(){
+    this.api_visitas.informacion_visita(this.id_visita).subscribe(data => {
+      this.visita = data;
+      this.visita = this.visita.result;
+      console.log(this.visita)
+    }), (error => {
+      console.log(error)
+    })
+  }
+
+  async modificar_visita(){
+    const modal = await this.modalController.create({
+      component: ModificarVisitaPage,
+      cssClass: 'my-custom-class',
+      componentProps: {
+        'id_visita': this.id_visita
+      }
+    });
+    modal.onDidDismiss().then(data =>{
+      this.actualizar_informacion();
+    })
+    return await modal.present();
   }
 
 }

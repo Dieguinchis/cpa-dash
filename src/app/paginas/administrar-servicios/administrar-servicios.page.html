@@ -1,23 +1,12 @@
 <ion-content>
-  <ion-row>
-    <ion-col size=5></ion-col>
-    <ion-col size=2>
-      <ion-card>
-        <ion-item (click)="crear_servicio()" lines="none">
-          <ion-label><b>Crear un nuevo servicio</b></ion-label>
-          <ion-button class="boton_nuevo_servicio" slot="end">    
-            <ion-icon color="primary" name="duplicate-outline"></ion-icon>
-          </ion-button>
-       </ion-item>
-      </ion-card>
-    </ion-col>
-    <ion-col size=5></ion-col>
-  </ion-row>
-
+  
   <div style="margin-left: 30%; width: 40%;">
     <ion-card style="text-align: center;">
       <ion-item lines="full" class="titulo_lista_servicios" style="margin-bottom: 20px;">
         <ion-label style="text-align: center;"><b>Servicios</b></ion-label>  
+        <ion-button (click)="crear_servicio()">
+          Crear servicio
+        </ion-button>
       </ion-item>
       <ion-item lines="full" *ngFor="let servicio of servicios" class="lista_servicios">
         <ion-label style="text-align: left;">

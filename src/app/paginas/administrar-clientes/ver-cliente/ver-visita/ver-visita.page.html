@@ -6,9 +6,16 @@
     <ion-item lines="full">
       <ion-label><b>Técnico a cargo de la visita:</b> {{visita.visitas.nombre_tecnico}} {{visita.visitas.apellido_tecnico}}</ion-label>
     </ion-item>
-    <ion-item lines="full">
-      <ion-label><b>Fecha de concluida la visita:</b> {{visita.visitas.horario_salida}}</ion-label>
-    </ion-item>
+    <div *ngIf="visita.visitas.horario_salida != 'NULL'">
+      <ion-item lines="full">
+        <ion-label><b>Fecha de concluida la visita:</b> {{visita.visitas.horario_salida}}</ion-label>
+      </ion-item>
+    </div>
+    <div *ngIf="visita.visitas.horario_salida == 'NULL'">
+      <ion-item>
+        <ion-label><b>Fecha estimada de la visita:</b> {{visita.visitas.fecha_visita | date: 'dd/MM/yyyy hh:mm'}}</ion-label>
+      </ion-item>
+    </div>
     <ion-item lines="full">
       <ion-label><b>Cliente:</b> {{visita.visitas.razon_social_cliente}}</ion-label>
     </ion-item>
@@ -23,11 +30,16 @@
         </div>
       </ion-label>
     </ion-item>
-    <div *ngIf="!pdf_generado">
-      <ion-button expand="full" (click)="generar_pdf()">Generar PDF</ion-button>
+    <div *ngIf="visita.visitas.horario_salida != 'NULL'">
+      <div *ngIf="!pdf_generado">
+        <ion-button expand="full" (click)="generar_pdf()">Generar PDF</ion-button>
+      </div>
+      <div *ngIf="pdf_generado">
+        <ion-button expand="full" (click)="ver_pdf()" color="success">Ver PDF</ion-button>
+      </div>
     </div>
-    <div *ngIf="pdf_generado">
-      <ion-button expand="full" (click)="ver_pdf()" color="success">Ver PDF</ion-button>
+    <div *ngIf="visita.visitas.horario_salida == 'NULL'">
+      <ion-button expand="full" (click)="modificar_visita()">Modificar visita</ion-button>
     </div>
   </div>
 

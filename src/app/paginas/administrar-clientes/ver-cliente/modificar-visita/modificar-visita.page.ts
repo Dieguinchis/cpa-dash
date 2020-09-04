@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { NavParams } from '@ionic/angular';
+import { NavParams, ModalController } from '@ionic/angular';
 import * as moment from 'moment';
 import { ApiClientesService } from '../../servicios/api-clientes.service'
 import { ApiVisitasService } from '../../../programar-visita/servicios/api-visitas.service'
@@ -12,7 +12,8 @@ import { ServicioTecnicosService } from '../../../administrar-tecnicos/servicios
 })
 export class ModificarVisitaPage implements OnInit {
 
-  constructor(private navParams: NavParams, private api_clientes: ApiClientesService, private api_visitas: ApiVisitasService, private api_tecnicos: ServicioTecnicosService ) { }
+  constructor(private navParams: NavParams, private api_clientes: ApiClientesService, private api_visitas: ApiVisitasService,
+     private api_tecnicos: ServicioTecnicosService, private modalController: ModalController ) { }
 
   fecha_actual: any;
   dayNames= ['Domingo','Lunes','Martes','Miercoles','Jueves','Viernes','Sabado']
@@ -63,7 +64,10 @@ export class ModificarVisitaPage implements OnInit {
   modificar_visita(){
     console.log(this.servicios_elegidos)
     this.api_visitas.modificar_visita({id_visita: this.id_visita, fecha_visita: this.fecha_elegida, id_tecnico: this.tecnico_elegido, servicios: this.servicios_elegidos}).subscribe(data => {
-      console.log(data)
+      console.log(data);
+      this.modalController.dismiss({
+        'dismissed': true
+      })
     }, (error => {
       console.log(error)
     }))

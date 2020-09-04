@@ -26,9 +26,12 @@
 @import "~@ionic/angular/css/flex-utils.css";
 
 ion-tab-bar, ion-tab-button{
-    background-color: #000000;
+    background-color: #1c6799;
     color: #fff;
    }
+ion-tab-button:hover{
+    background-color: rgb(255, 255, 255);
+}
 
 ion-content{
     --background: #d1d1d1;
