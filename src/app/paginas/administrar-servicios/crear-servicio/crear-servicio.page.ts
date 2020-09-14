@@ -17,7 +17,7 @@ export class CrearServicioPage implements OnInit {
   
 
   ngOnInit() {
-    this.servicio = {nombreDelServicio:'', requiereQR: 0, formulario: this.formulario}
+    this.servicio = {nombreDelServicio:'', requiereQR: 0, formulario: this.formulario, producto: 0}
   }
 
   agregar_campo_formulario(){

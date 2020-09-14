@@ -11,8 +11,15 @@
       <ion-input [(ngModel)]="servicio.nombreDelServicio"></ion-input>
     </ion-item>
     <ion-item lines="full">
-      <ion-label style="text-align: left;">Requiere QR?</ion-label>
+      <ion-label style="text-align: left;">¿Requiere QR?</ion-label>
       <ion-select [(ngModel)]="servicio.requiereQR">
+        <ion-select-option value="1">Si</ion-select-option>
+        <ion-select-option value="0">No</ion-select-option>
+      </ion-select>
+    </ion-item>
+    <ion-item lines="full">
+      <ion-label style="text-align: left;">¿Contiene productos?</ion-label>
+      <ion-select [(ngModel)]="servicio.producto">
         <ion-select-option value="1">Si</ion-select-option>
         <ion-select-option value="0">No</ion-select-option>
       </ion-select>
