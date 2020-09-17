@@ -14,11 +14,20 @@ export class CrearProductoPage implements OnInit {
   lote: any;
   tipo_producto: any;
 
+  public servicio: any;
+
   public id_servicio = this.navParams.get('id_servicio');
 
   constructor(private navParams: NavParams, private api_servicios: ApiServiciosService, private modalCtrl: ModalController) { }
 
   ngOnInit() {
+    this.api_servicios.ver_servicio(this.id_servicio).subscribe(data => {
+      this.servicio = data;
+      this.servicio = this.servicio.result;
+      console.log(this.servicio);
+    }, (error => {
+      console.log(error)
+    }))
   }
 
   cargar_producto(){
@@ -31,5 +40,7 @@ export class CrearProductoPage implements OnInit {
       console.log(error)
     }))
   }
+
+
 
 }

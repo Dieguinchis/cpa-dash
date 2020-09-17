@@ -29,12 +29,13 @@
     </ion-input>
   </ion-item>
 
-  <ion-item lines="full">
+  <ion-item lines="full" *ngIf="servicio">
     <ion-label class="titulos">
       Tipo de producto:
     </ion-label>
-    <ion-input [(ngModel)]="tipo_producto">
-    </ion-input>
+    <ion-select [(ngModel)]="tipo_producto">
+      <ion-select-option *ngFor="let opcion of servicio.formulario[0].opciones" value="{{opcion}}">{{opcion}}</ion-select-option>
+    </ion-select>
   </ion-item>
 
   <div style="width: 100%; text-align: center; margin-top: 25px;">

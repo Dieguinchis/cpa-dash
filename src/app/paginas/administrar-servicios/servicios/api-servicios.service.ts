@@ -41,6 +41,10 @@ export class ApiServiciosService {
     return this.http.get(this.apiDir+'/servicios/id/'+id_servicio);
   }
 
+  baja_producto(id_producto){
+    return this.http.post(this.apiDir+'/productos/eliminar/'+id_producto, this.requestOptions);
+  }
+
   
    
 }

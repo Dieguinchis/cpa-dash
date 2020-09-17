@@ -35,6 +35,18 @@ export class CrearServicioPage implements OnInit {
     }), (error =>
       console.log(error))
   }
+
+  producto_asociado(){
+    if(this.servicio.producto == 1){
+      this.formulario.push({nombreCampo:'Tipo de producto', tipoCampo: 'select', opciones:[]})
+    } else{
+      this.formulario.splice(0);
+    }
+  }
       
+
+  prueba(){
+    console.log(this.formulario)
+  }
 
 }

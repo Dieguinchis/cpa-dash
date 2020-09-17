@@ -43,4 +43,13 @@ export class VerServicioPage implements OnInit {
     return await modal.present();
   }
 
+  baja_producto(id_producto){
+    this.api_servicios.baja_producto(id_producto).subscribe(data => {
+      console.log(data)
+      this.actualizar_informacion()
+    }, (error =>{
+      console.log(error)
+    }))
+  }
+
 }
