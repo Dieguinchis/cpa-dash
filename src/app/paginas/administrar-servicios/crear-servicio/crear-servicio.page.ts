@@ -44,9 +44,4 @@ export class CrearServicioPage implements OnInit {
     }
   }
       
-
-  prueba(){
-    console.log(this.formulario)
-  }
-
 }

@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { NavParams, ModalController } from '@ionic/angular';
+import { NavParams, ModalController, AlertController } from '@ionic/angular';
 import { ApiServiciosService } from '../servicios/api-servicios.service'
 import { CrearProductoPage } from './crear-producto/crear-producto.page'
 
@@ -13,7 +13,7 @@ export class VerServicioPage implements OnInit {
   public id_servicio = this.navParams.get('id_servicio');
   public servicio: any;
 
-  constructor(private navParams: NavParams, private api_servicios: ApiServiciosService, private modalController: ModalController) { }
+  constructor(private navParams: NavParams, private api_servicios: ApiServiciosService, private modalController: ModalController, private alertController: AlertController) { }
 
   ngOnInit() {
     this.actualizar_informacion();
@@ -50,6 +50,27 @@ export class VerServicioPage implements OnInit {
     }, (error =>{
       console.log(error)
     }))
+  }
+
+  async eliminar_producto(id_producto){
+    const alert = await this.alertController.create({
+      header: 'Seguro que desea eliminar el producto?',
+      buttons: 
+      [
+       { 
+          text: 'No',
+          handler: () => {
+          }
+        },
+        {
+          text: 'Si',
+          handler: () => {
+            this.baja_producto(id_producto);
+          }
+        }
+      ]
+    });
+    await alert.present();
   }
 
 }
