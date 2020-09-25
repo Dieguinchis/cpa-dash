@@ -1,0 +1,48 @@
+<ion-header>
+  <ion-toolbar color="primary">
+    <ion-title style="text-align: center;">Alta de producto</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-item lines="full">
+    <ion-label class="titulos">
+      Nombre del producto:
+    </ion-label>
+    <ion-input [(ngModel)]="nombre_producto">
+    </ion-input>
+  </ion-item>
+
+  <ion-item lines="full">
+    <ion-label class="titulos" >
+      Fecha de vencimiento:
+    </ion-label>
+    <ion-input [(ngModel)]="fecha_vencimiento" type="date">
+    </ion-input>
+  </ion-item>
+
+  <ion-item lines="full">
+    <ion-label class="titulos" >
+      Lote:
+    </ion-label>
+    <ion-input [(ngModel)]="lote">
+    </ion-input>
+  </ion-item>
+
+  <ion-item lines="full" *ngIf="servicio">
+    <ion-label class="titulos">
+      Tipo de producto:
+    </ion-label>
+    <ion-select [(ngModel)]="tipo_producto">
+      <ion-select-option *ngFor="let opcion of servicio.formulario[0].opciones" value="{{opcion}}">{{opcion}}</ion-select-option>
+    </ion-select>
+  </ion-item>
+
+  <div style="width: 100%; text-align: center; margin-top: 25px;">
+    <ion-button (click)="cargar_producto()">Cargar</ion-button>   
+  </div>
+
+  <div style="margin-top: 25px">
+    <img class="imagen_empresa" src='../../../assets/LogoCPA-01.png'>
+  </div>
+</ion-content>

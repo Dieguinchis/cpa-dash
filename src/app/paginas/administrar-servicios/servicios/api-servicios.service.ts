@@ -10,7 +10,7 @@ export class ApiServiciosService {
   private requestOptions
   headers : any
 
-  private apiDir = "http://192.168.1.220:3000";
+  private apiDir = "http://appbackendcpa.herokuapp.com";
 
 
   constructor(public http: HttpClient) {
@@ -29,8 +29,22 @@ export class ApiServiciosService {
     return this.http.get(this.apiDir+'/servicios');
   }
 
+  alta_producto(parametros){
+    return this.http.post(this.apiDir+'/productos/crear',parametros,this.requestOptions);
+  }
+
   alta_workstation(parametros){
     return this.http.post(this.apiDir+'/servicios/equipos/crear',parametros,this.requestOptions);
   }
+
+  ver_servicio(id_servicio){
+    return this.http.get(this.apiDir+'/servicios/id/'+id_servicio);
+  }
+
+  baja_producto(id_producto){
+    return this.http.post(this.apiDir+'/productos/eliminar/'+id_producto, this.requestOptions);
+  }
+
+  
    
 }

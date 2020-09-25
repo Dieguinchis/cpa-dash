@@ -7,6 +7,10 @@ const routes: Routes = [
   {
     path: '',
     component: VerServicioPage
+  },
+  {
+    path: 'crear-producto',
+    loadChildren: () => import('./crear-producto/crear-producto.module').then( m => m.CrearProductoPageModule)
   }
 ];
 

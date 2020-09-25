@@ -11,8 +11,15 @@
       <ion-input [(ngModel)]="servicio.nombreDelServicio"></ion-input>
     </ion-item>
     <ion-item lines="full">
-      <ion-label style="text-align: left;">Requiere QR?</ion-label>
+      <ion-label style="text-align: left;">¿Requiere QR?</ion-label>
       <ion-select [(ngModel)]="servicio.requiereQR">
+        <ion-select-option value="1">Si</ion-select-option>
+        <ion-select-option value="0">No</ion-select-option>
+      </ion-select>
+    </ion-item>
+    <ion-item lines="full">
+      <ion-label style="text-align: left;">¿Contiene productos?</ion-label>
+      <ion-select [(ngModel)]="servicio.producto" (ionChange)="producto_asociado()">
         <ion-select-option value="1">Si</ion-select-option>
         <ion-select-option value="0">No</ion-select-option>
       </ion-select>
@@ -32,15 +39,17 @@
             </ion-item>
           </ion-row>
           <ion-row>
-            <ion-item lines="none">
-              <ion-label>
-                Seleccione tipo de campo
-              </ion-label>
-              <ion-select [(ngModel)]="campo.tipoCampo">
-                <ion-select-option value="input">Escritura</ion-select-option>
-                <ion-select-option value="select">Seleccionable</ion-select-option>
-              </ion-select>
-            </ion-item>
+            <div *ngIf="campo.nombreCampo != 'Tipo de producto'">
+              <ion-item lines="none">
+                <ion-label>
+                  Seleccione tipo de campo
+                </ion-label>
+                <ion-select [(ngModel)]="campo.tipoCampo">
+                  <ion-select-option value="input">Escritura</ion-select-option>
+                  <ion-select-option value="select">Seleccionable</ion-select-option>
+                </ion-select>
+              </ion-item>
+            </div>
           </ion-row>
           <div *ngIf="campo.tipoCampo == 'select'">
             <ion-item lines="none" *ngFor="let opcion of campo.opciones; let j = index">
@@ -79,5 +88,6 @@
   <div style="margin-top: 15px">
     <img class="imagen_empresa" src='../../../assets/LogoCPA-01.png'>
   </div>
+
 
 </ion-content>  

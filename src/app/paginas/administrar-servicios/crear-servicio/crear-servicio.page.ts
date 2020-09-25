@@ -17,7 +17,7 @@ export class CrearServicioPage implements OnInit {
   
 
   ngOnInit() {
-    this.servicio = {nombreDelServicio:'', requiereQR: 0, formulario: this.formulario}
+    this.servicio = {nombreDelServicio:'', requiereQR: 0, formulario: this.formulario, producto: 0}
   }
 
   agregar_campo_formulario(){
@@ -35,6 +35,13 @@ export class CrearServicioPage implements OnInit {
     }), (error =>
       console.log(error))
   }
-      
 
+  producto_asociado(){
+    if(this.servicio.producto == 1){
+      this.formulario.push({nombreCampo:'Tipo de producto', tipoCampo: 'select', opciones:[]})
+    } else{
+      this.formulario.splice(0);
+    }
+  }
+      
 }

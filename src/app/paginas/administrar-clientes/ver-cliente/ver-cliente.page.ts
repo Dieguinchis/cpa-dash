@@ -114,18 +114,6 @@ export class VerClientePage implements OnInit {
     return await modal.present();
   }
 
-  async modificarVisita(id_visita){
-    const modal = await this.modalController.create({
-      component: ModificarVisitaPage,
-      cssClass: 'my-custom-class',
-      componentProps: {
-        'id_visita': id_visita
-      }
-    });
-    modal.onDidDismiss().then(data =>{
-      this.actualizar_informacion();
-    })
-    return await modal.present();
-  }
+  
 
 }
