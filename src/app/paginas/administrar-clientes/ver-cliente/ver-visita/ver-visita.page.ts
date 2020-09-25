@@ -39,7 +39,7 @@ export class VerVisitaPage implements OnInit {
     this.api_visitas.ver_pdf(this.id_visita).subscribe(data => {
       this.url = data;
       console.log(this.url.url)
-      var win = window.open('http://'+this.url.url, '_blank');
+      var win = window.open(this.url.url, '_blank');
       win.focus();  
     }, error => {
       console.log(error)
