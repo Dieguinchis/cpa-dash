@@ -49,7 +49,6 @@ export class AdministrarClientesPage implements OnInit {
 
   actualizar_informacion(){
     this.api_clientes.listado_clientes().subscribe(data => {
-      console.log(data)
       this.clientes = data;
       this.clientes = this.clientes.result;
     }),

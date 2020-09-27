@@ -38,7 +38,6 @@ export class ModificarClientePage implements OnInit {
     direccion: this.direccion, telefono: this.telefono, email: this.email}
     console.log(this.objeto);
     this.api_clientes.modificar_cliente(this.objeto).subscribe(data => {
-      console.log(data);
       this.modalCtrl.dismiss({
         'dismissed': true
       });}, (error =>{

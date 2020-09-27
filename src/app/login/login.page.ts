@@ -29,7 +29,6 @@ export class LoginPage implements OnInit {
     this.loader = await this.loadingController.create({ message: "Ingresando..." });
     this.loader.present();
     this.api_login.login({nombre: this.usuario, psw_admin: this.password}).subscribe((data:any) => {
-      console.log(data)
       if(data.status == "OK"){
         this.storage.set('token', data).then(res=>{
           this.loadingController.dismiss();

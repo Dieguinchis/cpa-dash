@@ -83,7 +83,6 @@ export class VerClientePage implements OnInit {
 
   eliminar_sucursal(id_sucursal){
     this.api_clientes.eliminar_sucursal(id_sucursal).subscribe(data => {
-      console.log(data)
     }, (error =>{
       console.log(error)
     }))
@@ -94,8 +93,6 @@ export class VerClientePage implements OnInit {
     this.api_clientes.informacion_cliente(id_cliente).subscribe(data => {
       this.cliente = data;
       this.cliente = this.cliente.result;
-      console.log(this.cliente)
-
     }), (error =>
       console.log(error))
   }
