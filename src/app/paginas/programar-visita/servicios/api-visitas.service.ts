@@ -9,8 +9,7 @@ export class ApiVisitasService {
   private requestOptions
   headers : any
 
-  private apiDir = "http://appbackendcpa.herokuapp.com";
-
+  private apiDir = "http://157.230.90.222:3000";
 
   constructor(public http: HttpClient) {
     this.requestOptions = {
