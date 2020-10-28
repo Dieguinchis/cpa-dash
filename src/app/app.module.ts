@@ -13,6 +13,7 @@ import { IonicStorageModule } from '@ionic/storage';
 import { ServiceWorkerModule } from '@angular/service-worker';
 import { environment } from '../environments/environment';
 import { LocationStrategy, HashLocationStrategy } from '@angular/common';
+import { NgxImageCompressService } from 'ngx-image-compress';
 
 @NgModule({
   declarations: [AppComponent],
@@ -22,6 +23,7 @@ import { LocationStrategy, HashLocationStrategy } from '@angular/common';
   providers: [
     StatusBar,
     SplashScreen,
+    NgxImageCompressService,
     { provide: LocationStrategy, useClass: HashLocationStrategy }
   ],
   bootstrap: [AppComponent]

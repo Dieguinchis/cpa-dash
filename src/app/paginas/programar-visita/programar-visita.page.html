@@ -16,17 +16,30 @@
 
     <ion-item>
         <ion-label fixed style="text-align: center;">Seleccionar servicios a ofrecer</ion-label>
-        <ion-select [(ngModel)]="servicios_elegidos"multiple="true">
+        <ion-select [(ngModel)]="servicios_elegidosAux"multiple="true" (ionChange)="test()">
             <ion-select-option *ngFor="let servicio of listado_servicios" value="{{servicio.id_servicio}}">{{servicio.nombre_servicio}}</ion-select-option>
         </ion-select>
     </ion-item>
 
-    <ion-item>
+    <div *ngFor="let servicio of serviciosElegidos" style="text-align: center;">
+        <h2 style="text-align: center;">{{servicio.nombre_servicio}}</h2>
+        <div *ngFor="let equipo of servicio.equipos">
+            <ion-label fixed style="text-align: center;color: var(--ion-color-secondary);font-weight: bold;">{{equipo.nombre_equipo}}</ion-label>
+            <ion-item style="margin-top: 10px;">
+                <ion-label fixed style="text-align: center;">Seleccionar técnico a cargo</ion-label>
+                <ion-select [(ngModel)]="equipo.tecnico">
+                    <ion-select-option *ngFor="let tecnico of listado_tecnicos" value="{{tecnico.id_tecnico}}">{{tecnico.nombre_tecnico}} {{tecnico.apellido_tecnico}}</ion-select-option>
+                </ion-select>
+            </ion-item>
+        </div>
+    </div>
+
+    <!-- <ion-item>
         <ion-label fixed style="text-align: center;">Seleccionar técnico a cargo</ion-label>
         <ion-select [(ngModel)]="tecnico_elegido">
             <ion-select-option *ngFor="let tecnico of listado_tecnicos" value="{{tecnico.id_tecnico}}">{{tecnico.nombre_tecnico}} {{tecnico.apellido_tecnico}}</ion-select-option>
         </ion-select>
-    </ion-item>
+    </ion-item> -->
 
     <ion-item>
         <ion-label fixed style="text-align: center;">Elegir una fecha</ion-label>
@@ -42,6 +55,5 @@
     <div style="margin-top: 25px">
         <img class="imagen_empresa" src='../../../assets/LogoCPA-01.png'>
     </div>
-    
 
 </ion-content>

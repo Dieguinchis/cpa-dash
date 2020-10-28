@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ApiClientesService } from '../servicios/api-clientes.service'
 import { NavParams, ModalController } from '@ionic/angular';
+import { NgxImageCompressService } from 'ngx-image-compress';
 
 @Component({
   selector: 'app-modificar-cliente',
@@ -16,10 +17,11 @@ export class ModificarClientePage implements OnInit {
   public email;
   public telefono;
   public direccion;
+  public logo;
 
   public objeto: any;
 
-  constructor(private api_clientes: ApiClientesService, private navParams: NavParams, public modalCtrl: ModalController) { }
+  constructor(private api_clientes: ApiClientesService, private navParams: NavParams, public modalCtrl: ModalController, private imageCompress: NgxImageCompressService) { }
 
   ngOnInit() {
     this.api_clientes.informacion_cliente(this.id_cliente).subscribe(data => {
@@ -29,6 +31,7 @@ export class ModificarClientePage implements OnInit {
       this.email = this.cliente.clienteDatos[0].email;
       this.telefono = this.cliente.clienteDatos[0].telefono;
       this.direccion = this.cliente.clienteDatos[0].direccion;
+      console.log(this.cliente)
     }), (error =>
       console.log(error))
   }
@@ -38,10 +41,32 @@ export class ModificarClientePage implements OnInit {
     direccion: this.direccion, telefono: this.telefono, email: this.email}
     console.log(this.objeto);
     this.api_clientes.modificar_cliente(this.objeto).subscribe(data => {
-      this.modalCtrl.dismiss({
-        'dismissed': true
-      });}, (error =>{
-      console.log(error)}))
+      if(this.logo){
+        this.api_clientes.subir_logo_cliente({id_cliente: this.id_cliente, logo: this.logo}).subscribe(response=>{
+          this.modalCtrl.dismiss({
+            'dismissed': true
+          })
+        })
+      }else{
+        this.modalCtrl.dismiss({
+          'dismissed': true
+        })
+      }
+    }, (error =>{
+      console.log(error)
+    }))
+  }
+
+  agregarLogo(){
+    this.imageCompress.uploadFile().then(({image, orientation}) => {
+      console.warn('Size in bytes was:', this.imageCompress.byteCount(image));
+      this.imageCompress.compressFile(image, orientation, 50, 50).then(
+        result => {
+          console.log(result);
+          this.logo = result;
+        }
+      )
+    });
   }
 
 }

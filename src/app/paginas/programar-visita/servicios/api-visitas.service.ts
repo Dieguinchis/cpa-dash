@@ -23,6 +23,10 @@ export class ApiVisitasService {
     return this.http.get(this.apiDir+'/clientes');
   }
 
+  listado_equipos(){
+    return this.http.get(this.apiDir+'/servicios/equipos/offline');
+  }
+
   informacion_cliente(id){
     return this.http.get(this.apiDir+'/clientes/id/'+id);
   }

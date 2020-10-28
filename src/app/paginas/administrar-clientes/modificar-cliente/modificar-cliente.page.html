@@ -37,6 +37,14 @@
     </ion-input>
   </ion-item>
 
+  <ion-item lines="full">
+    <img [src]="cliente.clienteDatos[0].logo_cliente" alt="" *ngIf="cliente.clienteDatos[0].logo_cliente">
+    <ion-button (click)="agregarLogo()" *ngIf="!logo">
+      Seleccionar Logo
+    </ion-button>
+    <img [src]="logo" alt="" style="width: 50%;margin-left: 25%;padding: 5px;">
+  </ion-item>
+
   <div style="width: 100%; text-align: center; margin-top: 10px;">
     <ion-button (click)="modificar_cliente()">Modificar</ion-button>   
   </div>

@@ -7,6 +7,7 @@ import { IonicModule } from '@ionic/angular';
 import { AltaClientePageRoutingModule } from './alta-cliente-routing.module';
 
 import { AltaClientePage } from './alta-cliente.page';
+import { NgxImageCompressService } from 'ngx-image-compress';
 
 @NgModule({
   imports: [
@@ -15,6 +16,7 @@ import { AltaClientePage } from './alta-cliente.page';
     IonicModule,
     AltaClientePageRoutingModule
   ],
+  providers: [NgxImageCompressService],
   declarations: [AltaClientePage]
 })
 export class AltaClientePageModule {}

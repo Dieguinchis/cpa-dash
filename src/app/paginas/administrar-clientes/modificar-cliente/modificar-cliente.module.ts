@@ -7,6 +7,7 @@ import { IonicModule } from '@ionic/angular';
 import { ModificarClientePageRoutingModule } from './modificar-cliente-routing.module';
 
 import { ModificarClientePage } from './modificar-cliente.page';
+import { NgxImageCompressService } from 'ngx-image-compress';
 
 @NgModule({
   imports: [
@@ -15,6 +16,7 @@ import { ModificarClientePage } from './modificar-cliente.page';
     IonicModule,
     ModificarClientePageRoutingModule
   ],
+  providers: [NgxImageCompressService],
   declarations: [ModificarClientePage]
 })
 export class ModificarClientePageModule {}

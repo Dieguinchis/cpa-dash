@@ -10,9 +10,36 @@ import { ServicioTecnicosService } from '../administrar-tecnicos/servicios/servi
 })
 export class ProgramarVisitaPage implements OnInit {
 
-  constructor(private api: ApiVisitasService, private api_tecnicos: ServicioTecnicosService) { }
+  public equipos;
+  public serviciosConEquipos = [];
+  public serviciosElegidos = [];
+  public serviciosParaEnviar = [];
 
-  servicios_elegidos: [];
+  constructor(private api: ApiVisitasService, private api_tecnicos: ServicioTecnicosService) { 
+    this.api.mostrar_servicios().subscribe(data =>{
+      this.listado_servicios = data;
+      this.listado_servicios = this.listado_servicios.result;
+      console.log(this.listado_servicios,'servicios')
+      this.api.listado_equipos().subscribe((res:any)=>{
+        this.equipos = res.result;
+        console.log(this.equipos,'equipos')
+        for ( let servicio of this.listado_servicios){
+          servicio.equipos = [];
+          for ( let equipo of this.equipos){
+            if(equipo.id_servicio == servicio.id_servicio){
+              servicio.equipos.push(equipo);
+            }
+          }
+        }
+        console.log(this.listado_servicios,'servicios completos');
+      })
+    }), (error => {
+      console.log(error)
+    });
+    
+  }
+
+  servicios_elegidosAux: [];
   id_cliente_elegido: any;
   sucursal_elegida: any;
   fecha_elegida: any;
@@ -37,13 +64,6 @@ export class ProgramarVisitaPage implements OnInit {
       console.log(error)
     });
     
-    this.api.mostrar_servicios().subscribe(data =>{
-      this.listado_servicios = data;
-      this.listado_servicios = this.listado_servicios.result;
-      console.log(this.listado_servicios)
-    }), (error => {
-      console.log(error)
-    });
 
     this.api_tecnicos.listado_tecnicos().subscribe(data => {
       this.listado_tecnicos = data;
@@ -60,6 +80,7 @@ export class ProgramarVisitaPage implements OnInit {
   sucursalesCliente(id_cliente){
     this.api.informacion_cliente(id_cliente).subscribe(data => {
       this.listado_sucursales_cliente = data
+      console.log(data)
       this.listado_sucursales_cliente = this.listado_sucursales_cliente.result.sucursales.datosSucursal
       this.sucursal_elegida = null;
       this.id_cliente_elegido = id_cliente;
@@ -69,17 +90,33 @@ export class ProgramarVisitaPage implements OnInit {
   }
 
   programarVisita(){
-    console.log(this.servicios_elegidos)
+    for(let servicio of this.serviciosElegidos){
+      for(let equipo of servicio.equipos){
+        this.serviciosParaEnviar.push({id_servicio: servicio.id_servicio, id_tecnico: equipo.tecnico, id_equipo: equipo.id_equipo})
+      }
+    }
+    console.log(this.serviciosParaEnviar);
     this.api.crear_visita({'id_cliente': this.id_cliente_elegido,
-                          'id_tecnico': this.tecnico_elegido,
                           'id_sucursal': this.sucursal_elegida,
-                          'servicios': this.servicios_elegidos,
+                          'servicios': this.serviciosParaEnviar,
                           'fecha_visita': this.fecha_elegida}).subscribe(data => {
                               console.log(data)
                               location.reload();
                            }), (error =>{
                              console.log(error)
                            })
+  }
+
+  test(){
+    this.serviciosElegidos = [];
+    for (let servicioID of this.servicios_elegidosAux){
+      for(let servicio of this.listado_servicios){
+        if(servicio.id_servicio == servicioID){
+          this.serviciosElegidos.push(servicio);
+        }
+      }
+    }
+    console.log(this.serviciosElegidos)
   }
 
 }
