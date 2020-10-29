@@ -30,6 +30,9 @@ export class ProgramarVisitaPage implements OnInit {
               servicio.equipos.push(equipo);
             }
           }
+          if (servicio.equipos.length < 1){
+            servicio.equipos.push({id_equipo: 0, id_servicio:servicio.id_servicio, nombre_equipo: 'Servicio principal'});
+          }
         }
         console.log(this.listado_servicios,'servicios completos');
       })

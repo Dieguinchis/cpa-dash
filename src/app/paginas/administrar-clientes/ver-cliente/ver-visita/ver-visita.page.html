@@ -3,9 +3,6 @@
     <ion-spinner></ion-spinner>
   </div>
   <div *ngIf="visita">
-    <ion-item lines="full">
-      <ion-label><b>Técnico a cargo de la visita:</b> {{visita.visitas.nombre_tecnico}} {{visita.visitas.apellido_tecnico}}</ion-label>
-    </ion-item>
     <div *ngIf="visita.visitas.horario_salida != 'NULL'">
       <ion-item lines="full">
         <ion-label><b>Fecha de concluida la visita:</b> {{visita.visitas.horario_salida}}</ion-label>
