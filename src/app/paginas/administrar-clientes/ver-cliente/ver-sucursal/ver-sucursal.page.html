@@ -107,12 +107,12 @@
         </ion-row>
       </ion-grid>
     </ion-item> -->
-    <div *ngIf="(grupoWorkStation == unefined)">
+    <div *ngIf="(grupoWorkStation == undefined)">
       <ion-item>
         <ion-label style="width:  100%; text-align: center;">No se encontraron WorkStation</ion-label>
       </ion-item>
     </div>
-    <div *ngIf="(grupoWorkStation != unefined)">
+    <div *ngIf="(grupoWorkStation != undefined)">
       <ion-item lines="full" *ngFor="let grupoEquipo of grupoWorkStation; let i = index">
         <ion-grid>
           <ion-row>
