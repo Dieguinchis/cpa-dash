@@ -15,7 +15,11 @@ const routes: Routes = [
   {
     path: 'ver-servicio',
     loadChildren: () => import('./ver-servicio/ver-servicio.module').then( m => m.VerServicioPageModule)
+  },  {
+    path: 'modificar-servicio',
+    loadChildren: () => import('./modificar-servicio/modificar-servicio.module').then( m => m.ModificarServicioPageModule)
   }
+
 ];
 
 @NgModule({

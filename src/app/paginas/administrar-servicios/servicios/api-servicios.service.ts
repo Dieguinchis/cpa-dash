@@ -22,6 +22,7 @@ export class ApiServiciosService {
    }
 
   crear_servicio(parametros){
+    console.log(parametros)
     return this.http.post(this.apiDir+'/servicios/crear',parametros,this.requestOptions);
   }
 
@@ -37,6 +38,21 @@ export class ApiServiciosService {
     return this.http.post(this.apiDir+'/servicios/equipos/crear',parametros,this.requestOptions);
   }
 
+  alta_Grupo_workstation(parametros){
+    return this.http.post(this.apiDir+'/servicios/gruposEquipos/crear',parametros,this.requestOptions);
+  }
+
+  
+  eliminar_Grupo_workstation(id_producto){
+    console.log('delete2',id_producto)
+    return this.http.post(this.apiDir+'/servicios/eliminarGrupoEquipos/'+id_producto, this.requestOptions);
+  }
+
+  
+  modificar_Grupo_workstation(parametros){
+    return this.http.post(this.apiDir+'/servicios/gruposEquipos/crear',parametros,this.requestOptions);
+  }
+
   ver_servicio(id_servicio){
     return this.http.get(this.apiDir+'/servicios/id/'+id_servicio);
   }
@@ -48,7 +64,16 @@ export class ApiServiciosService {
   baja_servicio(id_servicio){
     return this.http.post(this.apiDir+'/servicios/eliminar/'+id_servicio, this.requestOptions);
   }
+  update_servicio(parametros){
+    // console.log(parametros)
+    return this.http.post(this.apiDir+'/servicios/update',parametros, this.requestOptions);
+  }
 
+  baja_opcion(id){
+
+    return this.http.post(this.apiDir+'/servicios/opcion/delete/'+id, this.requestOptions);
+
+  }
   
    
 }

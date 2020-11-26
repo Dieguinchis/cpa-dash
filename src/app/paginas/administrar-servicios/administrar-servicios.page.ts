@@ -3,6 +3,8 @@ import { AlertController, ModalController } from '@ionic/angular';
 import { CrearServicioPage } from './crear-servicio/crear-servicio.page'
 import { ApiServiciosService } from './servicios/api-servicios.service'
 import { VerServicioPage } from './ver-servicio/ver-servicio.page'
+import { ModificarServicioPage } from './modificar-servicio/modificar-servicio.page'
+
 
 @Component({
   selector: 'app-administrar-servicios',
@@ -76,5 +78,15 @@ export class AdministrarServiciosPage implements OnInit {
       console.log(error)
     }))
   }
+
+  async modificar_servicio(id_servicio){
+    const modal = await this.modalController.create({
+      component: ModificarServicioPage,
+      cssClass: 'modal_grande',
+      componentProps: {
+        'id_servicio': id_servicio
+      }
+    });
+    return await modal.present();  }
 
 }

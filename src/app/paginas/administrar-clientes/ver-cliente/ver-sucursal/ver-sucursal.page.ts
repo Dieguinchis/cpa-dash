@@ -1,9 +1,11 @@
 import { Component, OnInit } from '@angular/core';
-import { NavParams, ModalController } from '@ionic/angular';
+import { NavParams, ModalController, AlertController } from '@ionic/angular';
 import { ApiClientesService } from '../../servicios/api-clientes.service'
 import { AltaWorkstationPage } from './alta-workstation/alta-workstation.page'
 import { LoadingController } from "@ionic/angular";
 import { NgxImageCompressService } from "ngx-image-compress";
+import { ApiServiciosService } from '../../../administrar-servicios/servicios/api-servicios.service'
+
 
 @Component({
   selector: 'app-ver-sucursal',
@@ -14,12 +16,15 @@ export class VerSucursalPage implements OnInit {
 
   constructor(private navParams: NavParams, private api_sucursales: ApiClientesService,
               private modalController: ModalController, private imageCompress: NgxImageCompressService,
-              private loadingController: LoadingController) { }
+              private loadingController: LoadingController,
+              private api_servicios: ApiServiciosService,
+              private alertController:AlertController) { }
 
   public id_sucursal = this.navParams.get('id_sucursal');
   public sucursal: any;
   public QR
   public workstations: any;
+  public grupoWorkStation: any;
   public loading;
   imagen = [];
   object:any;
@@ -29,12 +34,13 @@ export class VerSucursalPage implements OnInit {
   }
 
 
-  async altaWorkstation(){
+  async altaWorkstation(id_equipo_grupo){
     const modal = await this.modalController.create({
       component: AltaWorkstationPage,
       cssClass: 'modal-chiquito',
       componentProps: {
-        'id_sucursal': this.id_sucursal
+        'id_sucursal': this.id_sucursal,
+        id_equipo_grupo:id_equipo_grupo
       }
     });
     modal.onDidDismiss().then(data =>{
@@ -43,13 +49,61 @@ export class VerSucursalPage implements OnInit {
     return await modal.present();
   }
 
+  altaGrupoWorkstation(nombre){
+    var body = {nombre_equipo_grupo:nombre ,id_sucursal:this.id_sucursal}
+    this.api_servicios.alta_Grupo_workstation(body).subscribe(resp =>{
+      this.actualizar_informacion();
+    }),(error => {
+      console.log(error)
+    })
+  }
+
+  async alertAltaGrupoWorkstation(){
+    const alert = await this.alertController.create({
+      header: 'Crear Grupo de Workstation',
+      inputs:[
+        {
+          name: 'nombre',
+          type: 'text',
+          placeholder: 'nombre'
+        }
+      ],
+      buttons: 
+      [
+       { 
+          text: 'Cancelar',
+          handler: () => {
+          }
+        },
+        {
+          text: 'Crear',
+          handler: (input) => {
+            this.altaGrupoWorkstation(input.nombre)
+          }
+        }
+      ]
+    });
+    await alert.present();
+  }
+
   borrar_equipo(id_equipo){
     this.api_sucursales.borrar_equipo(id_equipo).subscribe(data => {
-      console.log(data)
+      console.log(data, id_equipo)
       this.actualizar_informacion();
     }), (error => {
       console.log(error)
     })
+  }
+
+  borrar_equipo_grupo(id, i){
+    this.api_sucursales.eliminar_Grupo_workstation(id).subscribe(data => {
+      console.log(data, id)
+      // this.actualizar_informacion();
+      this.grupoWorkStation.splice(i,1)
+    }), (error => {
+      console.log(error)
+    })
+    console.log(i)
   }
 
   actualizar_informacion(){
@@ -59,13 +113,36 @@ export class VerSucursalPage implements OnInit {
     }), (error => {
       console.log(error)
     })
-    this.api_sucursales.listado_workstations(this.id_sucursal).subscribe(data => {
-      console.log(data)
-      this.workstations = data;
-      this.workstations = this.workstations.result;
-      console.log(this.workstations)
-    }), (error => {
-      console.log(error)
+    // this.api_sucursales.listado_workstations(this.id_sucursal).subscribe(data => {
+    //   console.log(data)
+    //   this.workstations = data;
+    //   this.workstations = this.workstations.result;
+    //   console.log(this.workstations)
+    // }), (error => {
+    //   console.log(error)
+    // })
+    this.api_sucursales.listado_grupoWorkstations(this.id_sucursal).subscribe((data:any) =>{
+      // console.log('Grupo1', data.result)
+      var flag = 0
+      var array = []
+      var i = 0
+      var first = true
+      data.result.forEach((element) => {
+        if(element.id_equipo_grupo == flag){
+          // console.log(element.id_equipo_grupo, ' ' ,flag)
+          array[i].equipos.push({id_equipo: element.id_equipo, id_servicio:element.id_servicio,id_sucursal:element.id_sucursal, nombre_equipo:element.nombre_equipo,codigo_qr_equipo:element.codigo_qr_equipo,estado_servicio:element.estado_servicio,nombre_servicio:element.nombre_servicio})
+        }else{
+          if(!first){
+            i++
+          }
+          flag = element.id_equipo_grupo
+          array.push({nombre_equipo_grupo:element.nombre_equipo_grupo,id_equipo_grupo:element.id_equipo_grupo,equipos:[]})
+          array[i].equipos.push({id_equipo: element.id_equipo, id_servicio:element.id_servicio,id_sucursal:element.id_sucursal, nombre_equipo:element.nombre_equipo,codigo_qr_equipo:element.codigo_qr_equipo,estado_servicio:element.estado_servicio,nombre_servicio:element.nombre_servicio})
+          first = false
+        }
+      });
+      this.grupoWorkStation = array
+      // console.log('grupo2: ', this.grupoWorkStation)
     })
     
   }
@@ -77,8 +154,8 @@ export class VerSucursalPage implements OnInit {
         result => {
           console.log(result);
           this.imagen[0] = {url: result}
-          console.log('rodri1', this.imagen[0]);
-          console.log('rodri2', this.sucursal.sucursal[0].id_sucursal)
+          // console.log('rodri1', this.imagen[0]);
+          // console.log('rodri2', this.sucursal.sucursal[0].id_sucursal)
           this.subirPlano(this.imagen);
         }
       )
@@ -109,5 +186,6 @@ export class VerSucursalPage implements OnInit {
       console.log('No se ha seleccionado ningun plano')
     }
   }
+
 
 }

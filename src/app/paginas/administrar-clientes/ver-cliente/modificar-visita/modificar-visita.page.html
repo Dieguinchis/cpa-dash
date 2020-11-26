@@ -9,7 +9,9 @@
   <ion-item>
     <ion-label fixed style="text-align: center;">Seleccionar servicios a ofrecer</ion-label>
     <ion-select [(ngModel)]="servicios_elegidos"multiple="true">
-        <ion-select-option *ngFor="let servicio of listado_servicios" value="{{servicio.id_servicio}}">{{servicio.nombre_servicio}}</ion-select-option>
+      <div *ngFor="let servicio of listado_servicios">
+        <ion-select-option  value="{{servicio.id_servicio}}">{{servicio.nombre_servicio}}</ion-select-option>
+      </div>
     </ion-select>
   </ion-item>
 
@@ -24,6 +26,33 @@
     <ion-label fixed style="text-align: center;">Elegir una fecha</ion-label>
     <ion-datetime [(ngModel)]="fecha_elegida" [monthNames]="monthNames" [dayNames]="dayNames" displayFormat="DDDD D MMMM YYYY HH:mm" min="{{fecha_actual}}" max="2022" value="{{fecha_actual}}"></ion-datetime>
   </ion-item>
+
+  <div *ngFor="let servicio of serviciosElegidos" style="text-align: center;">
+    <h2 style="text-align: center;">{{servicio.nombre_servicio}}</h2>
+    <div *ngFor="let equipo of servicio.equipos">
+        <ion-label fixed style="text-align: center;color: var(--ion-color-secondary);font-weight: bold;">{{equipo.nombre_equipo}}</ion-label>
+        <ion-item style="margin-top: 10px;">
+            <ion-label fixed style="text-align: center;">Seleccionar técnico a cargo</ion-label>
+            <ion-select [(ngModel)]="equipo.tecnico">
+                <ion-select-option *ngFor="let tecnico of listado_tecnicos" value="{{tecnico.id_tecnico}}">{{tecnico.nombre_tecnico}} {{tecnico.apellido_tecnico}}</ion-select-option>
+            </ion-select>
+        </ion-item>
+    </div>
+  </div>
+  <div *ngIf="show">
+    <div *ngFor="let servicio of grupoWorkStationElegidos" style="text-align: center;">
+        <h2 style="text-align: center;">{{servicio.nombre_equipo_grupo}}</h2>
+        <div *ngFor="let equipo of servicio.equipos">
+            <ion-label fixed style="text-align: center;color: var(--ion-color-secondary);font-weight: bold;">{{equipo.nombre_equipo}}: {{equipo.nombre_servicio}}</ion-label>
+        </div>
+        <ion-item style="margin-top: 10px;">
+            <ion-label fixed style="text-align: center;">Seleccionar técnico a cargo</ion-label>
+            <ion-select [(ngModel)]="servicio.tecnico">
+                <ion-select-option *ngFor="let tecnico of listado_tecnicos" value="{{tecnico.id_tecnico}}">{{tecnico.nombre_tecnico}} {{tecnico.apellido_tecnico}}</ion-select-option>
+            </ion-select>
+        </ion-item>
+    </div>
+  </div>
 
 
   <div style="width: 100%; text-align: center; margin-top: 10px;">

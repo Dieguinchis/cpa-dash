@@ -15,7 +15,6 @@ export class CrearServicioPage implements OnInit {
   public servicio:any = {}
 
   
-
   ngOnInit() {
     this.servicio = {nombreDelServicio:'', requiereQR: 0, formulario: this.formulario, producto: 0}
   }

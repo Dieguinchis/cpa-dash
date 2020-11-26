@@ -1,15 +1,15 @@
 <ion-header>
   <ion-toolbar style="text-align: center;" color="primary">
-    <ion-title>Crear un nuevo servicio</ion-title>
+    <ion-title>Modiciar servicio: {{servicio.nombreDelServicio}}</ion-title>
   </ion-toolbar>
 </ion-header>
 
-<ion-content style="background-color: white !important;">
+<ion-content>
   <div>
-    <ion-item lines="full">
+    <!-- <ion-item lines="full">
       <ion-label style="text-align: left;">Nombre del servicio: </ion-label>
-      <ion-input [(ngModel)]="servicio.nombreDelServicio"></ion-input>
-    </ion-item>
+      <ion-input [disabled]="servicio.modificable == 0" [(ngModel)]="servicio.nombreDelServicio"></ion-input>
+    </ion-item> -->
     <ion-item lines="full">
       <ion-label style="text-align: left;">¿Requiere QR?</ion-label>
       <ion-select [(ngModel)]="servicio.requiereQR">
@@ -19,22 +19,22 @@
     </ion-item>
     <ion-item lines="full">
       <ion-label style="text-align: left;">¿Contiene productos?</ion-label>
-      <ion-select [(ngModel)]="servicio.producto" (ionChange)="producto_asociado()">
+      <ion-select [disabled]="servicio.modificable == 0" [(ngModel)]="servicio.tieneProducto" (ionChange)="producto_asociado()">
         <ion-select-option value="1">Si</ion-select-option>
         <ion-select-option value="0">No</ion-select-option>
       </ion-select>
     </ion-item>
 
-    <div *ngFor="let campo of formulario; let i = index" style="background-color: white;">
+    <div *ngFor="let campo of campos; let i = index" style="background-color: white;">
       <ion-item lines="full">
         <ion-grid style="background-color: white;">
           <ion-row style="background-color: white;">
-            <ion-item lines="none" style="background-color: white;">
-              <ion-col style="background-color: white;">
+            <ion-item lines="none">
+              <ion-col>
                 <ion-label>Ingrese titulo del campo: </ion-label>
               </ion-col>
               <ion-col>
-                <ion-input [disabled]="campo.nombreCampo == 'Tipo de producto'" [(ngModel)]="campo.nombreCampo"></ion-input>
+                <ion-input [disabled]="campo.nombreCampo == 'Tipo de producto' || servicio.modificable == 0" [(ngModel)]="campo.nombreCampo"></ion-input>
               </ion-col>
             </ion-item>
           </ion-row>
@@ -44,7 +44,7 @@
                 <ion-label>
                   Seleccione tipo de campo
                 </ion-label>
-                <ion-select [(ngModel)]="campo.tipoCampo">
+                <ion-select [disabled]="servicio.modificable == 0" [(ngModel)]="campo.tipoCampo">
                   <ion-select-option value="input">Escritura</ion-select-option>
                   <ion-select-option value="select">Seleccionable</ion-select-option>
                 </ion-select>
@@ -52,15 +52,19 @@
             </div>
           </ion-row>
           <div *ngIf="campo.tipoCampo == 'select'">
-            <ion-item lines="none" *ngFor="let opcion of campo.opciones; let j = index">
+            <ion-item lines="none" *ngFor="let opcion of campo.opt; let j = index">
               <ion-label>Ingrese la opcion: </ion-label>
-              <div style="margin-left: 5px">
-                <ion-input [(ngModel)]="campo.opciones[j].opcion"></ion-input>  
-              </div>
+              <!-- <div style="margin-left: 5px"> -->
+                <ion-input [(ngModel)]="opcion.name"></ion-input>  
+              <!-- </div> -->
+              <ion-icon name="trash-outline" (click)="quitar_opcion_select(i,j,opcion.opcionId)"></ion-icon>
             </ion-item>  
             <ion-item lines="none">
-              <!-- <ion-label style="text-align: center;color: black;"></ion-label> -->
-              <ion-button (click)="agregar_opcion_select(i)">Agregar opcion
+              <!-- <ion-label style="text-align: center;">
+                
+              </ion-label> -->
+              <ion-button (click)="agregar_opcion_select(i)">
+                Agregar opcion
                 <ion-icon name="add-outline"></ion-icon>
               </ion-button>  
             </ion-item>
@@ -77,15 +81,21 @@
         <ion-icon name="add-outline"></ion-icon>
       </ion-button>
     </ion-item>
+    <ion-item disabled *ngIf="servicio.modificable == 0" lines="full">
+        <p>Al ser un servicio con un diseño predeterminado recuerde que si agrega nuevos campos no se veran automaticamente reflejados en el pdf</p> 
+    </ion-item>
   </div>
 
-  <div style="text-align: center; margin-top: 20px;">
-    <ion-button (click)="crear_servicio()">Listo</ion-button>
+  <div  *ngIf="servicio.modificable == 0" style="text-align: center; margin-top: 20px;">
+    <ion-button (click)="modificar_servicio()">Modificar</ion-button>
+  </div>
+  <div  *ngIf="servicio.modificable == 1" style="text-align: center; margin-top: 20px;">
+    <ion-button (click)="crear_servicio()">Modificar</ion-button>
   </div>
 
-  <!-- <div style="margin-top: 15px">
+  <div style="margin-top: 15px">
     <img class="imagen_empresa" src='../../../assets/LogoCPA-01.png'>
-  </div> -->
+  </div>
 
 
 </ion-content>  

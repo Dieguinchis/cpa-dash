@@ -43,6 +43,10 @@ export class ApiVisitasService {
     return this.http.post(this.apiDir+'/visitas/update',parametros,this.requestOptions);
   }
 
+  listado_grupoWorkstations(id){
+    return this.http.get(this.apiDir+'/servicios/gruposEquipos/sucursal/'+id);
+  }
+
 
 
 }

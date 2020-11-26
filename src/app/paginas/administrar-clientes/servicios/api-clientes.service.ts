@@ -43,9 +43,17 @@ export class ApiClientesService {
   listado_workstations(id){
     return this.http.get(this.apiDir+'/servicios/equipos/sucursal/'+id);
   }
+  listado_grupoWorkstations(id){
+    return this.http.get(this.apiDir+'/servicios/gruposEquipos/sucursal/'+id);
+  }
 
   borrar_equipo(id_equipo){
     return this.http.post(this.apiDir+'/servicios/eliminarEquipos/'+id_equipo,this.requestOptions);
+  }
+
+  eliminar_Grupo_workstation(id_producto){
+    console.log('delete2',id_producto)
+    return this.http.post(this.apiDir+'/servicios/eliminarGrupoEquipos/'+id_producto,this.requestOptions);
   }
 
   subir_planos(parametros){

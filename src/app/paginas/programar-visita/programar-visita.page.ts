@@ -14,8 +14,32 @@ export class ProgramarVisitaPage implements OnInit {
   public serviciosConEquipos = [];
   public serviciosElegidos = [];
   public serviciosParaEnviar = [];
+  public grupoWorkStation = []
+  public grupoWorkStationElegidos = []
+  public show = false
+  
+  servicios_elegidosAux: string[] = [];
+  id_cliente_elegido: any = null;
+  sucursal_elegida: any = null;
+  fecha_elegida: any;
+  tecnico_elegido: any;
+
+  listado_clientes: any;
+  listado_sucursales_cliente: any;
+  listado_servicios: any;
+  listado_tecnicos: any;
+
+  fecha_actual: any;
+  dayNames= ['Domingo','Lunes','Martes','Miercoles','Jueves','Viernes','Sabado']
+  monthNames = ['Enero','Febrero','Marzo','Abril','Mayo','Junio','Julio','Agosto','Septiembre','Octubre','Noviembre','Diciembre']
 
   constructor(private api: ApiVisitasService, private api_tecnicos: ServicioTecnicosService) { 
+   
+  }
+
+
+  ngOnInit() {
+    
     this.api.mostrar_servicios().subscribe(data =>{
       this.listado_servicios = data;
       this.listado_servicios = this.listado_servicios.result;
@@ -38,26 +62,9 @@ export class ProgramarVisitaPage implements OnInit {
       })
     }), (error => {
       console.log(error)
-    });
-    
-  }
+    }); 
 
-  servicios_elegidosAux: [];
-  id_cliente_elegido: any;
-  sucursal_elegida: any;
-  fecha_elegida: any;
-  tecnico_elegido: any;
 
-  listado_clientes: any;
-  listado_sucursales_cliente: any;
-  listado_servicios: any;
-  listado_tecnicos: any;
-
-  fecha_actual: any;
-  dayNames= ['Domingo','Lunes','Martes','Miercoles','Jueves','Viernes','Sabado']
-  monthNames = ['Enero','Febrero','Marzo','Abril','Mayo','Junio','Julio','Agosto','Septiembre','Octubre','Noviembre','Diciembre']
-
-  ngOnInit() {
     this.api.listado_clientes().subscribe(data => {
       this.listado_clientes = data;
       this.listado_clientes = this.listado_clientes.result;
@@ -89,13 +96,45 @@ export class ProgramarVisitaPage implements OnInit {
       this.id_cliente_elegido = id_cliente;
       console.log(this.listado_sucursales_cliente)
     }), (error => {
-      console.log(error)})
+      console.log(error)
+    })
+  }
+
+  selectSucursal(){
+    this.api.listado_grupoWorkstations(this.sucursal_elegida).subscribe((data:any) =>{
+      // console.log('Grupo1', data.result)
+      var flag = 0
+      var array = []
+      var i = 0
+      var first = true
+      data.result.forEach((element) => {
+        if(element.id_equipo_grupo == flag){
+          // console.log(element.id_equipo_grupo, ' ' ,flag)
+          array[i].equipos.push({id_equipo: element.id_equipo, id_servicio:element.id_servicio,id_sucursal:element.id_sucursal, nombre_equipo:element.nombre_equipo,codigo_qr_equipo:element.codigo_qr_equipo,estado_servicio:element.estado_servicio,nombre_servicio:element.nombre_servicio, qr:element.qr})
+        }else{
+          if(!first){
+            i++
+          }
+          flag = element.id_equipo_grupo
+          array.push({nombre_equipo_grupo:element.nombre_equipo_grupo,id_equipo_grupo:element.id_equipo_grupo,equipos:[]})
+          array[i].equipos.push({id_equipo: element.id_equipo, id_servicio:element.id_servicio,id_sucursal:element.id_sucursal, nombre_equipo:element.nombre_equipo,codigo_qr_equipo:element.codigo_qr_equipo,estado_servicio:element.estado_servicio,nombre_servicio:element.nombre_servicio,qr:element.qr})
+          first = false
+        }
+      });
+      this.grupoWorkStation = array
+      // console.log('grupo2: ', this.grupoWorkStation)
+    })
   }
 
   programarVisita(){
     for(let servicio of this.serviciosElegidos){
       for(let equipo of servicio.equipos){
         this.serviciosParaEnviar.push({id_servicio: servicio.id_servicio, id_tecnico: equipo.tecnico, id_equipo: equipo.id_equipo})
+      }
+    }
+    for(let workstation of this.grupoWorkStationElegidos){
+      for(let equipo of workstation.equipos){
+        this.serviciosParaEnviar.push({id_servicio: equipo.id_servicio, id_tecnico: workstation.tecnico, id_equipo: equipo.id_equipo})
       }
     }
     console.log(this.serviciosParaEnviar);
@@ -110,16 +149,59 @@ export class ProgramarVisitaPage implements OnInit {
                            })
   }
 
-  test(){
+  serviciosElegidosChange(){
     this.serviciosElegidos = [];
     for (let servicioID of this.servicios_elegidosAux){
       for(let servicio of this.listado_servicios){
-        if(servicio.id_servicio == servicioID){
+        if(servicio.id_servicio == servicioID && servicio.qr == 0){
           this.serviciosElegidos.push(servicio);
         }
       }
     }
-    console.log(this.serviciosElegidos)
+    var arrayWorkstation:any = [{nombre_equipo_grupo:null, id_equipo_grupo:null, tecnico: null ,equipos:[]}]
+    var i = 0
+    var first = true
+    // console.log(this.servicios_elegidosAux)
+    this.grupoWorkStation.forEach((workstation:any) =>{
+      workstation.equipos.forEach((servicio) => {
+        var val = servicio.id_servicio.toString()
+        if(this.servicios_elegidosAux.includes(val)){
+          if(this.checkExist(arrayWorkstation,workstation.nombre_equipo_grupo) || arrayWorkstation[0].nombre_equipo_grupo == null){
+              if(!first){
+                console.log('1')
+                i = i + 1
+                first = false
+                arrayWorkstation.push({nombre_equipo_grupo:workstation.nombre_equipo_grupo, id_equipo_grupo:workstation.id_equipo_grupo, tecnico: null ,equipos:[servicio]})
+              }else{
+                first = false
+                console.log('2')
+                arrayWorkstation = [{nombre_equipo_grupo:workstation.nombre_equipo_grupo, id_equipo_grupo:workstation.id_equipo_grupo, tecnico: null ,equipos:[servicio]}]  
+              }
+          }else{
+            console.log('3')
+            arrayWorkstation[i].equipos.push(servicio)
+          }
+        }
+      });
+    })
+    this.grupoWorkStationElegidos = arrayWorkstation
+    this.show = true
+    if(this.grupoWorkStationElegidos[0].nombre_equipo_grupo == null){
+      this.show = false
+    }
+    console.log('Servicio elegidos: ',arrayWorkstation)
+  }
+
+  checkExist(array,nombre_equipo_grupo){
+    var resp = []
+    resp = array.find(resp =>
+      (resp.nombre_equipo_grupo == nombre_equipo_grupo)
+    )
+    if(resp == undefined){
+      return true
+    }else{
+      return false
+    }
   }
 
 }

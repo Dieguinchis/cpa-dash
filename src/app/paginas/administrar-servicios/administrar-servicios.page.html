@@ -13,9 +13,12 @@
           <b>{{servicio.nombre_servicio}}</b>
         </ion-label> 
         <ion-buttons>
-          <ion-icon name="trash-outline" color="danger" (click)="borrar_servicio(servicio.id_servicio)"></ion-icon>
+          <ion-icon style="margin-right: 10px;" *ngIf="servicio.modificable == 1" name="trash-outline" color="danger" (click)="borrar_servicio(servicio.id_servicio)"></ion-icon>
         </ion-buttons>
-        <ion-buttons style="margin-left: 10px;">
+        <ion-buttons>
+          <ion-icon name="create-outline" style="margin-right: 10px;" (click)="modificar_servicio(servicio.id_servicio)"></ion-icon>
+        </ion-buttons>
+        <ion-buttons >
           <ion-icon name="enter-outline" (click)="ver_servicio(servicio.id_servicio)"></ion-icon>
         </ion-buttons>
       </ion-item>
