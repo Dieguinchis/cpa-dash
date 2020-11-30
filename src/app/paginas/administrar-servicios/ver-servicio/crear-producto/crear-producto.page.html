@@ -34,7 +34,7 @@
       Tipo de producto:
     </ion-label>
     <ion-select [(ngModel)]="tipo_producto">
-      <ion-select-option *ngFor="let opcion of servicio.formulario[0].opciones" value="{{opcion}}">{{opcion}}</ion-select-option>
+      <ion-select-option *ngFor="let opcion of servicio.formulario[indexTipoProducto].opciones" [value]="opcion">{{opcion.name}}</ion-select-option>
     </ion-select>
   </ion-item>
 

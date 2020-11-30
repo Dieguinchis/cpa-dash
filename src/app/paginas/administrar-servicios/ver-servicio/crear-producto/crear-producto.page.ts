@@ -15,6 +15,7 @@ export class CrearProductoPage implements OnInit {
   tipo_producto: any;
 
   public servicio: any;
+  public indexTipoProducto = 0;
 
   public id_servicio = this.navParams.get('id_servicio');
 
@@ -24,6 +25,11 @@ export class CrearProductoPage implements OnInit {
     this.api_servicios.ver_servicio(this.id_servicio).subscribe(data => {
       this.servicio = data;
       this.servicio = this.servicio.result;
+      for(let i = 0; i < this.servicio.formulario.length; i++){
+        if(this.servicio.formulario[i].nombreCampo == 'Tipo de producto'){
+          this.indexTipoProducto = i;
+        }
+      }
       console.log(this.servicio);
     }, (error => {
       console.log(error)
@@ -40,7 +46,5 @@ export class CrearProductoPage implements OnInit {
       console.log(error)
     }))
   }
-
-
 
 }
