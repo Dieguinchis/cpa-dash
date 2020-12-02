@@ -1,66 +1,73 @@
 <ion-header>
-  <ion-toolbar style="text-align: center;" color="primary">
-    <ion-title>Modificar visita</ion-title>
+  <ion-toolbar color="primary">
+    <ion-title>Modificar Visita</ion-title>
+    <ion-buttons slot="end">
+      <ion-button (click)="close()">
+        <ion-icon name="close-outline"></ion-icon>
+      </ion-button>
+    </ion-buttons>
   </ion-toolbar>
 </ion-header>
-
 <ion-content>
+  <!-- <ion-button (click)="onClick()" expand="block" fill="clear" shape="round">
+      Click me
+  </ion-button> -->
 
   <ion-item>
-    <ion-label fixed style="text-align: center;">Seleccionar servicios a ofrecer</ion-label>
-    <ion-select [(ngModel)]="servicios_elegidos"multiple="true">
-      <div *ngFor="let servicio of listado_servicios">
-        <ion-select-option  value="{{servicio.id_servicio}}">{{servicio.nombre_servicio}}</ion-select-option>
-      </div>
-    </ion-select>
-  </ion-item>
-
-  <ion-item>
-    <ion-label fixed style="text-align: center;">Seleccionar técnico a cargo</ion-label>
-    <ion-select [(ngModel)]="tecnico_elegido">
-        <ion-select-option *ngFor="let tecnico of listado_tecnicos" value="{{tecnico.id_tecnico}}">{{tecnico.nombre_tecnico}} {{tecnico.apellido_tecnico}}</ion-select-option>
-    </ion-select>
-  </ion-item>
-
-  <ion-item>
-    <ion-label fixed style="text-align: center;">Elegir una fecha</ion-label>
-    <ion-datetime [(ngModel)]="fecha_elegida" [monthNames]="monthNames" [dayNames]="dayNames" displayFormat="DDDD D MMMM YYYY HH:mm" min="{{fecha_actual}}" max="2022" value="{{fecha_actual}}"></ion-datetime>
+      <ion-label fixed style="text-align: center;">Seleccionar servicios a ofrecer</ion-label>
+      <ion-select [disabled]="sucursal_elegida == null" [(ngModel)]="servicios_elegidosAux"multiple="true" (ionChange)="serviciosElegidosChange()">
+          <ion-select-option *ngFor="let servicio of listado_servicios" value="{{servicio.id_servicio}}">{{servicio.nombre_servicio}}</ion-select-option>
+      </ion-select>
   </ion-item>
 
   <div *ngFor="let servicio of serviciosElegidos" style="text-align: center;">
-    <h2 style="text-align: center;">{{servicio.nombre_servicio}}</h2>
-    <div *ngFor="let equipo of servicio.equipos">
-        <ion-label fixed style="text-align: center;color: var(--ion-color-secondary);font-weight: bold;">{{equipo.nombre_equipo}}</ion-label>
-        <ion-item style="margin-top: 10px;">
-            <ion-label fixed style="text-align: center;">Seleccionar técnico a cargo</ion-label>
-            <ion-select [(ngModel)]="equipo.tecnico">
-                <ion-select-option *ngFor="let tecnico of listado_tecnicos" value="{{tecnico.id_tecnico}}">{{tecnico.nombre_tecnico}} {{tecnico.apellido_tecnico}}</ion-select-option>
-            </ion-select>
-        </ion-item>
-    </div>
+      <h2 style="text-align: center;">{{servicio.nombre_servicio}}</h2>
+      <div *ngFor="let equipo of servicio.equipos">
+          <ion-label fixed style="text-align: center;color: var(--ion-color-secondary);font-weight: bold;">{{equipo.nombre_equipo}}</ion-label>
+          <ion-item style="margin-top: 10px;">
+              <ion-label fixed style="text-align: center;">Seleccionar técnico a cargo</ion-label>
+              <ion-select [(ngModel)]="equipo.tecnico">
+                  <ion-select-option *ngFor="let tecnico of listado_tecnicos" value="{{tecnico.id_tecnico}}">{{tecnico.nombre_tecnico}} {{tecnico.apellido_tecnico}}</ion-select-option>
+              </ion-select>
+          </ion-item>
+      </div>
   </div>
   <div *ngIf="show">
-    <div *ngFor="let servicio of grupoWorkStationElegidos" style="text-align: center;">
-        <h2 style="text-align: center;">{{servicio.nombre_equipo_grupo}}</h2>
-        <div *ngFor="let equipo of servicio.equipos">
-            <ion-label fixed style="text-align: center;color: var(--ion-color-secondary);font-weight: bold;">{{equipo.nombre_equipo}}: {{equipo.nombre_servicio}}</ion-label>
-        </div>
-        <ion-item style="margin-top: 10px;">
-            <ion-label fixed style="text-align: center;">Seleccionar técnico a cargo</ion-label>
-            <ion-select [(ngModel)]="servicio.tecnico">
-                <ion-select-option *ngFor="let tecnico of listado_tecnicos" value="{{tecnico.id_tecnico}}">{{tecnico.nombre_tecnico}} {{tecnico.apellido_tecnico}}</ion-select-option>
-            </ion-select>
-        </ion-item>
-    </div>
+      <div *ngFor="let servicio of grupoWorkStationElegidos" style="text-align: center;">
+          <h2 style="text-align: center;">{{servicio.nombre_equipo_grupo}}</h2>
+          <div *ngFor="let equipo of servicio.equipos">
+              <ion-label fixed style="text-align: center;color: var(--ion-color-secondary);font-weight: bold;">{{equipo.nombre_equipo}}: {{equipo.nombre_servicio}}</ion-label>
+          </div>
+          <ion-item style="margin-top: 10px;">
+              <ion-label fixed style="text-align: center;">Seleccionar técnico a cargo</ion-label>
+              <ion-select [(ngModel)]="servicio.tecnico">
+                  <ion-select-option *ngFor="let tecnico of listado_tecnicos" value="{{tecnico.id_tecnico}}">{{tecnico.nombre_tecnico}} {{tecnico.apellido_tecnico}}</ion-select-option>
+              </ion-select>
+          </ion-item>
+      </div>
   </div>
 
 
-  <div style="width: 100%; text-align: center; margin-top: 10px;">
-    <ion-button (click)="modificar_visita()">Modificar</ion-button>   
+  <!-- <ion-item>
+      <ion-label fixed style="text-align: center;">Seleccionar técnico a cargo</ion-label>
+      <ion-select [(ngModel)]="tecnico_elegido">
+          <ion-select-option *ngFor="let tecnico of listado_tecnicos" value="{{tecnico.id_tecnico}}">{{tecnico.nombre_tecnico}} {{tecnico.apellido_tecnico}}</ion-select-option>
+      </ion-select>
+  </ion-item> -->
+
+  <ion-item>
+      <ion-label fixed style="text-align: center;">Elegir una fecha</ion-label>
+      <ion-datetime [(ngModel)]="fecha_elegida" [doneText]="'Listo'"
+      [cancelText]="'Cancelar'" [monthNames]="monthNames" [dayNames]="dayNames" displayFormat="DDDD D MMMM YYYY HH:mm" min="{{fecha_actual}}" max="2022" value="{{fecha_actual}}"></ion-datetime>
+  </ion-item>
+
+  <div style="width: 100%; text-align: center;">
+      <ion-button (click)="programarVisita()">Modificar</ion-button>
   </div>
 
-
+      
   <div style="margin-top: 25px">
-    <img class="imagen_empresa" src='../../../assets/LogoCPA-01.png'>
+      <img class="imagen_empresa" src='../../../assets/LogoCPA-01.png'>
   </div>
+
 </ion-content>

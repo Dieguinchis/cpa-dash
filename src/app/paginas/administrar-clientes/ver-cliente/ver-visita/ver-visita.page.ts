@@ -46,6 +46,10 @@ export class VerVisitaPage implements OnInit {
     })
   }
 
+  close(){
+    this.modalController.dismiss()
+  }
+
   actualizar_informacion(){
     this.api_visitas.informacion_visita(this.id_visita).subscribe(data => {
       this.visita = data;

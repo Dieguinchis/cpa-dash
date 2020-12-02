@@ -1,9 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { NavParams, ModalController } from '@ionic/angular';
-import * as moment from 'moment';
 import { ApiClientesService } from '../../servicios/api-clientes.service'
 import { ApiVisitasService } from '../../../programar-visita/servicios/api-visitas.service'
 import { ServicioTecnicosService } from '../../../administrar-tecnicos/servicios/servicio-tecnicos.service'
+import * as moment from 'moment';
 
 @Component({
   selector: 'app-modificar-visita',
@@ -12,54 +12,61 @@ import { ServicioTecnicosService } from '../../../administrar-tecnicos/servicios
 })
 export class ModificarVisitaPage implements OnInit {
 
+  public equipos;
+  public serviciosConEquipos = [];
+  public serviciosElegidos = [];
+  public serviciosParaEnviar = [];
+  public grupoWorkStation = []
+  public grupoWorkStationElegidos = []
+  public show = false
+  public id_visita = this.navParams.get('id_visita');
+  visita;
+  servicios_elegidosAux: string[] = [];
+  id_cliente_elegido: any = null;
+  sucursal_elegida: any = null;
+  fecha_elegida: any;
+  tecnico_elegido: any;
+
+  listado_clientes: any;
+  listado_sucursales_cliente: any;
+  listado_servicios: any;
+  listado_tecnicos: any;
+
   fecha_actual: any;
   dayNames= ['Domingo','Lunes','Martes','Miercoles','Jueves','Viernes','Sabado']
   monthNames = ['Enero','Febrero','Marzo','Abril','Mayo','Junio','Julio','Agosto','Septiembre','Octubre','Noviembre','Diciembre']
 
-  public id_visita = this.navParams.get('id_visita');
-  public visita: any;
-  public servicios_elegidos: any = [];
-  public tecnico_elegido: any;
-  public fecha_elegida: any;
-
-  public listado_tecnicos: any;
-  public listado_servicios: any;
-
-  public serviciosElegidos
-  public servicios_elegidosAux
-  public grupoWorkStation
-  public grupoWorkStationElegidos
-  public show
-
-  constructor(private navParams: NavParams, private api_clientes: ApiClientesService, private api_visitas: ApiVisitasService,
-     private api_tecnicos: ServicioTecnicosService, private modalController: ModalController ) { }
-
+  constructor(private api: ApiVisitasService, private api_tecnicos: ServicioTecnicosService, private api_clientes:ApiClientesService, public navParams: NavParams, private ModalController: ModalController, private api_visitas: ApiVisitasService) { 
+   
+  }
 
 
   ngOnInit() {
-    this.fecha_actual = moment().format();
-    this.api_clientes.informacion_visita(this.id_visita).subscribe(data => {
-      console.log(data)
-      this.visita = data;
-      this.visita = this.visita.result;
-      this.fecha_elegida = this.visita.visitas.fecha_visita;
-      this.tecnico_elegido = this.visita.visitas.id_tecnico;
-      for(let i = 0; i < this.visita.servicios.length; i++){
-        this.servicios_elegidos.push(this.visita.servicios[i].id_servicio.toString())
-      }
-      console.log('QWERTY;; ',this.visita)
-
-    }, (error =>{
-      console.log(error)
-    }))
-   
-    this.api_visitas.mostrar_servicios().subscribe(data =>{
+    
+    this.api.mostrar_servicios().subscribe(data =>{
       this.listado_servicios = data;
       this.listado_servicios = this.listado_servicios.result;
-      console.log(this.listado_servicios)
+      console.log(this.listado_servicios,'servicios')
+      this.api.listado_equipos().subscribe((res:any)=>{
+        this.equipos = res.result;
+        console.log(this.equipos,'equipos')
+        for ( let servicio of this.listado_servicios){
+          servicio.equipos = [];
+          for ( let equipo of this.equipos){
+            if(equipo.id_servicio == servicio.id_servicio){
+              servicio.equipos.push(equipo);
+            }
+          }
+          if (servicio.equipos.length < 1){
+            servicio.equipos.push({id_equipo: 0, id_servicio:servicio.id_servicio, nombre_equipo: 'Servicio principal'});
+          }
+        }
+        console.log(this.listado_servicios,'servicios completos');
+      })
     }), (error => {
       console.log(error)
-    });
+    }); 
+   
 
     this.api_tecnicos.listado_tecnicos().subscribe(data => {
       this.listado_tecnicos = data;
@@ -69,45 +76,99 @@ export class ModificarVisitaPage implements OnInit {
       console.log(error)
     }))
 
+    this.fecha_actual = moment().format();
+    this.actualizar_informacion()
+
   }
 
-  modificar_visita(){
-    console.log(this.servicios_elegidos)
-    this.api_visitas.modificar_visita({id_visita: this.id_visita, fecha_visita: this.fecha_elegida, id_tecnico: this.tecnico_elegido, servicios: this.servicios_elegidos}).subscribe(data => {
-      console.log(data);
-      this.modalController.dismiss({
-        'dismissed': true
-      })
-    }, (error => {
+  actualizar_informacion(){
+    this.api_clientes.informacion_visita(this.id_visita).subscribe(data => {
+      this.visita = data;
+      this.visita = this.visita.result;
+      this.id_cliente_elegido = this.visita.visitas.id_cliente
+      this.sucursal_elegida = this.visita.visitas.id_sucursal
+      this.sucursalesCliente(this.id_cliente_elegido)
+
+      console.log('IDS:  ',this.visita, this.sucursal_elegida)
+    }), (error => {
       console.log(error)
-    }))
+    })
   }
 
-  // selectSucursal(){
-  //   this.api.listado_grupoWorkstations(this.sucursal_elegida).subscribe((data:any) =>{
-  //     console.log('Grupo1', data.result)
-  //     var flag = 0
-  //     var array = []
-  //     var i = 0
-  //     var first = true
-  //     data.result.forEach((element) => {
-  //       if(element.id_equipo_grupo == flag){
-  //         // console.log(element.id_equipo_grupo, ' ' ,flag)
-  //         array[i].equipos.push({id_equipo: element.id_equipo, id_servicio:element.id_servicio,id_sucursal:element.id_sucursal, nombre_equipo:element.nombre_equipo,codigo_qr_equipo:element.codigo_qr_equipo,estado_servicio:element.estado_servicio,nombre_servicio:element.nombre_servicio, qr:element.qr})
-  //       }else{
-  //         if(!first){
-  //           i++
-  //         }
-  //         flag = element.id_equipo_grupo
-  //         array.push({nombre_equipo_grupo:element.nombre_equipo_grupo,id_equipo_grupo:element.id_equipo_grupo,equipos:[]})
-  //         array[i].equipos.push({id_equipo: element.id_equipo, id_servicio:element.id_servicio,id_sucursal:element.id_sucursal, nombre_equipo:element.nombre_equipo,codigo_qr_equipo:element.codigo_qr_equipo,estado_servicio:element.estado_servicio,nombre_servicio:element.nombre_servicio,qr:element.qr})
-  //         first = false
-  //       }
-  //     });
-  //     this.grupoWorkStation = array
-  //     console.log('grupo2: ', this.grupoWorkStation)
-  //   })
-  // }
+  sucursalesCliente(id_cliente){
+    this.api.informacion_cliente(id_cliente).subscribe(data => {
+      this.listado_sucursales_cliente = data
+      console.log(data)
+      this.listado_sucursales_cliente = this.listado_sucursales_cliente.result.sucursales.datosSucursal
+      // this.sucursal_elegida = null;
+      this.id_cliente_elegido = id_cliente;
+      this.selectSucursal()
+      console.log(this.listado_sucursales_cliente)
+    }), (error => {
+      console.log(error)
+    })
+  }
+
+  selectSucursal(){
+    this.api.listado_grupoWorkstations(this.sucursal_elegida).subscribe((data:any) =>{
+      // console.log('Grupo1', data.result)
+      var flag = 0
+      var array = []
+      var i = 0
+      var first = true
+      data.result.forEach((element) => {
+        if(element.id_equipo_grupo == flag){
+          // console.log(element.id_equipo_grupo, ' ' ,flag)
+          array[i].equipos.push({id_equipo: element.id_equipo, id_servicio:element.id_servicio,id_sucursal:element.id_sucursal, nombre_equipo:element.nombre_equipo,codigo_qr_equipo:element.codigo_qr_equipo,estado_servicio:element.estado_servicio,nombre_servicio:element.nombre_servicio, qr:element.qr})
+        }else{
+          if(!first){
+            i++
+          }
+          flag = element.id_equipo_grupo
+          array.push({nombre_equipo_grupo:element.nombre_equipo_grupo,id_equipo_grupo:element.id_equipo_grupo,equipos:[]})
+          array[i].equipos.push({id_equipo: element.id_equipo, id_servicio:element.id_servicio,id_sucursal:element.id_sucursal, nombre_equipo:element.nombre_equipo,codigo_qr_equipo:element.codigo_qr_equipo,estado_servicio:element.estado_servicio,nombre_servicio:element.nombre_servicio,qr:element.qr})
+          first = false
+        }
+      });
+      this.grupoWorkStation = array
+      // console.log('grupo2: ', this.grupoWorkStation)
+    })
+  }
+
+  programarVisita(){
+    for(let servicio of this.serviciosElegidos){
+      for(let equipo of servicio.equipos){
+        this.serviciosParaEnviar.push({id_servicio: servicio.id_servicio, id_tecnico: equipo.tecnico, id_equipo: equipo.id_equipo})
+      }
+    }
+    for(let workstation of this.grupoWorkStationElegidos){
+      for(let equipo of workstation.equipos){
+        this.serviciosParaEnviar.push({id_servicio: equipo.id_servicio, id_tecnico: workstation.tecnico, id_equipo: equipo.id_equipo})
+      }
+    }
+    console.log(this.serviciosParaEnviar);
+
+    this.api_visitas.modificar_visita({'id_cliente': this.id_cliente_elegido,
+    'id_sucursal': this.sucursal_elegida,
+    'servicios': this.serviciosParaEnviar,
+    'fecha_visita': this.fecha_elegida,
+    'id':this.visita.visitas.id_visita
+  }).subscribe(data => {
+      console.log(data)
+      location.reload();
+    }), (error =>{
+      console.log(error)
+    })
+    // this.api.crear_visita({'id_cliente': this.id_cliente_elegido,
+    //                       'id_sucursal': this.sucursal_elegida,
+    //                       'servicios': this.serviciosParaEnviar,
+    //                       'fecha_visita': this.fecha_elegida}).subscribe(data => {
+    //                           console.log(data)
+    //                           location.reload();
+    //                        }), (error =>{
+    //                          console.log(error)
+    //                        })
+  }
 
   serviciosElegidosChange(){
     this.serviciosElegidos = [];
@@ -121,7 +182,7 @@ export class ModificarVisitaPage implements OnInit {
     var arrayWorkstation:any = [{nombre_equipo_grupo:null, id_equipo_grupo:null, tecnico: null ,equipos:[]}]
     var i = 0
     var first = true
-    // console.log(this.servicios_elegidosAux)
+    console.log(this.servicios_elegidosAux)
     this.grupoWorkStation.forEach((workstation:any) =>{
       workstation.equipos.forEach((servicio) => {
         var val = servicio.id_servicio.toString()
@@ -134,7 +195,7 @@ export class ModificarVisitaPage implements OnInit {
                 arrayWorkstation.push({nombre_equipo_grupo:workstation.nombre_equipo_grupo, id_equipo_grupo:workstation.id_equipo_grupo, tecnico: null ,equipos:[servicio]})
               }else{
                 first = false
-                console.log('2')
+                // console.log('2')
                 arrayWorkstation = [{nombre_equipo_grupo:workstation.nombre_equipo_grupo, id_equipo_grupo:workstation.id_equipo_grupo, tecnico: null ,equipos:[servicio]}]  
               }
           }else{
@@ -163,5 +224,11 @@ export class ModificarVisitaPage implements OnInit {
       return false
     }
   }
+
+  close(){
+    this.ModalController.dismiss()
+  }
+
+  
 
 }
