@@ -47,11 +47,12 @@
                 <ion-select [disabled]="servicio.modificable == 0" [(ngModel)]="campo.tipoCampo">
                   <ion-select-option value="input">Escritura</ion-select-option>
                   <ion-select-option value="select">Seleccionable</ion-select-option>
+                  <ion-select-option value="multiple">Seleccion multiple</ion-select-option>
                 </ion-select>
               </ion-item>
             </div>
           </ion-row>
-          <div *ngIf="campo.tipoCampo == 'select'">
+          <div *ngIf="campo.tipoCampo == 'select' || campo.tipoCampo == 'multiple'">
             <ion-item lines="none" *ngFor="let opcion of campo.opt; let j = index">
               <ion-label>Ingrese la opcion: </ion-label>
               <!-- <div style="margin-left: 5px"> -->
@@ -99,3 +100,7 @@
 
 
 </ion-content>  
+
+
+
+

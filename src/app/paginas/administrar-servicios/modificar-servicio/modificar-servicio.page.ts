@@ -58,6 +58,8 @@ export class ModificarServicioPage implements OnInit {
 
   agregar_campo_formulario(){
     this.servicio.formulario.push({nombreCampo:'', tipoCampo:'', opciones:[]})
+    this.campos.push({opt:[], tipoCampo:"", nombreCampo:""})
+
   }
 
   agregar_opcion_select(i){

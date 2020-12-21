@@ -70,8 +70,7 @@ export class ApiServiciosService {
   }
 
   baja_opcion(id){
-
-    return this.http.post(this.apiDir+'/servicios/opcion/delete/'+id, this.requestOptions);
+    return this.http.post(this.apiDir+'/servicios/opcion/delete/',{id:id}, this.requestOptions);
 
   }
   
