@@ -1,7 +1,11 @@
 {
   "configVersion": 1,
 <<<<<<< HEAD
+<<<<<<< HEAD
   "timestamp": 1610647624221,
+=======
+  "timestamp": 1608580724438,
+>>>>>>> 35eb98de23fb8e979972cfa2be845e66ca4b4611
 =======
   "timestamp": 1608580724438,
 >>>>>>> 35eb98de23fb8e979972cfa2be845e66ca4b4611
@@ -22,6 +26,9 @@
         "/12-es5.36bfd73fa0ed4b28ec4a.js",
         "/13-es2015.93f1368c28fbea746817.js",
         "/13-es5.93f1368c28fbea746817.js",
+<<<<<<< HEAD
+>>>>>>> 35eb98de23fb8e979972cfa2be845e66ca4b4611
+=======
 >>>>>>> 35eb98de23fb8e979972cfa2be845e66ca4b4611
         "/14-es2015.023792cf55706588d2de.js",
         "/14-es5.023792cf55706588d2de.js",
@@ -164,8 +171,13 @@
         "/80-es2015.501a9d96ab59a7dbd159.js",
         "/80-es5.501a9d96ab59a7dbd159.js",
 <<<<<<< HEAD
+<<<<<<< HEAD
         "/common-es2015.ee33f94a9a79be075a2c.js",
         "/common-es5.ee33f94a9a79be075a2c.js",
+=======
+        "/common-es2015.91296162649930c58673.js",
+        "/common-es5.91296162649930c58673.js",
+>>>>>>> 35eb98de23fb8e979972cfa2be845e66ca4b4611
 =======
         "/common-es2015.91296162649930c58673.js",
         "/common-es5.91296162649930c58673.js",
@@ -193,6 +205,9 @@
         "/polyfills-es5.19741e94533fa050c01c.js",
         "/runtime-es2015.2f6d24e5c255db5bb1ae.js",
         "/runtime-es5.2f6d24e5c255db5bb1ae.js",
+<<<<<<< HEAD
+>>>>>>> 35eb98de23fb8e979972cfa2be845e66ca4b4611
+=======
 >>>>>>> 35eb98de23fb8e979972cfa2be845e66ca4b4611
         "/styles.6aa027a260e79635200a.css"
       ],
@@ -230,6 +245,9 @@
     "/12-es5.36bfd73fa0ed4b28ec4a.js": "2579f47b03ada10e68e1cadc44403773cd3f4b0b",
     "/13-es2015.93f1368c28fbea746817.js": "1fad594bec35f061ac01154b8c9854ee99495812",
     "/13-es5.93f1368c28fbea746817.js": "389359d3865a21a7109807db861a971522d42d46",
+<<<<<<< HEAD
+>>>>>>> 35eb98de23fb8e979972cfa2be845e66ca4b4611
+=======
 >>>>>>> 35eb98de23fb8e979972cfa2be845e66ca4b4611
     "/14-es2015.023792cf55706588d2de.js": "3b22e300c992d22eaf15750fa8b6cc2ba01d2caf",
     "/14-es5.023792cf55706588d2de.js": "fdfa0fdc659bc8b2d644a15f83809a5b3b2dc863",
@@ -383,8 +401,13 @@
     "/assets/icons/icon-96x96.png": "3914125a4b445bf111c5627875fc190f560daa41",
     "/assets/shapes.svg": "638f87e27e6fc7ddfd6e6b262ea70d690f6c7011",
 <<<<<<< HEAD
+<<<<<<< HEAD
     "/common-es2015.ee33f94a9a79be075a2c.js": "f5a5504e6c3116beca6b54f010a14cab646e841e",
     "/common-es5.ee33f94a9a79be075a2c.js": "7ff4f726233bb0d94be181e96dfc09337da4e269",
+=======
+    "/common-es2015.91296162649930c58673.js": "265d58e185fa73e84d3ca2f2fbcf08b0ce47d16d",
+    "/common-es5.91296162649930c58673.js": "faa71832cbf7f8ed0d9100070b5583fd111ee294",
+>>>>>>> 35eb98de23fb8e979972cfa2be845e66ca4b4611
 =======
     "/common-es2015.91296162649930c58673.js": "265d58e185fa73e84d3ca2f2fbcf08b0ce47d16d",
     "/common-es5.91296162649930c58673.js": "faa71832cbf7f8ed0d9100070b5583fd111ee294",
@@ -394,11 +417,14 @@
     "/cordova_plugins.js": "ce50299a92de4b0a60604cf4251adbdb4f160c8d",
     "/favicon.ico": "696dfbca3c3326f3a7832c34da7188bf98d59dbe",
 <<<<<<< HEAD
+<<<<<<< HEAD
     "/index.html": "ab77c7e0a466ebed7f689c1bad4a5559a770c2d0",
     "/main-es2015.bca34f17394cf9e4893d.js": "f493229916ac5676de37e5cb94f63eb25c04cb3e",
     "/main-es5.bca34f17394cf9e4893d.js": "1ea6810284e5655071a1798a792af3e963453a0c",
     "/manifest.webmanifest": "da2061dba175bf2d881980e8596ff5343e2dd7b6",
 =======
+=======
+>>>>>>> 35eb98de23fb8e979972cfa2be845e66ca4b4611
     "/index.html": "d1b805d231a0e7f9c6e929e46b31df55833b7e10",
     "/main-es2015.adc547d0b70ae0803745.js": "f493229916ac5676de37e5cb94f63eb25c04cb3e",
     "/main-es5.adc547d0b70ae0803745.js": "1ea6810284e5655071a1798a792af3e963453a0c",
@@ -419,6 +445,9 @@
     "/polyfills-es5.19741e94533fa050c01c.js": "4086e5c7f07cebe6186f92879588144b801db569",
     "/runtime-es2015.2f6d24e5c255db5bb1ae.js": "e98d6afebfef7858a93a7f9fc3e87083ae570136",
     "/runtime-es5.2f6d24e5c255db5bb1ae.js": "65028a96eb07536efdbf3b0a3066da50c2bf4a97",
+<<<<<<< HEAD
+>>>>>>> 35eb98de23fb8e979972cfa2be845e66ca4b4611
+=======
 >>>>>>> 35eb98de23fb8e979972cfa2be845e66ca4b4611
     "/styles.6aa027a260e79635200a.css": "66c8f8ac3c4adaea88c05636c34fd8396bbe3b95"
   },
