@@ -73,7 +73,7 @@ export class VerClientePage implements OnInit {
           text: 'Si',
           handler: () => {
             this.eliminar_sucursal(id_sucursal);
-            this.actualizar_informacion();
+            
           }
         }
       ]
@@ -83,6 +83,7 @@ export class VerClientePage implements OnInit {
 
   eliminar_sucursal(id_sucursal){
     this.api_clientes.eliminar_sucursal(id_sucursal).subscribe(data => {
+      location.reload()
     }, (error =>{
       console.log(error)
     }))

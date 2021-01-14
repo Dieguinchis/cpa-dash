@@ -15,7 +15,7 @@
 
   <ion-item lines="full">
     <ion-label class="titulos" >
-      Telefono:
+      Telefono: (solo numeros)
     </ion-label>
     <ion-input [(ngModel)]="telefono">
     </ion-input>
@@ -38,11 +38,11 @@
   </ion-item>
 
   <ion-item lines="full">
-    <img [src]="cliente.clienteDatos[0].logo_cliente" alt="" *ngIf="cliente.clienteDatos[0].logo_cliente">
-    <ion-button (click)="agregarLogo()" *ngIf="!logo">
-      Seleccionar Logo
-    </ion-button>
+    <!-- <img [src]="cliente.clienteDatos[0].logo_cliente" alt="" *ngIf="cliente.clienteDatos[0].logo_cliente"> -->
     <img [src]="logo" alt="" style="width: 50%;margin-left: 25%;padding: 5px;">
+    <ion-icon *ngIf="!(logo == null)" name="trash-outline" color="danger" style="margin-top:15px" (click)="deleteLogo()"></ion-icon>
+    <ion-button (click)="agregarLogo()" *ngIf="(logo == null)">Seleccionar Logo</ion-button>
+
   </ion-item>
 
   <div style="width: 100%; text-align: center; margin-top: 10px;">

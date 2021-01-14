@@ -79,7 +79,9 @@ export class ApiClientesService {
   subir_logo_cliente(parametros){
     return this.http.post(this.apiDir+'/clientes/actualizarLogo', parametros, this.requestOptions);
   }
-
+  eliminar_Logo_Cliente(parametros){
+    return this.http.post(this.apiDir+'/clientes/eliminarLogo', parametros, this.requestOptions);
+  }
   eliminar_cliente(id_cliente){
     return this.http.post(this.apiDir+'/clientes/eliminar/'+id_cliente,this.requestOptions)
   }

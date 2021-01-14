@@ -19,7 +19,7 @@
           <ion-icon name="create-outline" style="margin-right: 10px;" (click)="modificar_servicio(servicio.id_servicio)"></ion-icon>
         </ion-buttons>
         <ion-buttons >
-          <ion-icon name="enter-outline" (click)="ver_servicio(servicio.id_servicio)"></ion-icon>
+          <ion-icon name="enter-outline" *ngIf="servicio.producto == 1" (click)="ver_servicio(servicio.id_servicio)"></ion-icon>
         </ion-buttons>
       </ion-item>
     </ion-card>

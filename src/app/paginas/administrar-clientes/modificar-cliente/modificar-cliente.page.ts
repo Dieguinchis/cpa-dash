@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ApiClientesService } from '../servicios/api-clientes.service'
-import { NavParams, ModalController } from '@ionic/angular';
+import { NavParams, ModalController, LoadingController } from '@ionic/angular';
 import { NgxImageCompressService } from 'ngx-image-compress';
 
 @Component({
@@ -21,7 +21,7 @@ export class ModificarClientePage implements OnInit {
 
   public objeto: any;
 
-  constructor(private api_clientes: ApiClientesService, private navParams: NavParams, public modalCtrl: ModalController, private imageCompress: NgxImageCompressService) { }
+  constructor(public loadingController: LoadingController,private api_clientes: ApiClientesService, private navParams: NavParams, public modalCtrl: ModalController, private imageCompress: NgxImageCompressService) { }
 
   ngOnInit() {
     this.api_clientes.informacion_cliente(this.id_cliente).subscribe(data => {
@@ -31,6 +31,7 @@ export class ModificarClientePage implements OnInit {
       this.email = this.cliente.clienteDatos[0].email;
       this.telefono = this.cliente.clienteDatos[0].telefono;
       this.direccion = this.cliente.clienteDatos[0].direccion;
+      this.logo = this.cliente.clienteDatos[0].logo_cliente
       console.log(this.cliente)
     }), (error =>
       console.log(error))
@@ -57,16 +58,43 @@ export class ModificarClientePage implements OnInit {
     }))
   }
 
-  agregarLogo(){
+  async agregarLogo(){
+    const loading = await this.loadingController.create({
+      message: 'Subiendo img',
+    });
+    await loading.present();
+
     this.imageCompress.uploadFile().then(({image, orientation}) => {
       console.warn('Size in bytes was:', this.imageCompress.byteCount(image));
       this.imageCompress.compressFile(image, orientation, 50, 50).then(
         result => {
           console.log(result);
           this.logo = result;
+          this.api_clientes.subir_logo_cliente({id_cliente: this.id_cliente, logo: this.logo}).subscribe(response=>{
+            this.loadingController.dismiss()
+          }), (error =>{
+            console.log(error)
+            this.loadingController.dismiss()
+          })
         }
       )
     });
+  }
+
+  async deleteLogo(){
+    const loading = await this.loadingController.create({
+      message: 'Eliminando img',
+    });
+    await loading.present();
+    this.api_clientes.eliminar_Logo_Cliente({id:this.id_cliente}).subscribe(resp =>{
+      this.loadingController.dismiss()
+
+      this.logo = null
+    }), (error =>{
+      this.loadingController.dismiss()
+
+      console.log('123',error)
+    })
   }
 
 }
