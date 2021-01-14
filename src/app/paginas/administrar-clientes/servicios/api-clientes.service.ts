@@ -88,6 +88,10 @@ export class ApiClientesService {
     return this.http.post(this.apiDir+'/sucursales/eliminar/'+id_sucursal,this.requestOptions)
   }
 
+  eliminar_plano(id_plano){
+    return this.http.post(this.apiDir+'/planos/eliminar/'+id_plano,this.requestOptions)
+  }
+
   modificar_sucursal(parametros){
     return this.http.post(this.apiDir+'/sucursales/actualizar',parametros,this.requestOptions)
   }

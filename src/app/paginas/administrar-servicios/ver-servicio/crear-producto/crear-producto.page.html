@@ -33,8 +33,9 @@
     <ion-label class="titulos">
       Tipo de producto:
     </ion-label>
-    <ion-select [(ngModel)]="tipo_producto">
+    <ion-select [(ngModel)]="tipo_producto" (ionChange)="select_tipo_producto()">
       <ion-select-option *ngFor="let opcion of servicio.formulario[indexTipoProducto].opciones" [value]="opcion">{{opcion.name}}</ion-select-option>
+      <ion-select-option value="nuevo">Nuevo tipo</ion-select-option>
     </ion-select>
   </ion-item>
 

@@ -26,7 +26,7 @@
     </ion-item>
 
     <div *ngFor="let campo of campos; let i = index" style="background-color: white;">
-      <ion-item lines="full">
+      <ion-item lines="full" *ngIf="!(campo.nombreCampo == 'Tipo de producto')">
         <ion-grid style="background-color: white;">
           <ion-row style="background-color: white;">
             <ion-item lines="none">
@@ -62,7 +62,6 @@
             </ion-item>  
             <ion-item lines="none">
               <!-- <ion-label style="text-align: center;">
-                
               </ion-label> -->
               <ion-button (click)="agregar_opcion_select(i)">
                 Agregar opcion

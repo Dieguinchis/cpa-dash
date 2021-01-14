@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { NavParams, ModalController } from '@ionic/angular';
+import { NavParams, ModalController, LoadingController } from '@ionic/angular';
 import { ApiClientesService } from '../../servicios/api-clientes.service'
 import { ModificarVisitaPage } from '../modificar-visita/modificar-visita.page'
 
@@ -17,7 +17,7 @@ export class VerVisitaPage implements OnInit {
   public url;
   public pdf_generado:boolean = false;
 
-  constructor(private navParams: NavParams, private api_visitas: ApiClientesService, private modalController: ModalController) { }
+  constructor(private navParams: NavParams, private api_visitas: ApiClientesService, private modalController: ModalController, public loadingController: LoadingController) { }
 
   
 
@@ -25,13 +25,18 @@ export class VerVisitaPage implements OnInit {
     this.actualizar_informacion()
   }
 
-  generar_pdf(){
+  async generar_pdf(){
+    var loader = await this.loadingController.create({ message: "Generando PDF" });
+     loader.present();
+
     console.log(this.id_visita)
     this.api_visitas.crear_pdf({id_visita:this.id_visita}).subscribe(data => {
       console.log(data)
       this.pdf_generado = true;
+      loader.dismiss()
     }, error => {
       console.log(error)
+      loader.dismiss()
     })
   }
 

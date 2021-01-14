@@ -88,7 +88,7 @@ export class VerSucursalPage implements OnInit {
 
   borrar_equipo(id_equipo){
     this.api_sucursales.borrar_equipo(id_equipo).subscribe(data => {
-      console.log(data, id_equipo)
+      // console.log(data, id_equipo)
       this.actualizar_informacion();
     }), (error => {
       console.log(error)
@@ -97,19 +97,22 @@ export class VerSucursalPage implements OnInit {
 
   borrar_equipo_grupo(id, i){
     this.api_sucursales.eliminar_Grupo_workstation(id).subscribe(data => {
-      console.log(data, id)
+      // console.log(data, id)
       // this.actualizar_informacion();
       this.grupoWorkStation.splice(i,1)
     }), (error => {
       console.log(error)
     })
-    console.log(i)
+    // console.log(i)
   }
 
   actualizar_informacion(){
     this.api_sucursales.informacion_sucursal(this.id_sucursal).subscribe(data => {
       this.sucursal = data;
       this.sucursal = this.sucursal.result;
+      console.log('sucursal: ', this.sucursal)
+
+
     }), (error => {
       console.log(error)
     })
@@ -143,6 +146,7 @@ export class VerSucursalPage implements OnInit {
       });
       this.grupoWorkStation = array
       // console.log('grupo2: ', this.grupoWorkStation)
+      
     })
     
   }
@@ -152,7 +156,7 @@ export class VerSucursalPage implements OnInit {
       console.warn('Size in bytes was:', this.imageCompress.byteCount(image));
       this.imageCompress.compressFile(image, orientation, 50, 50).then(
         result => {
-          console.log(result);
+          // console.log(result);
           this.imagen[0] = {url: result}
           // console.log('rodri1', this.imagen[0]);
           // console.log('rodri2', this.sucursal.sucursal[0].id_sucursal)
@@ -168,12 +172,14 @@ export class VerSucursalPage implements OnInit {
     this.loading = await this.loadingController.create({
       message: 'Por favor espere.'
     });
+    
     await this.loading.present();
     if (this.imagen.length > 0){
       this.object = {id_sucursal:this.sucursal.sucursal[0].id_sucursal, imagen: this.imagen[0].url}
-      console.log(this.object);
+      // console.log('LA IMAGEN PUTO',this.imagen[0]);
+      // console.log('request al sv: ', this.object)
       this.api_sucursales.subir_planos(this.object).subscribe(data =>{
-        console.log(data)
+        console.log('resp sv img: ',data)
         this.actualizar_informacion();
         this.loading.dismiss();
       }, (error =>{
@@ -186,6 +192,56 @@ export class VerSucursalPage implements OnInit {
       console.log('No se ha seleccionado ningun plano')
     }
   }
+  
+async eliminar_plano(id_plano){
+  console.log(id_plano)
+  this.loading = await this.loadingController.create({
+    message: 'Eliminado plano, Por favor espere.'
+  });
+  await this.loading.present();
+  this.api_sucursales.eliminar_plano(id_plano).subscribe(resp =>{
+    this.api_sucursales.informacion_sucursal(this.id_sucursal).subscribe(data => {
+      this.sucursal = data;
+      this.sucursal = this.sucursal.result;
+      console.log('sucursal: ', this.sucursal)
+      this.loadingController.dismiss()
 
+
+    }), (error => {
+      this.loadingController.dismiss()
+      this.modalController.dismiss()
+      console.log(error)
+    })
+  },(error =>{
+    this.loading.dismiss();
+    console.log('Error al borrar el plano ', error);
+    this.loadingController.dismiss()
+
+    alert('Ocurrio un error')
+  }))
+}
+
+
+async alert_eliminar_plano(id_plano){
+  const alert = await this.alertController.create({
+    header: 'Seguro que desea eliminar el plano?',
+    buttons: 
+    [
+     { 
+        text: 'No',
+        handler: () => {
+          
+        }
+      },
+      {
+        text: 'Si',
+        handler: () => {
+          this.eliminar_plano(id_plano);
+        }
+      }
+    ]
+  });
+  await alert.present();
+}
 
 }

@@ -186,8 +186,12 @@
     </ion-item>
     <ion-slides pager="true" style="background-color: secondary">
       <ion-slide *ngFor= "let plano of sucursal.planos">
-        <ion-card>
+        <ion-card class="cardPlanos">
+
           <img src={{plano.url_imagen_plano}}  class="planos">
+          <ion-button class="deletePlano" style="position:absolute; right: 0%; bottom: 0%;" (click)="alert_eliminar_plano(plano.id_plano)">
+            <ion-icon style="color: red;" name="trash-outline" (click)="alert_eliminar_plano(plano.id_plano)"></ion-icon>
+          </ion-button>
         </ion-card>
       </ion-slide>
     </ion-slides>

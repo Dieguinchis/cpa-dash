@@ -1,6 +1,8 @@
 .planos{
-    width: 50%;
-    height: 50%;
+    width: 98%;
+    height: 98%;
+    padding: 5%;
+    
 }
 
 .equipos{
@@ -18,3 +20,47 @@ ion-label {
     // --color: #3880ff;
     font-size: 80% !important;
 }
+
+.cardPlanos {
+width: 100% !important;
+height: 100% !important;
+}
+
+ion-slides {
+    --bullet-background: #000000;
+    // --bullet-background-active: #3880ff;
+    // --progress-bar-background: 3880ff
+    // --progress-bar-background-active: 3880ff
+    // --scroll-bar-background: 3880ff
+    // --scroll-bar-background-active: 3880ff
+}
+
+ion-slides {
+    height: 100%;
+  }
+
+  .deletePlano {
+    --background: #3881ff00;
+    --background-activated: #3881ff00;
+    --background-activated-opacity: 1;
+    --background-focused: #3881ff00;
+    --background-focused-opacity: 1;
+    --background-hover: #3881ff00;
+    --background-hover-opacity: 1;
+    --border-color: #3881ff00;
+    --border-radius: 8px;
+    --border-style: solid;
+    --border-width: 8px;
+    --box-shadow: 10px 10px;
+    --color: #3881ff00;
+    --color-activated: #3881ff00;
+    --color-focused: #3881ff00;
+    --color-hover: #3881ff00;
+    --opacity: 1;
+    --padding-bottom: 4px;
+    --padding-end: 4px;
+    --padding-start: 4px;
+    --padding-top: 4px;
+    --ripple-color: #3881ff00;
+    --transition: background-color 15ms linear;
+  }
