@@ -86,15 +86,22 @@ export class ModificarClientePage implements OnInit {
       message: 'Eliminando img',
     });
     await loading.present();
-    this.api_clientes.eliminar_Logo_Cliente({id:this.id_cliente}).subscribe(resp =>{
+    this.api_clientes.subir_logo_cliente({id_cliente: this.id_cliente, logo: null}).subscribe(response=>{
+      this.ngOnInit()
       this.loadingController.dismiss()
-
-      this.logo = null
     }), (error =>{
+      console.log(error)
       this.loadingController.dismiss()
-
-      console.log('123',error)
     })
+    // this.api_clientes.eliminar_Logo_Cliente({id:this.id_cliente}).subscribe(resp =>{
+    //   this.loadingController.dismiss()
+
+    //   this.logo = null
+    // }), (error =>{
+    //   this.loadingController.dismiss()
+
+    //   console.log('123',error)
+    // })
   }
 
 }
