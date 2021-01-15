@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ServicioTecnicosService } from '../servicios/servicio-tecnicos.service'
-import { ModalController } from '@ionic/angular';
+import { ModalController, NavParams } from '@ionic/angular';
 
 @Component({
   selector: 'app-alta-tecnicos',
@@ -16,10 +16,26 @@ export class AltaTecnicosPage implements OnInit {
   email: string;
   usuario: any;
   password: any;
+  newuser = true
+  id:any
 
-  constructor(private api_tecnicos: ServicioTecnicosService, public modalCtrl: ModalController) { }
+  constructor(private api_tecnicos: ServicioTecnicosService, public modalCtrl: ModalController, public navParams: NavParams) { }
 
-  ngOnInit() {
+  async ngOnInit() {
+    var data = await this.navParams.get('tecnico')
+    // id_tecnico,nombre_tecnico, apellido_tecnico, dni, email_tecnico, telefono_tecnico, user_tecnico, clave
+    if(data != undefined || data != null){
+      this.nombre = data.nombre_tecnico
+      this.apellido= data.apellido_tecnico
+      this.dni= data.dni
+      this.telefono= data.telefono_tecnico
+      this.email= data.email_tecnico
+      this.usuario= data.user_tecnico
+      this.password= null
+      this.newuser = false
+      this.id = data.id_tecnico
+    }
+
   }
 
   alta_tecnico(){
@@ -31,6 +47,24 @@ export class AltaTecnicosPage implements OnInit {
                                   email: this.email,
                                   user: this.usuario,
                                   clave: this.password}).subscribe(data => {
+                                    console.log(data)
+                                    location.reload();
+                                  }), (error =>
+                                    console.log(error))
+  }
+
+  modificar_tecnico(){
+    console.log(this.usuario)
+    // id_tecnico,nombre_tecnico, apellido_tecnico, dni, email_tecnico, telefono_tecnico, user_tecnico, clave
+    this.api_tecnicos.modificar_tecnico({id_tecnico:this.id,
+                                  nombre_tecnico: this.nombre,
+                                  apellido_tecnico: this.apellido,
+                                  dni: this.dni,
+                                  email_tecnico: this.email,
+                                  telefono_tecnico: this.telefono,
+                                  user_tecnico: this.usuario,
+                                  clave: this.password}
+                                  ).subscribe(data => {
                                     console.log(data)
                                     location.reload();
                                   }), (error =>

@@ -1,3 +1,10 @@
+<ion-header>
+  <ion-toolbar color="primary">
+    <ion-title *ngIf="newuser">Nuevo Tecnico</ion-title>
+    <ion-title *ngIf="!newuser">Modificar Tecnico</ion-title>
+
+  </ion-toolbar>
+</ion-header>
 <ion-content >
 
   <ion-item lines="full">
@@ -58,7 +65,9 @@
 
   <div style="width: 100%; text-align: center; margin-top: 15px;">
     <ion-button (click)="cancelar()">Cancelar</ion-button>
-    <ion-button (click)="alta_tecnico()">Cargar</ion-button>   
+    <ion-button *ngIf="newuser" (click)="alta_tecnico()">Crear</ion-button>   
+    <ion-button *ngIf="!newuser" (click)="modificar_tecnico()">Modificar</ion-button>   
+
   </div>
 
   <div style="margin-top: 25px">

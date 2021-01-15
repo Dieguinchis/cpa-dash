@@ -154,7 +154,7 @@ export class VerSucursalPage implements OnInit {
   agregar_plano(){
     this.imageCompress.uploadFile().then(({image, orientation}) => {
       console.warn('Size in bytes was:', this.imageCompress.byteCount(image));
-      this.imageCompress.compressFile(image, orientation, 50, 50).then(
+      this.imageCompress.compressFile(image, orientation, 100, 100).then(
         result => {
           // console.log(result);
           this.imagen[0] = {url: result}

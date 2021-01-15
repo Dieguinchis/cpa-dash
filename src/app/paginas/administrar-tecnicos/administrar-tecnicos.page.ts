@@ -32,7 +32,16 @@ export class AdministrarTecnicosPage implements OnInit {
     });
     return await modal.present();
   }
-
+  async modificar(tecnico){
+    const modal = await this.modalController.create({
+      component: AltaTecnicosPage,
+      cssClass: 'my-custom-class',
+      componentProps:{
+        tecnico: tecnico
+      }
+    });
+    return await modal.present();
+  }
   async confirmar_baja(id_tecnico) {
     const alert = await this.alertController.create({
       header: '¿Seguro que deseas dar de baja al tecnico?',
