@@ -40,8 +40,8 @@
   <ion-item lines="full">
     <!-- <img [src]="cliente.clienteDatos[0].logo_cliente" alt="" *ngIf="cliente.clienteDatos[0].logo_cliente"> -->
     <img [src]="logo" alt="" style="width: 50%;margin-left: 25%;padding: 5px;">
-    <ion-icon *ngIf="!(logo == null)" name="trash-outline" color="danger" style="margin-top:15px" (click)="deleteLogo()"></ion-icon>
-    <ion-button (click)="agregarLogo()" *ngIf="(logo == null)">Seleccionar Logo</ion-button>
+    <ion-icon *ngIf="!(logo == null || logo == 'NULL')" name="trash-outline" color="danger" style="margin-top:15px" (click)="deleteLogo()"></ion-icon>
+    <ion-button (click)="agregarLogo()" *ngIf="(logo == null || logo == 'NULL')">Seleccionar Logo</ion-button>
 
   </ion-item>
 
