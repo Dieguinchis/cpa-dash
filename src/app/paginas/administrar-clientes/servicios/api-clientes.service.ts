@@ -60,6 +60,18 @@ export class ApiClientesService {
     return this.http.post(this.apiDir+'/planos/crear', parametros, this.requestOptions)
   }
 
+  upload(params,bodyP = {}){
+    return new Promise((resolve, reject) => {
+      this.http.post(this.apiDir + params,bodyP)
+      // this.http.post(this.url + params, bodyP,{headers: header})
+        .subscribe(response => {
+          resolve(response);
+        }, (error) => {
+          reject(error);
+        });
+    });
+  }
+
   ver_sucursal(id_sucursal){
     return this.http.get(this.apiDir+'/sucursales/id/'+id_sucursal)
   }

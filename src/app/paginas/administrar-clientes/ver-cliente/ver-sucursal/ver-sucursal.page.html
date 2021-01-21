@@ -182,9 +182,21 @@
   <div *ngIf="sucursal" style="margin-top: 10px;">
     <ion-item style="text-align: center;" lines="none">
       <ion-label><b>Planos de la sucursal</b></ion-label>
+      <input style="visibility: hidden;" id="inputUploadFile" accept=".pdf" title=" " [disabled]="disabled" type="file" name="" (change)="showFile($event.target.files)">
       <ion-icon slot="end" name="add-circle-outline" color="primary" (click)="agregar_plano()"></ion-icon>
     </ion-item>
-    <ion-slides pager="true" style="background-color: secondary">
+    <div *ngFor="let plano of sucursal.planos">
+      <ion-item button *ngIf="sucursal.planos.length > 0">
+        <ion-icon (click)="openPdf(plano.url_imagen_plano)" name="eye" slot="start"></ion-icon>
+        <ion-label (click)="openPdf(plano.url_imagen_plano)">{{plano.name}}</ion-label>
+        <ion-icon slot="end" style="color: red;" name="trash-outline" (click)="alert_eliminar_plano(plano.id_plano)"></ion-icon>
+      </ion-item>
+
+    </div>
+    <ion-item button *ngIf="sucursal.planos.length == 0">
+      <ion-label>No hay planos cargados</ion-label>
+    </ion-item>
+    <!-- <ion-slides pager="true" style="background-color: secondary">
       <ion-slide *ngFor= "let plano of sucursal.planos">
         <ion-card class="cardPlanos">
 
@@ -194,7 +206,7 @@
           </ion-button>
         </ion-card>
       </ion-slide>
-    </ion-slides>
+    </ion-slides> -->
   </div>
 
 </ion-content>

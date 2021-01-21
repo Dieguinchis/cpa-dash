@@ -28,9 +28,12 @@ export class VerSucursalPage implements OnInit {
   public loading;
   imagen = [];
   object:any;
+  public disabled = false
+  public fileNames = []
+  public filesToUpload = []
 
   ngOnInit() {
-    this.actualizar_informacion();
+    this.actualizar_informacion(false);
   }
 
 
@@ -44,7 +47,7 @@ export class VerSucursalPage implements OnInit {
       }
     });
     modal.onDidDismiss().then(data =>{
-      this.actualizar_informacion();
+      this.actualizar_informacion(false);
     })
     return await modal.present();
   }
@@ -52,7 +55,7 @@ export class VerSucursalPage implements OnInit {
   altaGrupoWorkstation(nombre){
     var body = {nombre_equipo_grupo:nombre ,id_sucursal:this.id_sucursal}
     this.api_servicios.alta_Grupo_workstation(body).subscribe(resp =>{
-      this.actualizar_informacion();
+      this.actualizar_informacion(false);
     }),(error => {
       console.log(error)
     })
@@ -89,7 +92,7 @@ export class VerSucursalPage implements OnInit {
   borrar_equipo(id_equipo){
     this.api_sucursales.borrar_equipo(id_equipo).subscribe(data => {
       // console.log(data, id_equipo)
-      this.actualizar_informacion();
+      this.actualizar_informacion(false);
     }), (error => {
       console.log(error)
     })
@@ -106,14 +109,25 @@ export class VerSucursalPage implements OnInit {
     // console.log(i)
   }
 
-  actualizar_informacion(){
+  actualizar_informacion(loading){
     this.api_sucursales.informacion_sucursal(this.id_sucursal).subscribe(data => {
       this.sucursal = data;
       this.sucursal = this.sucursal.result;
-      console.log('sucursal: ', this.sucursal)
+      for (let index = 0; index < this.sucursal.planos.length; index++) {
+        // this.sucursal.planos[index].url_imagen_plano = 1
+        // this.sucursal[index] = this.sucursal[index].url_imagen_plano
+        Object.defineProperty(this.sucursal.planos[index],'name',{value:this.sucursal.planos[index].url_imagen_plano.slice(27)});
 
+      }
+      console.log('sucursal: ', this.sucursal)
+      if(loading){
+        this.loadingController.dismiss();
+      }
 
     }), (error => {
+      if(loading){
+        this.loadingController.dismiss();
+      }
       console.log(error)
     })
     // this.api_sucursales.listado_workstations(this.id_sucursal).subscribe(data => {
@@ -150,48 +164,102 @@ export class VerSucursalPage implements OnInit {
     })
     
   }
-
-  agregar_plano(){
-    this.imageCompress.uploadFile().then(({image, orientation}) => {
-      console.warn('Size in bytes was:', this.imageCompress.byteCount(image));
-      this.imageCompress.compressFile(image, orientation, 100, 100).then(
-        result => {
-          // console.log(result);
-          this.imagen[0] = {url: result}
-          // console.log('rodri1', this.imagen[0]);
-          // console.log('rodri2', this.sucursal.sucursal[0].id_sucursal)
-          this.subirPlano(this.imagen);
-        }
-      )
-    });
+  openPdf(url){
+    window.open(url)
   }
+  agregar_plano(){
+    document.getElementById('inputUploadFile').click()
+    // this.imageCompress.uploadFile().then(({image, orientation}) => {
+    //   console.warn('Size in bytes was:', this.imageCompress.byteCount(image));
+    //   this.imageCompress.compressFile(image, orientation, 100, 100).then(
+    //     result => {
+    //       // console.log(result);
+    //       this.imagen[0] = {url: result}
+    //       // console.log('rodri1', this.imagen[0]);
+    //       // console.log('rodri2', this.sucursal.sucursal[0].id_sucursal)
+    //       this.subirPlano(this.imagen);
+    //     }
+    //   )
+    // });
+  }
+
+
+  showFile(files: FileList){
+    if(files.length > 0){
+      for (const file in files){
+        var val = files[file].name;
+        var result =  this.filesToUpload.filter(file => file.name == val)
+        if(result.length == 0){
+          this.filesToUpload.push(files[file]);
+          
+        }else{
+          alert('Ya existe: '+ val)
+        }
+      }
+      this.filesToUpload.splice(-2,2)
+      this.uploadFile(this.filesToUpload)
+      this.filesToUpload = []
+      val = null
+      result = null
+      // console.log(this.filesToUpload); 
+    }else{
+    }
+
+  }
+  async uploadFile(files){
+
+    var loader = await this.loadingController.create({ message: "Subiendo Archivos" });
+    loader.present()
+    var err = 0
+    this.disabled = true
+
+    for (let index = 0; index < files.length; index++) {
+
+        const formData: FormData = new FormData();
+        formData.append('file', files[index], files[index].name)
+        formData.append('id_sucursal', this.sucursal.sucursal[0].id_sucursal)
+        // {id_sucursal:this.sucursal.sucursal[0].id_sucursal,
+        this.api_sucursales.upload('/planos/crear',formData).then(resp =>{
+          console.log(resp)
+          this.sucursal.planos =[]
+          this.actualizar_informacion(true)
+        }).catch(error =>{
+          this.loadingController.dismiss();
+          console.log('Error al subir el plano ', error);
+          alert('El plano no se subio')
+        })
+    }
+    this.disabled = false
+    // return err
+  }
+
 
   
 
-  async subirPlano(imagen){
-    this.loading = await this.loadingController.create({
-      message: 'Por favor espere.'
-    });
+  // async subirPlano(imagen){
+  //   this.loading = await this.loadingController.create({
+  //     message: 'Por favor espere.'
+  //   });
     
-    await this.loading.present();
-    if (this.imagen.length > 0){
-      this.object = {id_sucursal:this.sucursal.sucursal[0].id_sucursal, imagen: this.imagen[0].url}
-      // console.log('LA IMAGEN PUTO',this.imagen[0]);
-      // console.log('request al sv: ', this.object)
-      this.api_sucursales.subir_planos(this.object).subscribe(data =>{
-        console.log('resp sv img: ',data)
-        this.actualizar_informacion();
-        this.loading.dismiss();
-      }, (error =>{
-        this.loading.dismiss();
-        console.log('Error al subir el plano ', error);
-        alert('El plano no se subio')
-      }))
-    } else {
-      this.loading.dismiss();
-      console.log('No se ha seleccionado ningun plano')
-    }
-  }
+  //   await this.loading.present();
+  //   if (this.imagen.length > 0){
+  //     this.object = {id_sucursal:this.sucursal.sucursal[0].id_sucursal, imagen: this.imagen[0].url}
+  //     // console.log('LA IMAGEN PUTO',this.imagen[0]);
+  //     // console.log('request al sv: ', this.object)
+  //     this.api_sucursales.subir_planos(this.object).subscribe(data =>{
+  //       console.log('resp sv img: ',data)
+  //       this.actualizar_informacion();
+  //       this.loading.dismiss();
+  //     }, (error =>{
+  //       this.loading.dismiss();
+  //       console.log('Error al subir el plano ', error);
+  //       alert('El plano no se subio')
+  //     }))
+  //   } else {
+  //     this.loading.dismiss();
+  //     console.log('No se ha seleccionado ningun plano')
+  //   }
+  // }
   
 async eliminar_plano(id_plano){
   console.log(id_plano)
@@ -203,6 +271,12 @@ async eliminar_plano(id_plano){
     this.api_sucursales.informacion_sucursal(this.id_sucursal).subscribe(data => {
       this.sucursal = data;
       this.sucursal = this.sucursal.result;
+      for (let index = 0; index < this.sucursal.planos.length; index++) {
+        // this.sucursal.planos[index].url_imagen_plano = 1
+        // this.sucursal[index] = this.sucursal[index].url_imagen_plano
+        Object.defineProperty(this.sucursal.planos[index],'name',{value:this.sucursal.planos[index].url_imagen_plano.slice(27)});
+
+      }
       console.log('sucursal: ', this.sucursal)
       this.loadingController.dismiss()
 
