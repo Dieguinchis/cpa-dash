@@ -27,8 +27,8 @@ export class AltaClientePage implements OnInit {
                                   'direccion': this.direccion}).subscribe(data => {
 
       console.log(data);
-      // this.navCtrl.navigateForward('/administrar-clientes')
-      // location.reload();
+      this.navCtrl.navigateForward('/administrar-clientes')
+      location.reload();
       }),
     (error =>
         console.log(error))
