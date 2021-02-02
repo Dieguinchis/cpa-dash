@@ -20,17 +20,21 @@ export class AltaClientePage implements OnInit {
   }
 
   cargar_cliente(){
-    this.api_clientes.alta_cliente({'razon_social_cliente':this.razon_social,
+    if(this.razon_social){
+      this.api_clientes.alta_cliente({'razon_social_cliente':this.razon_social,
                                   'telefono':this.telefono, 
                                   'email': this.email,
                                   'direccion': this.direccion}).subscribe(data => {
 
       console.log(data);
-      this.navCtrl.navigateForward('/administrar-clientes')
-      location.reload();
+      // this.navCtrl.navigateForward('/administrar-clientes')
+      // location.reload();
       }),
     (error =>
         console.log(error))
+    }else{
+      alert('El campo Razon social es obligatorio');
+    }
   }
 
 }
