@@ -158,9 +158,21 @@ export class VerSucursalPage implements OnInit {
           first = false
         }
       });
+      
       this.grupoWorkStation = array
       // console.log('grupo2: ', this.grupoWorkStation)
-      
+      for( let grupoEquipo of this.grupoWorkStation){
+        grupoEquipo.equipos.sort(function (a, b) {
+          if (a.nombre_equipo > b.nombre_equipo) {
+            return 1;
+          }
+          if (a.nombre_equipo < b.nombre_equipo) {
+            return -1;
+          }
+          // a must be equal to b
+          return 0;
+        });
+      }
     })
     
   }
