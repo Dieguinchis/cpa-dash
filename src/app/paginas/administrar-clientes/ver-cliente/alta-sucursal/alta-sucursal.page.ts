@@ -22,7 +22,8 @@ export class AltaSucursalPage implements OnInit {
   }
 
   cargar_sucursal(){
-    this.api.alta_sucursal({'id_cliente': this.id_cliente,
+    if(this.direccion && this.razon_social){
+      this.api.alta_sucursal({'id_cliente': this.id_cliente,
                             'razon_social_sucursal': this.razon_social,
                             'direccion_sucursal': this.direccion,
                             'telefono_sucursal': this.telefono,
@@ -32,6 +33,10 @@ export class AltaSucursalPage implements OnInit {
                             }), (error => {
                               console.log(error)
                             })
+    }else{
+      alert('Los campos direccion y razon social son obligatorios');
+    }
+    
   }
 
   cancelar(){

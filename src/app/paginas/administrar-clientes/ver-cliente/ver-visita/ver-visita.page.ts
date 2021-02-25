@@ -59,7 +59,12 @@ export class VerVisitaPage implements OnInit {
     this.api_visitas.informacion_visita(this.id_visita).subscribe(data => {
       this.visita = data;
       this.visita = this.visita.result;
-      console.log(this.visita)
+      this.visita.servicios2 = [];
+      for(let servicio of this.visita.servicios){
+        if(!this.visita.servicios2.includes(servicio.nombre_servicio)){
+          this.visita.servicios2.push(servicio.nombre_servicio); 
+        }
+      }
     }), (error => {
       console.log(error)
     })
