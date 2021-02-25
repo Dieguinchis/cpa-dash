@@ -380,7 +380,7 @@ imprimirQr(qr){
   this.imprimir(qrs)
 }
 
-imprimirQrSucursal(qr){
+imprimirQrSucursal(){
   var qrs = []
   qrs.push(this.sucursal.sucursal[0].codigo_qr)
   this.imprimir(qrs)
