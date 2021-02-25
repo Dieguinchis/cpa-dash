@@ -156,7 +156,7 @@
               </ion-row>
             </ion-grid>
           </ion-item>
-          <div *ngIf="(grupoEquipo.equipos.length == 0)">
+          <div *ngIf="(grupoEquipo.equipos.length == 0 || grupoEquipo.length == 0)">
             <ion-item>
               <ion-label style="width:  100%; text-align: center;">No se encontraron equipos</ion-label>
             </ion-item>

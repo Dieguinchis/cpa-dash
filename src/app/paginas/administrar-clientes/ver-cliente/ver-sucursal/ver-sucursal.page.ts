@@ -139,40 +139,44 @@ export class VerSucursalPage implements OnInit {
     //   console.log(error)
     // })
     this.api_sucursales.listado_grupoWorkstations(this.id_sucursal).subscribe((data:any) =>{
-      // console.log('Grupo1', data.result)
+      console.log('Grupo1', data.result)
       var flag = 0
       var array = []
       var i = 0
       var first = true
-      data.result.forEach((element) => {
-        if(element.id_equipo_grupo == flag){
-          // console.log(element.id_equipo_grupo, ' ' ,flag)
-          array[i].equipos.push({id_equipo: element.id_equipo, id_servicio:element.id_servicio,id_sucursal:element.id_sucursal, nombre_equipo:element.nombre_equipo,codigo_qr_equipo:element.codigo_qr_equipo,estado_servicio:element.estado_servicio,nombre_servicio:element.nombre_servicio})
-        }else{
-          if(!first){
-            i++
+      if(data.result != undefined){
+        data.result.forEach((element) => {
+          if(element.id_equipo_grupo == flag){
+            // console.log(element.id_equipo_grupo, ' ' ,flag)
+            array[i].equipos.push({id_equipo: element.id_equipo, id_servicio:element.id_servicio,id_sucursal:element.id_sucursal, nombre_equipo:element.nombre_equipo,codigo_qr_equipo:element.codigo_qr_equipo,estado_servicio:element.estado_servicio,nombre_servicio:element.nombre_servicio})
+          }else{
+            if(!first){
+              i++
+            }
+            flag = element.id_equipo_grupo
+            array.push({nombre_equipo_grupo:element.nombre_equipo_grupo,id_equipo_grupo:element.id_equipo_grupo,equipos:[]})
+            array[i].equipos.push({id_equipo: element.id_equipo, id_servicio:element.id_servicio,id_sucursal:element.id_sucursal, nombre_equipo:element.nombre_equipo,codigo_qr_equipo:element.codigo_qr_equipo,estado_servicio:element.estado_servicio,nombre_servicio:element.nombre_servicio})
+            first = false
           }
-          flag = element.id_equipo_grupo
-          array.push({nombre_equipo_grupo:element.nombre_equipo_grupo,id_equipo_grupo:element.id_equipo_grupo,equipos:[]})
-          array[i].equipos.push({id_equipo: element.id_equipo, id_servicio:element.id_servicio,id_sucursal:element.id_sucursal, nombre_equipo:element.nombre_equipo,codigo_qr_equipo:element.codigo_qr_equipo,estado_servicio:element.estado_servicio,nombre_servicio:element.nombre_servicio})
-          first = false
-        }
-      });
-      
-      this.grupoWorkStation = array
-      // console.log('grupo2: ', this.grupoWorkStation)
-      for( let grupoEquipo of this.grupoWorkStation){
-        grupoEquipo.equipos.sort(function (a, b) {
-          if (a.nombre_equipo > b.nombre_equipo) {
-            return 1;
-          }
-          if (a.nombre_equipo < b.nombre_equipo) {
-            return -1;
-          }
-          // a must be equal to b
-          return 0;
         });
+        this.grupoWorkStation = array
+        // console.log('grupo2: ', this.grupoWorkStation)
+        for( let grupoEquipo of this.grupoWorkStation){
+          grupoEquipo.equipos.sort(function (a, b) {
+            if (a.nombre_equipo > b.nombre_equipo) {
+              return 1;
+            }
+            if (a.nombre_equipo < b.nombre_equipo) {
+              return -1;
+            }
+            // a must be equal to b
+            return 0;
+          });
+        }
       }
+
+      
+
     })
     
   }
