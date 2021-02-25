@@ -30,6 +30,10 @@ export class ApiServiciosService {
     return this.http.get(this.apiDir+'/servicios');
   }
 
+  getZpl(parametros){
+    return this.http.post(this.apiDir+'/servicios/imprimir',parametros,this.requestOptions);
+  }
+
   alta_producto(parametros){
     return this.http.post(this.apiDir+'/productos/crear',parametros,this.requestOptions);
   }

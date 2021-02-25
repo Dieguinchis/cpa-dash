@@ -318,4 +318,99 @@ async alert_eliminar_plano(id_plano){
   await alert.present();
 }
 
+Imprimir(){
+  this.api_servicios.getZpl({base: this.sucursal.sucursal[0].codigo_qr}).toPromise().then((resp:any) =>{
+    console.log(resp.codigo)
+    var mywindow = window.open('', 'PRINT', 'height=400,width=600');
+
+    mywindow.document.write('<html><head><title>' + document.title  + '</title>');
+    mywindow.document.write('</head><body >');
+    mywindow.document.write('<h3>' + resp.codigo + '</h3>');
+    // mywindow.document.write(document.getElementById('divContenido').innerHTML);
+    mywindow.document.write('</body></html>');
+  
+    mywindow.document.close(); // necessary for IE >= 10
+    mywindow.focus(); // necessary for IE >= 10*/
+  
+    mywindow.print();
+    // mywindow.close();
+  })
+
 }
+
+imprimirQrAllWorkstations(){
+  var qrs = []
+  // console.log(this.grupoWorkStation)
+  this.grupoWorkStation.forEach(WorkStation => {
+    WorkStation.equipos.forEach(equipo => {
+      qrs.push(equipo.codigo_qr_equipo)
+    });
+  });
+  console.log(qrs)
+  this.imprimir(qrs)
+}
+
+imprimirQrThisWorkstation(grupoEquipo){
+  var qrs = []
+  // console.log(grupoEquipo)
+  grupoEquipo.equipos.forEach(equipo => {
+    qrs.push(equipo.codigo_qr_equipo)
+  });
+  console.log(qrs)
+  this.imprimir(qrs)
+}
+
+imprimirQr(qr){
+  var qrs = []
+  console.log(qr)
+  qrs.push(qr.codigo_qr_equipo)
+
+  this.imprimir(qrs)
+}
+
+imprimirQrSucursal(qr){
+  var qrs = []
+  qrs.push(this.sucursal.sucursal[0].codigo_qr)
+  this.imprimir(qrs)
+}
+
+imprimirAllQrSucursal(){
+  var qrs = []
+  qrs.push(this.sucursal.sucursal[0].codigo_qr)
+  this.grupoWorkStation.forEach(WorkStation => {
+    WorkStation.equipos.forEach(equipo => {
+      qrs.push(equipo.codigo_qr_equipo)
+    });
+  });
+  // console.log(qrs)
+  this.imprimir(qrs)
+}
+
+imprimir(qrs){
+  var mywindow = window.open('', 'PRINT', 'width=21,5cm');
+
+  mywindow.document.write('<html><head><title>' + document.title  + '</title>');
+  mywindow.document.write('</head><body>');
+  for (let index = 0; index < qrs.length; index++) {
+    // mywindow.document.write('<div style="margin: 0.5cm ;padding: 0.5cm; border-style: solid; border-width: 1px; border-color: rgb(97, 97, 97);height: 4cm; width: 4cm;">');
+    mywindow.document.write('<img style="margin: 0.2cm ;padding-left: 0.52cm;padding-top: 0;padding-bottom: 0.52cm; padding-right: 0.52cm; height: 5cm; width: 5cm; border-style: solid; border-width: 1px; border-color: rgb(97, 97, 97);" src="' + qrs[index] + '">');
+    // mywindow.document.write('</div>');
+    // mywindow.document.write('<img style="height: 6cm; width: 6cm; border-style: solid; border-width: 1px; border-color: rgb(97, 97, 97);" src="' + qrs[index] + '">');
+
+
+  }
+  // mywindow.document.write(document.getElementById('divContenido').innerHTML);
+  mywindow.document.write('</body></html>');
+
+  mywindow.document.close(); // necessary for IE >= 10
+  mywindow.focus(); // necessary for IE >= 10*/
+
+  mywindow.print();
+  // mywindow.close();
+
+
+}
+
+}
+
+6
