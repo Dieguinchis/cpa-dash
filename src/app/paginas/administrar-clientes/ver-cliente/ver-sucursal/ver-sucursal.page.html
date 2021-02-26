@@ -50,7 +50,8 @@
             </ion-card>
           </ion-col>
           <ion-col style="font-size: 24px !important;" size="1">
-            <ion-icon color="primary" title="Imprimir SOLO este QR" style="margin-top:15px" (click)="imprimirQrSucursal()" name="print-outline"></ion-icon>
+            <ion-icon color="primary" title="Seleccionar ESTE QR para Imprimir" style="margin-top:15px" (click)="addImprimirQrSucursal()" name="print-outline"></ion-icon>
+            <ion-icon *ngIf="showDeleteQrSucursal.show" [title]="'Eliminar QR de la lista (' + showDeleteQrSucursal.count +')'" style="margin-top:15px; color: red !important;" (click)="deleteImprimirQrSucursal()" name="print-outline"></ion-icon>
           </ion-col>
           <!-- <ion-col size="1"></ion-col> -->
         </ion-row>
@@ -121,12 +122,12 @@
       </ion-item>
     </div>
     <div *ngIf="(grupoWorkStation != undefined)">
-      <ion-item lines="full" *ngFor="let grupoEquipo of grupoWorkStation; let i = index">
+      <ion-item lines="full" *ngFor="let grupoEquipo of grupoWorkStation; let j = index">
         <ion-grid>
           <ion-row>
             <ion-col class="grupoequipo" size="5.5" >{{grupoEquipo.nombre_equipo_grupo}}</ion-col>
             <ion-col size="0.5">
-              <ion-icon name="trash-outline" color="danger" style="margin-top:15px" (click)="borrar_equipo_grupo(grupoEquipo.id_equipo_grupo,i)"></ion-icon>
+              <ion-icon name="trash-outline" color="danger" style="margin-top:15px" (click)="borrar_equipo_grupo(grupoEquipo.id_equipo_grupo,j)"></ion-icon>
             </ion-col>
             <ion-col size="6">
               <ion-item style="text-align: left;" lines="none">
@@ -180,7 +181,8 @@
                   </ion-card>
                 </ion-col>
                 <ion-col size="1">
-                  <ion-icon color="primary" title="Imprimir SOLO este QR" style="margin-top:15px" (click)="imprimirQr(equipo)" name="print-outline"></ion-icon>
+                  <ion-icon color="primary" title="Seleccionar ESTE QR para Imprimir" style="margin-top:15px" (click)="addmprimirQr(equipo, i, j)" name="print-outline"></ion-icon>
+                  <ion-icon *ngIf="showDeleteQr[j][i].show" [title]="'Eliminar QR de la lista (' + showDeleteQr[j][i].count +')'" style="margin-top:15px; color: red !important;" (click)="deleteImprimirQr(equipo, i, j)" name="print-outline"></ion-icon>
                 </ion-col>
                 <ion-col size="1.5">
                   <ion-icon name="trash-outline" color="danger" style="margin-top:15px" (click)="borrar_equipo(equipo.id_equipo)"></ion-icon>
@@ -226,3 +228,13 @@
   </div>
 
 </ion-content>
+
+<ion-footer *ngIf="qrsToPrint.length > 0">
+  <ion-toolbar color="primary">
+    <ion-title>QR'S Seleccionados ({{qrsToPrint.length}})</ion-title>
+    <ion-buttons slot="end">
+      <ion-button class="printButton" (click)="printSelect()">Imprimir</ion-button>
+      <ion-button class="printButtonCancel" (click)="deletePrintSelect()">Cancelar</ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-footer>

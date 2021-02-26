@@ -64,3 +64,35 @@ ion-slides {
     --ripple-color: #3881ff00;
     --transition: background-color 15ms linear;
   }
+
+  .printButton {
+      --background-activated: #3881ff7a !important;
+      --background-activated-opacity: 1;
+      --background-focused: #3881ff7a !important;
+      --background-focused-opacity: 1;
+      --background-hover: #3881ff7a !important;
+      --background-hover-opacity: 1;
+      --border-color: #3880ff;
+      --border-radius: 8px;
+      --border-style: solid;
+      --border-width: 1px;
+      --opacity: 1;
+      --ripple-color: #1e1e1e;
+      --transition: background-color 15ms linear;
+  }
+  .printButtonCancel{
+    --background : #ff0800c2 !important;
+    --background-activated: #ff0800 !important;
+    --background-activated-opacity: 1;
+    --background-focused: #ff0800 !important;
+    --background-focused-opacity: 1;
+    --background-hover: #ff0800 !important;
+    --background-hover-opacity: 1;
+    --border-color: #ff0800;
+    --border-radius: 8px;
+    --border-style: solid;
+    --border-width: 1px;
+    --opacity: 1;
+    --ripple-color: #1e1e1e;
+    --transition: background-color 15ms linear; 
+  }

@@ -5,6 +5,7 @@ import { AltaWorkstationPage } from './alta-workstation/alta-workstation.page'
 import { LoadingController } from "@ionic/angular";
 import { NgxImageCompressService } from "ngx-image-compress";
 import { ApiServiciosService } from '../../../administrar-servicios/servicios/api-servicios.service'
+import { element } from 'protractor';
 
 
 @Component({
@@ -31,6 +32,9 @@ export class VerSucursalPage implements OnInit {
   public disabled = false
   public fileNames = []
   public filesToUpload = []
+  public qrsToPrint = []
+  public showDeleteQrSucursal = {show:false,count:0}
+  public showDeleteQr = []
 
   ngOnInit() {
     this.actualizar_informacion(false);
@@ -148,6 +152,7 @@ export class VerSucursalPage implements OnInit {
         data.result.forEach((element) => {
           if(element.id_equipo_grupo == flag){
             // console.log(element.id_equipo_grupo, ' ' ,flag)
+            this.showDeleteQr[i].push({show: false, count:0})
             array[i].equipos.push({id_equipo: element.id_equipo, id_servicio:element.id_servicio,id_sucursal:element.id_sucursal, nombre_equipo:element.nombre_equipo,codigo_qr_equipo:element.codigo_qr_equipo,estado_servicio:element.estado_servicio,nombre_servicio:element.nombre_servicio})
           }else{
             if(!first){
@@ -155,10 +160,13 @@ export class VerSucursalPage implements OnInit {
             }
             flag = element.id_equipo_grupo
             array.push({nombre_equipo_grupo:element.nombre_equipo_grupo,id_equipo_grupo:element.id_equipo_grupo,equipos:[]})
+            this.showDeleteQr.push([])
             array[i].equipos.push({id_equipo: element.id_equipo, id_servicio:element.id_servicio,id_sucursal:element.id_sucursal, nombre_equipo:element.nombre_equipo,codigo_qr_equipo:element.codigo_qr_equipo,estado_servicio:element.estado_servicio,nombre_servicio:element.nombre_servicio})
+            this.showDeleteQr[i].push({show: false, count:0})
             first = false
           }
         });
+        console.log(this.showDeleteQr)
         this.grupoWorkStation = array
         // console.log('grupo2: ', this.grupoWorkStation)
         for( let grupoEquipo of this.grupoWorkStation){
@@ -376,18 +384,41 @@ imprimirQrThisWorkstation(grupoEquipo){
   this.imprimir(qrs)
 }
 
-imprimirQr(qr){
-  var qrs = []
-  console.log(qr)
-  qrs.push(qr.codigo_qr_equipo)
-
-  this.imprimir(qrs)
+addmprimirQr(qr, i, j){
+  this.qrsToPrint.push(qr.codigo_qr_equipo)
+  this.showDeleteQr[j][i].show = true
+  this.showDeleteQr[j][i].count++
 }
 
-imprimirQrSucursal(){
-  var qrs = []
-  qrs.push(this.sucursal.sucursal[0].codigo_qr)
-  this.imprimir(qrs)
+deleteImprimirQr(qr, i, j){
+  var pos = this.qrsToPrint.indexOf(qr.codigo_qr_equipo)
+  if(pos != -1){
+    this.qrsToPrint.splice(pos,1)
+    this.showDeleteQr[j][i].count--
+  }
+  pos = this.qrsToPrint.indexOf(qr.codigo_qr_equipo)
+  if(pos == -1){
+    this.showDeleteQr[j][i].show = false
+  }}
+
+addImprimirQrSucursal(){
+  this.qrsToPrint.push(this.sucursal.sucursal[0].codigo_qr)
+  this.showDeleteQrSucursal.show = true
+  this.showDeleteQrSucursal.count++
+}
+
+deleteImprimirQrSucursal(){
+  var pos = this.qrsToPrint.indexOf(this.sucursal.sucursal[0].codigo_qr)
+  if(pos != -1){
+    this.qrsToPrint.splice(pos,1)
+    this.showDeleteQrSucursal.count--
+
+  }
+  pos = this.qrsToPrint.indexOf(this.sucursal.sucursal[0].codigo_qr)
+  if(pos == -1){
+    this.showDeleteQrSucursal.show = false
+  }
+
 }
 
 imprimirAllQrSucursal(){
@@ -400,6 +431,23 @@ imprimirAllQrSucursal(){
   });
   // console.log(qrs)
   this.imprimir(qrs)
+}
+
+printSelect(){
+  this.imprimir(this.qrsToPrint)
+}
+
+deletePrintSelect(){
+  this.showDeleteQrSucursal.count = 0
+  this.showDeleteQrSucursal.show = false
+  this.showDeleteQr.forEach(element =>{
+    element.forEach(element2 => {
+      element2.show = false
+      element2.count = 0
+    });
+  })
+
+  this.qrsToPrint = []
 }
 
 imprimir(qrs){
