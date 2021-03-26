@@ -27,6 +27,10 @@ export class ApiVisitasService {
     return this.http.get(this.apiDir+'/servicios/equipos/offline');
   }
 
+  listado_equipos_id(id){
+    return this.http.get(this.apiDir+'/servicios/equipos/sucursal/'+id);
+  }
+
   informacion_cliente(id){
     return this.http.get(this.apiDir+'/clientes/id/'+id);
   }

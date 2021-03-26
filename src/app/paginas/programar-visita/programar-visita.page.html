@@ -18,7 +18,7 @@
 
     <ion-item>
         <ion-label fixed style="text-align: center;">Seleccionar servicios a ofrecer</ion-label>
-        <ion-select [disabled]="sucursal_elegida == null" [(ngModel)]="servicios_elegidosAux"multiple="true" (ionChange)="serviciosElegidosChange()">
+        <ion-select [disabled]="(sucursal_elegida == null) && !equiposCargados" [(ngModel)]="servicios_elegidosAux"multiple="true" (ionChange)="serviciosElegidosChange()">
             <ion-select-option *ngFor="let servicio of listado_servicios" value="{{servicio.id_servicio}}">{{servicio.nombre_servicio}}</ion-select-option>
         </ion-select>
     </ion-item>

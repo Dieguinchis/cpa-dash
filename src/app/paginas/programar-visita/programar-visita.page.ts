@@ -23,7 +23,7 @@ export class ProgramarVisitaPage implements OnInit {
   sucursal_elegida: any = null;
   fecha_elegida: any;
   tecnico_elegido: any;
-
+  equiposCargados: boolean = false
   listado_clientes: any;
   listado_sucursales_cliente: any;
   listado_servicios: any;
@@ -39,29 +39,15 @@ export class ProgramarVisitaPage implements OnInit {
 
 
   ngOnInit() {
-    
+    console.warn(1)
     this.api.mostrar_servicios().subscribe(data =>{
+      console.warn(2)
+
       this.listado_servicios = data;
       this.listado_servicios = this.listado_servicios.result;
       console.log(this.listado_servicios,'servicios')
-      this.api.listado_equipos().subscribe((res:any)=>{
-        this.equipos = res.result;
-        console.log(this.equipos,'equipos')
-        for ( let servicio of this.listado_servicios){
-          servicio.equipos = [];
-          for ( let equipo of this.equipos){
-            if(equipo.id_servicio == servicio.id_servicio){
-              servicio.equipos.push(equipo);
-            }
-          }
-          if (servicio.equipos.length < 1){
-            servicio.equipos.push({id_equipo: 0, id_servicio:servicio.id_servicio, nombre_equipo: 'Servicio principal'});
-          }
-        }
-        console.log(this.listado_servicios,'servicios completos');
-      })
     }), (error => {
-      console.log(error)
+      console.log('*1*1*1*1*1*1',error)
     }); 
 
 
@@ -101,6 +87,28 @@ export class ProgramarVisitaPage implements OnInit {
   }
 
   selectSucursal(){
+    if(this.sucursal_elegida != null){
+      this.api.listado_equipos_id(this.sucursal_elegida).subscribe((res:any)=>{  
+        this.equipos = res.result;
+        console.log(this.equipos,'equipos')
+        for ( let servicio of this.listado_servicios){
+          servicio.equipos = [];
+          for ( let equipo of this.equipos){
+  
+            if(equipo.id_servicio == servicio.id_servicio){
+  
+              servicio.equipos.push(equipo);
+            }
+          }
+          if (servicio.equipos.length < 1){
+  
+            servicio.equipos.push({id_equipo: 0, id_servicio:servicio.id_servicio, nombre_equipo: 'Servicio principal'});
+          }
+        }
+        console.log(this.listado_servicios,'servicios completos');
+      })
+    }
+
     this.api.listado_grupoWorkstations(this.sucursal_elegida).subscribe((data:any) =>{
       // console.log('Grupo1', data.result)
       var flag = 0
@@ -127,7 +135,8 @@ export class ProgramarVisitaPage implements OnInit {
         this.grupoWorkStation = array
       }
 
-      // console.log('grupo2: ', this.grupoWorkStation)
+      console.log('grupo2: ', this.grupoWorkStation)
+      this.equiposCargados = true
     })
   }
 
