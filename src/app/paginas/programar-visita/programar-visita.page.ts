@@ -24,6 +24,7 @@ export class ProgramarVisitaPage implements OnInit {
   fecha_elegida: any;
   tecnico_elegido: any;
   equiposCargados: boolean = false
+  workStationCargados: boolean = false
   listado_clientes: any;
   listado_sucursales_cliente: any;
   listado_servicios: any;
@@ -106,6 +107,7 @@ export class ProgramarVisitaPage implements OnInit {
           }
         }
         console.log(this.listado_servicios,'servicios completos');
+        this.equiposCargados = true
       })
     }
 
@@ -136,7 +138,8 @@ export class ProgramarVisitaPage implements OnInit {
       }
 
       console.log('grupo2: ', this.grupoWorkStation)
-      this.equiposCargados = true
+      this.workStationCargados = true
+
     })
   }
 
