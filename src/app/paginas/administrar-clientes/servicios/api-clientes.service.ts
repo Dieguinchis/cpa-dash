@@ -36,8 +36,9 @@ export class ApiClientesService {
     return this.http.get(this.apiDir+'/sucursales/id/'+id);
   }
 
-  informacion_visita(id){
-    return this.http.get(this.apiDir+'/visitas/id/'+id);
+  async informacion_visita(id){
+    var data = await this.http.get(this.apiDir+'/visitas/id/'+id);
+    return data.toPromise()
   }
 
   listado_workstations(id){

@@ -41,27 +41,29 @@ export class ModificarVisitaPage implements OnInit {
   }
 
 
-  ngOnInit() {
-    
-    this.api.mostrar_servicios().subscribe(data =>{
+  async ngOnInit() {
+    await this.api.mostrar_servicios().subscribe((data) =>{
       this.listado_servicios = data;
       this.listado_servicios = this.listado_servicios.result;
       console.log(this.listado_servicios,'servicios')
-      this.api.listado_equipos().subscribe((res:any)=>{
-        this.equipos = res.result;
-        console.log(this.equipos,'equipos')
-        for ( let servicio of this.listado_servicios){
-          servicio.equipos = [];
-          for ( let equipo of this.equipos){
-            if(equipo.id_servicio == servicio.id_servicio){
-              servicio.equipos.push(equipo);
-            }
+      this.actualizar_informacion().then(id =>{
+        console.warn(this.sucursal_elegida)
+        this.api.listado_equipos(this.sucursal_elegida).subscribe((res:any)=>{  
+          this.equipos = res.result;  
+          console.log(this.equipos,'equipos')  
+          for ( let servicio of this.listado_servicios){  
+            servicio.equipos = [];
+            for ( let equipo of this.equipos){  
+              if(equipo.id_servicio == servicio.id_servicio){  
+                servicio.equipos.push(equipo);
+              }
+            }  
+            if (servicio.equipos.length < 1){  
+              servicio.equipos.push({id_equipo: 0, id_servicio:servicio.id_servicio, nombre_equipo: 'Servicio principal'});
+            }  
           }
-          if (servicio.equipos.length < 1){
-            servicio.equipos.push({id_equipo: 0, id_servicio:servicio.id_servicio, nombre_equipo: 'Servicio principal'});
-          }
-        }
-        console.log(this.listado_servicios,'servicios completos');
+          console.log(this.listado_servicios,'servicios completos');  
+        })
       })
     }), (error => {
       console.log(error)
@@ -77,19 +79,18 @@ export class ModificarVisitaPage implements OnInit {
     }))
 
     this.fecha_actual = moment().format();
-    this.actualizar_informacion()
 
   }
 
-  actualizar_informacion(){
-    this.api_clientes.informacion_visita(this.id_visita).subscribe(data => {
+  async actualizar_informacion(){
+    await this.api_clientes.informacion_visita(this.id_visita).then((data) => {
       this.visita = data;
       this.visita = this.visita.result;
       this.id_cliente_elegido = this.visita.visitas.id_cliente
       this.sucursal_elegida = this.visita.visitas.id_sucursal
       this.sucursalesCliente(this.id_cliente_elegido)
-
-      console.log('IDS:  ',this.visita, this.sucursal_elegida)
+      // console.log('IDS:  ',this.visita, this.sucursal_elegida)
+      return this.visita.visitas.id_sucursal
     }), (error => {
       console.log(error)
     })

@@ -56,7 +56,7 @@ export class VerVisitaPage implements OnInit {
   }
 
   actualizar_informacion(){
-    this.api_visitas.informacion_visita(this.id_visita).subscribe(data => {
+    this.api_visitas.informacion_visita(this.id_visita).then(data => {
       this.visita = data;
       this.visita = this.visita.result;
       this.visita.servicios2 = [];
