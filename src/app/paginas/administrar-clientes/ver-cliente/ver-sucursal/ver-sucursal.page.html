@@ -116,12 +116,15 @@
         </ion-row>
       </ion-grid>
     </ion-item> -->
-    <div *ngIf="(grupoWorkStation == undefined)">
+    <div *ngIf="(grupoWorkStation == undefined) && !loadingEquipos">
       <ion-item>
         <ion-label style="width:  100%; text-align: center;">No se encontraron WorkStation</ion-label>
       </ion-item>
     </div>
-    <div *ngIf="(grupoWorkStation != undefined)">
+    <div class="loadding" *ngIf="loadingEquipos">
+      <ion-spinner style="margin-top: 10px; color: #3b3b3f"></ion-spinner>
+    </div>
+    <div *ngIf="(grupoWorkStation != undefined) && !loadingEquipos">
       <ion-item lines="full" *ngFor="let grupoEquipo of grupoWorkStation; let j = index">
         <ion-grid>
           <ion-row>
@@ -132,7 +135,7 @@
             <ion-col size="6">
               <ion-item style="text-align: left;" lines="none">
                 <ion-icon color="primary" title="Imprimir los QR'S de ESTA Workstation/equipo" (click)="imprimirQrThisWorkstation(grupoEquipo)" name="print-outline"></ion-icon>
-                <ion-button (click)="altaWorkstation(grupoEquipo.id_equipo_grupo)">Agregar workstation</ion-button>
+                <ion-button (click)="altaWorkstation(grupoEquipo.id_equipo_grupo,j)">Agregar workstation</ion-button>
               </ion-item>
             </ion-col>
           </ion-row>
@@ -185,7 +188,7 @@
                   <ion-icon *ngIf="showDeleteQr[j][i].show" [title]="'Eliminar QR de la lista (' + showDeleteQr[j][i].count +')'" style="margin-top:15px; color: red !important;" (click)="deleteImprimirQr(equipo, i, j)" name="print-outline"></ion-icon>
                 </ion-col>
                 <ion-col size="1.5">
-                  <ion-icon name="trash-outline" color="danger" style="margin-top:15px" (click)="borrar_equipo(equipo.id_equipo)"></ion-icon>
+                  <ion-icon name="trash-outline" color="danger" style="margin-top:15px" (click)="borrar_equipo(equipo.id_equipo,j,i)"></ion-icon>
                 </ion-col>
 
 

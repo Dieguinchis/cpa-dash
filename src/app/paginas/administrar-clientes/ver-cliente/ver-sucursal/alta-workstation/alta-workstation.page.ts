@@ -32,12 +32,18 @@ export class AltaWorkstationPage implements OnInit {
   }
 
   alta_workstation(){
+    var data = null
     if(this.id_servicio){
       this.object = {nombre_equipos:this.nombre_workstation, id_servicio: this.id_servicio, id_sucursal:this.id_sucursal,id_equipo_grupo:this.id_equipo_grupo};
-      this.api_servicios.alta_workstation(this.object).subscribe(data => {
-        console.log(data)
+      // data = this.object
+      this.api_servicios.alta_workstation(this.object).subscribe((resp:any) => {
+        console.log(resp.equipoCreado.insertId)
+        data = {qr:1,nombre_equipos:this.nombre_workstation, id_servicio: this.id_servicio,id_equipo: resp.equipoCreado.insertId ,id_sucursal:this.id_sucursal,id_equipo_grupo:this.id_equipo_grupo,estado_servicio:'alta',modificable: 0};
         this.modalCtrl.dismiss({
-          'dismissed': true
+          'dismissed': true,
+          data: data,
+          id:resp.equipoCreado.insertId
+
         });
       }), (error => {
         console.log(error)

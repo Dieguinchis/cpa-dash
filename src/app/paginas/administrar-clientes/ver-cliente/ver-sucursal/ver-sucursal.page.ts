@@ -34,14 +34,15 @@ export class VerSucursalPage implements OnInit {
   public filesToUpload = []
   public qrsToPrint = []
   public showDeleteQrSucursal = {show:false,count:0}
-  public showDeleteQr = []
+  public showDeleteQr = [];
+  public loadingEquipos = true
 
   ngOnInit() {
     this.actualizar_informacion(false);
   }
 
 
-  async altaWorkstation(id_equipo_grupo){
+  async altaWorkstation(id_equipo_grupo,j){
     const modal = await this.modalController.create({
       component: AltaWorkstationPage,
       cssClass: 'modal-chiquito',
@@ -50,8 +51,11 @@ export class VerSucursalPage implements OnInit {
         id_equipo_grupo:id_equipo_grupo
       }
     });
-    modal.onDidDismiss().then(data =>{
+    modal.onDidDismiss().then((data:any) =>{
       this.actualizar_informacion(false);
+      // console.log(data)
+      // this.grupoWorkStation[j].equipos.push(data.data)
+
     })
     return await modal.present();
   }
@@ -93,11 +97,22 @@ export class VerSucursalPage implements OnInit {
     await alert.present();
   }
 
-  borrar_equipo(id_equipo){
+  async borrar_equipo(id_equipo,j,i){
+    this.loading = await this.loadingController.create({
+      message: 'Eliminado, Por favor espere.'
+    });
+    this.loading.pre
+    // console.warn(this.grupoWorkStation[j].equipos[i])
+    // this.loadingController.dismiss()
     this.api_sucursales.borrar_equipo(id_equipo).subscribe(data => {
       // console.log(data, id_equipo)
-      this.actualizar_informacion(false);
+      // this.actualizar_informacion(false);
+      this.grupoWorkStation[j].equipos.splice(i,1)
+      this.loadingController.dismiss()
+
     }), (error => {
+      this.loadingController.dismiss()
+      alert('Ocurrio un error al eliminar, por favor intente nuevamente')
       console.log(error)
     })
   }
@@ -114,9 +129,11 @@ export class VerSucursalPage implements OnInit {
   }
 
   actualizar_informacion(loading){
+    this.loadingEquipos = true
     this.api_sucursales.informacion_sucursal(this.id_sucursal).subscribe(data => {
       this.sucursal = data;
       this.sucursal = this.sucursal.result;
+      console.warn(this.sucursal)
       for (let index = 0; index < this.sucursal.planos.length; index++) {
         // this.sucursal.planos[index].url_imagen_plano = 1
         // this.sucursal[index] = this.sucursal[index].url_imagen_plano
@@ -182,7 +199,7 @@ export class VerSucursalPage implements OnInit {
           });
         }
       }
-
+      this.loadingEquipos = false
       
 
     })
