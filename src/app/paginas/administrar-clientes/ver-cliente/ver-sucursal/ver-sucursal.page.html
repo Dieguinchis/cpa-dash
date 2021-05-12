@@ -1,8 +1,11 @@
 <ion-content>
   <div *ngIf="sucursal">
       <ion-row style="text-align: center; background-color: white;padding: 1%;">
-        <ion-col size="10"><b style="margin-top:15px">Informacion de la sucursal</b></ion-col>
-        <ion-col size="2" style="font-size: 24px !important;"><ion-icon color="primary" title="Imprimir Toda la informacion de la sucursal" (click)="imprimirAllQrSucursal()" name="print-outline"></ion-icon></ion-col>
+        <ion-col size="9"><b style="margin-top:15px">Informacion de la sucursal</b></ion-col>
+        <ion-col size="1">Acciones: </ion-col>
+        <ion-col size="0.5" style="font-size: 24px !important;"><ion-icon color="primary" title="Descargar Todos los QRs de la sucursal" (click)="descargarAllQrSucursal()" name="cloud-download-outline"></ion-icon></ion-col>
+        <ion-col size="0.5" style="font-size: 24px !important;"><ion-icon color="primary" title="Imprimir Toda la informacion de la sucursal" (click)="imprimirAllQrSucursal()" name="print-outline"></ion-icon></ion-col>
+        <ion-col size="1"></ion-col>
       </ion-row>
     <ion-item lines="full">
       <ion-grid>
@@ -21,7 +24,7 @@
             <ion-label><b>Codigo QR</b></ion-label>
           </ion-col>
           <ion-col size="2">
-            <ion-label><b>Imprimir</b></ion-label>
+            <ion-label><b>Acciones</b></ion-label>
           </ion-col>
           <!-- <ion-col size="1"></ion-col> -->
         </ion-row>
@@ -43,13 +46,17 @@
           <ion-col size="2">
             <ion-card style="width: 50px; margin-top: 0px;">
               <div>
-                <a [href]="sucursal.sucursal[0].codigo_qr" download>
-                  <img [src]='sucursal.sucursal[0].codigo_qr'>
+                <a (click)="descargarSucursal()">
+                  <img style="z-index: -1 !important" [src]='sucursal.sucursal[0].codigo_qr' (click)="descargarSucursal()">
                 </a>
+                <!-- <ion-button (click)="toDataURL(sucursal.sucursal[0].codigo_qr)" expand="block" fill="clear" shape="round">
+                  Click me
+                </ion-button> -->
               </div>
             </ion-card>
           </ion-col>
-          <ion-col style="font-size: 24px !important;" size="1">
+          <ion-col style="font-size: 24px !important;" size="2">
+            <ion-icon color="primary" title="Descargar este QR" style="margin-top:15px" (click)="descargarSucursal()" name="cloud-download-outline"></ion-icon>
             <ion-icon color="primary" title="Seleccionar ESTE QR para Imprimir" style="margin-top:15px" (click)="addImprimirQrSucursal()" name="print-outline"></ion-icon>
             <ion-icon *ngIf="showDeleteQrSucursal.show" [title]="'Eliminar QR de la lista (' + showDeleteQrSucursal.count +')'" style="margin-top:15px; color: red !important;" (click)="deleteImprimirQrSucursal()" name="print-outline"></ion-icon>
           </ion-col>
@@ -67,6 +74,7 @@
       <ion-col size="7">
         <ion-item style="text-align: right;" lines="none">
           <ion-label></ion-label>
+          <ion-icon color="primary" (click)="descargarQrAllWorkstations()" title="Descargar los QR'S de TODAS las Workstations/equipos" name="cloud-download-outline"></ion-icon>
           <ion-icon color="primary" (click)="imprimirQrAllWorkstations()" title="Imprimir los QR'S de TODAS las Workstations/equipos" name="print-outline"></ion-icon>
           <ion-button (click)="alertAltaGrupoWorkstation()">Agregar grupo de workstations</ion-button>
         </ion-item>
@@ -134,6 +142,7 @@
             </ion-col>
             <ion-col size="6">
               <ion-item style="text-align: left;" lines="none">
+                <ion-icon color="primary" title="Descargar los QR'S de ESTA Workstation/equipo" (click)="descargarQrThisWorkstation(grupoEquipo)" name="cloud-download-outline"></ion-icon>
                 <ion-icon color="primary" title="Imprimir los QR'S de ESTA Workstation/equipo" (click)="imprimirQrThisWorkstation(grupoEquipo)" name="print-outline"></ion-icon>
                 <ion-button (click)="altaWorkstation(grupoEquipo.id_equipo_grupo,j)">Agregar workstation</ion-button>
               </ion-item>
@@ -148,13 +157,13 @@
                 <ion-col size="2.5">
                   <ion-label><b>Servicio</b></ion-label>
                 </ion-col>
-                <ion-col size="2">
+                <ion-col size="1.5">
                   <ion-label><b>Codigo QR</b></ion-label>
                 </ion-col>
-                <ion-col size="1">
+                <ion-col size="2">
                   <ion-label></ion-label>
                 </ion-col>
-                <ion-col size="1.5">
+                <ion-col size="1">
                   <ion-label><b>Eliminar</b></ion-label>
                 </ion-col>
               </ion-row>
@@ -174,20 +183,21 @@
                 <ion-col size="2.5" style="margin-top: 15px">
                   <ion-label>{{equipo.nombre_servicio}}</ion-label>
                 </ion-col>
-                <ion-col size="2">
+                <ion-col size="1.5">
                   <ion-card style="width: 50px; margin-top: 0px;">
                     <div>
-                      <a [href]="equipo.codigo_qr_equipo" download>
-                        <img [src]='equipo.codigo_qr_equipo'>
+                      <a  (click)="descargarQrEquipo(equipo)">
+                        <img [src]='equipo.codigo_qr_equipo'  (click)="descargarQrEquipo(equipo)">
                       </a>
                     </div>
                   </ion-card>
                 </ion-col>
-                <ion-col size="1">
+                <ion-col size="2">
+                  <ion-icon color="primary" title="Descargar este QR" style="margin-top:15px" (click)="descargarQrEquipo(equipo)" name="cloud-download-outline"></ion-icon>
                   <ion-icon color="primary" title="Seleccionar ESTE QR para Imprimir" style="margin-top:15px" (click)="addmprimirQr(equipo, i, j)" name="print-outline"></ion-icon>
                   <ion-icon *ngIf="showDeleteQr[j][i].show" [title]="'Eliminar QR de la lista (' + showDeleteQr[j][i].count +')'" style="margin-top:15px; color: red !important;" (click)="deleteImprimirQr(equipo, i, j)" name="print-outline"></ion-icon>
                 </ion-col>
-                <ion-col size="1.5">
+                <ion-col size="1">
                   <ion-icon name="trash-outline" color="danger" style="margin-top:15px" (click)="borrar_equipo(equipo.id_equipo,j,i)"></ion-icon>
                 </ion-col>
 

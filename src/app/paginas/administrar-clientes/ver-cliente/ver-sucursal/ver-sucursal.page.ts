@@ -492,6 +492,92 @@ imprimir(qrs){
 
 }
 
+test($event) {
+  console.warn($event)
+  // window.open('http://157.230.90.222:3000/getZip')
 }
 
-6
+descargar(){
+
+}
+descargarSucursal(){
+  // console.warn(1)
+  var link = document.createElement("a");
+  link.download = this.sucursal.sucursal[0].id_sucursal + ".png";
+  link.href = "http://157.230.90.222:3000/getfile/sucursales/"+this.sucursal.sucursal[0].id_sucursal ;
+  link.click();
+}
+
+descargarQrEquipo(equipo){
+  // console.warn(equipo)
+  // console.warn(equipo.id_equipo)
+  var link = document.createElement("a");
+  link.download = equipo.id_equipo + ".png";
+  link.href = "http://157.230.90.222:3000/getfile/equipos/"+equipo.id_equipo;
+  link.click();
+}
+
+descargarQrThisWorkstation(grupoEquipo){
+  // console.warn(grupoEquipo)
+  var ids = null
+  for (let index = 0; index < grupoEquipo.equipos.length; index++) {
+    const element = grupoEquipo.equipos[index];
+    if(index == 0){
+      ids = (element.id_equipo.toString())
+    }else{
+      ids = ids + "," + (element.id_equipo.toString())
+    }
+  }
+  var link = document.createElement("a");
+  link.download = "qrs.png";
+  link.href = "http://157.230.90.222:3000/getZip?type=equipos&name="+grupoEquipo.nombre_equipo_grupo+"&data="+ids;
+  link.click();
+}
+
+descargarAllQrSucursal(){
+  var data = []
+  var ids = null
+  data.push(this.sucursal.sucursal[0].id_sucursal)
+  this.grupoWorkStation.forEach(WorkStation => {
+    WorkStation.equipos.forEach(equipo => {
+      data.push(equipo.id_equipo)
+    });
+  });
+  for (let index = 0; index < data.length; index++) {
+    const element = data[index];
+    if(index == 0){
+      ids = (element.toString())
+    }else{
+      ids = ids + "," + (element.toString())
+    }
+  }
+  var link = document.createElement("a");
+  link.download = "qrs.png";
+  link.href = "http://157.230.90.222:3000/getZip?type=all&name="+this.sucursal.sucursal[0].razon_social_sucursal+"&data="+ids;
+  link.click();
+
+}
+
+descargarQrAllWorkstations(){
+  var data = []
+  var ids = null
+  this.grupoWorkStation.forEach(WorkStation => {
+    WorkStation.equipos.forEach(equipo => {
+      data.push(equipo.id_equipo)
+    });
+  });
+  for (let index = 0; index < data.length; index++) {
+    const element = data[index];
+    if(index == 0){
+      ids = (element.toString())
+    }else{
+      ids = ids + "," + (element.toString())
+    }
+  }
+  var link = document.createElement("a");
+  link.download = "qrs.png";
+  link.href = "http://157.230.90.222:3000/getZip?type=equipos&name=equipos_"+this.sucursal.sucursal[0].razon_social_sucursal+"&data="+ids;
+  link.click();
+}
+
+}
