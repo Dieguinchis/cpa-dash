@@ -34,6 +34,10 @@ export class ProgramarVisitaPage implements OnInit {
   dayNames= ['Domingo','Lunes','Martes','Miercoles','Jueves','Viernes','Sabado']
   monthNames = ['Enero','Febrero','Marzo','Abril','Mayo','Junio','Julio','Agosto','Septiembre','Octubre','Noviembre','Diciembre']
 
+  public custom = {
+    cssClass:'alertSize'
+  }
+
   constructor(private api: ApiVisitasService, private api_tecnicos: ServicioTecnicosService) { 
    
   }

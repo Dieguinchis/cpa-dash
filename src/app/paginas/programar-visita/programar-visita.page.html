@@ -5,21 +5,21 @@
 
     <ion-item style="margin-top: 15px;">
         <ion-label fixed style="text-align: center;">Seleccionar un cliente</ion-label>
-        <ion-select (ionChange)="sucursalesCliente($event.target.value)">
-            <ion-select-option *ngFor="let cliente of listado_clientes" value="{{cliente.id_cliente}}">{{cliente.razon_social_cliente}}</ion-select-option>
+        <ion-select [interfaceOptions]="custom" (ionChange)="sucursalesCliente($event.target.value)">
+            <ion-select-option  *ngFor="let cliente of listado_clientes" value="{{cliente.id_cliente}}">{{cliente.razon_social_cliente}}</ion-select-option>
         </ion-select>
     </ion-item>
     
     <ion-item>
         <ion-label fixed style="text-align: center;">Seleccionar una sucursal</ion-label>
-        <ion-select [disabled]="id_cliente_elegido == null" (ionChange)="selectSucursal()" [(ngModel)]="sucursal_elegida">
+        <ion-select [interfaceOptions]="custom" [disabled]="id_cliente_elegido == null" (ionChange)="selectSucursal()" [(ngModel)]="sucursal_elegida">
             <ion-select-option *ngFor="let sucursal of listado_sucursales_cliente" value="{{sucursal.id_sucursal}}">{{sucursal.razon_social_sucursal}}</ion-select-option>
         </ion-select>
     </ion-item>
 
     <ion-item>
         <ion-label fixed style="text-align: center;">Seleccionar servicios a ofrecer</ion-label>
-        <ion-select [disabled]="(sucursal_elegida == null) && !equiposCargados && !workStationCargados" [(ngModel)]="servicios_elegidosAux"multiple="true" (ionChange)="serviciosElegidosChange()">
+        <ion-select [interfaceOptions]="custom" [disabled]="(sucursal_elegida == null) && !equiposCargados && !workStationCargados" [(ngModel)]="servicios_elegidosAux"multiple="true" (ionChange)="serviciosElegidosChange()">
             <ion-select-option *ngFor="let servicio of listado_servicios" value="{{servicio.id_servicio}}">{{servicio.nombre_servicio}}</ion-select-option>
         </ion-select>
     </ion-item>
@@ -30,7 +30,7 @@
             <ion-label fixed style="text-align: center;color: var(--ion-color-secondary);font-weight: bold;">{{equipo.nombre_equipo}}</ion-label>
             <ion-item style="margin-top: 10px;">
                 <ion-label fixed style="text-align: center;">Seleccionar técnico a cargo</ion-label>
-                <ion-select [(ngModel)]="equipo.tecnico">
+                <ion-select [interfaceOptions]="custom" [(ngModel)]="equipo.tecnico">
                     <ion-select-option *ngFor="let tecnico of listado_tecnicos" value="{{tecnico.id_tecnico}}">{{tecnico.nombre_tecnico}} {{tecnico.apellido_tecnico}}</ion-select-option>
                 </ion-select>
             </ion-item>
@@ -44,7 +44,7 @@
             </div>
             <ion-item style="margin-top: 10px;">
                 <ion-label fixed style="text-align: center;">Seleccionar técnico a cargo</ion-label>
-                <ion-select [(ngModel)]="servicio.tecnico">
+                <ion-select [interfaceOptions]="custom" [(ngModel)]="servicio.tecnico">
                     <ion-select-option *ngFor="let tecnico of listado_tecnicos" value="{{tecnico.id_tecnico}}">{{tecnico.nombre_tecnico}} {{tecnico.apellido_tecnico}}</ion-select-option>
                 </ion-select>
             </ion-item>
