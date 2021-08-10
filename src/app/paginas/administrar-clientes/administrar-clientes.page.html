@@ -1,4 +1,5 @@
 <ion-content>
+  <ion-searchbar animated placeholder="Razon Social || Telefono || Email || Direccion" (ionClear)="searchClear()" (keyup)="updateFilter($event)"></ion-searchbar>
   <ion-item lines="none">
     <ion-label style="text-align: center;"><b>Clientes</b></ion-label>
   </ion-item>

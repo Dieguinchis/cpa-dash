@@ -10,7 +10,7 @@ export class ApiServiciosService {
   private requestOptions
   headers : any
 
-  private apiDir = "http://192.168.100.100:3000";
+  private apiDir = "http://192.168.0.71:3000";
 
 
   constructor(public http: HttpClient) {

@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { ApiClientesService } from '../servicios/api-clientes.service'
-import { ModalController, AlertController } from '@ionic/angular';
+import { ModalController, AlertController, LoadingController, ToastController } from '@ionic/angular';
 import { AltaSucursalPage } from './alta-sucursal/alta-sucursal.page'
 import { VerSucursalPage } from './ver-sucursal/ver-sucursal.page'
 import { VerVisitaPage } from './ver-visita/ver-visita.page'
@@ -17,7 +17,7 @@ export class VerClientePage implements OnInit {
 
   public cliente: any;
 
-  constructor(private activatedRoute: ActivatedRoute, private api_clientes: ApiClientesService, public modalController: ModalController, private alertController: AlertController) { }
+  constructor(private activatedRoute: ActivatedRoute, private api_clientes: ApiClientesService, public modalController: ModalController, private alertController: AlertController, public loadignController: LoadingController, public toastController: ToastController) { }
 
   ngOnInit() {
     this.actualizar_informacion();
@@ -112,6 +112,57 @@ export class VerClientePage implements OnInit {
     return await modal.present();
   }
 
+  async eliminarVisitaAlert(visita){
+    var al = await this.alertController.create({
+      header: 'Seguro que desea eliminar la visita?',
+      buttons: 
+      [
+       { 
+          text: 'No',
+          handler: () => {
+            
+          }
+        },
+        {
+          text: 'Si',
+          handler: () => {
+            this.eliminarVisita(visita);
+            
+          }
+        }
+      ]
+    })
+    al.present()
+  }
+
+  async eliminarVisita(visita){
+    var load = await this.loadignController.create({
+      message:"Eliminando la visita"
+    })
+    load.present();
+    this.api_clientes.eliminar_visita(visita.id_visita).then(e => {
+      this.actualizar_informacion();
+      load.dismiss();
+      this.toastController.create({
+        message:"Se elimino correctamente",
+        duration: 2000,
+        color:"success"
+      }).then(r =>{
+        r.present();
+      })
+      console.log(e);
+    }).catch(error => {
+      load.dismiss();
+      this.toastController.create({
+        message:"Hubo un error al eliminar",
+        duration: 2000,
+        color:"danger"
+      }).then(r =>{
+        r.present();
+      })
+      console.error(error);
+    })
+  }
   
 
 }

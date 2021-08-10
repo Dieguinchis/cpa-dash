@@ -37,6 +37,10 @@ export class CrearProductoPage implements OnInit {
   }
 
   cargar_producto(){
+    const year = this.fecha_vencimiento.slice(0,4);
+    const month = this.fecha_vencimiento.slice(5,7);
+    const day = this.fecha_vencimiento.slice(8,10);
+    this.fecha_vencimiento = day + "-" + month + "-" + year
     this.api_servicios.alta_producto({id_servicio: this.id_servicio, nombre_producto: this.nombre_producto, fecha_vencimiento: this.fecha_vencimiento, lote: this.lote, tipo_producto: this.tipo_producto}).subscribe(data => {
       console.log(data)
       this.modalCtrl.dismiss({

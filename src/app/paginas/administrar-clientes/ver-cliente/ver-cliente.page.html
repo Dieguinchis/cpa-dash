@@ -93,14 +93,17 @@
           <ion-col size="4">Estado</ion-col>
         </ion-item>
         <div *ngFor="let visita of cliente.sucursales.visitas">
-          <ion-item lines="full">
-            <ion-col size="4">{{visita.fecha_visita | date: 'dd/MM/yyyy hh:mm'}}</ion-col>
-            <ion-col size="4">{{visita.razon_social_sucursal}}</ion-col>
-            <ion-col size="3">{{visita.estado_visitas}}</ion-col>
-            <ion-col size="1">
-              <ion-icon color="primary" name="enter-outline" (click)="verVisita(visita.id_visita)"></ion-icon>
-            </ion-col>
-          </ion-item>
+          <ng-container *ngIf="visita.estado_visitas != 'eliminado'">
+            <ion-item lines="full">
+              <ion-col size="4">{{visita.fecha_visita | date: 'dd/MM/yyyy hh:mm'}}</ion-col>
+              <ion-col size="4">{{visita.razon_social_sucursal}}</ion-col>
+              <ion-col size="3">{{visita.estado_visitas}}</ion-col>
+              <ion-col size="1">
+                <ion-icon color="primary" name="enter-outline" (click)="verVisita(visita.id_visita)"></ion-icon>
+                <ion-icon *ngIf="visita.estado_visitas == 'pendiente'" color="danger" name="trash-outline" (click)="eliminarVisitaAlert(visita)"></ion-icon>
+              </ion-col>
+            </ion-item>
+          </ng-container>
         </div>
       </ion-col>
     </ion-row>
