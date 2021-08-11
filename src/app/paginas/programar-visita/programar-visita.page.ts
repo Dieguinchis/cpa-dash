@@ -42,7 +42,6 @@ export class ProgramarVisitaPage implements OnInit {
    
   }
 
-
   ngOnInit() {
     console.warn(1)
     this.api.mostrar_servicios().subscribe(data =>{
@@ -59,6 +58,7 @@ export class ProgramarVisitaPage implements OnInit {
     this.api.listado_clientes().subscribe(data => {
       this.listado_clientes = data;
       this.listado_clientes = this.listado_clientes.result;
+      this.listado_clientes.sort(this.ordenarClientes);
       console.log(this.listado_clientes)
     }), 
     (error => {
@@ -69,6 +69,7 @@ export class ProgramarVisitaPage implements OnInit {
     this.api_tecnicos.listado_tecnicos().subscribe(data => {
       this.listado_tecnicos = data;
       this.listado_tecnicos = this.listado_tecnicos.result;
+      this.listado_tecnicos.sort(this.ordenarTecnicos);
       console.log(this.listado_tecnicos)
     }, (error => {
       console.log(error)
@@ -85,6 +86,7 @@ export class ProgramarVisitaPage implements OnInit {
       this.listado_sucursales_cliente = this.listado_sucursales_cliente.result.sucursales.datosSucursal
       this.sucursal_elegida = null;
       this.id_cliente_elegido = id_cliente;
+      this.listado_sucursales_cliente.sort(this.ordenarSucursales);
       console.log(this.listado_sucursales_cliente)
     }), (error => {
       console.log(error)
@@ -205,6 +207,12 @@ export class ProgramarVisitaPage implements OnInit {
         }
       });
     })
+    for (let index = 0; index < arrayWorkstation.length; index++) {
+      const element = arrayWorkstation[index];
+      console.log(element.equipos);
+      element.equipos.sort(this.ordenarEquipos);
+      
+    }
     this.grupoWorkStationElegidos = arrayWorkstation
     this.show = true
     if(this.grupoWorkStationElegidos[0].nombre_equipo_grupo == null){
@@ -223,6 +231,46 @@ export class ProgramarVisitaPage implements OnInit {
     }else{
       return false
     }
+  }
+
+  ordenarClientes(a,b){
+    if (a.razon_social_cliente.toLowerCase() > b.razon_social_cliente.toLowerCase()) {
+      return 1;
+    }
+    if (a.razon_social_cliente.toLowerCase() < b.razon_social_cliente.toLowerCase()) {
+      return -1;
+    }
+    return 0;
+  }
+
+  ordenarSucursales(a,b){
+    if (a.razon_social_sucursal.toLowerCase() > b.razon_social_sucursal.toLowerCase()) {
+      return 1;
+    }
+    if (a.razon_social_sucursal.toLowerCase() < b.razon_social_sucursal.toLowerCase()) {
+      return -1;
+    }
+    return 0;
+  }
+
+  ordenarEquipos(a,b){
+    if (a.nombre_equipo.toLowerCase() > b.nombre_equipo.toLowerCase()) {
+      return 1;
+    }
+    if (a.nombre_equipo.toLowerCase() < b.nombre_equipo.toLowerCase()) {
+      return -1;
+    }
+    return 0;
+  }
+
+  ordenarTecnicos(a,b){
+    if (a.nombre_tecnico.toLowerCase() > b.nombre_tecnico.toLowerCase()) {
+      return 1;
+    }
+    if (a.nombre_tecnico.toLowerCase() < b.nombre_tecnico.toLowerCase()) {
+      return -1;
+    }
+    return 0;
   }
 
 }
