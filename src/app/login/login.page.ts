@@ -28,7 +28,9 @@ export class LoginPage implements OnInit {
   async login(){
     this.loader = await this.loadingController.create({ message: "Ingresando..." });
     this.loader.present();
+
     this.api_login.login({nombre: this.usuario, psw_admin: this.password}).subscribe((data:any) => {
+      console.log(data)
       if(data.status == "OK"){
         this.storage.set('token', data).then(res=>{
           this.loadingController.dismiss();
@@ -36,16 +38,20 @@ export class LoginPage implements OnInit {
         },error=>{
           console.log(error);
           this.loadingController.dismiss();
-          alert('algo salio mal =(');
+          alert('algo salio mal');
         })
       }else{
         alert(data.message.message);
         this.loadingController.dismiss();
-      }      
-    }),(error => {
-      console.log(error)
+      } 
+
+    },error => {
       this.loadingController.dismiss();
-      alert('Algo salio mal, por favor intente de nuevo mas tarde');
+      if(error.error.badVersion){
+        alert('La version utilizada de la app no es la ultima, Por favor aguarde unos minutos, elimine el cache y actualice la pagina.')
+      }else{
+        alert('Los datos ingresados no son correctos');
+      }
     })
   }
 

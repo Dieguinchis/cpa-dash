@@ -19,7 +19,6 @@ export class MenuPrincipalPage implements OnInit {
   logout(){
     this.storage.remove('token');
     this.router.navigate(['/login']);
-    console.log('te deslogueaste capo');
   }
 
 }

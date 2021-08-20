@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http'
 import { HttpClientModule } from '@angular/common/http'
+import {version} from '../../../../environments/version'
 
 @Injectable({
   providedIn: 'root'
@@ -16,13 +17,14 @@ export class ServicioTecnicosService {
   constructor(public http: HttpClient) {
     this.requestOptions = {
       headers : new HttpHeaders({
-        'Content-Type': 'application/json'
+        'Content-Type': 'application/json',
+        'version': version
       })
     };
    }
    
   listado_tecnicos(){
-    return this.http.get(this.apiDir+'/tecnicos');
+    return this.http.get(this.apiDir+'/tecnicos',this.requestOptions);
   }
 
   alta_tecnico(datos){
@@ -34,6 +36,6 @@ export class ServicioTecnicosService {
   }
 
   baja_tecnico(id_tecnico){
-    return this.http.delete(this.apiDir+'/tecnicos/eliminar/'+id_tecnico)
+    return this.http.delete(this.apiDir+'/tecnicos/eliminar/'+id_tecnico,this.requestOptions)
   }
 }

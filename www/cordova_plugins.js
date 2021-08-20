@@ -49,6 +49,20 @@ module.exports = [
         "clobbers": [
             "Ionic.WebView"
         ]
+    },
+    {
+        "file": "plugins/cordova-plugin-app-version/www/AppVersionPlugin.js",
+        "id": "cordova-plugin-app-version.AppVersionPlugin",
+        "pluginId": "cordova-plugin-app-version",
+        "clobbers": [
+            "cordova.getAppVersion"
+        ]
+    },
+    {
+        "file": "plugins/cordova-plugin-app-version/src/browser/AppVersionProxy.js",
+        "id": "cordova-plugin-app-version.AppVersionProxy",
+        "pluginId": "cordova-plugin-app-version",
+        "runs": true
     }
 ];
 module.exports.metadata = 
@@ -59,7 +73,8 @@ module.exports.metadata =
     "cordova-plugin-device": "2.0.2",
     "cordova-plugin-splashscreen": "5.0.2",
     "cordova-plugin-ionic-webview": "4.2.1",
-    "cordova-plugin-ionic-keyboard": "2.2.0"
+    "cordova-plugin-ionic-keyboard": "2.2.0",
+    "cordova-plugin-app-version": "0.1.12"
 }
 // BOTTOM OF METADATA
 });

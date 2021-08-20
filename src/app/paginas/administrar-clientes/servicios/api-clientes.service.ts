@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http'
 import { HttpClientModule } from '@angular/common/http'
-
+import {version} from '../../../../environments/version'
 @Injectable({
   providedIn: 'root'
 })
@@ -15,17 +15,18 @@ export class ApiClientesService {
   constructor(public http: HttpClient) {
     this.requestOptions = {
       headers : new HttpHeaders({
-        'Content-Type': 'application/json'
+        'Content-Type': 'application/json',
+        'version': version
       })
     };
    }
    
   listado_clientes(){
-    return this.http.get(this.apiDir+'/clientes');
+    return this.http.get(this.apiDir+'/clientes',this.requestOptions);
   }
 
   informacion_cliente(id){
-    return this.http.get(this.apiDir+'/clientes/id/'+id);
+    return this.http.get(this.apiDir+'/clientes/id/'+id,this.requestOptions);
   }
 
   alta_sucursal(datos){
@@ -33,19 +34,19 @@ export class ApiClientesService {
   }
 
   informacion_sucursal(id){
-    return this.http.get(this.apiDir+'/sucursales/id/'+id);
+    return this.http.get(this.apiDir+'/sucursales/id/'+id,this.requestOptions);
   }
 
   async informacion_visita(id){
-    var data = await this.http.get(this.apiDir+'/visitas/id/'+id);
+    var data = await this.http.get(this.apiDir+'/visitas/id/'+id,this.requestOptions);
     return data.toPromise()
   }
 
   listado_workstations(id){
-    return this.http.get(this.apiDir+'/servicios/equipos/sucursal/'+id);
+    return this.http.get(this.apiDir+'/servicios/equipos/sucursal/'+id,this.requestOptions);
   }
   listado_grupoWorkstations(id){
-    return this.http.get(this.apiDir+'/servicios/gruposEquipos/sucursal/'+id);
+    return this.http.get(this.apiDir+'/servicios/gruposEquipos/sucursal/'+id,this.requestOptions);
   }
 
   borrar_equipo(id_equipo){
@@ -77,7 +78,7 @@ export class ApiClientesService {
 
   upload(params,bodyP = {}){
     return new Promise((resolve, reject) => {
-      this.http.post(this.apiDir + params,bodyP)
+      this.http.post(this.apiDir + params,bodyP,this.requestOptions)
       // this.http.post(this.url + params, bodyP,{headers: header})
         .subscribe(response => {
           resolve(response);
@@ -88,7 +89,7 @@ export class ApiClientesService {
   }
 
   ver_sucursal(id_sucursal){
-    return this.http.get(this.apiDir+'/sucursales/id/'+id_sucursal)
+    return this.http.get(this.apiDir+'/sucursales/id/'+id_sucursal,this.requestOptions)
   }
 
   crear_pdf(id_visita){
@@ -96,7 +97,7 @@ export class ApiClientesService {
   }
 
   ver_pdf(id_visita){
-    return this.http.get(this.apiDir+'/pdf/fetch-pdf/'+id_visita);
+    return this.http.get(this.apiDir+'/pdf/fetch-pdf/'+id_visita,this.requestOptions);
   }
 
   modificar_cliente(parametros){

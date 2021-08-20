@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http'
 import { HttpClientModule } from '@angular/common/http'
+import {version} from '../../../../environments/version'
 
 @Injectable({
   providedIn: 'root'
@@ -16,7 +17,8 @@ export class ApiServiciosService {
   constructor(public http: HttpClient) {
     this.requestOptions = {
       headers : new HttpHeaders({
-        'Content-Type': 'application/json'
+        'Content-Type': 'application/json',
+        'version': version
       })
     };
    }
@@ -27,7 +29,7 @@ export class ApiServiciosService {
   }
 
   mostrar_servicios(){
-    return this.http.get(this.apiDir+'/servicios');
+    return this.http.get(this.apiDir+'/servicios',this.requestOptions);
   }
 
   getZpl(parametros){
@@ -58,7 +60,7 @@ export class ApiServiciosService {
   }
 
   ver_servicio(id_servicio){
-    return this.http.get(this.apiDir+'/servicios/id/'+id_servicio);
+    return this.http.get(this.apiDir+'/servicios/id/'+id_servicio,this.requestOptions);
   }
 
   baja_producto(id_producto){

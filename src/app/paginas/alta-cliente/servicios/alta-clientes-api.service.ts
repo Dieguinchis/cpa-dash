@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http'
 import { HttpClientModule } from '@angular/common/http'
+import {version} from '../../../../environments/version'
 
 @Injectable({
   providedIn: 'root'
@@ -15,7 +16,8 @@ export class AltaClientesApiService {
   constructor(public http: HttpClient) {
     this.requestOptions = {
       headers : new HttpHeaders({
-        'Content-Type': 'application/json'
+        'Content-Type': 'application/json',
+        'version': version
       })
     };
    }

@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http'
 import { HttpClientModule } from '@angular/common/http'
+import {version} from '../../../../environments/version'
 
 @Injectable({
   providedIn: 'root'
@@ -14,29 +15,30 @@ export class ApiVisitasService {
   constructor(public http: HttpClient) {
     this.requestOptions = {
       headers : new HttpHeaders({
-        'Content-Type': 'application/json'
+        'Content-Type': 'application/json',
+        'version': version
       })
     };
    }
    
   listado_clientes(){
-    return this.http.get(this.apiDir+'/clientes');
+    return this.http.get(this.apiDir+'/clientes',this.requestOptions);
   }
 
   listado_equipos(id){
-    return this.http.get(this.apiDir+'/servicios/equipos/offline/'+id);
+    return this.http.get(this.apiDir+'/servicios/equipos/offline/'+id,this.requestOptions);
   }
 
   listado_equipos_id(id){
-    return this.http.get(this.apiDir+'/servicios/equipos/sucursal/'+id);
+    return this.http.get(this.apiDir+'/servicios/equipos/sucursal/'+id,this.requestOptions);
   }
 
   informacion_cliente(id){
-    return this.http.get(this.apiDir+'/clientes/id/'+id);
+    return this.http.get(this.apiDir+'/clientes/id/'+id,this.requestOptions);
   }
 
   mostrar_servicios(){
-    return this.http.get(this.apiDir+'/servicios');
+    return this.http.get(this.apiDir+'/servicios',this.requestOptions);
   }
 
   crear_visita(parametros){
@@ -48,7 +50,7 @@ export class ApiVisitasService {
   }
 
   listado_grupoWorkstations(id){
-    return this.http.get(this.apiDir+'/servicios/gruposEquipos/sucursal/'+id);
+    return this.http.get(this.apiDir+'/servicios/gruposEquipos/sucursal/'+id,this.requestOptions);
   }
 
 
