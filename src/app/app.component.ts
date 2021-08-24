@@ -35,14 +35,19 @@ export class AppComponent {
     this.loginService.checkVersion().then((resp:any) =>{
       if(resp.badVersion){
         alert('La version utilizada de la app no es la ultima, Por favor aguarde unos minutos, elimine el cache y actualice la pagina.')
+      }else{
       }
     }).catch(err =>{
-      console.warn(err.error.badVersion)
+      console.error(err)
       if(err.error.badVersion){
         alert('La version utilizada de la app no es la ultima, Por favor aguarde unos minutos, elimine el cache y actualice la pagina.')
         this.router.navigate(['/login']);
+
+      }else{
 
       }
     })
   }
 }
+
+
