@@ -376,11 +376,15 @@ let AppComponent = class AppComponent {
             if (resp.badVersion) {
                 alert('La version utilizada de la app no es la ultima, Por favor aguarde unos minutos, elimine el cache y actualice la pagina.');
             }
+            else {
+            }
         }).catch(err => {
-            console.warn(err.error.badVersion);
+            console.error(err);
             if (err.error.badVersion) {
                 alert('La version utilizada de la app no es la ultima, Por favor aguarde unos minutos, elimine el cache y actualice la pagina.');
                 this.router.navigate(['/login']);
+            }
+            else {
             }
         });
     }
@@ -613,7 +617,7 @@ const environment = {
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "version", function() { return version; });
-const version = '0.0.1';
+const version = '0.0.2';
 
 
 /***/ }),

@@ -333,15 +333,15 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
           this.loginService.checkVersion().then(function (resp) {
             if (resp.badVersion) {
               alert('La version utilizada de la app no es la ultima, Por favor aguarde unos minutos, elimine el cache y actualice la pagina.');
-            }
+            } else {}
           })["catch"](function (err) {
-            console.warn(err.error.badVersion);
+            console.error(err);
 
             if (err.error.badVersion) {
               alert('La version utilizada de la app no es la ultima, Por favor aguarde unos minutos, elimine el cache y actualice la pagina.');
 
               _this2.router.navigate(['/login']);
-            }
+            } else {}
           });
         }
       }]);
@@ -743,7 +743,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
       return version;
     });
 
-    var version = '0.0.1';
+    var version = '0.0.2';
     /***/
   },
 
