@@ -59,12 +59,11 @@ export class ModificarClientePage implements OnInit {
   }
 
   async agregarLogo(){
-    const loading = await this.loadingController.create({
-      message: 'Subiendo img',
-    });
-    await loading.present();
-
-    this.imageCompress.uploadFile().then(({image, orientation}) => {
+    this.imageCompress.uploadFile().then(async ({image, orientation}) => {
+      const loading = await this.loadingController.create({
+        message: 'Subiendo img',
+      });
+      await loading.present();
       console.warn('Size in bytes was:', this.imageCompress.byteCount(image));
       this.imageCompress.compressFile(image, orientation, 50, 50).then(
         result => {

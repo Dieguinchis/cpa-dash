@@ -208,7 +208,7 @@ export class VerSucursalPage implements OnInit {
     
   }
 
-  async presentAlert(equipo) {
+  async editName(equipo) {
     const alert = await this.alertController.create({
       header: 'Modificar Nombre',
       inputs:[
@@ -225,9 +225,20 @@ export class VerSucursalPage implements OnInit {
         {
           text:'Guardar',
           handler:(data)=>{
-            equipo.nombre_equipo = data[0];
-            console.log(equipo)
-            this.api_visitas.actualizar_equipo(equipo);
+            this.loadingController.create({ message: "Guardando Cambios" }).then(loader=>{
+              loader.present();
+              equipo.codigo_qr_equipo = null;
+              equipo.nombre_equipo = data[0];
+              console.log(equipo);
+              this.api_visitas.actualizar_equipo(equipo).then((resp: any) =>{
+                console.log(resp.equipoCreado.url);
+                equipo.codigo_qr_equipo = resp.equipoCreado.url;
+                loader.dismiss();
+              }).catch(err =>{
+                console.log(err);
+                loader.dismiss();
+              })
+            });
           }
         }
       ]
@@ -235,9 +246,7 @@ export class VerSucursalPage implements OnInit {
   
     await alert.present();
   }
-  editName(equipo){
-    console.log(equipo)
-  }
+
   openPdf(url){
     window.open(url)
   }
@@ -537,7 +546,7 @@ descargarSucursal(){
   // console.warn(1)
   var link = document.createElement("a");
   link.download = this.sucursal.sucursal[0].id_sucursal + ".png";
-  link.href = "http://192.168.0.71:3000/getfile/sucursales/"+this.sucursal.sucursal[0].id_sucursal ;
+  link.href = "http:///getfile/sucursales/"+this.sucursal.sucursal[0].id_sucursal ;
   link.click();
 }
 

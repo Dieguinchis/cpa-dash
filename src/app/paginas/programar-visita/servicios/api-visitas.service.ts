@@ -54,7 +54,13 @@ export class ApiVisitasService {
   }
 
   actualizar_equipo(parametros){
-    return this.http.post(this.apiDir+'/servicios/equipos/update',parametros,this.requestOptions);
+    return new Promise((resolve, reject) => {
+      this.http.post(this.apiDir+'/servicios/equipos/update',parametros,this.requestOptions).subscribe(response => {
+        resolve(response);
+      }, (error) => {
+        reject(error);
+      });
+    });
   }
 
 
