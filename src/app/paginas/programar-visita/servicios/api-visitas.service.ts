@@ -53,6 +53,10 @@ export class ApiVisitasService {
     return this.http.get(this.apiDir+'/servicios/gruposEquipos/sucursal/'+id,this.requestOptions);
   }
 
+  actualizar_equipo(parametros){
+    return this.http.post(this.apiDir+'/servicios/equipos/update',parametros,this.requestOptions);
+  }
+
 
 
 }
