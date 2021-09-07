@@ -78,7 +78,7 @@ export class ApiClientesService {
 
   upload(params,bodyP = {}){
     return new Promise((resolve, reject) => {
-      this.http.post(this.apiDir + params,bodyP,this.requestOptions)
+      this.http.post(this.apiDir + params,bodyP)
       // this.http.post(this.url + params, bodyP,{headers: header})
         .subscribe(response => {
           resolve(response);
