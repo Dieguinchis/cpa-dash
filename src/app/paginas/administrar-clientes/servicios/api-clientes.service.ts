@@ -9,7 +9,7 @@ export class ApiClientesService {
   private requestOptions
   headers : any
 
-  private apiDir = "http://157.230.90.222:3000";
+  private apiDir = "http://192.168.100.100:3000";
 
 
   constructor(public http: HttpClient) {
@@ -78,7 +78,7 @@ export class ApiClientesService {
 
   upload(params,bodyP = {}){
     return new Promise((resolve, reject) => {
-      this.http.post(this.apiDir + params,bodyP,this.requestOptions)
+      this.http.post(this.apiDir + params,bodyP)
       // this.http.post(this.url + params, bodyP,{headers: header})
         .subscribe(response => {
           resolve(response);
