@@ -6,6 +6,7 @@ import { LoadingController } from "@ionic/angular";
 import { NgxImageCompressService } from "ngx-image-compress";
 import { ApiServiciosService } from '../../../administrar-servicios/servicios/api-servicios.service'
 import { element } from 'protractor';
+import { ApiVisitasService } from 'src/app/paginas/programar-visita/servicios/api-visitas.service';
 
 
 @Component({
@@ -19,7 +20,8 @@ export class VerSucursalPage implements OnInit {
               private modalController: ModalController, private imageCompress: NgxImageCompressService,
               private loadingController: LoadingController,
               private api_servicios: ApiServiciosService,
-              private alertController:AlertController) { }
+              private alertController:AlertController,
+              private api_visitas: ApiVisitasService) { }
 
   public id_sucursal = this.navParams.get('id_sucursal');
   public sucursal: any;
@@ -205,6 +207,46 @@ export class VerSucursalPage implements OnInit {
     })
     
   }
+
+  async editName(equipo) {
+    const alert = await this.alertController.create({
+      header: 'Modificar Nombre',
+      inputs:[
+        {
+          type:'textarea',
+          value:equipo.nombre_equipo
+        }
+      ],
+      buttons: [
+        {
+          text:'Cancelar',
+          role:'cancel'
+        },
+        {
+          text:'Guardar',
+          handler:(data)=>{
+            this.loadingController.create({ message: "Guardando Cambios" }).then(loader=>{
+              loader.present();
+              equipo.codigo_qr_equipo = null;
+              equipo.nombre_equipo = data[0];
+              console.log(equipo);
+              this.api_visitas.actualizar_equipo(equipo).then((resp: any) =>{
+                console.log(resp.equipoCreado.url);
+                equipo.codigo_qr_equipo = resp.equipoCreado.url;
+                loader.dismiss();
+              }).catch(err =>{
+                console.log(err);
+                loader.dismiss();
+              })
+            });
+          }
+        }
+      ]
+    });
+  
+    await alert.present();
+  }
+
   openPdf(url){
     window.open(url)
   }
@@ -494,7 +536,7 @@ imprimir(qrs){
 
 test($event) {
   console.warn($event)
-  // window.open('http://157.230.90.222:3000/getZip')
+  // window.open('http://192.168.0.71:3000/getZip')
 }
 
 descargar(){
@@ -504,7 +546,7 @@ descargarSucursal(){
   // console.warn(1)
   var link = document.createElement("a");
   link.download = this.sucursal.sucursal[0].id_sucursal + ".png";
-  link.href = "http://157.230.90.222:3000/getfile/sucursales/"+this.sucursal.sucursal[0].id_sucursal ;
+  link.href = "http:///getfile/sucursales/"+this.sucursal.sucursal[0].id_sucursal ;
   link.click();
 }
 
@@ -513,7 +555,7 @@ descargarQrEquipo(equipo){
   // console.warn(equipo.id_equipo)
   var link = document.createElement("a");
   link.download = equipo.id_equipo + ".png";
-  link.href = "http://157.230.90.222:3000/getfile/equipos/"+equipo.id_equipo;
+  link.href = "http://192.168.0.71:3000/getfile/equipos/"+equipo.id_equipo;
   link.click();
 }
 
@@ -530,7 +572,7 @@ descargarQrThisWorkstation(grupoEquipo){
   }
   var link = document.createElement("a");
   link.download = "qrs.png";
-  link.href = "http://157.230.90.222:3000/getZip?type=equipos&name="+grupoEquipo.nombre_equipo_grupo+"&data="+ids;
+  link.href = "http://192.168.0.71:3000/getZip?type=equipos&name="+grupoEquipo.nombre_equipo_grupo+"&data="+ids;
   link.click();
 }
 
@@ -553,7 +595,7 @@ descargarAllQrSucursal(){
   }
   var link = document.createElement("a");
   link.download = "qrs.png";
-  link.href = "http://157.230.90.222:3000/getZip?type=all&name="+this.sucursal.sucursal[0].razon_social_sucursal+"&data="+ids;
+  link.href = "http://192.168.0.71:3000/getZip?type=all&name="+this.sucursal.sucursal[0].razon_social_sucursal+"&data="+ids;
   link.click();
 
 }
@@ -576,7 +618,7 @@ descargarQrAllWorkstations(){
   }
   var link = document.createElement("a");
   link.download = "qrs.png";
-  link.href = "http://157.230.90.222:3000/getZip?type=equipos&name=equipos_"+this.sucursal.sucursal[0].razon_social_sucursal+"&data="+ids;
+  link.href = "http://192.168.0.71:3000/getZip?type=equipos&name=equipos_"+this.sucursal.sucursal[0].razon_social_sucursal+"&data="+ids;
   link.click();
 }
 
