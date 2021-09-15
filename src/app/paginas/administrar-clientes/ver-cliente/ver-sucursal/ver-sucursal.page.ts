@@ -536,7 +536,7 @@ imprimir(qrs){
 
 test($event) {
   console.warn($event)
-  // window.open('http://192.168.0.71:3000/getZip')
+  // window.open('http://157.230.90.222:3000/getZip')
 }
 
 descargar(){
@@ -555,7 +555,7 @@ descargarQrEquipo(equipo){
   // console.warn(equipo.id_equipo)
   var link = document.createElement("a");
   link.download = equipo.id_equipo + ".png";
-  link.href = "http://192.168.0.71:3000/getfile/equipos/"+equipo.id_equipo;
+  link.href = "http://157.230.90.222:3000/getfile/equipos/"+equipo.id_equipo;
   link.click();
 }
 
@@ -572,7 +572,7 @@ descargarQrThisWorkstation(grupoEquipo){
   }
   var link = document.createElement("a");
   link.download = "qrs.png";
-  link.href = "http://192.168.0.71:3000/getZip?type=equipos&name="+grupoEquipo.nombre_equipo_grupo+"&data="+ids;
+  link.href = "http://157.230.90.222:3000/getZip?type=equipos&name="+grupoEquipo.nombre_equipo_grupo+"&data="+ids;
   link.click();
 }
 
@@ -595,7 +595,7 @@ descargarAllQrSucursal(){
   }
   var link = document.createElement("a");
   link.download = "qrs.png";
-  link.href = "http://192.168.0.71:3000/getZip?type=all&name="+this.sucursal.sucursal[0].razon_social_sucursal+"&data="+ids;
+  link.href = "http://157.230.90.222:3000/getZip?type=all&name="+this.sucursal.sucursal[0].razon_social_sucursal+"&data="+ids;
   link.click();
 
 }
@@ -618,7 +618,7 @@ descargarQrAllWorkstations(){
   }
   var link = document.createElement("a");
   link.download = "qrs.png";
-  link.href = "http://192.168.0.71:3000/getZip?type=equipos&name=equipos_"+this.sucursal.sucursal[0].razon_social_sucursal+"&data="+ids;
+  link.href = "http://157.230.90.222:3000/getZip?type=equipos&name=equipos_"+this.sucursal.sucursal[0].razon_social_sucursal+"&data="+ids;
   link.click();
 }
 
