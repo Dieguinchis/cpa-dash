@@ -51,7 +51,7 @@ export class ApiServiciosService {
   
   eliminar_Grupo_workstation(id_producto){
     console.log('delete2',id_producto)
-    return this.http.post(this.apiDir+'/servicios/eliminarGrupoEquipos/'+id_producto, this.requestOptions);
+    return this.http.post(this.apiDir+'/servicios/eliminarGrupoEquipos/'+id_producto, null, this.requestOptions);
   }
 
   
@@ -64,11 +64,11 @@ export class ApiServiciosService {
   }
 
   baja_producto(id_producto){
-    return this.http.post(this.apiDir+'/productos/eliminar/'+id_producto, this.requestOptions);
+    return this.http.post(this.apiDir+'/productos/eliminar/'+id_producto, null, this.requestOptions);
   }
 
   baja_servicio(id_servicio){
-    return this.http.post(this.apiDir+'/servicios/eliminar/'+id_servicio, this.requestOptions);
+    return this.http.post(this.apiDir+'/servicios/eliminar/'+id_servicio, null, this.requestOptions);
   }
   update_servicio(parametros){
     // console.log(parametros)
