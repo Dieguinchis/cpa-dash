@@ -17,7 +17,7 @@
               <ion-select-option *ngFor = "let campo_opciones of campo.opciones" [value]="campo_opciones.name" >{{campo_opciones.name}}</ion-select-option>
             </ion-select>
             </ion-item>
-            <div *ngIf = "(campo.tipoCampo =='multiple' || campo.tipoCampo =='Multiple') && campo.id_campo == 30 && showOtros">
+            <div *ngIf = "(campo.tipoCampo =='multiple' || campo.tipoCampo =='Multiple') && campo.id_campo == 30 && mostrarOtros()">
             <ion-item>
                   <ion-label>Otros: </ion-label>
                   <ion-input  style = "margin-left: 10px;" [(ngModel)] ="otros" mode="ios"></ion-input>
@@ -34,11 +34,6 @@
         </div>
       </div>
     </div>
-
-    <ion-button (click)="prueba()" expand="block" fill="clear" shape="round">
-      Click me
-    </ion-button>
-  
   
     <ion-row>
       <ion-col class="ion-text-center">

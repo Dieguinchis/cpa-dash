@@ -15,7 +15,7 @@ export class EditarVisitaComponent implements OnInit {
   public servicio
   public respuestas
   public id_formulario
-
+  public otros
   constructor(
     public navParams: NavParams,
     public apiServicios: ApiServiciosService,
@@ -29,24 +29,35 @@ export class EditarVisitaComponent implements OnInit {
     this.id_formulario = this.navParams.get('id_formulario');
     console.log(this.id_formulario)
     this.apiVisitas.getRespuestas(this.id_formulario).then((resp:any) => {
-      console.log(resp.respuestas);
       this.respuestas = resp.respuestas;
       console.log(this.respuestas);
       this.apiServicios.ver_servicio(this.id_servicio).subscribe((resp:any) =>{
         this.servicio = resp.result;
-        console.log('test');
         for (let index = 0; index < this.servicio.formulario.length; index++) {
-          console.log('test');
           const element = this.servicio.formulario[index];
-          if (element.tipoCampo.toLowerCase() == 'multiple') {
-            console.log('testif1');
+          if ((element.tipoCampo.toLowerCase() == 'multiple') && (element.id_campo == 30)) {
+            var lastElement = this.respuestas[index].respuesta.split(' - ')[this.respuestas[index].respuesta.split(' - ').length - 1]
+            if (!element.opciones.find(opcion => opcion.name == lastElement)) {
+              this.otros = lastElement
+            }
             var aux = this.respuestas[index].respuesta;
             this.respuestas[index].respuesta = [];
             for (let index2 = 0; index2 < aux.split(' - ').length; index2++) {
-              console.log('testfor');
               const element = aux.split(' - ')[index2];
               if (!(element == "")){
-                console.log('testid2');
+                this.respuestas[index].respuesta[index2] = element ;
+              }
+            }
+            if ( !element.opciones.find(opcion => opcion.name == this.respuestas[index].respuesta[this.respuestas[index].respuesta.length - 1])){
+              this.respuestas[index].respuesta[this.respuestas[index].respuesta.length -1 ] = 'Otros'
+            }
+          }
+          if ((element.tipoCampo.toLowerCase() == 'multiple') && (element.id_campo != 30)) {
+            var aux = this.respuestas[index].respuesta;
+            this.respuestas[index].respuesta = [];
+            for (let index2 = 0; index2 < aux.split(' - ').length; index2++) {
+              const element = aux.split(' - ')[index2];
+              if (!(element == "")){
                 this.respuestas[index].respuesta[index2] = element ;
               }
             }
@@ -68,6 +79,10 @@ export class EditarVisitaComponent implements OnInit {
     this.modalcontroller.dismiss();
   }
 
+  prueba1(campo){
+    console.log(campo);
+  }
+
   prueba(){
     console.log(this.respuestas);
   }
@@ -77,6 +92,12 @@ export class EditarVisitaComponent implements OnInit {
   }
 
   guardar(){
+    if (this.respuestas.find(respuesta => respuesta.id_campo == 30)){
+      var auxIndex = this.respuestas.findIndex(respuesta => respuesta.id_campo == 30)
+      if (this.respuestas[auxIndex].respuesta.includes('Otros')) {
+        (this.respuestas[auxIndex].respuesta.splice((this.respuestas[auxIndex].respuesta.length -1), 1, this.otros));
+      }
+    }
     for (let index = 0; index < this.servicio.formulario.length; index++) {
       const element = this.servicio.formulario[index];
       if (element.tipoCampo.toLowerCase() == 'multiple') {
@@ -118,4 +139,8 @@ export class EditarVisitaComponent implements OnInit {
     })
   }
 
+  mostrarOtros(){
+    var aux = this.respuestas.find(respuesta => respuesta.id_campo == 30)
+    return aux.respuesta.includes('Otros')
+  }
 }
