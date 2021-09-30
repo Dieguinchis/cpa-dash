@@ -31,9 +31,10 @@
     </ion-item>
     <ion-item lines="full">
       <ion-label><b>Servicios ofrecidos:</b>
-        <div *ngFor="let servicio of visita.servicios2" style="margin-left:10px; margin-top: 10px">
+        <div *ngFor="let servicio of visita.servicios2; let i = index" style="margin-left:10px; margin-top: 10px">
           <ion-icon name="document-outline" color="primary"></ion-icon>
-          {{servicio}}
+          {{servicio.nombre_servicio}}
+          <ion-icon name="create-outline" style="cursor: pointer;" *ngIf="visita.visitas.estado_visitas == 'finalizada'" (click)="editarServicio(servicio.id_servicio, i)"></ion-icon>
         </div>
       </ion-label>
     </ion-item>

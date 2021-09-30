@@ -1,0 +1,56 @@
+<ion-content>
+  <!-- Servicios Sin productos -->
+    <div *ngIf="servicio">
+      <div *ngFor = "let campo of servicio.formulario; let i = index">
+        <div *ngIf = "campo.tipoCampo =='Select' || campo.tipoCampo =='select'">
+          <ion-item>
+            <ion-label>{{campo.nombreCampo}}</ion-label>
+            <ion-select [(ngModel)] = "respuestas[i].respuesta" mode="ios" >
+              <ion-select-option *ngFor = "let campo_opciones of campo.opciones; let h = index" [value]="campo_opciones.name" >{{campo_opciones.name}}</ion-select-option>
+            </ion-select>
+          </ion-item>
+        </div>
+        <div *ngIf = "campo.tipoCampo =='multiple' || campo.tipoCampo =='Multiple' ">
+          <ion-item>
+            <ion-label>{{campo.nombreCampo}}</ion-label>
+            <ion-select multiple [(ngModel)] = "respuestas[i].respuesta" mode="ios">
+              <ion-select-option *ngFor = "let campo_opciones of campo.opciones" [value]="campo_opciones.name" >{{campo_opciones.name}}</ion-select-option>
+            </ion-select>
+            </ion-item>
+            <div *ngIf = "(campo.tipoCampo =='multiple' || campo.tipoCampo =='Multiple') && campo.id_campo == 30 && showOtros">
+            <ion-item>
+                  <ion-label>Otros: </ion-label>
+                  <ion-input  style = "margin-left: 10px;" [(ngModel)] ="otros" mode="ios"></ion-input>
+            </ion-item>
+          </div>
+        </div>
+  
+  
+        <div *ngIf = "campo.tipoCampo == 'input'|| campo.tipoCampo =='Input'">
+          <ion-item>
+                <ion-label>{{campo.nombreCampo}}</ion-label>
+                <ion-input style = "margin-left: 10px;" [(ngModel)] ="respuestas[i].respuesta" mode="ios"></ion-input>
+          </ion-item>
+        </div>
+      </div>
+    </div>
+
+    <ion-button (click)="prueba()" expand="block" fill="clear" shape="round">
+      Click me
+    </ion-button>
+  
+  
+    <ion-row>
+      <ion-col class="ion-text-center">
+        <div>
+         <ion-button (click)="modalDissmiss()" style="width: 50%" class = "button">Volver</ion-button>
+        </div>
+      </ion-col>
+      <ion-col class="ion-text-center">
+        <div>
+         <ion-button  (click)="guardar()" style="width: 50%" class = "button">Guardar</ion-button>
+        </div>
+      </ion-col>
+    </ion-row>
+  
+  </ion-content>

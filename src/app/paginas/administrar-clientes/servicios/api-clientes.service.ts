@@ -9,7 +9,7 @@ export class ApiClientesService {
   private requestOptions
   headers : any
 
-  private apiDir = "http://157.230.90.222:3000";
+  private apiDir = "http://192.168.0.71:3000";
 
 
   constructor(public http: HttpClient) {
@@ -53,11 +53,11 @@ export class ApiClientesService {
     return this.http.post(this.apiDir+'/servicios/eliminarEquipos/'+id_equipo,this.requestOptions);
   }
 
-  eliminar_visita(id_visita){
-    console.log(this.apiDir+'/visitas/eliminar/'+id_visita,this.requestOptions);
-    //return this.http.delete(this.apiDir+'/visitas/eliminar/'+id_visita,this.requestOptions);
+  cambiar_estado_visita(id_visita, estado){
+    console.log(this.apiDir+'/visitas/cambiarEstado',this.requestOptions);
+    var params = {id_visita:id_visita, estado:estado}
     return new Promise((resolve, reject) => {
-      this.http.delete(this.apiDir+'/visitas/eliminar/'+id_visita,this.requestOptions)       
+      this.http.post(this.apiDir+'/visitas/cambiarEstado', params, this.requestOptions)       
       .subscribe(response => {
         resolve(response);
       }, (error) => {

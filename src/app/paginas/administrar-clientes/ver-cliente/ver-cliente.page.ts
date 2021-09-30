@@ -7,6 +7,7 @@ import { VerSucursalPage } from './ver-sucursal/ver-sucursal.page'
 import { VerVisitaPage } from './ver-visita/ver-visita.page'
 import { ModificarSucursalPage } from './modificar-sucursal/modificar-sucursal.page'
 import { ModificarVisitaPage } from './modificar-visita/modificar-visita.page'
+import { ApiVisitasService } from '../../programar-visita/servicios/api-visitas.service';
 
 @Component({
   selector: 'app-ver-cliente',
@@ -17,7 +18,7 @@ export class VerClientePage implements OnInit {
 
   public cliente: any;
 
-  constructor(private activatedRoute: ActivatedRoute, private api_clientes: ApiClientesService, public modalController: ModalController, private alertController: AlertController, public loadignController: LoadingController, public toastController: ToastController) { }
+  constructor(private activatedRoute: ActivatedRoute, private api_clientes: ApiClientesService, public modalController: ModalController, private alertController: AlertController, public loadingController: LoadingController, public toastController: ToastController, public apiVisitasService: ApiVisitasService) { }
 
   ngOnInit() {
     this.actualizar_informacion();
@@ -136,11 +137,11 @@ export class VerClientePage implements OnInit {
   }
 
   async eliminarVisita(visita){
-    var load = await this.loadignController.create({
+    var load = await this.loadingController.create({
       message:"Eliminando la visita"
     })
     load.present();
-    this.api_clientes.eliminar_visita(visita.id_visita).then(e => {
+    this.api_clientes.cambiar_estado_visita(visita.id_visita, 'eliminado').then(e => {
       this.actualizar_informacion();
       load.dismiss();
       this.toastController.create({
@@ -162,6 +163,52 @@ export class VerClientePage implements OnInit {
       })
       console.error(error);
     })
+  }
+
+  async marcarEntregadoAlert(visita) {
+    const alert = await this.alertController.create({
+      header: 'Atención',
+      message: '¿Estas seguro que deseas marcar esta visita como entregada?',
+      buttons: [
+        {text:'No',role:'cancel'},
+        {text:'Si',
+        handler: () =>{
+          this.marcarEntregado(visita.id_visita);
+        }  
+      }
+      ]
+    });
+  
+    await alert.present();
+  }
+
+  async marcarEntregado(id){
+    var load = await this.loadingController.create({
+      message:"Cargando visita"
+    })
+    load.present();
+    this.api_clientes.cambiar_estado_visita(id, 'entregado').then(e => {
+      this.actualizar_informacion();
+      load.dismiss();
+      this.toastController.create({
+        message:"Se Marco como entregada",
+        duration: 2000,
+        color:"success"
+      }).then(r =>{
+        r.present();
+      })
+    }).catch(err =>{
+      load.dismiss();
+      this.toastController.create({
+        message:"Hubo un error al marcar como entregada",
+        duration: 2000,
+        color:"danger"
+      }).then(r =>{
+        r.present();
+      })
+      console.error(err);
+    })
+
   }
   
 

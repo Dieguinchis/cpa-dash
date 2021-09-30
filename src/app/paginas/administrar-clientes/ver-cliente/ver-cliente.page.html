@@ -90,15 +90,23 @@
         <ion-item lines="full">
           <ion-col size="4">Fecha de la visita</ion-col>
           <ion-col size="4">Sucursal</ion-col>
-          <ion-col size="4">Estado</ion-col>
+          <ion-col size="2">Estado</ion-col>
+          <ion-col size="2" style="margin-left: -15px;">Entrega</ion-col>
         </ion-item>
         <div *ngFor="let visita of cliente.sucursales.visitas">
           <ng-container *ngIf="visita.estado_visitas != 'eliminado'">
             <ion-item lines="full">
               <ion-col size="4">{{visita.fecha_visita | date: 'dd/MM/yyyy hh:mm'}}</ion-col>
               <ion-col size="4">{{visita.razon_social_sucursal}}</ion-col>
-              <ion-col size="3">{{visita.estado_visitas}}</ion-col>
+              <ion-col size="2">
+                {{visita.estado_visitas}}
+              </ion-col>
               <ion-col size="1">
+                <ion-icon class="no-pointer" name="close-outline" *ngIf="visita.estado_visitas != 'finalizada' && visita.estado_visitas != 'entregado'"></ion-icon>
+                <ion-icon name="arrow-forward-outline" *ngIf="visita.estado_visitas == 'finalizada' " (click)="marcarEntregadoAlert(visita)"></ion-icon>
+                <ion-icon name="checkmark-done-outline" style="color: rgb(52, 183, 241);" *ngIf="visita.estado_visitas == 'entregado'" class="no-pointer"></ion-icon>
+              </ion-col>
+              <ion-col size="2">
                 <ion-icon color="primary" name="enter-outline" (click)="verVisita(visita.id_visita)"></ion-icon>
                 <ion-icon *ngIf="visita.estado_visitas == 'pendiente' || visita.estado_visitas == 'en proceso'" color="danger" name="trash-outline" (click)="eliminarVisitaAlert(visita)"></ion-icon>
               </ion-col>

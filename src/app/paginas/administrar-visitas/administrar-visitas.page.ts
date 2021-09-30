@@ -1,0 +1,171 @@
+import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
+import { AlertController, LoadingController, ModalController, ToastController } from '@ionic/angular';
+import { ApiClientesService } from '../administrar-clientes/servicios/api-clientes.service';
+import { VerVisitaPage } from '../administrar-clientes/ver-cliente/ver-visita/ver-visita.page';
+import { ApiVisitasService } from '../programar-visita/servicios/api-visitas.service';
+
+@Component({
+  selector: 'app-administrar-visitas',
+  templateUrl: './administrar-visitas.page.html',
+  styleUrls: ['./administrar-visitas.page.scss'],
+})
+export class AdministrarVisitasPage implements OnInit {
+
+  public visitas = [];
+  public fecha_desde;
+  public fecha_hasta;
+  public visitas_filtro;
+  public entregado = true;
+  public finalizada = true;
+  public enProceso = true;
+  public pendiente = true;
+  public filtrar_fecha = false;
+
+
+  constructor(
+    public apiVisitasService: ApiVisitasService,
+    public router: Router,
+    public modalController: ModalController,
+    public api_clientes: ApiClientesService,
+    public toastController: ToastController,
+    public loadingController: LoadingController,
+    public alertController: AlertController
+    ) { }
+
+  ngOnInit() {
+    var aux = new Date().getFullYear().toString() + '-' + (new Date().getMonth() + 1).toString() + '-' + new Date().getDate().toString()
+    this.fecha_hasta = aux;
+    this.fecha_desde = aux;
+    this.getVisitas();
+  }
+
+  getVisitas(){
+    this.apiVisitasService.getAllVisitas().then((resp: any) => {
+      console.log(resp.result)
+      this.visitas = resp.result;
+      this.filtrar();
+    })
+  }
+
+  entreFechas(visita){
+    if ((new Date(visita.fecha_visita).valueOf() >= new Date(this.fecha_desde).setHours(0).valueOf()) && (new Date(visita.fecha_visita).valueOf() <= new Date(this.fecha_hasta).setHours(24).valueOf())) {
+      return true
+    }else {
+      return false
+    }
+  }
+
+  filtrar(){
+    if (!this.filtrar_fecha) {
+      this.visitas_filtro = this.visitas.filter(visita => this.entreFechas(visita) && this.revisarEstado(visita))
+      this.visitas_filtro.sort(this.ordenarVisitas)
+    } else {
+      this.visitas_filtro = this.visitas.filter(visita => this.revisarEstado(visita))
+      this.visitas_filtro.sort(this.ordenarVisitas)
+    }
+  }
+
+  ordenarVisitas(a,b){
+    var aaux = new Date(a.fecha_visita).valueOf();
+    var baux = new Date(b.fecha_visita).valueOf();
+    return  baux -aaux;
+  }
+
+  revisarEstado(visita){
+    if(visita.estado_visitas == 'entregado'){
+      return this.entregado
+    }
+    if(visita.estado_visitas == 'finalizada'){
+      return this.finalizada
+    }
+    if(visita.estado_visitas == 'en proceso'){
+      return this.enProceso
+    }
+    if(visita.estado_visitas == 'pendiente'){
+      return this.pendiente
+    }
+  }
+  
+  revisarMenor(){
+    if (new Date(this.fecha_desde).valueOf() > new Date(this.fecha_hasta).valueOf()){
+      this.fecha_hasta = this.fecha_desde
+    }
+    this.filtrar();
+  }
+
+  revisarMayor(){
+    if (new Date(this.fecha_desde).valueOf() > new Date(this.fecha_hasta).valueOf()){
+      this.fecha_desde = this.fecha_hasta
+    }
+    this.filtrar();
+  }
+
+  navigateToCrearVisita(){
+    this.router.navigateByUrl('menu-principal/programar-visita')
+  }
+
+  async verVisita(id_visita) {
+    const modal = await this.modalController.create({
+      component: VerVisitaPage,
+      cssClass: 'my-custom-class',
+      componentProps: {
+        'id_visita': id_visita
+      }
+    });
+    return await modal.present();
+  }
+
+  async eliminarVisitaAlert(visita){
+    var al = await this.alertController.create({
+      header: 'Seguro que desea eliminar la visita?',
+      buttons: 
+      [
+       { 
+          text: 'No',
+          handler: () => {
+            
+          }
+        },
+        {
+          text: 'Si',
+          handler: () => {
+            this.eliminarVisita(visita);
+            
+          }
+        }
+      ]
+    })
+    al.present()
+  }
+
+  async eliminarVisita(visita){
+    var load = await this.loadingController.create({
+      message:"Eliminando la visita"
+    })
+    load.present();
+    this.api_clientes.cambiar_estado_visita(visita.id_visita, 'eliminado').then(e => {
+      load.dismiss();
+      this.getVisitas();
+      this.toastController.create({
+        message:"Se elimino correctamente",
+        duration: 2000,
+        color:"success"
+      }).then(r =>{
+        r.present();
+      })
+      console.log(e);
+    }).catch(error => {
+      load.dismiss();
+      this.toastController.create({
+        message:"Hubo un error al eliminar",
+        duration: 2000,
+        color:"danger"
+      }).then(r =>{
+        r.present();
+      })
+      console.error(error);
+    })
+  }
+
+}

@@ -711,7 +711,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
         _classCallCheck(this, ApiClientesService);
 
         this.http = http;
-        this.apiDir = "http://157.230.90.222:3000";
+        this.apiDir = "http://192.168.0.71:3000";
         this.requestOptions = {
           headers: new _angular_common_http__WEBPACK_IMPORTED_MODULE_2__["HttpHeaders"]({
             'Content-Type': 'application/json',
@@ -936,7 +936,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
         _classCallCheck(this, ApiServiciosService);
 
         this.http = http;
-        this.apiDir = "http://157.230.90.222:3000";
+        this.apiDir = "http://192.168.0.71:3000";
         this.requestOptions = {
           headers: new _angular_common_http__WEBPACK_IMPORTED_MODULE_2__["HttpHeaders"]({
             'Content-Type': 'application/json',

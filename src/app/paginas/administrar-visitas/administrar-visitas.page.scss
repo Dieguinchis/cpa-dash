@@ -1,0 +1,12 @@
+.filter-col{
+    display: flex;
+    align-items: center;
+}
+ion-checkbox{
+    min-width: 18px;
+}
+ion-icon{
+    cursor: pointer;
+}.no-pointer{
+    cursor:default;
+}

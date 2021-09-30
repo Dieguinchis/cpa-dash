@@ -22,8 +22,8 @@ const routes: Routes = [
       loadChildren: () => import('../paginas/administrar-clientes/administrar-clientes.module').then( m => m.AdministrarClientesPageModule)
     },
     {
-      path: 'programar-visita',
-      loadChildren: () => import('../paginas/programar-visita/programar-visita.module').then( m => m.ProgramarVisitaPageModule)
+      path: 'administrar-visitas',
+      loadChildren: () => import('../paginas/administrar-visitas/administrar-visitas.module').then( m => m.AdministrarVisitasPageModule)
     },
     {
       path: 'ver-cliente/:id_cliente',
@@ -40,7 +40,11 @@ const routes: Routes = [
     {
       path: 'administrar-tecnicos',
       loadChildren: () => import('../paginas/administrar-tecnicos/administrar-tecnicos.module').then( m => m.AdministrarTecnicosPageModule)
-    }  
+    },
+    {
+      path: 'programar-visita',
+      loadChildren: () => import('../paginas/programar-visita/programar-visita.module').then( m => m.ProgramarVisitaPageModule)
+    }
     ]
   },
   {

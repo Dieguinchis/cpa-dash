@@ -13,7 +13,7 @@ import { VerVisitaPage } from './ver-visita.page';
     CommonModule,
     FormsModule,
     IonicModule,
-    VerVisitaPageRoutingModule
+    VerVisitaPageRoutingModule,
   ],
   declarations: [VerVisitaPage]
 })

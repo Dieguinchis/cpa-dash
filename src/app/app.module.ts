@@ -14,11 +14,13 @@ import { ServiceWorkerModule } from '@angular/service-worker';
 import { environment } from '../environments/environment';
 import { LocationStrategy, HashLocationStrategy } from '@angular/common';
 import { NgxImageCompressService } from 'ngx-image-compress';
+import { EditarVisitaComponent } from './modals/editar-visita/editar-visita.component';
+import { FormsModule } from '@angular/forms';
 
 @NgModule({
-  declarations: [AppComponent],
-  entryComponents: [],
-  imports: [BrowserModule, IonicModule.forRoot(),
+  declarations: [AppComponent,EditarVisitaComponent],
+  entryComponents: [EditarVisitaComponent],
+  imports: [FormsModule,BrowserModule, IonicModule.forRoot(),
     IonicStorageModule.forRoot(), AppRoutingModule, HttpClientModule, ServiceWorkerModule.register('ngsw-worker.js', { enabled: environment.production })],
   providers: [
     StatusBar,

@@ -10,7 +10,7 @@ export class ApiVisitasService {
   private requestOptions
   headers : any
 
-  private apiDir = "http://157.230.90.222:3000";
+  private apiDir = "http://192.168.0.71:3000";
 
   constructor(public http: HttpClient) {
     this.requestOptions = {
@@ -46,11 +46,43 @@ export class ApiVisitasService {
   }
 
   modificar_visita(parametros){
+    console.log(this.apiDir+'/visitas/update', parametros);
     return this.http.post(this.apiDir+'/visitas/update',parametros,this.requestOptions);
   }
 
   listado_grupoWorkstations(id){
     return this.http.get(this.apiDir+'/servicios/gruposEquipos/sucursal/'+id,this.requestOptions);
+  }
+
+  getAllVisitas(){
+    return new Promise((resolve, reject) => {
+      this.http.get(this.apiDir+'/visitas/',this.requestOptions).subscribe(response =>{
+        resolve(response);
+      }, (error) =>{
+        reject (error);
+      })
+    });
+    
+  }
+
+  getRespuestas(id_formulario){
+    return new Promise((resolve, reject) => {
+      this.http.get(this.apiDir+'/formularios/respuestas/'+id_formulario.toString(),this.requestOptions).subscribe(response => {
+        resolve(response);
+      }, (error) =>{
+        reject(error)
+      })
+    })
+  }
+
+  cambiarRespuestas(respuesta){
+    return new Promise((resolve, reject) => {
+      this.http.put(this.apiDir+'/formularios/respuestas',respuesta,this.requestOptions).subscribe(response => {
+        resolve(response);
+      }, (error) =>{
+        reject(error)
+      })
+    })
   }
 
   actualizar_equipo(parametros){
