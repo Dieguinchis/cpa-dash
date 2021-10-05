@@ -79,6 +79,21 @@ export class ApiServiciosService {
     return this.http.post(this.apiDir+'/servicios/opcion/delete/',{id:id}, this.requestOptions);
 
   }
+
+  ver_opciones_producto(id_servicio){
+    console.log(id_servicio);
+    return this.http.get(this.apiDir+'/servicios/producto/opciones/'+id_servicio, this.requestOptions);
+
+  }
+
+  producto_update(producto){
+    console.log(producto);
+    return this.http.post(this.apiDir+'/productos/actualizar',producto, this.requestOptions);
+  }
+
+  getProductos(){
+    return this.http.get(this.apiDir+'/productos/', this.requestOptions);
+  }
   
    
 }

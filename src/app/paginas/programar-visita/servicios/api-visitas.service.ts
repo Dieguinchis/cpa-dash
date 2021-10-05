@@ -95,6 +95,8 @@ export class ApiVisitasService {
     });
   }
 
-
+  getEquipo(id_equipo){
+    return this.http.get(this.apiDir+'/servicios/equipos/'+ id_equipo,this.requestOptions);
+  }
 
 }

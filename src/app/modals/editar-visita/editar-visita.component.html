@@ -1,3 +1,8 @@
+<ion-header>
+  <ion-toolbar style="text-align: center;" color="primary">
+    <ion-title>{{equipo?.nombre_equipo?equipo?.nombre_equipo:servicio?.nombreDelServicio}}</ion-title>
+  </ion-toolbar>
+</ion-header>
 <ion-content>
   <!-- Servicios Sin productos -->
     <div *ngIf="servicio">
@@ -47,5 +52,5 @@
         </div>
       </ion-col>
     </ion-row>
-  
+
   </ion-content>

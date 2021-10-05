@@ -16,10 +16,11 @@ import { LocationStrategy, HashLocationStrategy } from '@angular/common';
 import { NgxImageCompressService } from 'ngx-image-compress';
 import { EditarVisitaComponent } from './modals/editar-visita/editar-visita.component';
 import { FormsModule } from '@angular/forms';
+import { ModificarProductoComponent } from './paginas/administrar-servicios/ver-servicio/modificar-producto/modificar-producto.component';
 
 @NgModule({
-  declarations: [AppComponent,EditarVisitaComponent],
-  entryComponents: [EditarVisitaComponent],
+  declarations: [AppComponent,EditarVisitaComponent, ModificarProductoComponent],
+  entryComponents: [EditarVisitaComponent, ModificarProductoComponent],
   imports: [FormsModule,BrowserModule, IonicModule.forRoot(),
     IonicStorageModule.forRoot(), AppRoutingModule, HttpClientModule, ServiceWorkerModule.register('ngsw-worker.js', { enabled: environment.production })],
   providers: [

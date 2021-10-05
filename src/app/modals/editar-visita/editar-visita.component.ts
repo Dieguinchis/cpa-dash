@@ -10,12 +10,14 @@ import { ApiVisitasService } from 'src/app/paginas/programar-visita/servicios/ap
 })
 export class EditarVisitaComponent implements OnInit {
 
-  public id_servicio
-  public id_visita
-  public servicio
-  public respuestas
-  public id_formulario
-  public otros
+  public id_servicio;
+  public id_visita;
+  public servicio;
+  public respuestas;
+  public id_formulario;
+  public otros;
+  public equipo;
+
   constructor(
     public navParams: NavParams,
     public apiServicios: ApiServiciosService,
@@ -27,9 +29,15 @@ export class EditarVisitaComponent implements OnInit {
     this.id_servicio = this.navParams.get('id_servicio');
     this.id_visita = this.navParams.get('id_visita');
     this.id_formulario = this.navParams.get('id_formulario');
-    console.log(this.id_formulario)
+    console.log(this.id_formulario);
     this.apiVisitas.getRespuestas(this.id_formulario).then((resp:any) => {
       this.respuestas = resp.respuestas;
+      if (this.respuestas[0].id_equipo != 0) {
+        this.apiVisitas.getEquipo(this.respuestas[0].id_equipo).subscribe((equipo:any) => {
+          this.equipo = equipo.result[0];
+          console.log(this.equipo);
+        });
+      }
       console.log(this.respuestas);
       this.apiServicios.ver_servicio(this.id_servicio).subscribe((resp:any) =>{
         this.servicio = resp.result;
@@ -45,11 +53,11 @@ export class EditarVisitaComponent implements OnInit {
             for (let index2 = 0; index2 < aux.split(' - ').length; index2++) {
               const element = aux.split(' - ')[index2];
               if (!(element == "")){
-                this.respuestas[index].respuesta[index2] = element ;
+                this.respuestas[index].respuesta[index2] = element;
               }
             }
             if ( !element.opciones.find(opcion => opcion.name == this.respuestas[index].respuesta[this.respuestas[index].respuesta.length - 1])){
-              this.respuestas[index].respuesta[this.respuestas[index].respuesta.length -1 ] = 'Otros'
+              this.respuestas[index].respuesta[this.respuestas[index].respuesta.length -1 ] = 'Otros';
             }
           }
           if ((element.tipoCampo.toLowerCase() == 'multiple') && (element.id_campo != 30)) {
@@ -68,6 +76,20 @@ export class EditarVisitaComponent implements OnInit {
           
         }
         console.log(this.servicio);
+        var indexRespId55 = this.respuestas.findIndex(respuesta => respuesta.id_campo == 55);
+        if(this.respuestas[indexRespId55]){
+          this.respuestas[indexRespId55].respuesta = this.servicio.listaProductos.find(producto => producto.id_producto == this.respuestas[indexRespId55].respuesta).tipo_producto;
+        }
+        var indexRespId70 = this.respuestas.findIndex(respuesta => respuesta.id_campo == 70);
+        if (this.respuestas[indexRespId70]) {
+          var aux = this.respuestas[indexRespId70];
+          var arrayAux = [];
+          for (let index = 0; index < this.respuestas[indexRespId70].respuesta.length; index++){
+            arrayAux.push(this.servicio.listaProductos.find(producto => producto.id_producto == this.respuestas[indexRespId70].respuesta[index]).tipo_producto);
+          }
+          this.respuestas[indexRespId70].respuesta =  arrayAux;
+        }
+        console.log(this.respuestas);
       })
     }).catch(err =>{
       console.warn(err);

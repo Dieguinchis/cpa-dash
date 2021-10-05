@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { NavParams, ModalController, AlertController } from '@ionic/angular';
 import { ApiServiciosService } from '../servicios/api-servicios.service'
 import { CrearProductoPage } from './crear-producto/crear-producto.page'
+import { ModificarProductoComponent } from './modificar-producto/modificar-producto.component';
 
 @Component({
   selector: 'app-ver-servicio',
@@ -71,5 +72,17 @@ export class VerServicioPage implements OnInit {
       ]
     });
     await alert.present();
+  }
+
+  async modificarProducto(producto){
+    const modal = await this.modalController.create({
+      component: ModificarProductoComponent,
+      cssClass:'stack-modal',
+      showBackdrop:true,
+      componentProps: {
+        'producto': producto,
+      }
+    });
+    return await modal.present();
   }
 }
