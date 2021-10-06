@@ -21,6 +21,8 @@ export class AdministrarVisitasPage implements OnInit {
   public enProceso = true;
   public pendiente = true;
   public filtrar_fecha = false;
+  public temp;
+  public busqueda;
 
 
   constructor(
@@ -34,9 +36,7 @@ export class AdministrarVisitasPage implements OnInit {
     ) { }
 
   ngOnInit() {
-    var aux = new Date().getFullYear().toString() + '-' + (new Date().getMonth() + 1).toString() + '-' + new Date().getDate().toString()
-    this.fecha_hasta = aux;
-    this.fecha_desde = aux;
+    this.filtroHoy();
     this.getVisitas();
   }
 
@@ -64,6 +64,8 @@ export class AdministrarVisitasPage implements OnInit {
       this.visitas_filtro = this.visitas.filter(visita => this.revisarEstado(visita))
       this.visitas_filtro.sort(this.ordenarVisitas)
     }
+    this.temp = this.visitas_filtro;
+    this.updateFilter();
   }
 
   ordenarVisitas(a,b){
@@ -168,4 +170,96 @@ export class AdministrarVisitasPage implements OnInit {
     })
   }
 
+  async marcarEntregadoAlert(visita) {
+    const alert = await this.alertController.create({
+      header: 'Atención',
+      message: '¿Estas seguro que deseas marcar esta visita como entregada?',
+      buttons: [
+        {text:'No',role:'cancel'},
+        {text:'Si',
+        handler: () =>{
+          this.marcarEntregado(visita.id_visita);
+        }  
+      }
+      ]
+    });
+  
+    await alert.present();
+  }
+
+  async marcarEntregado(id){
+    var load = await this.loadingController.create({
+      message:"Cargando visita"
+    })
+    load.present();
+    this.api_clientes.cambiar_estado_visita(id, 'entregado').then(e => {
+      this.getVisitas();
+      load.dismiss();
+      this.toastController.create({
+        message:"Se Marco como entregada",
+        duration: 2000,
+        color:"success"
+      }).then(r =>{
+        r.present();
+      })
+    }).catch(err =>{
+      load.dismiss();
+      this.toastController.create({
+        message:"Hubo un error al marcar como entregada",
+        duration: 2000,
+        color:"danger"
+      }).then(r =>{
+        r.present();
+      })
+      console.error(err);
+    })
+
+  }
+
+  filtroHoy(){
+    var aux = new Date().getFullYear().toString() + '-' + (new Date().getMonth() + 1).toString() + '-' + new Date().getDate().toString();
+    this.fecha_hasta = aux;
+    this.fecha_desde = aux;
+    this.filtrar_fecha = false;
+  }
+
+  hoyDisable(){
+    var aux = new Date().getFullYear().toString() + '-' + (new Date().getMonth() + 1).toString() + '-' + new Date().getDate().toString();
+    if ((aux == this.fecha_hasta && aux == this.fecha_desde) && (!this.filtrar_fecha)){
+      return true;
+    }else{
+      return false;
+    }
+  }
+
+  updateFilter(event?) {
+    if (event){
+      const val = event.target.value.toLowerCase();
+      const temp = this.temp.filter(function (d) {
+
+        return d.razon_social_cliente?.toLowerCase().includes(val) || d.razon_social_sucursal?.toLowerCase().includes(val);
+        
+      });
+  
+      // update the rows
+      this.visitas_filtro = temp;
+    }else{
+      const val = this.busqueda;
+      const temp = this.temp.filter(function (d) {
+
+        return d.razon_social_cliente?.toLowerCase().includes(val) || d.razon_social_sucursal?.toLowerCase().includes(val);
+        
+      });
+  
+      if (val){
+        this.visitas_filtro = temp;
+      }
+    }
+
+    
+  }
+
+  searchClear(){
+    this.visitas_filtro = this.temp;
+  }
 }

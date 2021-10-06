@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { NavParams, ModalController, LoadingController } from '@ionic/angular';
 import { EditarVisitaComponent } from 'src/app/modals/editar-visita/editar-visita.component';
+import { VerServicioVisitaComponent } from 'src/app/modals/ver-servicio-visita/ver-servicio-visita.component';
 import { ApiClientesService } from '../../servicios/api-clientes.service'
 import { ModificarVisitaPage } from '../modificar-visita/modificar-visita.page'
 
@@ -60,17 +61,16 @@ export class VerVisitaPage implements OnInit {
     this.api_visitas.informacion_visita(this.id_visita).then(data => {
       this.visita = data;
       this.visita = this.visita.result;
-      for (let index = 0; index < this.visita?.servicios.length; index++) {
-        const element = this.visita?.servicios[index];
-        element
-        
-      }
       console.log(this.visita)
       if (this.visita) {
         this.visita.servicios2 = [];
         for(let servicio of this.visita.servicios){
-          if(!this.visita?.servicios2.includes(servicio.nombre_servicio)){
-            this.visita.servicios2.push({nombre_servicio:servicio.nombre_servicio, id_servicio:servicio.id_servicio}); 
+          if(!this.visita?.servicios2.find(servicioAux => servicioAux.nombre_servicio == servicio.nombre_servicio)){
+            if (servicio.id_servicio == 22 || servicio.id_servicio == 20){
+              this.visita.servicios2.push({nombre_servicio: servicio.nombre_servicio, id_servicio:servicio.id_servicio, id_formulario:null});
+            }else{
+              this.visita.servicios2.push(servicio); 
+            }
           }
         }
       }
@@ -93,14 +93,23 @@ export class VerVisitaPage implements OnInit {
     return await modal.present();
   }
 
-  async editarServicio(id_servicio, i) {
-    console.log(id_servicio)
-    const modal = await this.modalController.create({
-    component: EditarVisitaComponent,
-    componentProps: { id_servicio: id_servicio, id_visita:this.id_visita, id_formulario: this.visita.servicios[i].id_formulario }
-    });
-  
-    await modal.present();
+  async editarServicio(id_servicio, id_formulario) {
+    if (id_formulario) {
+      const modal = await this.modalController.create({
+        component: EditarVisitaComponent,
+        componentProps: { id_servicio: id_servicio, id_visita:this.id_visita, id_formulario: id_formulario }
+        });
+      
+        await modal.present();
+    }else{ 
+      const modal = await this.modalController.create({
+      component: VerServicioVisitaComponent,
+      componentProps: { id_servicio: id_servicio, visita:this.visita}
+      });
+      
+      await modal.present();
+    }
+    
   
   }
 }

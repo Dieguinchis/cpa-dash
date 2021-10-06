@@ -29,15 +29,12 @@ export class EditarVisitaComponent implements OnInit {
     this.id_servicio = this.navParams.get('id_servicio');
     this.id_visita = this.navParams.get('id_visita');
     this.id_formulario = this.navParams.get('id_formulario');
+    if (this.navParams.get('equipo')) {
+      this.equipo = this.navParams.get('equipo');
+    }
     console.log(this.id_formulario);
     this.apiVisitas.getRespuestas(this.id_formulario).then((resp:any) => {
       this.respuestas = resp.respuestas;
-      if (this.respuestas[0].id_equipo != 0) {
-        this.apiVisitas.getEquipo(this.respuestas[0].id_equipo).subscribe((equipo:any) => {
-          this.equipo = equipo.result[0];
-          console.log(this.equipo);
-        });
-      }
       console.log(this.respuestas);
       this.apiServicios.ver_servicio(this.id_servicio).subscribe((resp:any) =>{
         this.servicio = resp.result;

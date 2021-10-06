@@ -17,10 +17,11 @@ import { NgxImageCompressService } from 'ngx-image-compress';
 import { EditarVisitaComponent } from './modals/editar-visita/editar-visita.component';
 import { FormsModule } from '@angular/forms';
 import { ModificarProductoComponent } from './paginas/administrar-servicios/ver-servicio/modificar-producto/modificar-producto.component';
+import { VerServicioVisitaComponent } from './modals/ver-servicio-visita/ver-servicio-visita.component';
 
 @NgModule({
-  declarations: [AppComponent,EditarVisitaComponent, ModificarProductoComponent],
-  entryComponents: [EditarVisitaComponent, ModificarProductoComponent],
+  declarations: [AppComponent,EditarVisitaComponent, ModificarProductoComponent, VerServicioVisitaComponent],
+  entryComponents: [EditarVisitaComponent, ModificarProductoComponent, VerServicioVisitaComponent],
   imports: [FormsModule,BrowserModule, IonicModule.forRoot(),
     IonicStorageModule.forRoot(), AppRoutingModule, HttpClientModule, ServiceWorkerModule.register('ngsw-worker.js', { enabled: environment.production })],
   providers: [

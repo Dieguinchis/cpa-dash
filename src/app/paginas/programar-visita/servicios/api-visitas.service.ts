@@ -96,7 +96,13 @@ export class ApiVisitasService {
   }
 
   getEquipo(id_equipo){
-    return this.http.get(this.apiDir+'/servicios/equipos/'+ id_equipo,this.requestOptions);
+    return new Promise((resolve, reject) => {
+      this.http.get(this.apiDir+'/servicios/equipos/'+ id_equipo,this.requestOptions).subscribe(response => {
+        resolve(response);
+      }, (error) => {
+        reject(error);
+      });
+    });
   }
 
 }
