@@ -53,6 +53,10 @@ export class ApiClientesService {
     return this.http.post(this.apiDir+'/servicios/eliminarEquipos/'+id_equipo,this.requestOptions);
   }
 
+  listado_productosServicio(id_servicio){
+    return this.http.get(this.apiDir+'/productos/idServicio/'+id_servicio,this.requestOptions);
+  }
+
   cambiar_estado_visita(id_visita, estado){
     console.log(this.apiDir+'/visitas/cambiarEstado',this.requestOptions);
     var params = {id_visita:id_visita, estado:estado}

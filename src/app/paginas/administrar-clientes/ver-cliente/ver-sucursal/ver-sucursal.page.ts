@@ -7,6 +7,7 @@ import { NgxImageCompressService } from "ngx-image-compress";
 import { ApiServiciosService } from '../../../administrar-servicios/servicios/api-servicios.service'
 import { element } from 'protractor';
 import { ApiVisitasService } from 'src/app/paginas/programar-visita/servicios/api-visitas.service';
+import { type } from 'os';
 
 
 @Component({
@@ -37,7 +38,8 @@ export class VerSucursalPage implements OnInit {
   public qrsToPrint = []
   public showDeleteQrSucursal = {show:false,count:0}
   public showDeleteQr = [];
-  public loadingEquipos = true
+  public loadingEquipos = true;
+  public productos;
 
   ngOnInit() {
     this.actualizar_informacion(false);
@@ -130,7 +132,63 @@ export class VerSucursalPage implements OnInit {
     // console.log(i)
   }
 
+  prueba(algo){
+    console.log(algo)
+  }
+
   actualizar_informacion(loading){
+    this.api_sucursales.listado_productosServicio(20).subscribe((resp:any)=>{
+      console.log(resp)
+      this.productos = resp.result
+      this.api_sucursales.listado_grupoWorkstations(this.id_sucursal).subscribe((data:any) =>{
+        console.log('Grupo1', data.result)
+        var flag = 0
+        var array = []
+        var i = 0
+        var first = true
+        if(data.result != undefined){
+          data.result.forEach((element) => {
+            if(element.id_equipo_grupo == flag){
+              // console.log(element.id_equipo_grupo, ' ' ,flag)
+              this.showDeleteQr[i].push({show: false, count:0})
+              array[i].equipos.push({id_equipo: element.id_equipo, id_servicio:element.id_servicio,id_sucursal:element.id_sucursal, nombre_equipo:element.nombre_equipo,codigo_qr_equipo:element.codigo_qr_equipo,estado_servicio:element.estado_servicio,nombre_servicio:element.nombre_servicio})
+            }else{
+              if(!first){
+                i++
+              }
+              flag = element.id_equipo_grupo
+              array.push({nombre_equipo_grupo:element.nombre_equipo_grupo,id_equipo_grupo:element.id_equipo_grupo,equipos:[]})
+              this.showDeleteQr.push([])
+              if (element.producto_predeterminado){
+                const product = this.productos.find(producto => producto.id_producto == element.producto_predeterminado)
+
+                element.producto_predeterminado = product.nombre_producto + ' - '+ product.tipo_producto;
+              }
+              array[i].equipos.push({id_equipo: element.id_equipo, id_servicio:element.id_servicio,id_sucursal:element.id_sucursal, nombre_equipo:element.nombre_equipo,codigo_qr_equipo:element.codigo_qr_equipo,estado_servicio:element.estado_servicio,nombre_servicio:element.nombre_servicio, producto_predeterminado:element.producto_predeterminado})
+              this.showDeleteQr[i].push({show: false, count:0})
+              first = false
+            }
+          });
+          console.log(this.showDeleteQr)
+          this.grupoWorkStation = array
+          console.log('grupo2: ', this.grupoWorkStation)
+          for( let grupoEquipo of this.grupoWorkStation){
+            grupoEquipo.equipos.sort(function (a, b) {
+              if (a.nombre_equipo > b.nombre_equipo) {
+                return 1;
+              }
+              if (a.nombre_equipo < b.nombre_equipo) {
+                return -1;
+              }
+              // a must be equal to b
+              return 0;
+            });
+          }
+        }
+        this.loadingEquipos = false
+  
+      })
+    })
     this.loadingEquipos = true
     this.api_sucursales.informacion_sucursal(this.id_sucursal).subscribe(data => {
       this.sucursal = data;
@@ -161,50 +219,7 @@ export class VerSucursalPage implements OnInit {
     // }), (error => {
     //   console.log(error)
     // })
-    this.api_sucursales.listado_grupoWorkstations(this.id_sucursal).subscribe((data:any) =>{
-      console.log('Grupo1', data.result)
-      var flag = 0
-      var array = []
-      var i = 0
-      var first = true
-      if(data.result != undefined){
-        data.result.forEach((element) => {
-          if(element.id_equipo_grupo == flag){
-            // console.log(element.id_equipo_grupo, ' ' ,flag)
-            this.showDeleteQr[i].push({show: false, count:0})
-            array[i].equipos.push({id_equipo: element.id_equipo, id_servicio:element.id_servicio,id_sucursal:element.id_sucursal, nombre_equipo:element.nombre_equipo,codigo_qr_equipo:element.codigo_qr_equipo,estado_servicio:element.estado_servicio,nombre_servicio:element.nombre_servicio})
-          }else{
-            if(!first){
-              i++
-            }
-            flag = element.id_equipo_grupo
-            array.push({nombre_equipo_grupo:element.nombre_equipo_grupo,id_equipo_grupo:element.id_equipo_grupo,equipos:[]})
-            this.showDeleteQr.push([])
-            array[i].equipos.push({id_equipo: element.id_equipo, id_servicio:element.id_servicio,id_sucursal:element.id_sucursal, nombre_equipo:element.nombre_equipo,codigo_qr_equipo:element.codigo_qr_equipo,estado_servicio:element.estado_servicio,nombre_servicio:element.nombre_servicio})
-            this.showDeleteQr[i].push({show: false, count:0})
-            first = false
-          }
-        });
-        console.log(this.showDeleteQr)
-        this.grupoWorkStation = array
-        // console.log('grupo2: ', this.grupoWorkStation)
-        for( let grupoEquipo of this.grupoWorkStation){
-          grupoEquipo.equipos.sort(function (a, b) {
-            if (a.nombre_equipo > b.nombre_equipo) {
-              return 1;
-            }
-            if (a.nombre_equipo < b.nombre_equipo) {
-              return -1;
-            }
-            // a must be equal to b
-            return 0;
-          });
-        }
-      }
-      this.loadingEquipos = false
-      
-
-    })
+    
     
   }
 
@@ -621,5 +636,51 @@ descargarQrAllWorkstations(){
   link.href = "http://157.230.90.222:3000/getZip?type=equipos&name=equipos_"+this.sucursal.sucursal[0].razon_social_sucursal+"&data="+ids;
   link.click();
 }
+
+
+  async elegirProducto(equipo){
+    var input = [];
+    for (let producto of this.productos){
+      input.push({
+        label:producto.nombre_producto + ' - ' + producto.tipo_producto,
+        value:producto.id_producto,
+        type:"radio"
+      })
+    }
+    console.log(input)
+    
+    const alert = await this.alertController.create({
+      subHeader: equipo.nombre_equipo,
+      header:'Producto predeterminado',
+      inputs: input,
+      buttons: [
+        {
+          text:'Cancelar',
+          role:'cancel',
+          cssClass:'secondary'
+        },
+        {
+          text: 'Aceptar',
+          handler: (data) => {
+            equipo.producto_predeterminado = data;
+            equipo.estado_servicio = undefined;
+            equipo.modificable = undefined;
+            equipo.nombre_equipo_grupo = undefined;
+            equipo.nombre_servicio = undefined;
+            equipo.producto = undefined;
+            equipo.qr = undefined;
+            this.api_visitas.actualizar_equipo(equipo).then(resp =>{
+              console.log(resp);
+              this.actualizar_informacion(true);
+            }).catch(err => {
+              console.error(err)
+            })
+          }
+        }
+    ]
+    });
+  
+    await alert.present();
+  }
 
 }
