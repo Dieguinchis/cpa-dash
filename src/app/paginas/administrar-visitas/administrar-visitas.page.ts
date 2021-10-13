@@ -217,14 +217,14 @@ export class AdministrarVisitasPage implements OnInit {
   }
 
   filtroHoy(){
-    var aux = new Date().getFullYear().toString() + '-' + (new Date().getMonth() + 1).toString() + '-' + new Date().getDate().toString();
+    var aux = new Date().getFullYear().toString() + '-' + (new Date().getMonth() + 1).toString() + '-' + (new Date().getDate() + 1).toString();
     this.fecha_hasta = aux;
     this.fecha_desde = aux;
     this.filtrar_fecha = false;
   }
 
   hoyDisable(){
-    var aux = new Date().getFullYear().toString() + '-' + (new Date().getMonth() + 1).toString() + '-' + new Date().getDate().toString();
+    var aux = new Date().getFullYear().toString() + '-' + (new Date().getMonth() + 1).toString() + '-' + (new Date().getDate() + 1).toString();
     if ((aux == this.fecha_hasta && aux == this.fecha_desde) && (!this.filtrar_fecha)){
       return true;
     }else{

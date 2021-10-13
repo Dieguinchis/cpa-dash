@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { ApiVisitasService } from './servicios/api-visitas.service'
 import * as moment from 'moment';
 import { ServicioTecnicosService } from '../administrar-tecnicos/servicios/servicio-tecnicos.service'
+import { AlertController } from '@ionic/angular';
+import { element } from 'protractor';
 
 @Component({
   selector: 'app-programar-visita',
@@ -38,7 +40,7 @@ export class ProgramarVisitaPage implements OnInit {
     cssClass:'alertSize'
   }
 
-  constructor(private api: ApiVisitasService, private api_tecnicos: ServicioTecnicosService) { 
+  constructor(private api: ApiVisitasService, private api_tecnicos: ServicioTecnicosService, public alertController: AlertController) { 
    
   }
 
@@ -155,11 +157,35 @@ export class ProgramarVisitaPage implements OnInit {
         this.serviciosParaEnviar.push({id_servicio: servicio.id_servicio, id_tecnico: equipo.tecnico, id_equipo: equipo.id_equipo})
       }
     }
+    var arrAux = []
     for(let workstation of this.grupoWorkStationElegidos){
-      for(let equipo of workstation.equipos){
-        this.serviciosParaEnviar.push({id_servicio: equipo.id_servicio, id_tecnico: workstation.tecnico, id_equipo: equipo.id_equipo})
-      }
+      
+      workstation.tecnico.forEach(tecnico => {
+        console.log(1)
+        for (let index = 0; index < tecnico.equipos.length; index++) {
+          const element = tecnico.equipos[index];
+          console.warn(element)
+          console.log(2)
+          if (element?.length >= 1) {
+            for (let index2 = 0; index2 < element.length; index2++) {
+              console.log(index2, "/", element.length)
+              const equipo = element[index2];
+              if (equipo?.selected){
+                if (!arrAux.find(equipoAux => (equipoAux.id_servicio == equipo.id_servicio) && (equipoAux.id_equipo == equipo.id_equipo))){
+                  console.log("SI IF")
+                  console.warn(equipo)
+                  arrAux.push({id_servicio: equipo.id_servicio, id_tecnico: tecnico.id_tecnico, id_equipo: equipo.id_equipo})
+                  this.serviciosParaEnviar.push({id_servicio: equipo.id_servicio, id_tecnico: tecnico.id_tecnico, id_equipo: equipo.id_equipo})
+  
+                }
+              }
+            }
+          }
+        }
+      });
+
     }
+    console.log(arrAux)
     console.log(this.serviciosParaEnviar);
     this.api.crear_visita({'id_cliente': this.id_cliente_elegido,
                           'id_sucursal': this.sucursal_elegida,
@@ -271,6 +297,71 @@ export class ProgramarVisitaPage implements OnInit {
       return -1;
     }
     return 0;
+  }
+
+  async presentAlertCheckbox(servicio, h) {
+    var input = []
+    for (let tecnico of this.listado_tecnicos) {
+      console.log(tecnico)
+      input.push({
+        name: tecnico.nombre_tecnico,
+        type: 'checkbox',
+        label: tecnico.nombre_tecnico,
+        value: tecnico,
+      })
+      
+    }
+    const alert = await this.alertController.create({
+      cssClass: 'my-custom-class',
+      header: 'Checkbox',
+      inputs: input,
+      buttons: [
+        {
+          text: 'Cancel',
+          role: 'cancel',
+          cssClass: 'secondary',
+          handler: () => {
+            console.log('Confirm Cancel');
+          }
+        }, {
+          text: 'Ok',
+          handler: (data) => {
+            servicio.tecnico = data;
+            servicio.tecnico.forEach(tecnico => {
+              if (!tecnico.equipos) {
+                tecnico.equipos = [];
+                
+              }
+              tecnico.equipos[h] = [];
+              for (let index = 0; index < servicio.equipos.length; index++) {
+                const element = servicio.equipos[index];
+                if (servicio.tecnico.length == 1){
+                  element.selected = true;
+                }
+                tecnico.equipos[h].push(JSON.parse(JSON.stringify(element)));
+                
+              }
+              console.log(tecnico);
+            });
+            console.log(data,"data");
+            console.log(servicio);
+          }
+        }
+      ]
+    });
+
+    await alert.present();
+  }
+
+  prueba(servicio, t,h, i){
+    for (let index = 0; index < servicio.tecnico.length; index++) {
+      const tecnico = servicio.tecnico[index];
+      if (t != index) {
+        if (tecnico.equipos[h][i].selected) {
+          tecnico.equipos[h][i].selected = false;
+        }
+      }
+    }
   }
 
 }

@@ -36,17 +36,32 @@
         </div>
     </div>
     <div *ngIf="show">
-        <div *ngFor="let servicio of grupoWorkStationElegidos" style="text-align: center;">
+        <div *ngFor="let servicio of grupoWorkStationElegidos; let h = index" style="text-align: center;">
             <h2 style="text-align: center;">{{servicio.nombre_equipo_grupo}}</h2>
-            <div *ngFor="let equipo of servicio.equipos">
-                <ion-label fixed style="text-align: center;color: var(--ion-color-secondary);font-weight: bold;">{{equipo.nombre_equipo}}: {{equipo.nombre_servicio}}</ion-label>
-            </div>
-            <ion-item style="margin-top: 10px;">
-                <ion-label fixed style="text-align: center;">Seleccionar técnico a cargo</ion-label>
-                <ion-select [interfaceOptions]="custom" [(ngModel)]="servicio.tecnico">
-                    <ion-select-option *ngFor="let tecnico of listado_tecnicos" value="{{tecnico.id_tecnico}}">{{tecnico.nombre_tecnico}} {{tecnico.apellido_tecnico}}</ion-select-option>
-                </ion-select>
+            <ion-item style="margin-top: 10px;" (click)="presentAlertCheckbox(servicio, h)">
+                <ion-label fixed style="text-align: center;">Seleccionar técnicos a cargo</ion-label>
             </ion-item>
+
+            <div>
+                <ion-row>
+                    <ion-col offset=3 size="3" style="text-align:start;">
+                        <ion-label style="font-weight: bold;">Equipo</ion-label>
+                    </ion-col>
+                    <ion-col *ngFor="let tecnico of servicio.tecnico" [size]="3/servicio.tecnico.length">
+                        {{tecnico.nombre_tecnico}}
+                    </ion-col>
+                </ion-row>
+            </div>
+            <div style="min-width:50%" *ngFor="let equipo of servicio.equipos ; let i = index">
+                <ion-row>
+                    <ion-col offset=3 size="3" style="text-align:start;">
+                        <ion-label style="color: var(--ion-color-secondary);font-weight: bold;">{{equipo.nombre_equipo}}: {{equipo.nombre_servicio}}</ion-label>
+                    </ion-col>
+                    <ion-col *ngFor="let tecnico of servicio.tecnico; let t = index" [size]="3/servicio.tecnico.length">
+                        <ion-checkbox (click)="prueba(servicio, t,h, i)" [(ngModel)]="tecnico.equipos[h][i].selected" [checked]="servicio.tecnico.length == 1" ></ion-checkbox>
+                    </ion-col>
+                </ion-row>
+            </div>
         </div>
     </div>
 
@@ -67,7 +82,6 @@
     <div style="width: 100%; text-align: center;">
         <ion-button (click)="programarVisita()">Agendar</ion-button>
     </div>
-
         
     <div style="margin-top: 25px">
         <img class="imagen_empresa" src='../../../assets/LogoCPA-01.png'>
