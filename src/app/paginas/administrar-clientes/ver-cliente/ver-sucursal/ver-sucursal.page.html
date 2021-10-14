@@ -57,7 +57,7 @@
           </ion-col>
           <ion-col style="font-size: 24px !important;" size="2">
             <ion-icon color="primary" title="Descargar este QR" style="margin-top:15px" (click)="descargarSucursal()" name="cloud-download-outline"></ion-icon>
-            <ion-icon color="primary" title="Seleccionar ESTE QR para Imprimir" style="margin-top:15px" (click)="addImprimirQrSucursal()" name="print-outline"></ion-icon>
+            <!-- <ion-icon color="primary" title="Seleccionar ESTE QR para Imprimir" style="margin-top:15px" (click)="addImprimirQrSucursal()" name="print-outline"></ion-icon> -->
             <ion-icon *ngIf="showDeleteQrSucursal.show" [title]="'Eliminar QR de la lista (' + showDeleteQrSucursal.count +')'" style="margin-top:15px; color: red !important;" (click)="deleteImprimirQrSucursal()" name="print-outline"></ion-icon>
           </ion-col>
           <!-- <ion-col size="1"></ion-col> -->
@@ -187,8 +187,8 @@
                 </ion-col>
                 <ion-col size="3" style="margin-top: 15px">
                   <ion-label *ngIf="equipo.id_servicio == 20">
-                    {{equipo.producto_predeterminado?equipo.producto_predeterminado:"Sin producto"}}
-                    <ion-icon slot="start" name="create-outline" (click)="elegirProducto(equipo)"></ion-icon>
+                    {{equipo.producto_predeterminado_nombre?equipo.producto_predeterminado_nombre:"Sin producto"}}
+                    <ion-icon color="primary" slot="start" name="create-outline" (click)="elegirProducto(equipo)"></ion-icon>
                   </ion-label>
                 </ion-col>
                 <ion-col size="2.5" style="margin-top: 15px">

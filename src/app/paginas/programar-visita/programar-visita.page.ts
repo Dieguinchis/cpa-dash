@@ -110,7 +110,6 @@ export class ProgramarVisitaPage implements OnInit {
             }
           }
           if (servicio.equipos.length < 1){
-  
             servicio.equipos.push({id_equipo: 0, id_servicio:servicio.id_servicio, nombre_equipo: 'Servicio principal'});
           }
         }
@@ -299,17 +298,29 @@ export class ProgramarVisitaPage implements OnInit {
     return 0;
   }
 
-  async presentAlertCheckbox(servicio, h) {
+  async presentAlertCheckbox(servicio, h, tecnicos) {
+    if (!tecnicos){
+      tecnicos = []
+    }
     var input = []
     for (let tecnico of this.listado_tecnicos) {
       console.log(tecnico)
-      input.push({
-        name: tecnico.nombre_tecnico,
-        type: 'checkbox',
-        label: tecnico.nombre_tecnico,
-        value: tecnico,
-      })
-      
+      if (tecnicos.includes(tecnico)){
+        input.push({
+          name: tecnico.nombre_tecnico,
+          type: 'checkbox',
+          label: tecnico.nombre_tecnico,
+          value: tecnico,
+          checked:true
+        })
+      }else{
+        input.push({
+          name: tecnico.nombre_tecnico,
+          type: 'checkbox',
+          label: tecnico.nombre_tecnico,
+          value: tecnico,
+        })
+      }
     }
     const alert = await this.alertController.create({
       cssClass: 'my-custom-class',
@@ -326,6 +337,7 @@ export class ProgramarVisitaPage implements OnInit {
         }, {
           text: 'Ok',
           handler: (data) => {
+            console.error(data)
             servicio.tecnico = data;
             servicio.tecnico.forEach(tecnico => {
               if (!tecnico.equipos) {
@@ -337,6 +349,8 @@ export class ProgramarVisitaPage implements OnInit {
                 const element = servicio.equipos[index];
                 if (servicio.tecnico.length == 1){
                   element.selected = true;
+                }else{
+                  element.selected = false;
                 }
                 tecnico.equipos[h].push(JSON.parse(JSON.stringify(element)));
                 

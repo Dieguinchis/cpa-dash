@@ -141,7 +141,7 @@ export class VerSucursalPage implements OnInit {
       console.log(resp)
       this.productos = resp.result
       this.api_sucursales.listado_grupoWorkstations(this.id_sucursal).subscribe((data:any) =>{
-        console.log('Grupo1', data.result)
+        console.log('Grupo1',  data.result)
         var flag = 0
         var array = []
         var i = 0
@@ -151,7 +151,13 @@ export class VerSucursalPage implements OnInit {
             if(element.id_equipo_grupo == flag){
               // console.log(element.id_equipo_grupo, ' ' ,flag)
               this.showDeleteQr[i].push({show: false, count:0})
-              array[i].equipos.push({id_equipo: element.id_equipo, id_servicio:element.id_servicio,id_sucursal:element.id_sucursal, nombre_equipo:element.nombre_equipo,codigo_qr_equipo:element.codigo_qr_equipo,estado_servicio:element.estado_servicio,nombre_servicio:element.nombre_servicio})
+              if (element.producto_predeterminado){
+                const product = this.productos.find(producto => producto.id_producto == element.producto_predeterminado)
+
+                element.producto_predeterminado_nombre = product.nombre_producto + ' - '+ product.tipo_producto;
+              }
+              array[i].equipos.push({id_equipo: element.id_equipo, id_servicio:element.id_servicio,id_sucursal:element.id_sucursal, nombre_equipo:element.nombre_equipo,codigo_qr_equipo:element.codigo_qr_equipo,estado_servicio:element.estado_servicio,nombre_servicio:element.nombre_servicio, producto_predeterminado:element.producto_predeterminado, producto_predeterminado_nombre:element.producto_predeterminado_nombre})
+              first = false
             }else{
               if(!first){
                 i++
@@ -162,9 +168,9 @@ export class VerSucursalPage implements OnInit {
               if (element.producto_predeterminado){
                 const product = this.productos.find(producto => producto.id_producto == element.producto_predeterminado)
 
-                element.producto_predeterminado = product.nombre_producto + ' - '+ product.tipo_producto;
+                element.producto_predeterminado_nombre = product.nombre_producto + ' - '+ product.tipo_producto;
               }
-              array[i].equipos.push({id_equipo: element.id_equipo, id_servicio:element.id_servicio,id_sucursal:element.id_sucursal, nombre_equipo:element.nombre_equipo,codigo_qr_equipo:element.codigo_qr_equipo,estado_servicio:element.estado_servicio,nombre_servicio:element.nombre_servicio, producto_predeterminado:element.producto_predeterminado})
+              array[i].equipos.push({id_equipo: element.id_equipo, id_servicio:element.id_servicio,id_sucursal:element.id_sucursal, nombre_equipo:element.nombre_equipo,codigo_qr_equipo:element.codigo_qr_equipo,estado_servicio:element.estado_servicio,nombre_servicio:element.nombre_servicio, producto_predeterminado:element.producto_predeterminado, producto_predeterminado_nombre:element.producto_predeterminado_nombre})
               this.showDeleteQr[i].push({show: false, count:0})
               first = false
             }
@@ -551,7 +557,7 @@ imprimir(qrs){
 
 test($event) {
   console.warn($event)
-  // window.open('http://157.230.90.222:3000/getZip')
+  // window.open('http://192.168.0.71:3000/getZip')
 }
 
 descargar(){
@@ -561,7 +567,7 @@ descargarSucursal(){
   // console.warn(1)
   var link = document.createElement("a");
   link.download = this.sucursal.sucursal[0].id_sucursal + ".png";
-  link.href = "http:///getfile/sucursales/"+this.sucursal.sucursal[0].id_sucursal ;
+  link.href = "http://192.168.0.71:3000/getfile/sucursales/"+this.sucursal.sucursal[0].id_sucursal ;
   link.click();
 }
 
@@ -570,7 +576,7 @@ descargarQrEquipo(equipo){
   // console.warn(equipo.id_equipo)
   var link = document.createElement("a");
   link.download = equipo.id_equipo + ".png";
-  link.href = "http://157.230.90.222:3000/getfile/equipos/"+equipo.id_equipo;
+  link.href = "http://192.168.0.71:3000/getfile/equipos/"+equipo.id_equipo;
   link.click();
 }
 
@@ -587,7 +593,7 @@ descargarQrThisWorkstation(grupoEquipo){
   }
   var link = document.createElement("a");
   link.download = "qrs.png";
-  link.href = "http://157.230.90.222:3000/getZip?type=equipos&name="+grupoEquipo.nombre_equipo_grupo+"&data="+ids;
+  link.href = "http://192.168.0.71:3000/getZip?type=equipos&name="+grupoEquipo.nombre_equipo_grupo+"&data="+ids;
   link.click();
 }
 
@@ -610,7 +616,7 @@ descargarAllQrSucursal(){
   }
   var link = document.createElement("a");
   link.download = "qrs.png";
-  link.href = "http://157.230.90.222:3000/getZip?type=all&name="+this.sucursal.sucursal[0].razon_social_sucursal+"&data="+ids;
+  link.href = "http://192.168.0.71:3000/getZip?type=all&name="+this.sucursal.sucursal[0].razon_social_sucursal+"&data="+ids;
   link.click();
 
 }
@@ -633,7 +639,7 @@ descargarQrAllWorkstations(){
   }
   var link = document.createElement("a");
   link.download = "qrs.png";
-  link.href = "http://157.230.90.222:3000/getZip?type=equipos&name=equipos_"+this.sucursal.sucursal[0].razon_social_sucursal+"&data="+ids;
+  link.href = "http://192.168.0.71:3000/getZip?type=equipos&name=equipos_"+this.sucursal.sucursal[0].razon_social_sucursal+"&data="+ids;
   link.click();
 }
 
@@ -647,6 +653,11 @@ descargarQrAllWorkstations(){
         type:"radio"
       })
     }
+    input.push({
+        label:'Sin Producto',
+        value:null,
+        type:"radio"
+    })
     console.log(input)
     
     const alert = await this.alertController.create({

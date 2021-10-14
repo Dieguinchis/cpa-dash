@@ -49,7 +49,8 @@ export class AdministrarVisitasPage implements OnInit {
   }
 
   entreFechas(visita){
-    if ((new Date(visita.fecha_visita).valueOf() >= new Date(this.fecha_desde).setHours(0).valueOf()) && (new Date(visita.fecha_visita).valueOf() <= new Date(this.fecha_hasta).setHours(24).valueOf())) {
+    console.log(new Date(new Date(this.fecha_desde).setHours(0)),'///////',new Date(new Date(visita.fecha_visita).setDate(new Date(visita.fecha_visita).getDate())),'////////////', new Date(new Date(this.fecha_desde).setHours(24)))
+    if ((new Date(visita.fecha_visita).setDate(new Date(visita.fecha_visita).getDate()).valueOf() >= new Date(this.fecha_desde).setHours(0).valueOf()) && (new Date(visita.fecha_visita).setDate(new Date(visita.fecha_visita).getDate()).valueOf() <= new Date(this.fecha_hasta).setHours(24).valueOf())) {
       return true
     }else {
       return false
@@ -217,14 +218,19 @@ export class AdministrarVisitasPage implements OnInit {
   }
 
   filtroHoy(){
-    var aux = new Date().getFullYear().toString() + '-' + (new Date().getMonth() + 1).toString() + '-' + (new Date().getDate() + 1).toString();
+    var aux = new Date().getFullYear().toString() + '-' + (new Date().getMonth() + 1).toString() + '-' + (new Date().getDate()).toString() + 'T00:00:00-03:00';
     this.fecha_hasta = aux;
     this.fecha_desde = aux;
     this.filtrar_fecha = false;
   }
 
+  sumarDia(dia){
+    console.log(new Date(dia).setDate(dia.getDate()+1))
+    return new Date(dia).setDate(dia.getDate()+1)
+  }
+
   hoyDisable(){
-    var aux = new Date().getFullYear().toString() + '-' + (new Date().getMonth() + 1).toString() + '-' + (new Date().getDate() + 1).toString();
+    var aux = new Date().getFullYear().toString() + '-' + (new Date().getMonth() + 1).toString() + '-' + (new Date().getDate()).toString() + 'T00:00:00-03:00';
     if ((aux == this.fecha_hasta && aux == this.fecha_desde) && (!this.filtrar_fecha)){
       return true;
     }else{

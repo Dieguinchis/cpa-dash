@@ -5,12 +5,23 @@
   </ion-item>
   <ion-item lines="full">
     <ion-label>Servicio que cumple</ion-label>
-    <ion-select [(ngModel)]="id_servicio">
+    <ion-select [(ngModel)]="id_servicio" (ionChange)="producto_predeterminado = null">
       <div *ngFor="let servicio of servicios">
         <div *ngIf="servicio.qr == 1">
           <ion-select-option value={{servicio.id_servicio}}>{{servicio.nombre_servicio}}</ion-select-option>
         </div>
       </div>
+    </ion-select>
+  </ion-item>
+  <ion-item *ngIf="id_servicio == '20'">
+    <ion-label>Producto Predeterminado</ion-label>
+    <ion-select [(ngModel)]="producto_predeterminado">
+      <div *ngFor="let producto of productos">
+        <div>
+          <ion-select-option value={{producto.id_producto}}>{{producto.nombre_producto + ' - ' + producto.tipo_producto}}</ion-select-option>
+        </div>
+      </div>
+      <ion-select-option value=null>Sin Producto</ion-select-option>
     </ion-select>
   </ion-item>
   <div style="text-align: center;">

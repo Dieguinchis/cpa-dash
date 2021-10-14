@@ -50,7 +50,7 @@ export class ApiClientesService {
   }
 
   borrar_equipo(id_equipo){
-    return this.http.post(this.apiDir+'/servicios/eliminarEquipos/'+id_equipo,this.requestOptions);
+    return this.http.post(this.apiDir+'/servicios/eliminarEquipos/'+id_equipo,null,this.requestOptions);
   }
 
   listado_productosServicio(id_servicio){
