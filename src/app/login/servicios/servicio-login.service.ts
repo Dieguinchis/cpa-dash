@@ -37,7 +37,6 @@ export class ServicioLoginService {
         reject(err)
       })      
     })
-    
   }
 
 }
