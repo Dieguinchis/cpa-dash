@@ -4,7 +4,7 @@ function _defineProperties(target, props) { for (var i = 0; i < props.length; i+
 
 function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
 
-(window["webpackJsonp"] = window["webpackJsonp"] || []).push([["default~paginas-administrar-clientes-ver-cliente-ver-cliente-module~paginas-programar-visita-program~2a0c3347"], {
+(window["webpackJsonp"] = window["webpackJsonp"] || []).push([["default~paginas-administrar-clientes-ver-cliente-ver-cliente-module~paginas-administrar-visitas-admi~b66acba8"], {
   /***/
   "./node_modules/moment/locale sync recursive ^\\.\\/.*$":
   /*!**************************************************!*\
@@ -20134,7 +20134,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
         _classCallCheck(this, ServicioTecnicosService);
 
         this.http = http;
-        this.apiDir = "http://192.168.0.71:3000";
+        this.apiDir = "http://157.230.90.222:3001";
         this.requestOptions = {
           headers: new _angular_common_http__WEBPACK_IMPORTED_MODULE_2__["HttpHeaders"]({
             'Content-Type': 'application/json',
@@ -20178,121 +20178,6 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
       providedIn: 'root'
     })], ServicioTecnicosService);
     /***/
-  },
-
-  /***/
-  "./src/app/paginas/programar-visita/servicios/api-visitas.service.ts":
-  /*!***************************************************************************!*\
-    !*** ./src/app/paginas/programar-visita/servicios/api-visitas.service.ts ***!
-    \***************************************************************************/
-
-  /*! exports provided: ApiVisitasService */
-
-  /***/
-  function srcAppPaginasProgramarVisitaServiciosApiVisitasServiceTs(module, __webpack_exports__, __webpack_require__) {
-    "use strict";
-
-    __webpack_require__.r(__webpack_exports__);
-    /* harmony export (binding) */
-
-
-    __webpack_require__.d(__webpack_exports__, "ApiVisitasService", function () {
-      return ApiVisitasService;
-    });
-    /* harmony import */
-
-
-    var tslib__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(
-    /*! tslib */
-    "./node_modules/tslib/tslib.es6.js");
-    /* harmony import */
-
-
-    var _angular_core__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(
-    /*! @angular/core */
-    "./node_modules/@angular/core/__ivy_ngcc__/fesm2015/core.js");
-    /* harmony import */
-
-
-    var _angular_common_http__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(
-    /*! @angular/common/http */
-    "./node_modules/@angular/common/__ivy_ngcc__/fesm2015/http.js");
-    /* harmony import */
-
-
-    var _environments_version__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(
-    /*! ../../../../environments/version */
-    "./src/environments/version.ts");
-
-    var ApiVisitasService = /*#__PURE__*/function () {
-      function ApiVisitasService(http) {
-        _classCallCheck(this, ApiVisitasService);
-
-        this.http = http;
-        this.apiDir = "http://192.168.0.71:3000";
-        this.requestOptions = {
-          headers: new _angular_common_http__WEBPACK_IMPORTED_MODULE_2__["HttpHeaders"]({
-            'Content-Type': 'application/json',
-            'version': _environments_version__WEBPACK_IMPORTED_MODULE_3__["version"]
-          })
-        };
-      }
-
-      _createClass(ApiVisitasService, [{
-        key: "listado_clientes",
-        value: function listado_clientes() {
-          return this.http.get(this.apiDir + '/clientes', this.requestOptions);
-        }
-      }, {
-        key: "listado_equipos",
-        value: function listado_equipos(id) {
-          return this.http.get(this.apiDir + '/servicios/equipos/offline/' + id, this.requestOptions);
-        }
-      }, {
-        key: "listado_equipos_id",
-        value: function listado_equipos_id(id) {
-          return this.http.get(this.apiDir + '/servicios/equipos/sucursal/' + id, this.requestOptions);
-        }
-      }, {
-        key: "informacion_cliente",
-        value: function informacion_cliente(id) {
-          return this.http.get(this.apiDir + '/clientes/id/' + id, this.requestOptions);
-        }
-      }, {
-        key: "mostrar_servicios",
-        value: function mostrar_servicios() {
-          return this.http.get(this.apiDir + '/servicios', this.requestOptions);
-        }
-      }, {
-        key: "crear_visita",
-        value: function crear_visita(parametros) {
-          return this.http.post(this.apiDir + '/visitas/crear', parametros, this.requestOptions);
-        }
-      }, {
-        key: "modificar_visita",
-        value: function modificar_visita(parametros) {
-          return this.http.post(this.apiDir + '/visitas/update', parametros, this.requestOptions);
-        }
-      }, {
-        key: "listado_grupoWorkstations",
-        value: function listado_grupoWorkstations(id) {
-          return this.http.get(this.apiDir + '/servicios/gruposEquipos/sucursal/' + id, this.requestOptions);
-        }
-      }]);
-
-      return ApiVisitasService;
-    }();
-
-    ApiVisitasService.ctorParameters = function () {
-      return [{
-        type: _angular_common_http__WEBPACK_IMPORTED_MODULE_2__["HttpClient"]
-      }];
-    };
-
-    ApiVisitasService = Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"])([Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["Injectable"])({
-      providedIn: 'root'
-    })], ApiVisitasService);
-    /***/
   }
 }]);
-//# sourceMappingURL=default~paginas-administrar-clientes-ver-cliente-ver-cliente-module~paginas-programar-visita-program~2a0c3347-es5.js.map
+//# sourceMappingURL=default~paginas-administrar-clientes-ver-cliente-ver-cliente-module~paginas-administrar-visitas-admi~b66acba8-es5.js.map

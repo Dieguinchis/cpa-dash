@@ -569,73 +569,87 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
       }, {
         key: "agregarLogo",
         value: function agregarLogo() {
-          return Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"])(this, void 0, void 0, /*#__PURE__*/regeneratorRuntime.mark(function _callee3() {
+          return Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"])(this, void 0, void 0, /*#__PURE__*/regeneratorRuntime.mark(function _callee4() {
             var _this7 = this;
 
-            var loading;
-            return regeneratorRuntime.wrap(function _callee3$(_context3) {
+            return regeneratorRuntime.wrap(function _callee4$(_context4) {
               while (1) {
-                switch (_context3.prev = _context3.next) {
+                switch (_context4.prev = _context4.next) {
                   case 0:
-                    _context3.next = 2;
-                    return this.loadingController.create({
-                      message: 'Subiendo img'
-                    });
-
-                  case 2:
-                    loading = _context3.sent;
-                    _context3.next = 5;
-                    return loading.present();
-
-                  case 5:
                     this.imageCompress.uploadFile().then(function (_ref) {
                       var image = _ref.image,
                           orientation = _ref.orientation;
-                      console.warn('Size in bytes was:', _this7.imageCompress.byteCount(image));
+                      return Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"])(_this7, void 0, void 0, /*#__PURE__*/regeneratorRuntime.mark(function _callee3() {
+                        var _this8 = this;
 
-                      _this7.imageCompress.compressFile(image, orientation, 50, 50).then(function (result) {
-                        console.log(result);
-                        _this7.logo = result;
-                        _this7.api_clientes.subir_logo_cliente({
-                          id_cliente: _this7.id_cliente,
-                          logo: _this7.logo
-                        }).subscribe(function (response) {
-                          _this7.loadingController.dismiss();
-                        }), function (error) {
-                          console.log(error);
+                        var loading;
+                        return regeneratorRuntime.wrap(function _callee3$(_context3) {
+                          while (1) {
+                            switch (_context3.prev = _context3.next) {
+                              case 0:
+                                _context3.next = 2;
+                                return this.loadingController.create({
+                                  message: 'Subiendo img'
+                                });
 
-                          _this7.loadingController.dismiss();
-                        };
-                      });
+                              case 2:
+                                loading = _context3.sent;
+                                _context3.next = 5;
+                                return loading.present();
+
+                              case 5:
+                                console.warn('Size in bytes was:', this.imageCompress.byteCount(image));
+                                this.imageCompress.compressFile(image, orientation, 50, 50).then(function (result) {
+                                  console.log(result);
+                                  _this8.logo = result;
+                                  _this8.api_clientes.subir_logo_cliente({
+                                    id_cliente: _this8.id_cliente,
+                                    logo: _this8.logo
+                                  }).subscribe(function (response) {
+                                    _this8.loadingController.dismiss();
+                                  }), function (error) {
+                                    console.log(error);
+
+                                    _this8.loadingController.dismiss();
+                                  };
+                                });
+
+                              case 7:
+                              case "end":
+                                return _context3.stop();
+                            }
+                          }
+                        }, _callee3, this);
+                      }));
                     });
 
-                  case 6:
+                  case 1:
                   case "end":
-                    return _context3.stop();
+                    return _context4.stop();
                 }
               }
-            }, _callee3, this);
+            }, _callee4, this);
           }));
         }
       }, {
         key: "deleteLogo",
         value: function deleteLogo() {
-          return Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"])(this, void 0, void 0, /*#__PURE__*/regeneratorRuntime.mark(function _callee4() {
-            var _this8 = this;
+          return Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"])(this, void 0, void 0, /*#__PURE__*/regeneratorRuntime.mark(function _callee5() {
+            var _this9 = this;
 
             var loading;
-            return regeneratorRuntime.wrap(function _callee4$(_context4) {
+            return regeneratorRuntime.wrap(function _callee5$(_context5) {
               while (1) {
-                switch (_context4.prev = _context4.next) {
+                switch (_context5.prev = _context5.next) {
                   case 0:
-                    _context4.next = 2;
+                    _context5.next = 2;
                     return this.loadingController.create({
                       message: 'Eliminando img'
                     });
 
                   case 2:
-                    loading = _context4.sent;
-                    _context4.next = 5;
+                    loading = _context5.sent;
+                    _context5.next = 5;
                     return loading.present();
 
                   case 5:
@@ -643,13 +657,13 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
                       id_cliente: this.id_cliente,
                       logo: null
                     }).subscribe(function (response) {
-                      _this8.ngOnInit();
+                      _this9.ngOnInit();
 
-                      _this8.loadingController.dismiss();
+                      _this9.loadingController.dismiss();
                     }), function (error) {
                       console.log(error);
 
-                      _this8.loadingController.dismiss();
+                      _this9.loadingController.dismiss();
                     }; // this.api_clientes.eliminar_Logo_Cliente({id:this.id_cliente}).subscribe(resp =>{
                     //   this.loadingController.dismiss()
                     //   this.logo = null
@@ -660,10 +674,10 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 
                   case 6:
                   case "end":
-                    return _context4.stop();
+                    return _context5.stop();
                 }
               }
-            }, _callee4, this);
+            }, _callee5, this);
           }));
         }
       }]);
@@ -694,6 +708,239 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
       /*! ./modificar-cliente.page.scss */
       "./src/app/paginas/administrar-clientes/modificar-cliente/modificar-cliente.page.scss"))["default"]]
     })], ModificarClientePage);
+    /***/
+  },
+
+  /***/
+  "./src/app/paginas/administrar-clientes/servicios/api-clientes.service.ts":
+  /*!********************************************************************************!*\
+    !*** ./src/app/paginas/administrar-clientes/servicios/api-clientes.service.ts ***!
+    \********************************************************************************/
+
+  /*! exports provided: ApiClientesService */
+
+  /***/
+  function srcAppPaginasAdministrarClientesServiciosApiClientesServiceTs(module, __webpack_exports__, __webpack_require__) {
+    "use strict";
+
+    __webpack_require__.r(__webpack_exports__);
+    /* harmony export (binding) */
+
+
+    __webpack_require__.d(__webpack_exports__, "ApiClientesService", function () {
+      return ApiClientesService;
+    });
+    /* harmony import */
+
+
+    var tslib__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(
+    /*! tslib */
+    "./node_modules/tslib/tslib.es6.js");
+    /* harmony import */
+
+
+    var _angular_core__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(
+    /*! @angular/core */
+    "./node_modules/@angular/core/__ivy_ngcc__/fesm2015/core.js");
+    /* harmony import */
+
+
+    var _angular_common_http__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(
+    /*! @angular/common/http */
+    "./node_modules/@angular/common/__ivy_ngcc__/fesm2015/http.js");
+    /* harmony import */
+
+
+    var _environments_version__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(
+    /*! ../../../../environments/version */
+    "./src/environments/version.ts");
+
+    var ApiClientesService = /*#__PURE__*/function () {
+      function ApiClientesService(http) {
+        _classCallCheck(this, ApiClientesService);
+
+        this.http = http;
+        this.apiDir = "http://157.230.90.222:3001";
+        this.requestOptions = {
+          headers: new _angular_common_http__WEBPACK_IMPORTED_MODULE_2__["HttpHeaders"]({
+            'Content-Type': 'application/json',
+            'version': _environments_version__WEBPACK_IMPORTED_MODULE_3__["version"]
+          })
+        };
+      }
+
+      _createClass(ApiClientesService, [{
+        key: "listado_clientes",
+        value: function listado_clientes() {
+          return this.http.get(this.apiDir + '/clientes', this.requestOptions);
+        }
+      }, {
+        key: "informacion_cliente",
+        value: function informacion_cliente(id) {
+          return this.http.get(this.apiDir + '/clientes/id/' + id, this.requestOptions);
+        }
+      }, {
+        key: "alta_sucursal",
+        value: function alta_sucursal(datos) {
+          return this.http.post(this.apiDir + '/sucursales/crear', datos, this.requestOptions);
+        }
+      }, {
+        key: "informacion_sucursal",
+        value: function informacion_sucursal(id) {
+          return this.http.get(this.apiDir + '/sucursales/id/' + id, this.requestOptions);
+        }
+      }, {
+        key: "informacion_visita",
+        value: function informacion_visita(id) {
+          return Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"])(this, void 0, void 0, /*#__PURE__*/regeneratorRuntime.mark(function _callee6() {
+            var data;
+            return regeneratorRuntime.wrap(function _callee6$(_context6) {
+              while (1) {
+                switch (_context6.prev = _context6.next) {
+                  case 0:
+                    _context6.next = 2;
+                    return this.http.get(this.apiDir + '/visitas/id/' + id, this.requestOptions);
+
+                  case 2:
+                    data = _context6.sent;
+                    return _context6.abrupt("return", data.toPromise());
+
+                  case 4:
+                  case "end":
+                    return _context6.stop();
+                }
+              }
+            }, _callee6, this);
+          }));
+        }
+      }, {
+        key: "listado_workstations",
+        value: function listado_workstations(id) {
+          return this.http.get(this.apiDir + '/servicios/equipos/sucursal/' + id, this.requestOptions);
+        }
+      }, {
+        key: "listado_grupoWorkstations",
+        value: function listado_grupoWorkstations(id) {
+          return this.http.get(this.apiDir + '/servicios/gruposEquipos/sucursal/' + id, this.requestOptions);
+        }
+      }, {
+        key: "borrar_equipo",
+        value: function borrar_equipo(id_equipo) {
+          return this.http.post(this.apiDir + '/servicios/eliminarEquipos/' + id_equipo, null, this.requestOptions);
+        }
+      }, {
+        key: "listado_productosServicio",
+        value: function listado_productosServicio(id_servicio) {
+          return this.http.get(this.apiDir + '/productos/idServicio/' + id_servicio, this.requestOptions);
+        }
+      }, {
+        key: "cambiar_estado_visita",
+        value: function cambiar_estado_visita(id_visita, estado) {
+          var _this10 = this;
+
+          console.log(this.apiDir + '/visitas/cambiarEstado', this.requestOptions);
+          var params = {
+            id_visita: id_visita,
+            estado: estado
+          };
+          return new Promise(function (resolve, reject) {
+            _this10.http.post(_this10.apiDir + '/visitas/cambiarEstado', params, _this10.requestOptions).subscribe(function (response) {
+              resolve(response);
+            }, function (error) {
+              reject(error);
+            });
+          });
+        }
+      }, {
+        key: "eliminar_Grupo_workstation",
+        value: function eliminar_Grupo_workstation(id_producto) {
+          console.log('delete2', id_producto);
+          return this.http.post(this.apiDir + '/servicios/eliminarGrupoEquipos/' + id_producto, this.requestOptions);
+        }
+      }, {
+        key: "subir_planos",
+        value: function subir_planos(parametros) {
+          return this.http.post(this.apiDir + '/planos/crear', parametros, this.requestOptions);
+        }
+      }, {
+        key: "upload",
+        value: function upload(params) {
+          var _this11 = this;
+
+          var bodyP = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : {};
+          return new Promise(function (resolve, reject) {
+            _this11.http.post(_this11.apiDir + params, bodyP) // this.http.post(this.url + params, bodyP,{headers: header})
+            .subscribe(function (response) {
+              resolve(response);
+            }, function (error) {
+              reject(error);
+            });
+          });
+        }
+      }, {
+        key: "ver_sucursal",
+        value: function ver_sucursal(id_sucursal) {
+          return this.http.get(this.apiDir + '/sucursales/id/' + id_sucursal, this.requestOptions);
+        }
+      }, {
+        key: "crear_pdf",
+        value: function crear_pdf(id_visita) {
+          return this.http.post(this.apiDir + '/pdf/create-pdf', id_visita, this.requestOptions);
+        }
+      }, {
+        key: "ver_pdf",
+        value: function ver_pdf(id_visita) {
+          return this.http.get(this.apiDir + '/pdf/fetch-pdf/' + id_visita, this.requestOptions);
+        }
+      }, {
+        key: "modificar_cliente",
+        value: function modificar_cliente(parametros) {
+          return this.http.post(this.apiDir + '/clientes/actualizar', parametros, this.requestOptions);
+        }
+      }, {
+        key: "subir_logo_cliente",
+        value: function subir_logo_cliente(parametros) {
+          return this.http.post(this.apiDir + '/clientes/actualizarLogo', parametros, this.requestOptions);
+        }
+      }, {
+        key: "eliminar_Logo_Cliente",
+        value: function eliminar_Logo_Cliente(parametros) {
+          return this.http.post(this.apiDir + '/clientes/eliminarLogo', parametros, this.requestOptions);
+        }
+      }, {
+        key: "eliminar_cliente",
+        value: function eliminar_cliente(id_cliente) {
+          return this.http.post(this.apiDir + '/clientes/eliminar/' + id_cliente, this.requestOptions);
+        }
+      }, {
+        key: "eliminar_sucursal",
+        value: function eliminar_sucursal(id_sucursal) {
+          return this.http.post(this.apiDir + '/sucursales/eliminar/' + id_sucursal, this.requestOptions);
+        }
+      }, {
+        key: "eliminar_plano",
+        value: function eliminar_plano(id_plano) {
+          return this.http.post(this.apiDir + '/planos/eliminar/' + id_plano, this.requestOptions);
+        }
+      }, {
+        key: "modificar_sucursal",
+        value: function modificar_sucursal(parametros) {
+          return this.http.post(this.apiDir + '/sucursales/actualizar', parametros, this.requestOptions);
+        }
+      }]);
+
+      return ApiClientesService;
+    }();
+
+    ApiClientesService.ctorParameters = function () {
+      return [{
+        type: _angular_common_http__WEBPACK_IMPORTED_MODULE_2__["HttpClient"]
+      }];
+    };
+
+    ApiClientesService = Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"])([Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["Injectable"])({
+      providedIn: 'root'
+    })], ApiClientesService);
     /***/
   }
 }]);

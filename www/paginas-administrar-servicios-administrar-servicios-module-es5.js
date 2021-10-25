@@ -101,7 +101,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
     /* harmony default export */
 
 
-    __webpack_exports__["default"] = "<ion-header>\r\n  <ion-toolbar color=\"primary\">\r\n    <ion-title *ngIf=\"servicio\" style=\"text-align: center;\">{{servicio.nombreDelServicio}}</ion-title>\r\n  </ion-toolbar>\r\n</ion-header>\r\n\r\n<ion-content>\r\n  <div *ngIf=\"servicio\">\r\n    <div *ngIf=\"servicio.tieneProducto\">\r\n      <ion-item lines=\"none\">\r\n        <ion-label style=\"text-align: center;\"><b>Productos</b></ion-label>\r\n        <ion-button (click)=\"altaProducto(id_servicio)\">Agregar producto</ion-button>\r\n      </ion-item>\r\n      <ion-item class=\"titulos\" lines=\"full\">\r\n        <ion-grid>\r\n          <ion-row>\r\n            <ion-col size=\"3\">\r\n              <ion-label>\r\n                <b>Nombre del producto</b>\r\n              </ion-label>\r\n            </ion-col>\r\n            <ion-col size=\"3\">\r\n              <ion-label>\r\n                <b>Fecha de vencimiento</b>\r\n              </ion-label>  \r\n            </ion-col>\r\n            <ion-col size=\"3\">\r\n              <ion-label>\r\n                <b>Lote</b>\r\n              </ion-label>\r\n            </ion-col>\r\n            <ion-col size=\"2\">\r\n              <ion-label>\r\n                <b>Tipo de producto</b>\r\n              </ion-label>\r\n            </ion-col>\r\n          </ion-row>\r\n        </ion-grid>\r\n      </ion-item>\r\n      <div *ngFor=\"let producto of servicio.listaProductos\">\r\n        <ion-item lines=\"full\">\r\n            <ion-col size=\"3\">\r\n              <ion-label>\r\n                {{producto.nombre_producto}}\r\n              </ion-label>\r\n            </ion-col>\r\n            <ion-col size=\"3\">\r\n              <ion-label>\r\n                {{producto.fecha_vencimiento}}\r\n              </ion-label>\r\n            </ion-col>\r\n            <ion-col size=\"3\">\r\n              <ion-label>\r\n                {{producto.lote}}\r\n              </ion-label>\r\n            </ion-col>\r\n            <ion-col size=\"2\">\r\n              <ion-label>\r\n                {{producto.tipo_producto}}\r\n              </ion-label>\r\n            </ion-col>\r\n            <ion-col size=\"1\">\r\n              <ion-icon name=\"trash-outline\" color=\"danger\" style=\"margin-right: 15px\" (click)=\"eliminar_producto(producto.id_producto)\"></ion-icon>\r\n            </ion-col>\r\n        </ion-item>\r\n      </div>\r\n    </div>\r\n  </div>\r\n\r\n\r\n</ion-content>\r\n";
+    __webpack_exports__["default"] = "<ion-header>\r\n  <ion-toolbar color=\"primary\">\r\n    <ion-title *ngIf=\"servicio\" style=\"text-align: center;\">{{servicio.nombreDelServicio}}</ion-title>\r\n  </ion-toolbar>\r\n</ion-header>\r\n\r\n<ion-content>\r\n  <div *ngIf=\"servicio\">\r\n    <div *ngIf=\"servicio.tieneProducto\">\r\n      <ion-item lines=\"none\">\r\n        <ion-label style=\"text-align: center;\"><b>Productos</b></ion-label>\r\n        <ion-button (click)=\"altaProducto(id_servicio)\">Agregar producto</ion-button>\r\n      </ion-item>\r\n      <ion-item class=\"titulos\" lines=\"full\">\r\n        <ion-grid>\r\n          <ion-row>\r\n            <ion-col size=\"3\">\r\n              <ion-label>\r\n                <b>Nombre del producto</b>\r\n              </ion-label>\r\n            </ion-col>\r\n            <ion-col size=\"3\">\r\n              <ion-label>\r\n                <b>Fecha de vencimiento</b>\r\n              </ion-label>  \r\n            </ion-col>\r\n            <ion-col size=\"3\">\r\n              <ion-label>\r\n                <b>Lote</b>\r\n              </ion-label>\r\n            </ion-col>\r\n            <ion-col size=\"2\">\r\n              <ion-label>\r\n                <b>Tipo de producto</b>\r\n              </ion-label>\r\n            </ion-col>\r\n          </ion-row>\r\n        </ion-grid>\r\n      </ion-item>\r\n      <div *ngFor=\"let producto of servicio.listaProductos\">\r\n        <ion-item lines=\"full\">\r\n            <ion-col size=\"3\">\r\n              <ion-label>\r\n                {{producto.nombre_producto}}\r\n              </ion-label>\r\n            </ion-col>\r\n            <ion-col size=\"3\">\r\n              <ion-label>\r\n                {{producto.fecha_vencimiento}}\r\n              </ion-label>\r\n            </ion-col>\r\n            <ion-col size=\"3\">\r\n              <ion-label>\r\n                {{producto.lote}}\r\n              </ion-label>\r\n            </ion-col>\r\n            <ion-col size=\"2\">\r\n              <ion-label>\r\n                {{producto.tipo_producto}}\r\n              </ion-label>\r\n            </ion-col>\r\n            <ion-col size=\"1\">\r\n              <!-- <ion-icon name=\"create-outline\" (click)=\"modificarProducto(producto)\" *ngIf=\"id_servicio == 20\"></ion-icon> -->\r\n              <ion-icon name=\"trash-outline\" color=\"danger\" style=\"margin-right: 15px\" (click)=\"eliminar_producto(producto.id_producto)\"></ion-icon>\r\n            </ion-col>\r\n        </ion-item>\r\n      </div>\r\n    </div>\r\n  </div>\r\n\r\n\r\n</ion-content>\r\n";
     /***/
   },
 
@@ -287,7 +287,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
     /* harmony default export */
 
 
-    __webpack_exports__["default"] = ".lista_servicios {\n  width: 100%;\n  margin-bottom: 20px;\n}\n\n.boton_nuevo_servicio {\n  --background: transparent;\n}\n\nion-item {\n  width: 100%;\n}\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbInNyYy9hcHAvcGFnaW5hcy9hZG1pbmlzdHJhci1zZXJ2aWNpb3MvRTpcXFRyYWJham9cXGNwYVxcZnJvbnRlbmRfY3BhX2FkbWluL3NyY1xcYXBwXFxwYWdpbmFzXFxhZG1pbmlzdHJhci1zZXJ2aWNpb3NcXGFkbWluaXN0cmFyLXNlcnZpY2lvcy5wYWdlLnNjc3MiLCJzcmMvYXBwL3BhZ2luYXMvYWRtaW5pc3RyYXItc2VydmljaW9zL2FkbWluaXN0cmFyLXNlcnZpY2lvcy5wYWdlLnNjc3MiXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6IkFBRUE7RUFDSSxXQUFBO0VBQ0EsbUJBQUE7QUNESjs7QURLQTtFQUNJLHlCQUFBO0FDRko7O0FES0E7RUFDSSxXQUFBO0FDRkoiLCJmaWxlIjoic3JjL2FwcC9wYWdpbmFzL2FkbWluaXN0cmFyLXNlcnZpY2lvcy9hZG1pbmlzdHJhci1zZXJ2aWNpb3MucGFnZS5zY3NzIiwic291cmNlc0NvbnRlbnQiOlsiXHJcblxyXG4ubGlzdGFfc2VydmljaW9ze1xyXG4gICAgd2lkdGg6IDEwMCU7XHJcbiAgICBtYXJnaW4tYm90dG9tOiAyMHB4O1xyXG59XHJcblxyXG5cclxuLmJvdG9uX251ZXZvX3NlcnZpY2lve1xyXG4gICAgLS1iYWNrZ3JvdW5kOiB0cmFuc3BhcmVudDtcclxufVxyXG5cclxuaW9uLWl0ZW17XHJcbiAgICB3aWR0aDogMTAwJTtcclxufSIsIi5saXN0YV9zZXJ2aWNpb3Mge1xuICB3aWR0aDogMTAwJTtcbiAgbWFyZ2luLWJvdHRvbTogMjBweDtcbn1cblxuLmJvdG9uX251ZXZvX3NlcnZpY2lvIHtcbiAgLS1iYWNrZ3JvdW5kOiB0cmFuc3BhcmVudDtcbn1cblxuaW9uLWl0ZW0ge1xuICB3aWR0aDogMTAwJTtcbn0iXX0= */";
+    __webpack_exports__["default"] = ".lista_servicios {\n  width: 100%;\n  margin-bottom: 20px;\n}\n\n.boton_nuevo_servicio {\n  --background: transparent;\n}\n\nion-item {\n  width: 100%;\n}\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbInNyYy9hcHAvcGFnaW5hcy9hZG1pbmlzdHJhci1zZXJ2aWNpb3MvRTpcXFRyYWJham9cXGNwYVxcZnJvbnRlbmRfY3BhX2FkbWluL3NyY1xcYXBwXFxwYWdpbmFzXFxhZG1pbmlzdHJhci1zZXJ2aWNpb3NcXGFkbWluaXN0cmFyLXNlcnZpY2lvcy5wYWdlLnNjc3MiLCJzcmMvYXBwL3BhZ2luYXMvYWRtaW5pc3RyYXItc2VydmljaW9zL2FkbWluaXN0cmFyLXNlcnZpY2lvcy5wYWdlLnNjc3MiXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6IkFBRUE7RUFDSSxXQUFBO0VBQ0EsbUJBQUE7QUNESjs7QURLQTtFQUNJLHlCQUFBO0FDRko7O0FES0E7RUFDSSxXQUFBO0FDRkoiLCJmaWxlIjoic3JjL2FwcC9wYWdpbmFzL2FkbWluaXN0cmFyLXNlcnZpY2lvcy9hZG1pbmlzdHJhci1zZXJ2aWNpb3MucGFnZS5zY3NzIiwic291cmNlc0NvbnRlbnQiOlsiXHJcblxyXG4ubGlzdGFfc2VydmljaW9ze1xyXG4gICAgd2lkdGg6IDEwMCU7XHJcbiAgICBtYXJnaW4tYm90dG9tOiAyMHB4O1xyXG59XHJcblxyXG5cclxuLmJvdG9uX251ZXZvX3NlcnZpY2lve1xyXG4gICAgLS1iYWNrZ3JvdW5kOiB0cmFuc3BhcmVudDtcclxufVxyXG5cclxuaW9uLWl0ZW17XHJcbiAgICB3aWR0aDogMTAwJTtcclxufVxyXG5cclxuIiwiLmxpc3RhX3NlcnZpY2lvcyB7XG4gIHdpZHRoOiAxMDAlO1xuICBtYXJnaW4tYm90dG9tOiAyMHB4O1xufVxuXG4uYm90b25fbnVldm9fc2VydmljaW8ge1xuICAtLWJhY2tncm91bmQ6IHRyYW5zcGFyZW50O1xufVxuXG5pb24taXRlbSB7XG4gIHdpZHRoOiAxMDAlO1xufSJdfQ== */";
     /***/
   },
 
@@ -1281,6 +1281,12 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
     var _crear_producto_crear_producto_page__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(
     /*! ./crear-producto/crear-producto.page */
     "./src/app/paginas/administrar-servicios/ver-servicio/crear-producto/crear-producto.page.ts");
+    /* harmony import */
+
+
+    var _modificar_producto_modificar_producto_component__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(
+    /*! ./modificar-producto/modificar-producto.component */
+    "./src/app/paginas/administrar-servicios/ver-servicio/modificar-producto/modificar-producto.component.ts");
 
     var VerServicioPage = /*#__PURE__*/function () {
       function VerServicioPage(navParams, api_servicios, modalController, alertController) {
@@ -1399,6 +1405,41 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
                 }
               }
             }, _callee7, this);
+          }));
+        }
+      }, {
+        key: "modificarProducto",
+        value: function modificarProducto(producto) {
+          return Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"])(this, void 0, void 0, /*#__PURE__*/regeneratorRuntime.mark(function _callee8() {
+            var modal;
+            return regeneratorRuntime.wrap(function _callee8$(_context8) {
+              while (1) {
+                switch (_context8.prev = _context8.next) {
+                  case 0:
+                    _context8.next = 2;
+                    return this.modalController.create({
+                      component: _modificar_producto_modificar_producto_component__WEBPACK_IMPORTED_MODULE_5__["ModificarProductoComponent"],
+                      cssClass: 'stack-modal',
+                      showBackdrop: true,
+                      componentProps: {
+                        'producto': producto
+                      }
+                    });
+
+                  case 2:
+                    modal = _context8.sent;
+                    _context8.next = 5;
+                    return modal.present();
+
+                  case 5:
+                    return _context8.abrupt("return", _context8.sent);
+
+                  case 6:
+                  case "end":
+                    return _context8.stop();
+                }
+              }
+            }, _callee8, this);
           }));
         }
       }]);

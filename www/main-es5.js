@@ -1,3 +1,9 @@
+function _createForOfIteratorHelper(o, allowArrayLike) { var it; if (typeof Symbol === "undefined" || o[Symbol.iterator] == null) { if (Array.isArray(o) || (it = _unsupportedIterableToArray(o)) || allowArrayLike && o && typeof o.length === "number") { if (it) o = it; var i = 0; var F = function F() {}; return { s: F, n: function n() { if (i >= o.length) return { done: true }; return { done: false, value: o[i++] }; }, e: function e(_e) { throw _e; }, f: F }; } throw new TypeError("Invalid attempt to iterate non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); } var normalCompletion = true, didErr = false, err; return { s: function s() { it = o[Symbol.iterator](); }, n: function n() { var step = it.next(); normalCompletion = step.done; return step; }, e: function e(_e2) { didErr = true; err = _e2; }, f: function f() { try { if (!normalCompletion && it["return"] != null) it["return"](); } finally { if (didErr) throw err; } } }; }
+
+function _unsupportedIterableToArray(o, minLen) { if (!o) return; if (typeof o === "string") return _arrayLikeToArray(o, minLen); var n = Object.prototype.toString.call(o).slice(8, -1); if (n === "Object" && o.constructor) n = o.constructor.name; if (n === "Map" || n === "Set") return Array.from(o); if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return _arrayLikeToArray(o, minLen); }
+
+function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len = arr.length; for (var i = 0, arr2 = new Array(len); i < len; i++) { arr2[i] = arr[i]; } return arr2; }
+
 function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
 
 function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
@@ -132,7 +138,67 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
     /* harmony default export */
 
 
-    __webpack_exports__["default"] = "<ion-app>\r\n  <ion-router-outlet></ion-router-outlet>\r\n</ion-app>\r\n";
+    __webpack_exports__["default"] = "<ion-app>\r\n  <ion-router-outlet></ion-router-outlet>\r\n  <div style=\"color: red; padding: 10px; border: solid red 1px; position: fixed;top: 0px; left: 0px;font-weight: bold;\">\r\n    Version de desarrollo\r\n  </div>\r\n</ion-app>\r\n";
+    /***/
+  },
+
+  /***/
+  "./node_modules/raw-loader/dist/cjs.js!./src/app/modals/editar-visita/editar-visita.component.html":
+  /*!*********************************************************************************************************!*\
+    !*** ./node_modules/raw-loader/dist/cjs.js!./src/app/modals/editar-visita/editar-visita.component.html ***!
+    \*********************************************************************************************************/
+
+  /*! exports provided: default */
+
+  /***/
+  function node_modulesRawLoaderDistCjsJsSrcAppModalsEditarVisitaEditarVisitaComponentHtml(module, __webpack_exports__, __webpack_require__) {
+    "use strict";
+
+    __webpack_require__.r(__webpack_exports__);
+    /* harmony default export */
+
+
+    __webpack_exports__["default"] = "<ion-header>\r\n  <ion-toolbar style=\"text-align: center;\" color=\"primary\">\r\n    <ion-title>{{equipo?equipo:servicio?.nombreDelServicio}}</ion-title>\r\n  </ion-toolbar>\r\n</ion-header>\r\n<ion-content>\r\n  <!-- Servicios Sin productos -->\r\n    <div *ngIf=\"servicio\">\r\n      <div *ngFor = \"let campo of servicio.formulario; let i = index\">\r\n        <div *ngIf = \"campo.tipoCampo =='Select' || campo.tipoCampo =='select'\">\r\n          <ion-item>\r\n            <ion-label>{{campo.nombreCampo}}</ion-label>\r\n            <ion-select [(ngModel)] = \"respuestas[i].respuesta\" mode=\"ios\" >\r\n              <ion-select-option *ngFor = \"let campo_opciones of campo.opciones; let h = index\" [value]=\"campo_opciones.name\" >{{campo_opciones.name}}</ion-select-option>\r\n            </ion-select>\r\n          </ion-item>\r\n        </div>\r\n        <div *ngIf = \"campo.tipoCampo =='multiple' || campo.tipoCampo =='Multiple' \">\r\n          <ion-item>\r\n            <ion-label>{{campo.nombreCampo}}</ion-label>\r\n            <ion-select multiple [(ngModel)] = \"respuestas[i].respuesta\" mode=\"ios\">\r\n              <ion-select-option *ngFor = \"let campo_opciones of campo.opciones\" [value]=\"campo_opciones.name\" >{{campo_opciones.name}}</ion-select-option>\r\n            </ion-select>\r\n            </ion-item>\r\n            <div *ngIf = \"(campo.tipoCampo =='multiple' || campo.tipoCampo =='Multiple') && campo.id_campo == 30 && mostrarOtros()\">\r\n            <ion-item>\r\n                  <ion-label>Otros: </ion-label>\r\n                  <ion-input  style = \"margin-left: 10px;\" [(ngModel)] =\"otros\" mode=\"ios\"></ion-input>\r\n            </ion-item>\r\n          </div>\r\n        </div>\r\n  \r\n  \r\n        <div *ngIf = \"campo.tipoCampo == 'input'|| campo.tipoCampo =='Input'\">\r\n          <ion-item>\r\n                <ion-label>{{campo.nombreCampo}}</ion-label>\r\n                <ion-input style = \"margin-left: 10px;\" [(ngModel)] =\"respuestas[i].respuesta\" mode=\"ios\"></ion-input>\r\n          </ion-item>\r\n        </div>\r\n      </div>\r\n    </div>\r\n  \r\n    <ion-row>\r\n      <ion-col class=\"ion-text-center\">\r\n        <div>\r\n         <ion-button (click)=\"modalDissmiss()\" style=\"width: 50%\" class = \"button\">Volver</ion-button>\r\n        </div>\r\n      </ion-col>\r\n      <ion-col class=\"ion-text-center\">\r\n        <div>\r\n         <ion-button  (click)=\"guardar()\" style=\"width: 50%\" class = \"button\">Guardar</ion-button>\r\n        </div>\r\n      </ion-col>\r\n    </ion-row>\r\n\r\n  </ion-content>";
+    /***/
+  },
+
+  /***/
+  "./node_modules/raw-loader/dist/cjs.js!./src/app/modals/ver-servicio-visita/ver-servicio-visita.component.html":
+  /*!*********************************************************************************************************************!*\
+    !*** ./node_modules/raw-loader/dist/cjs.js!./src/app/modals/ver-servicio-visita/ver-servicio-visita.component.html ***!
+    \*********************************************************************************************************************/
+
+  /*! exports provided: default */
+
+  /***/
+  function node_modulesRawLoaderDistCjsJsSrcAppModalsVerServicioVisitaVerServicioVisitaComponentHtml(module, __webpack_exports__, __webpack_require__) {
+    "use strict";
+
+    __webpack_require__.r(__webpack_exports__);
+    /* harmony default export */
+
+
+    __webpack_exports__["default"] = "<ion-header>\r\n  <ion-toolbar color=\"primary\">\r\n    <ion-title>{{servicios?servicios[0].nombre_servicio:null}}</ion-title>\r\n  </ion-toolbar>\r\n</ion-header>\r\n<ion-content>\r\n  <ion-item *ngFor=\"let servicio of servicios\" (click)=\"editarServicio(servicio.id_formulario, servicio.nombre_equipo)\">\r\n    <ion-label>{{servicio.nombre_equipo}}</ion-label>\r\n  </ion-item>\r\n  <ion-row>\r\n      <ion-col class=\"ion-text-center\">\r\n        <div>\r\n         <ion-button (click)=\"modalDismiss()\" style=\"width: 50%\" class = \"button\">Volver</ion-button>\r\n        </div>\r\n      </ion-col>\r\n    </ion-row>\r\n</ion-content>";
+    /***/
+  },
+
+  /***/
+  "./node_modules/raw-loader/dist/cjs.js!./src/app/paginas/administrar-servicios/ver-servicio/modificar-producto/modificar-producto.component.html":
+  /*!*******************************************************************************************************************************************************!*\
+    !*** ./node_modules/raw-loader/dist/cjs.js!./src/app/paginas/administrar-servicios/ver-servicio/modificar-producto/modificar-producto.component.html ***!
+    \*******************************************************************************************************************************************************/
+
+  /*! exports provided: default */
+
+  /***/
+  function node_modulesRawLoaderDistCjsJsSrcAppPaginasAdministrarServiciosVerServicioModificarProductoModificarProductoComponentHtml(module, __webpack_exports__, __webpack_require__) {
+    "use strict";
+
+    __webpack_require__.r(__webpack_exports__);
+    /* harmony default export */
+
+
+    __webpack_exports__["default"] = "<ion-content>\r\n  <ion-item lines=\"full\">\r\n    <ion-label>\r\n      Estado del Puesto:\r\n    </ion-label>\r\n    <ion-select [(ngModel)]=\"opcionPredeterminada[0]\">\r\n      <ion-select-option *ngFor=\"let opcion of opcionesPuesto\" [value]=\"opcion.tipo_opcion\">{{opcion.tipo_opcion}}</ion-select-option>\r\n      <ion-select-option [value]=\"null\" >Sin Preselección</ion-select-option>\r\n    </ion-select>\r\n  </ion-item>\r\n  <ion-item lines=\"full\">\r\n    <ion-label>\r\n      Estado del Cebo:\r\n    </ion-label>\r\n    <ion-select [(ngModel)]=\"opcionPredeterminada[1]\">\r\n      <ion-select-option *ngFor=\"let opcion of opcionesCebo\" [value]=\"opcion.tipo_opcion\">{{opcion.tipo_opcion}}</ion-select-option>\r\n      <ion-select-option [value]=\"null\" >Sin Preselección</ion-select-option>\r\n    </ion-select>\r\n  </ion-item>\r\n  <ion-row>\r\n    <ion-col class=\"ion-text-center\">\r\n      <div>\r\n       <ion-button (click)=\"modalDismiss()\" style=\"width: 50%\" class = \"button\">Volver</ion-button>\r\n      </div>\r\n    </ion-col>\r\n    <ion-col class=\"ion-text-center\">\r\n      <div>\r\n       <ion-button  (click)=\"guardar()\" style=\"width: 50%\" class = \"button\">Guardar</ion-button>\r\n      </div>\r\n    </ion-col>\r\n  </ion-row>\r\n</ion-content>\r\n";
     /***/
   },
 
@@ -201,6 +267,17 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
         /*! ./login/login.module */
         "./src/app/login/login.module.ts")).then(function (m) {
           return m.LoginPageModule;
+        });
+      }
+    }, {
+      path: 'administrar-visitas',
+      loadChildren: function loadChildren() {
+        return Promise.all(
+        /*! import() | paginas-administrar-visitas-administrar-visitas-module */
+        [__webpack_require__.e("default~paginas-administrar-clientes-ver-cliente-ver-cliente-module~paginas-administrar-visitas-admi~b66acba8"), __webpack_require__.e("default~paginas-administrar-clientes-ver-cliente-ver-cliente-module~paginas-administrar-visitas-admi~5d227966"), __webpack_require__.e("paginas-administrar-visitas-administrar-visitas-module")]).then(__webpack_require__.bind(null,
+        /*! ./paginas/administrar-visitas/administrar-visitas.module */
+        "./src/app/paginas/administrar-visitas/administrar-visitas.module.ts")).then(function (m) {
+          return m.AdministrarVisitasPageModule;
         });
       }
     }];
@@ -478,15 +555,39 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
     var ngx_image_compress__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(
     /*! ngx-image-compress */
     "./node_modules/ngx-image-compress/__ivy_ngcc__/fesm2015/ngx-image-compress.js");
+    /* harmony import */
+
+
+    var _modals_editar_visita_editar_visita_component__WEBPACK_IMPORTED_MODULE_14__ = __webpack_require__(
+    /*! ./modals/editar-visita/editar-visita.component */
+    "./src/app/modals/editar-visita/editar-visita.component.ts");
+    /* harmony import */
+
+
+    var _angular_forms__WEBPACK_IMPORTED_MODULE_15__ = __webpack_require__(
+    /*! @angular/forms */
+    "./node_modules/@angular/forms/__ivy_ngcc__/fesm2015/forms.js");
+    /* harmony import */
+
+
+    var _paginas_administrar_servicios_ver_servicio_modificar_producto_modificar_producto_component__WEBPACK_IMPORTED_MODULE_16__ = __webpack_require__(
+    /*! ./paginas/administrar-servicios/ver-servicio/modificar-producto/modificar-producto.component */
+    "./src/app/paginas/administrar-servicios/ver-servicio/modificar-producto/modificar-producto.component.ts");
+    /* harmony import */
+
+
+    var _modals_ver_servicio_visita_ver_servicio_visita_component__WEBPACK_IMPORTED_MODULE_17__ = __webpack_require__(
+    /*! ./modals/ver-servicio-visita/ver-servicio-visita.component */
+    "./src/app/modals/ver-servicio-visita/ver-servicio-visita.component.ts");
 
     var AppModule = function AppModule() {
       _classCallCheck(this, AppModule);
     };
 
     AppModule = Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"])([Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["NgModule"])({
-      declarations: [_app_component__WEBPACK_IMPORTED_MODULE_6__["AppComponent"]],
-      entryComponents: [],
-      imports: [_angular_platform_browser__WEBPACK_IMPORTED_MODULE_2__["BrowserModule"], _ionic_angular__WEBPACK_IMPORTED_MODULE_3__["IonicModule"].forRoot(), _ionic_storage__WEBPACK_IMPORTED_MODULE_9__["IonicStorageModule"].forRoot(), _app_routing_module__WEBPACK_IMPORTED_MODULE_7__["AppRoutingModule"], _angular_common_http__WEBPACK_IMPORTED_MODULE_8__["HttpClientModule"], _angular_service_worker__WEBPACK_IMPORTED_MODULE_10__["ServiceWorkerModule"].register('ngsw-worker.js', {
+      declarations: [_app_component__WEBPACK_IMPORTED_MODULE_6__["AppComponent"], _modals_editar_visita_editar_visita_component__WEBPACK_IMPORTED_MODULE_14__["EditarVisitaComponent"], _paginas_administrar_servicios_ver_servicio_modificar_producto_modificar_producto_component__WEBPACK_IMPORTED_MODULE_16__["ModificarProductoComponent"], _modals_ver_servicio_visita_ver_servicio_visita_component__WEBPACK_IMPORTED_MODULE_17__["VerServicioVisitaComponent"]],
+      entryComponents: [_modals_editar_visita_editar_visita_component__WEBPACK_IMPORTED_MODULE_14__["EditarVisitaComponent"], _paginas_administrar_servicios_ver_servicio_modificar_producto_modificar_producto_component__WEBPACK_IMPORTED_MODULE_16__["ModificarProductoComponent"], _modals_ver_servicio_visita_ver_servicio_visita_component__WEBPACK_IMPORTED_MODULE_17__["VerServicioVisitaComponent"]],
+      imports: [_angular_forms__WEBPACK_IMPORTED_MODULE_15__["FormsModule"], _angular_platform_browser__WEBPACK_IMPORTED_MODULE_2__["BrowserModule"], _ionic_angular__WEBPACK_IMPORTED_MODULE_3__["IonicModule"].forRoot(), _ionic_storage__WEBPACK_IMPORTED_MODULE_9__["IonicStorageModule"].forRoot(), _app_routing_module__WEBPACK_IMPORTED_MODULE_7__["AppRoutingModule"], _angular_common_http__WEBPACK_IMPORTED_MODULE_8__["HttpClientModule"], _angular_service_worker__WEBPACK_IMPORTED_MODULE_10__["ServiceWorkerModule"].register('ngsw-worker.js', {
         enabled: _environments_environment__WEBPACK_IMPORTED_MODULE_11__["environment"].production
       })],
       providers: [_ionic_native_status_bar_ngx__WEBPACK_IMPORTED_MODULE_5__["StatusBar"], _ionic_native_splash_screen_ngx__WEBPACK_IMPORTED_MODULE_4__["SplashScreen"], ngx_image_compress__WEBPACK_IMPORTED_MODULE_13__["NgxImageCompressService"], {
@@ -641,7 +742,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
         _classCallCheck(this, ServicioLoginService);
 
         this.http = http;
-        this.apiDir = "http://192.168.0.71:3000";
+        this.apiDir = "http://157.230.90.222:3001";
         this.requestOptions = {
           headers: new _angular_common_http__WEBPACK_IMPORTED_MODULE_2__["HttpHeaders"]({
             'Content-Type': 'application/json',
@@ -682,6 +783,1038 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
     ServicioLoginService = Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"])([Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["Injectable"])({
       providedIn: 'root'
     })], ServicioLoginService);
+    /***/
+  },
+
+  /***/
+  "./src/app/modals/editar-visita/editar-visita.component.scss":
+  /*!*******************************************************************!*\
+    !*** ./src/app/modals/editar-visita/editar-visita.component.scss ***!
+    \*******************************************************************/
+
+  /*! exports provided: default */
+
+  /***/
+  function srcAppModalsEditarVisitaEditarVisitaComponentScss(module, __webpack_exports__, __webpack_require__) {
+    "use strict";
+
+    __webpack_require__.r(__webpack_exports__);
+    /* harmony default export */
+
+
+    __webpack_exports__["default"] = "\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6IiIsImZpbGUiOiJzcmMvYXBwL21vZGFscy9lZGl0YXItdmlzaXRhL2VkaXRhci12aXNpdGEuY29tcG9uZW50LnNjc3MifQ== */";
+    /***/
+  },
+
+  /***/
+  "./src/app/modals/editar-visita/editar-visita.component.ts":
+  /*!*****************************************************************!*\
+    !*** ./src/app/modals/editar-visita/editar-visita.component.ts ***!
+    \*****************************************************************/
+
+  /*! exports provided: EditarVisitaComponent */
+
+  /***/
+  function srcAppModalsEditarVisitaEditarVisitaComponentTs(module, __webpack_exports__, __webpack_require__) {
+    "use strict";
+
+    __webpack_require__.r(__webpack_exports__);
+    /* harmony export (binding) */
+
+
+    __webpack_require__.d(__webpack_exports__, "EditarVisitaComponent", function () {
+      return EditarVisitaComponent;
+    });
+    /* harmony import */
+
+
+    var tslib__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(
+    /*! tslib */
+    "./node_modules/tslib/tslib.es6.js");
+    /* harmony import */
+
+
+    var _angular_core__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(
+    /*! @angular/core */
+    "./node_modules/@angular/core/__ivy_ngcc__/fesm2015/core.js");
+    /* harmony import */
+
+
+    var _ionic_angular__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(
+    /*! @ionic/angular */
+    "./node_modules/@ionic/angular/__ivy_ngcc__/fesm2015/ionic-angular.js");
+    /* harmony import */
+
+
+    var src_app_paginas_administrar_servicios_servicios_api_servicios_service__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(
+    /*! src/app/paginas/administrar-servicios/servicios/api-servicios.service */
+    "./src/app/paginas/administrar-servicios/servicios/api-servicios.service.ts");
+    /* harmony import */
+
+
+    var src_app_paginas_programar_visita_servicios_api_visitas_service__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(
+    /*! src/app/paginas/programar-visita/servicios/api-visitas.service */
+    "./src/app/paginas/programar-visita/servicios/api-visitas.service.ts");
+
+    var EditarVisitaComponent = /*#__PURE__*/function () {
+      function EditarVisitaComponent(navParams, apiServicios, apiVisitas, modalcontroller) {
+        _classCallCheck(this, EditarVisitaComponent);
+
+        this.navParams = navParams;
+        this.apiServicios = apiServicios;
+        this.apiVisitas = apiVisitas;
+        this.modalcontroller = modalcontroller;
+      }
+
+      _createClass(EditarVisitaComponent, [{
+        key: "ngOnInit",
+        value: function ngOnInit() {
+          var _this5 = this;
+
+          this.id_servicio = this.navParams.get('id_servicio');
+          this.id_visita = this.navParams.get('id_visita');
+          this.id_formulario = this.navParams.get('id_formulario');
+
+          if (this.navParams.get('equipo')) {
+            this.equipo = this.navParams.get('equipo');
+          }
+
+          console.log(this.id_formulario);
+          this.apiVisitas.getRespuestas(this.id_formulario).then(function (resp) {
+            _this5.respuestas = resp.respuestas;
+            console.log(_this5.respuestas);
+
+            _this5.apiServicios.ver_servicio(_this5.id_servicio).subscribe(function (resp) {
+              _this5.servicio = resp.result;
+
+              var _loop = function _loop(index) {
+                var element = _this5.servicio.formulario[index];
+
+                if (element.tipoCampo.toLowerCase() == 'multiple' && element.id_campo == 30) {
+                  lastElement = _this5.respuestas[index].respuesta.split(' - ')[_this5.respuestas[index].respuesta.split(' - ').length - 1];
+
+                  if (!element.opciones.find(function (opcion) {
+                    return opcion.name == lastElement;
+                  })) {
+                    _this5.otros = lastElement;
+                  }
+
+                  aux = _this5.respuestas[index].respuesta;
+                  _this5.respuestas[index].respuesta = [];
+
+                  for (var index2 = 0; index2 < aux.split(' - ').length; index2++) {
+                    var _element = aux.split(' - ')[index2];
+
+                    if (!(_element == "")) {
+                      _this5.respuestas[index].respuesta[index2] = _element;
+                    }
+                  }
+
+                  if (!element.opciones.find(function (opcion) {
+                    return opcion.name == _this5.respuestas[index].respuesta[_this5.respuestas[index].respuesta.length - 1];
+                  })) {
+                    _this5.respuestas[index].respuesta[_this5.respuestas[index].respuesta.length - 1] = 'Otros';
+                  }
+                }
+
+                if (element.tipoCampo.toLowerCase() == 'multiple' && element.id_campo != 30) {
+                  aux = _this5.respuestas[index].respuesta;
+                  _this5.respuestas[index].respuesta = [];
+
+                  for (var _index2 = 0; _index2 < aux.split(' - ').length; _index2++) {
+                    var _element2 = aux.split(' - ')[_index2];
+
+                    if (!(_element2 == "")) {
+                      _this5.respuestas[index].respuesta[_index2] = _element2;
+                    }
+                  }
+
+                  if (_this5.respuestas[index].respuesta.length == 1) {}
+                }
+              };
+
+              for (var index = 0; index < _this5.servicio.formulario.length; index++) {
+                var lastElement;
+                var aux;
+                var aux;
+
+                _loop(index);
+              }
+
+              console.log(_this5.servicio);
+
+              var indexRespId55 = _this5.respuestas.findIndex(function (respuesta) {
+                return respuesta.id_campo == 55;
+              });
+
+              if (_this5.respuestas[indexRespId55]) {
+                _this5.respuestas[indexRespId55].respuesta = _this5.servicio.listaProductos.find(function (producto) {
+                  return producto.id_producto == _this5.respuestas[indexRespId55].respuesta;
+                }).tipo_producto;
+              }
+
+              var indexRespId70 = _this5.respuestas.findIndex(function (respuesta) {
+                return respuesta.id_campo == 70;
+              });
+
+              if (_this5.respuestas[indexRespId70]) {
+                var aux = _this5.respuestas[indexRespId70];
+                var arrayAux = [];
+
+                var _loop2 = function _loop2(_index) {
+                  arrayAux.push(_this5.servicio.listaProductos.find(function (producto) {
+                    return producto.id_producto == _this5.respuestas[indexRespId70].respuesta[_index];
+                  }).tipo_producto);
+                };
+
+                for (var _index = 0; _index < _this5.respuestas[indexRespId70].respuesta.length; _index++) {
+                  _loop2(_index);
+                }
+
+                _this5.respuestas[indexRespId70].respuesta = arrayAux;
+              }
+
+              console.log(_this5.respuestas);
+            });
+          })["catch"](function (err) {
+            console.warn(err);
+          });
+        }
+      }, {
+        key: "modalDissmiss",
+        value: function modalDissmiss() {
+          this.modalcontroller.dismiss();
+        }
+      }, {
+        key: "prueba1",
+        value: function prueba1(campo) {
+          console.log(campo);
+        }
+      }, {
+        key: "prueba",
+        value: function prueba() {
+          console.log(this.respuestas);
+        }
+      }, {
+        key: "cambio",
+        value: function cambio(respuesta, i) {
+          this.respuestas[i].respuesta = respuesta.toString();
+        }
+      }, {
+        key: "guardar",
+        value: function guardar() {
+          var _this6 = this;
+
+          if (this.respuestas.find(function (respuesta) {
+            return respuesta.id_campo == 30;
+          })) {
+            var auxIndex = this.respuestas.findIndex(function (respuesta) {
+              return respuesta.id_campo == 30;
+            });
+
+            if (this.respuestas[auxIndex].respuesta.includes('Otros')) {
+              this.respuestas[auxIndex].respuesta.splice(this.respuestas[auxIndex].respuesta.length - 1, 1, this.otros);
+            }
+          }
+
+          for (var index = 0; index < this.servicio.formulario.length; index++) {
+            var element = this.servicio.formulario[index];
+
+            if (element.tipoCampo.toLowerCase() == 'multiple') {
+              var aux = this.respuestas[index].respuesta;
+              var cadenaFinal;
+
+              for (var index2 = 0; index2 < aux.length; index2++) {
+                var cadena = aux[index2];
+                console.log(cadena);
+
+                if (index2 == 0) {
+                  console.log('5');
+                  cadenaFinal = cadena;
+                } else {
+                  console.log('6');
+                  cadenaFinal = cadenaFinal + ' - ' + cadena;
+                }
+              }
+
+              this.respuestas[index].respuesta = cadenaFinal;
+            }
+
+            var stringAux;
+
+            if (element.nombreCampo == 'Tipo de producto') {
+              var _loop3 = function _loop3(_index3) {
+                var nombreProducto = _this6.respuestas[index].respuesta.split(' - ')[_index3];
+
+                console.log(nombreProducto);
+                aux = _this6.servicio.listaProductos.find(function (producto) {
+                  return producto.nombre_producto.toLowerCase() == nombreProducto.toLowerCase();
+                });
+
+                if (!aux) {
+                  aux = _this6.servicio.listaProductos.find(function (producto) {
+                    return producto.tipo_producto.toLowerCase() == nombreProducto.toLowerCase();
+                  });
+                }
+
+                if (_index3 == 0) {
+                  stringAux = aux.id_producto.toString();
+                } else {
+                  stringAux = stringAux + ' - ' + aux.id_producto.toString();
+                }
+              };
+
+              for (var _index3 = 0; _index3 < this.respuestas[index].respuesta.split(' - ').length; _index3++) {
+                var aux;
+
+                _loop3(_index3);
+              }
+
+              this.respuestas[index].respuesta = stringAux;
+            }
+          }
+
+          this.apiVisitas.cambiarRespuestas(this.respuestas).then(function (resp) {
+            _this6.modalDissmiss();
+          });
+        }
+      }, {
+        key: "mostrarOtros",
+        value: function mostrarOtros() {
+          var aux = this.respuestas.find(function (respuesta) {
+            return respuesta.id_campo == 30;
+          });
+          return aux.respuesta.includes('Otros');
+        }
+      }]);
+
+      return EditarVisitaComponent;
+    }();
+
+    EditarVisitaComponent.ctorParameters = function () {
+      return [{
+        type: _ionic_angular__WEBPACK_IMPORTED_MODULE_2__["NavParams"]
+      }, {
+        type: src_app_paginas_administrar_servicios_servicios_api_servicios_service__WEBPACK_IMPORTED_MODULE_3__["ApiServiciosService"]
+      }, {
+        type: src_app_paginas_programar_visita_servicios_api_visitas_service__WEBPACK_IMPORTED_MODULE_4__["ApiVisitasService"]
+      }, {
+        type: _ionic_angular__WEBPACK_IMPORTED_MODULE_2__["ModalController"]
+      }];
+    };
+
+    EditarVisitaComponent = Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"])([Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["Component"])({
+      selector: 'app-editar-visita',
+      template: Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__importDefault"])(__webpack_require__(
+      /*! raw-loader!./editar-visita.component.html */
+      "./node_modules/raw-loader/dist/cjs.js!./src/app/modals/editar-visita/editar-visita.component.html"))["default"],
+      styles: [Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__importDefault"])(__webpack_require__(
+      /*! ./editar-visita.component.scss */
+      "./src/app/modals/editar-visita/editar-visita.component.scss"))["default"]]
+    })], EditarVisitaComponent);
+    /***/
+  },
+
+  /***/
+  "./src/app/modals/ver-servicio-visita/ver-servicio-visita.component.scss":
+  /*!*******************************************************************************!*\
+    !*** ./src/app/modals/ver-servicio-visita/ver-servicio-visita.component.scss ***!
+    \*******************************************************************************/
+
+  /*! exports provided: default */
+
+  /***/
+  function srcAppModalsVerServicioVisitaVerServicioVisitaComponentScss(module, __webpack_exports__, __webpack_require__) {
+    "use strict";
+
+    __webpack_require__.r(__webpack_exports__);
+    /* harmony default export */
+
+
+    __webpack_exports__["default"] = "\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6IiIsImZpbGUiOiJzcmMvYXBwL21vZGFscy92ZXItc2VydmljaW8tdmlzaXRhL3Zlci1zZXJ2aWNpby12aXNpdGEuY29tcG9uZW50LnNjc3MifQ== */";
+    /***/
+  },
+
+  /***/
+  "./src/app/modals/ver-servicio-visita/ver-servicio-visita.component.ts":
+  /*!*****************************************************************************!*\
+    !*** ./src/app/modals/ver-servicio-visita/ver-servicio-visita.component.ts ***!
+    \*****************************************************************************/
+
+  /*! exports provided: VerServicioVisitaComponent */
+
+  /***/
+  function srcAppModalsVerServicioVisitaVerServicioVisitaComponentTs(module, __webpack_exports__, __webpack_require__) {
+    "use strict";
+
+    __webpack_require__.r(__webpack_exports__);
+    /* harmony export (binding) */
+
+
+    __webpack_require__.d(__webpack_exports__, "VerServicioVisitaComponent", function () {
+      return VerServicioVisitaComponent;
+    });
+    /* harmony import */
+
+
+    var tslib__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(
+    /*! tslib */
+    "./node_modules/tslib/tslib.es6.js");
+    /* harmony import */
+
+
+    var _angular_core__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(
+    /*! @angular/core */
+    "./node_modules/@angular/core/__ivy_ngcc__/fesm2015/core.js");
+    /* harmony import */
+
+
+    var _ionic_angular__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(
+    /*! @ionic/angular */
+    "./node_modules/@ionic/angular/__ivy_ngcc__/fesm2015/ionic-angular.js");
+    /* harmony import */
+
+
+    var src_app_paginas_administrar_servicios_servicios_api_servicios_service__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(
+    /*! src/app/paginas/administrar-servicios/servicios/api-servicios.service */
+    "./src/app/paginas/administrar-servicios/servicios/api-servicios.service.ts");
+    /* harmony import */
+
+
+    var src_app_paginas_programar_visita_servicios_api_visitas_service__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(
+    /*! src/app/paginas/programar-visita/servicios/api-visitas.service */
+    "./src/app/paginas/programar-visita/servicios/api-visitas.service.ts");
+    /* harmony import */
+
+
+    var _editar_visita_editar_visita_component__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(
+    /*! ../editar-visita/editar-visita.component */
+    "./src/app/modals/editar-visita/editar-visita.component.ts");
+
+    var VerServicioVisitaComponent = /*#__PURE__*/function () {
+      function VerServicioVisitaComponent(navParams, apiServicios, apiVisitas, modalController) {
+        _classCallCheck(this, VerServicioVisitaComponent);
+
+        this.navParams = navParams;
+        this.apiServicios = apiServicios;
+        this.apiVisitas = apiVisitas;
+        this.modalController = modalController;
+      }
+
+      _createClass(VerServicioVisitaComponent, [{
+        key: "ngOnInit",
+        value: function ngOnInit() {
+          var _this7 = this;
+
+          this.id_servicio = this.navParams.get('id_servicio');
+          var aux = [];
+          new Promise(function (resolve, reject) {
+            var _loop4 = function _loop4(index) {
+              var servicio = _this7.navParams.get('visita').servicios[index];
+
+              if ((servicio.id_servicio == 20 || servicio.id_servicio == 22) && servicio.id_servicio == _this7.id_servicio) {
+                _this7.apiVisitas.getRespuestas(servicio.id_formulario).then(function (resp) {
+                  servicio.respuestas = resp.respuestas;
+
+                  _this7.apiVisitas.getEquipo(servicio.respuestas[0].id_equipo).then(function (response) {
+                    if (response.result[0]) {
+                      servicio.nombre_equipo = response.result[0].nombre_equipo;
+                    }
+                  });
+                })["catch"](function (err) {
+                  console.error(err);
+                });
+
+                aux.push(servicio);
+              }
+
+              if (index == _this7.navParams.get('visita').servicios.length - 1) {
+                resolve('');
+              }
+            };
+
+            for (var index = 0; index < _this7.navParams.get('visita').servicios.length; index++) {
+              _loop4(index);
+            }
+          }).then(function () {
+            _this7.servicios = aux;
+            console.log(_this7.servicios);
+          })["catch"](function (err) {
+            console.error(err);
+          });
+        }
+      }, {
+        key: "ngOnDestroy",
+        value: function ngOnDestroy() {}
+      }, {
+        key: "editarServicio",
+        value: function editarServicio(id_formulario, equipo) {
+          return Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"])(this, void 0, void 0, /*#__PURE__*/regeneratorRuntime.mark(function _callee() {
+            var modal;
+            return regeneratorRuntime.wrap(function _callee$(_context) {
+              while (1) {
+                switch (_context.prev = _context.next) {
+                  case 0:
+                    _context.next = 2;
+                    return this.modalController.create({
+                      component: _editar_visita_editar_visita_component__WEBPACK_IMPORTED_MODULE_5__["EditarVisitaComponent"],
+                      componentProps: {
+                        id_servicio: this.id_servicio,
+                        id_visita: this.navParams.get('visita').id_visita,
+                        id_formulario: id_formulario,
+                        equipo: equipo
+                      }
+                    });
+
+                  case 2:
+                    modal = _context.sent;
+                    _context.next = 5;
+                    return modal.present();
+
+                  case 5:
+                  case "end":
+                    return _context.stop();
+                }
+              }
+            }, _callee, this);
+          }));
+        }
+      }, {
+        key: "modalDismiss",
+        value: function modalDismiss() {
+          this.modalController.dismiss();
+        }
+      }]);
+
+      return VerServicioVisitaComponent;
+    }();
+
+    VerServicioVisitaComponent.ctorParameters = function () {
+      return [{
+        type: _ionic_angular__WEBPACK_IMPORTED_MODULE_2__["NavParams"]
+      }, {
+        type: src_app_paginas_administrar_servicios_servicios_api_servicios_service__WEBPACK_IMPORTED_MODULE_3__["ApiServiciosService"]
+      }, {
+        type: src_app_paginas_programar_visita_servicios_api_visitas_service__WEBPACK_IMPORTED_MODULE_4__["ApiVisitasService"]
+      }, {
+        type: _ionic_angular__WEBPACK_IMPORTED_MODULE_2__["ModalController"]
+      }];
+    };
+
+    VerServicioVisitaComponent = Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"])([Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["Component"])({
+      selector: 'app-ver-servicio-visita',
+      template: Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__importDefault"])(__webpack_require__(
+      /*! raw-loader!./ver-servicio-visita.component.html */
+      "./node_modules/raw-loader/dist/cjs.js!./src/app/modals/ver-servicio-visita/ver-servicio-visita.component.html"))["default"],
+      styles: [Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__importDefault"])(__webpack_require__(
+      /*! ./ver-servicio-visita.component.scss */
+      "./src/app/modals/ver-servicio-visita/ver-servicio-visita.component.scss"))["default"]]
+    })], VerServicioVisitaComponent);
+    /***/
+  },
+
+  /***/
+  "./src/app/paginas/administrar-servicios/servicios/api-servicios.service.ts":
+  /*!**********************************************************************************!*\
+    !*** ./src/app/paginas/administrar-servicios/servicios/api-servicios.service.ts ***!
+    \**********************************************************************************/
+
+  /*! exports provided: ApiServiciosService */
+
+  /***/
+  function srcAppPaginasAdministrarServiciosServiciosApiServiciosServiceTs(module, __webpack_exports__, __webpack_require__) {
+    "use strict";
+
+    __webpack_require__.r(__webpack_exports__);
+    /* harmony export (binding) */
+
+
+    __webpack_require__.d(__webpack_exports__, "ApiServiciosService", function () {
+      return ApiServiciosService;
+    });
+    /* harmony import */
+
+
+    var tslib__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(
+    /*! tslib */
+    "./node_modules/tslib/tslib.es6.js");
+    /* harmony import */
+
+
+    var _angular_core__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(
+    /*! @angular/core */
+    "./node_modules/@angular/core/__ivy_ngcc__/fesm2015/core.js");
+    /* harmony import */
+
+
+    var _angular_common_http__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(
+    /*! @angular/common/http */
+    "./node_modules/@angular/common/__ivy_ngcc__/fesm2015/http.js");
+    /* harmony import */
+
+
+    var _environments_version__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(
+    /*! ../../../../environments/version */
+    "./src/environments/version.ts");
+
+    var ApiServiciosService = /*#__PURE__*/function () {
+      function ApiServiciosService(http) {
+        _classCallCheck(this, ApiServiciosService);
+
+        this.http = http;
+        this.apiDir = "http://157.230.90.222:3001";
+        this.requestOptions = {
+          headers: new _angular_common_http__WEBPACK_IMPORTED_MODULE_2__["HttpHeaders"]({
+            'Content-Type': 'application/json',
+            'version': _environments_version__WEBPACK_IMPORTED_MODULE_3__["version"]
+          })
+        };
+      }
+
+      _createClass(ApiServiciosService, [{
+        key: "crear_servicio",
+        value: function crear_servicio(parametros) {
+          console.log(parametros);
+          return this.http.post(this.apiDir + '/servicios/crear', parametros, this.requestOptions);
+        }
+      }, {
+        key: "mostrar_servicios",
+        value: function mostrar_servicios() {
+          return this.http.get(this.apiDir + '/servicios', this.requestOptions);
+        }
+      }, {
+        key: "getZpl",
+        value: function getZpl(parametros) {
+          return this.http.post(this.apiDir + '/servicios/imprimir', parametros, this.requestOptions);
+        }
+      }, {
+        key: "alta_producto",
+        value: function alta_producto(parametros) {
+          return this.http.post(this.apiDir + '/productos/crear', parametros, this.requestOptions);
+        }
+      }, {
+        key: "alta_workstation",
+        value: function alta_workstation(parametros) {
+          return this.http.post(this.apiDir + '/servicios/equipos/crear', parametros, this.requestOptions);
+        }
+      }, {
+        key: "alta_Grupo_workstation",
+        value: function alta_Grupo_workstation(parametros) {
+          return this.http.post(this.apiDir + '/servicios/gruposEquipos/crear', parametros, this.requestOptions);
+        }
+      }, {
+        key: "eliminar_Grupo_workstation",
+        value: function eliminar_Grupo_workstation(id_producto) {
+          console.log('delete2', id_producto);
+          return this.http.post(this.apiDir + '/servicios/eliminarGrupoEquipos/' + id_producto, null, this.requestOptions);
+        }
+      }, {
+        key: "modificar_Grupo_workstation",
+        value: function modificar_Grupo_workstation(parametros) {
+          return this.http.post(this.apiDir + '/servicios/gruposEquipos/crear', parametros, this.requestOptions);
+        }
+      }, {
+        key: "ver_servicio",
+        value: function ver_servicio(id_servicio) {
+          return this.http.get(this.apiDir + '/servicios/id/' + id_servicio, this.requestOptions);
+        }
+      }, {
+        key: "baja_producto",
+        value: function baja_producto(id_producto) {
+          return this.http.post(this.apiDir + '/productos/eliminar/' + id_producto, null, this.requestOptions);
+        }
+      }, {
+        key: "baja_servicio",
+        value: function baja_servicio(id_servicio) {
+          return this.http.post(this.apiDir + '/servicios/eliminar/' + id_servicio, null, this.requestOptions);
+        }
+      }, {
+        key: "update_servicio",
+        value: function update_servicio(parametros) {
+          // console.log(parametros)
+          return this.http.post(this.apiDir + '/servicios/update', parametros, this.requestOptions);
+        }
+      }, {
+        key: "baja_opcion",
+        value: function baja_opcion(id) {
+          return this.http.post(this.apiDir + '/servicios/opcion/delete/', {
+            id: id
+          }, this.requestOptions);
+        }
+      }, {
+        key: "ver_opciones_producto",
+        value: function ver_opciones_producto(id_servicio) {
+          console.log(id_servicio);
+          return this.http.get(this.apiDir + '/servicios/producto/opciones/' + id_servicio, this.requestOptions);
+        }
+      }, {
+        key: "producto_update",
+        value: function producto_update(producto) {
+          console.log(producto);
+          return this.http.post(this.apiDir + '/productos/actualizar', producto, this.requestOptions);
+        }
+      }, {
+        key: "getProductos",
+        value: function getProductos() {
+          return this.http.get(this.apiDir + '/productos/', this.requestOptions);
+        }
+      }]);
+
+      return ApiServiciosService;
+    }();
+
+    ApiServiciosService.ctorParameters = function () {
+      return [{
+        type: _angular_common_http__WEBPACK_IMPORTED_MODULE_2__["HttpClient"]
+      }];
+    };
+
+    ApiServiciosService = Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"])([Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["Injectable"])({
+      providedIn: 'root'
+    })], ApiServiciosService);
+    /***/
+  },
+
+  /***/
+  "./src/app/paginas/administrar-servicios/ver-servicio/modificar-producto/modificar-producto.component.scss":
+  /*!*****************************************************************************************************************!*\
+    !*** ./src/app/paginas/administrar-servicios/ver-servicio/modificar-producto/modificar-producto.component.scss ***!
+    \*****************************************************************************************************************/
+
+  /*! exports provided: default */
+
+  /***/
+  function srcAppPaginasAdministrarServiciosVerServicioModificarProductoModificarProductoComponentScss(module, __webpack_exports__, __webpack_require__) {
+    "use strict";
+
+    __webpack_require__.r(__webpack_exports__);
+    /* harmony default export */
+
+
+    __webpack_exports__["default"] = "\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6IiIsImZpbGUiOiJzcmMvYXBwL3BhZ2luYXMvYWRtaW5pc3RyYXItc2VydmljaW9zL3Zlci1zZXJ2aWNpby9tb2RpZmljYXItcHJvZHVjdG8vbW9kaWZpY2FyLXByb2R1Y3RvLmNvbXBvbmVudC5zY3NzIn0= */";
+    /***/
+  },
+
+  /***/
+  "./src/app/paginas/administrar-servicios/ver-servicio/modificar-producto/modificar-producto.component.ts":
+  /*!***************************************************************************************************************!*\
+    !*** ./src/app/paginas/administrar-servicios/ver-servicio/modificar-producto/modificar-producto.component.ts ***!
+    \***************************************************************************************************************/
+
+  /*! exports provided: ModificarProductoComponent */
+
+  /***/
+  function srcAppPaginasAdministrarServiciosVerServicioModificarProductoModificarProductoComponentTs(module, __webpack_exports__, __webpack_require__) {
+    "use strict";
+
+    __webpack_require__.r(__webpack_exports__);
+    /* harmony export (binding) */
+
+
+    __webpack_require__.d(__webpack_exports__, "ModificarProductoComponent", function () {
+      return ModificarProductoComponent;
+    });
+    /* harmony import */
+
+
+    var tslib__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(
+    /*! tslib */
+    "./node_modules/tslib/tslib.es6.js");
+    /* harmony import */
+
+
+    var _angular_core__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(
+    /*! @angular/core */
+    "./node_modules/@angular/core/__ivy_ngcc__/fesm2015/core.js");
+    /* harmony import */
+
+
+    var _ionic_angular__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(
+    /*! @ionic/angular */
+    "./node_modules/@ionic/angular/__ivy_ngcc__/fesm2015/ionic-angular.js");
+    /* harmony import */
+
+
+    var _servicios_api_servicios_service__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(
+    /*! ../../servicios/api-servicios.service */
+    "./src/app/paginas/administrar-servicios/servicios/api-servicios.service.ts");
+
+    var ModificarProductoComponent = /*#__PURE__*/function () {
+      function ModificarProductoComponent(apiServicios, navParams, modalController) {
+        var _this8 = this;
+
+        _classCallCheck(this, ModificarProductoComponent);
+
+        this.apiServicios = apiServicios;
+        this.navParams = navParams;
+        this.modalController = modalController;
+        this.opcionesCebo = [];
+        this.opcionesPuesto = [];
+        this.opcionPredeterminada = [];
+        this.producto = navParams.get('producto');
+        apiServicios.ver_opciones_producto(this.producto.id_servicio).subscribe(function (resp) {
+          var opciones;
+          console.log(resp);
+          opciones = resp.result;
+
+          var _iterator = _createForOfIteratorHelper(opciones),
+              _step;
+
+          try {
+            for (_iterator.s(); !(_step = _iterator.n()).done;) {
+              var opcion = _step.value;
+
+              if (opcion.id_campo == 56) {
+                _this8.opcionesPuesto.push(opcion);
+              } else {
+                _this8.opcionesCebo.push(opcion);
+              }
+            }
+          } catch (err) {
+            _iterator.e(err);
+          } finally {
+            _iterator.f();
+          }
+
+          if (_this8.producto.opcion_predeterminada) {
+            _this8.opcionPredeterminada[0] = _this8.producto.opcion_predeterminada.split(' - ')[0];
+            _this8.opcionPredeterminada[1] = _this8.producto.opcion_predeterminada.split(' - ')[1];
+          }
+
+          console.log(_this8.opcionPredeterminada);
+          console.log("PRODUCTO", _this8.producto);
+          console.log("CEBO", _this8.opcionesCebo);
+          console.log("PUESTO", _this8.opcionesPuesto);
+        });
+      }
+
+      _createClass(ModificarProductoComponent, [{
+        key: "ngOnInit",
+        value: function ngOnInit() {}
+      }, {
+        key: "guardar",
+        value: function guardar() {
+          var _this9 = this;
+
+          var opcionPredAux = this.opcionPredeterminada[0] + ' - ' + this.opcionPredeterminada[1];
+          console.log(opcionPredAux);
+          this.producto.opcion_predeterminada = opcionPredAux;
+          this.apiServicios.producto_update(this.producto).subscribe(function (resp) {
+            console.log(resp);
+
+            _this9.modalController.dismiss();
+          });
+        }
+      }, {
+        key: "modalDismiss",
+        value: function modalDismiss() {
+          this.modalController.dismiss();
+        }
+      }]);
+
+      return ModificarProductoComponent;
+    }();
+
+    ModificarProductoComponent.ctorParameters = function () {
+      return [{
+        type: _servicios_api_servicios_service__WEBPACK_IMPORTED_MODULE_3__["ApiServiciosService"]
+      }, {
+        type: _ionic_angular__WEBPACK_IMPORTED_MODULE_2__["NavParams"]
+      }, {
+        type: _ionic_angular__WEBPACK_IMPORTED_MODULE_2__["ModalController"]
+      }];
+    };
+
+    ModificarProductoComponent = Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"])([Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["Component"])({
+      selector: 'app-modificar-producto',
+      template: Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__importDefault"])(__webpack_require__(
+      /*! raw-loader!./modificar-producto.component.html */
+      "./node_modules/raw-loader/dist/cjs.js!./src/app/paginas/administrar-servicios/ver-servicio/modificar-producto/modificar-producto.component.html"))["default"],
+      styles: [Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__importDefault"])(__webpack_require__(
+      /*! ./modificar-producto.component.scss */
+      "./src/app/paginas/administrar-servicios/ver-servicio/modificar-producto/modificar-producto.component.scss"))["default"]]
+    })], ModificarProductoComponent);
+    /***/
+  },
+
+  /***/
+  "./src/app/paginas/programar-visita/servicios/api-visitas.service.ts":
+  /*!***************************************************************************!*\
+    !*** ./src/app/paginas/programar-visita/servicios/api-visitas.service.ts ***!
+    \***************************************************************************/
+
+  /*! exports provided: ApiVisitasService */
+
+  /***/
+  function srcAppPaginasProgramarVisitaServiciosApiVisitasServiceTs(module, __webpack_exports__, __webpack_require__) {
+    "use strict";
+
+    __webpack_require__.r(__webpack_exports__);
+    /* harmony export (binding) */
+
+
+    __webpack_require__.d(__webpack_exports__, "ApiVisitasService", function () {
+      return ApiVisitasService;
+    });
+    /* harmony import */
+
+
+    var tslib__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(
+    /*! tslib */
+    "./node_modules/tslib/tslib.es6.js");
+    /* harmony import */
+
+
+    var _angular_core__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(
+    /*! @angular/core */
+    "./node_modules/@angular/core/__ivy_ngcc__/fesm2015/core.js");
+    /* harmony import */
+
+
+    var _angular_common_http__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(
+    /*! @angular/common/http */
+    "./node_modules/@angular/common/__ivy_ngcc__/fesm2015/http.js");
+    /* harmony import */
+
+
+    var _environments_version__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(
+    /*! ../../../../environments/version */
+    "./src/environments/version.ts");
+
+    var ApiVisitasService = /*#__PURE__*/function () {
+      function ApiVisitasService(http) {
+        _classCallCheck(this, ApiVisitasService);
+
+        this.http = http;
+        this.apiDir = "http://157.230.90.222:3001";
+        this.requestOptions = {
+          headers: new _angular_common_http__WEBPACK_IMPORTED_MODULE_2__["HttpHeaders"]({
+            'Content-Type': 'application/json',
+            'version': _environments_version__WEBPACK_IMPORTED_MODULE_3__["version"]
+          })
+        };
+      }
+
+      _createClass(ApiVisitasService, [{
+        key: "listado_clientes",
+        value: function listado_clientes() {
+          return this.http.get(this.apiDir + '/clientes', this.requestOptions);
+        }
+      }, {
+        key: "listado_equipos",
+        value: function listado_equipos(id) {
+          return this.http.get(this.apiDir + '/servicios/equipos/offline/' + id, this.requestOptions);
+        }
+      }, {
+        key: "listado_equipos_id",
+        value: function listado_equipos_id(id) {
+          return this.http.get(this.apiDir + '/servicios/equipos/sucursal/' + id, this.requestOptions);
+        }
+      }, {
+        key: "informacion_cliente",
+        value: function informacion_cliente(id) {
+          return this.http.get(this.apiDir + '/clientes/id/' + id, this.requestOptions);
+        }
+      }, {
+        key: "mostrar_servicios",
+        value: function mostrar_servicios() {
+          return this.http.get(this.apiDir + '/servicios', this.requestOptions);
+        }
+      }, {
+        key: "crear_visita",
+        value: function crear_visita(parametros) {
+          return this.http.post(this.apiDir + '/visitas/crear', parametros, this.requestOptions);
+        }
+      }, {
+        key: "modificar_visita",
+        value: function modificar_visita(parametros) {
+          console.log(this.apiDir + '/visitas/update', parametros);
+          return this.http.post(this.apiDir + '/visitas/update', parametros, this.requestOptions);
+        }
+      }, {
+        key: "listado_grupoWorkstations",
+        value: function listado_grupoWorkstations(id) {
+          return this.http.get(this.apiDir + '/servicios/gruposEquipos/sucursal/' + id, this.requestOptions);
+        }
+      }, {
+        key: "getAllVisitas",
+        value: function getAllVisitas() {
+          var _this10 = this;
+
+          return new Promise(function (resolve, reject) {
+            _this10.http.get(_this10.apiDir + '/visitas/', _this10.requestOptions).subscribe(function (response) {
+              resolve(response);
+            }, function (error) {
+              reject(error);
+            });
+          });
+        }
+      }, {
+        key: "getRespuestas",
+        value: function getRespuestas(id_formulario) {
+          var _this11 = this;
+
+          return new Promise(function (resolve, reject) {
+            _this11.http.get(_this11.apiDir + '/formularios/respuestas/' + id_formulario.toString(), _this11.requestOptions).subscribe(function (response) {
+              resolve(response);
+            }, function (error) {
+              reject(error);
+            });
+          });
+        }
+      }, {
+        key: "cambiarRespuestas",
+        value: function cambiarRespuestas(respuesta) {
+          var _this12 = this;
+
+          return new Promise(function (resolve, reject) {
+            _this12.http.put(_this12.apiDir + '/formularios/respuestas', respuesta, _this12.requestOptions).subscribe(function (response) {
+              resolve(response);
+            }, function (error) {
+              reject(error);
+            });
+          });
+        }
+      }, {
+        key: "actualizar_equipo",
+        value: function actualizar_equipo(parametros) {
+          var _this13 = this;
+
+          return new Promise(function (resolve, reject) {
+            _this13.http.post(_this13.apiDir + '/servicios/equipos/update', parametros, _this13.requestOptions).subscribe(function (response) {
+              resolve(response);
+            }, function (error) {
+              reject(error);
+            });
+          });
+        }
+      }, {
+        key: "getEquipo",
+        value: function getEquipo(id_equipo) {
+          var _this14 = this;
+
+          return new Promise(function (resolve, reject) {
+            _this14.http.get(_this14.apiDir + '/servicios/equipos/' + id_equipo, _this14.requestOptions).subscribe(function (response) {
+              resolve(response);
+            }, function (error) {
+              reject(error);
+            });
+          });
+        }
+      }]);
+
+      return ApiVisitasService;
+    }();
+
+    ApiVisitasService.ctorParameters = function () {
+      return [{
+        type: _angular_common_http__WEBPACK_IMPORTED_MODULE_2__["HttpClient"]
+      }];
+    };
+
+    ApiVisitasService = Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"])([Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["Injectable"])({
+      providedIn: 'root'
+    })], ApiVisitasService);
     /***/
   },
 
@@ -743,7 +1876,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
       return version;
     });
 
-    var version = '0.0.2';
+    var version = '0.0.6';
     /***/
   },
 

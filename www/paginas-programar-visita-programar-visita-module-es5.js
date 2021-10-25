@@ -27,7 +27,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
     /* harmony default export */
 
 
-    __webpack_exports__["default"] = "<ion-content>\r\n    <!-- <ion-button (click)=\"onClick()\" expand=\"block\" fill=\"clear\" shape=\"round\">\r\n        Click me\r\n    </ion-button> -->\r\n    <ion-item style=\"margin-top: 15px;\">\r\n        <ion-label fixed style=\"text-align: center;\">Seleccionar un cliente</ion-label>\r\n        <ion-select [interfaceOptions]=\"custom\" (ionChange)=\"sucursalesCliente($event.target.value)\">\r\n            <ion-select-option  *ngFor=\"let cliente of listado_clientes\" value=\"{{cliente.id_cliente}}\">{{cliente.razon_social_cliente}}</ion-select-option>\r\n        </ion-select>\r\n    </ion-item>\r\n    \r\n    <ion-item>\r\n        <ion-label fixed style=\"text-align: center;\">Seleccionar una sucursal</ion-label>\r\n        <ion-select [interfaceOptions]=\"custom\" [disabled]=\"id_cliente_elegido == null\" (ionChange)=\"selectSucursal()\" [(ngModel)]=\"sucursal_elegida\">\r\n            <ion-select-option *ngFor=\"let sucursal of listado_sucursales_cliente\" value=\"{{sucursal.id_sucursal}}\">{{sucursal.razon_social_sucursal}}</ion-select-option>\r\n        </ion-select>\r\n    </ion-item>\r\n\r\n    <ion-item>\r\n        <ion-label fixed style=\"text-align: center;\">Seleccionar servicios a ofrecer</ion-label>\r\n        <ion-select [interfaceOptions]=\"custom\" [disabled]=\"(sucursal_elegida == null) && !equiposCargados && !workStationCargados\" [(ngModel)]=\"servicios_elegidosAux\"multiple=\"true\" (ionChange)=\"serviciosElegidosChange()\">\r\n            <ion-select-option *ngFor=\"let servicio of listado_servicios\" value=\"{{servicio.id_servicio}}\">{{servicio.nombre_servicio}}</ion-select-option>\r\n        </ion-select>\r\n    </ion-item>\r\n\r\n    <div *ngFor=\"let servicio of serviciosElegidos\" style=\"text-align: center;\">\r\n        <h2 style=\"text-align: center;\">{{servicio.nombre_servicio}}</h2>\r\n        <div *ngFor=\"let equipo of servicio.equipos\">\r\n            <ion-label fixed style=\"text-align: center;color: var(--ion-color-secondary);font-weight: bold;\">{{equipo.nombre_equipo}}</ion-label>\r\n            <ion-item style=\"margin-top: 10px;\">\r\n                <ion-label fixed style=\"text-align: center;\">Seleccionar técnico a cargo</ion-label>\r\n                <ion-select [interfaceOptions]=\"custom\" [(ngModel)]=\"equipo.tecnico\">\r\n                    <ion-select-option *ngFor=\"let tecnico of listado_tecnicos\" value=\"{{tecnico.id_tecnico}}\">{{tecnico.nombre_tecnico}} {{tecnico.apellido_tecnico}}</ion-select-option>\r\n                </ion-select>\r\n            </ion-item>\r\n        </div>\r\n    </div>\r\n    <div *ngIf=\"show\">\r\n        <div *ngFor=\"let servicio of grupoWorkStationElegidos\" style=\"text-align: center;\">\r\n            <h2 style=\"text-align: center;\">{{servicio.nombre_equipo_grupo}}</h2>\r\n            <div *ngFor=\"let equipo of servicio.equipos\">\r\n                <ion-label fixed style=\"text-align: center;color: var(--ion-color-secondary);font-weight: bold;\">{{equipo.nombre_equipo}}: {{equipo.nombre_servicio}}</ion-label>\r\n            </div>\r\n            <ion-item style=\"margin-top: 10px;\">\r\n                <ion-label fixed style=\"text-align: center;\">Seleccionar técnico a cargo</ion-label>\r\n                <ion-select [interfaceOptions]=\"custom\" [(ngModel)]=\"servicio.tecnico\">\r\n                    <ion-select-option *ngFor=\"let tecnico of listado_tecnicos\" value=\"{{tecnico.id_tecnico}}\">{{tecnico.nombre_tecnico}} {{tecnico.apellido_tecnico}}</ion-select-option>\r\n                </ion-select>\r\n            </ion-item>\r\n        </div>\r\n    </div>\r\n\r\n\r\n    <!-- <ion-item>\r\n        <ion-label fixed style=\"text-align: center;\">Seleccionar técnico a cargo</ion-label>\r\n        <ion-select [(ngModel)]=\"tecnico_elegido\">\r\n            <ion-select-option *ngFor=\"let tecnico of listado_tecnicos\" value=\"{{tecnico.id_tecnico}}\">{{tecnico.nombre_tecnico}} {{tecnico.apellido_tecnico}}</ion-select-option>\r\n        </ion-select>\r\n    </ion-item> -->\r\n\r\n    <ion-item>\r\n        <ion-label fixed style=\"text-align: center;\">Elegir una fecha</ion-label>\r\n        <ion-datetime [(ngModel)]=\"fecha_elegida\" [doneText]=\"'Listo'\"\r\n        [cancelText]=\"'Cancelar'\" [monthNames]=\"monthNames\" [dayNames]=\"dayNames\" displayFormat=\"DDDD D MMMM YYYY HH:mm\" min=\"{{fecha_actual}}\" max=\"2022\" value=\"{{fecha_actual}}\"></ion-datetime>\r\n    </ion-item>\r\n\r\n    <div style=\"width: 100%; text-align: center;\">\r\n        <ion-button (click)=\"programarVisita()\">Agendar</ion-button>\r\n    </div>\r\n\r\n        \r\n    <div style=\"margin-top: 25px\">\r\n        <img class=\"imagen_empresa\" src='../../../assets/LogoCPA-01.png'>\r\n    </div>\r\n\r\n</ion-content>\r\n";
+    __webpack_exports__["default"] = "<ion-content>\r\n    <!-- <ion-button (click)=\"onClick()\" expand=\"block\" fill=\"clear\" shape=\"round\">\r\n        Click me\r\n    </ion-button> -->\r\n    <ion-item style=\"margin-top: 15px;\">\r\n        <ion-label fixed style=\"text-align: center;\">Seleccionar un cliente</ion-label>\r\n        <ion-select [interfaceOptions]=\"custom\" (ionChange)=\"sucursalesCliente($event.target.value)\">\r\n            <ion-select-option  *ngFor=\"let cliente of listado_clientes\" value=\"{{cliente.id_cliente}}\">{{cliente.razon_social_cliente}}</ion-select-option>\r\n        </ion-select>\r\n    </ion-item>\r\n    \r\n    <ion-item>\r\n        <ion-label fixed style=\"text-align: center;\">Seleccionar una sucursal</ion-label>\r\n        <ion-select [interfaceOptions]=\"custom\" [disabled]=\"id_cliente_elegido == null\" (ionChange)=\"selectSucursal()\" [(ngModel)]=\"sucursal_elegida\">\r\n            <ion-select-option *ngFor=\"let sucursal of listado_sucursales_cliente\" value=\"{{sucursal.id_sucursal}}\">{{sucursal.razon_social_sucursal}}</ion-select-option>\r\n        </ion-select>\r\n    </ion-item>\r\n\r\n    <ion-item>\r\n        <ion-label fixed style=\"text-align: center;\">Seleccionar servicios a ofrecer</ion-label>\r\n        <ion-select [interfaceOptions]=\"custom\" [disabled]=\"(sucursal_elegida == null) && !equiposCargados && !workStationCargados\" [(ngModel)]=\"servicios_elegidosAux\"multiple=\"true\" (ionChange)=\"serviciosElegidosChange()\">\r\n            <ion-select-option *ngFor=\"let servicio of listado_servicios\" value=\"{{servicio.id_servicio}}\">{{servicio.nombre_servicio}}</ion-select-option>\r\n        </ion-select>\r\n    </ion-item>\r\n\r\n    <div *ngFor=\"let servicio of serviciosElegidos\" style=\"text-align: center;\">\r\n        <h2 style=\"text-align: center;\">{{servicio.nombre_servicio}}</h2>\r\n        <div *ngFor=\"let equipo of servicio.equipos\">\r\n            <ion-label fixed style=\"text-align: center;color: var(--ion-color-secondary);font-weight: bold;\">{{equipo.nombre_equipo}}</ion-label>\r\n            <ion-item style=\"margin-top: 10px;\">\r\n                <ion-label fixed style=\"text-align: center;\">Seleccionar técnico a cargo</ion-label>\r\n                <ion-select [interfaceOptions]=\"custom\" [(ngModel)]=\"equipo.tecnico\">\r\n                    <ion-select-option *ngFor=\"let tecnico of listado_tecnicos\" value=\"{{tecnico.id_tecnico}}\">{{tecnico.nombre_tecnico}} {{tecnico.apellido_tecnico}}</ion-select-option>\r\n                </ion-select>\r\n            </ion-item>\r\n        </div>\r\n    </div>\r\n    <div *ngIf=\"show\">\r\n        <div *ngFor=\"let servicio of grupoWorkStationElegidos; let h = index\" style=\"text-align: center;\">\r\n            <h2 style=\"text-align: center;\">{{servicio.nombre_equipo_grupo}}</h2>\r\n            <ion-item style=\"margin-top: 10px;\" (click)=\"presentAlertCheckbox(servicio, h, servicio.tecnico)\">\r\n                <ion-label style=\"width: fit-content;\" fixed style=\"text-align: center;\">Seleccionar técnicos a cargo</ion-label>\r\n                <p *ngFor=\"let tecnico of servicio.tecnico\">{{tecnico.nombre_tecnico}}, </p>\r\n            </ion-item>\r\n\r\n            <div>\r\n                <ion-row>\r\n                    <ion-col offset=3 size=\"3\" style=\"text-align:start;\">\r\n                        <ion-label style=\"font-weight: bold;\">Equipo</ion-label>\r\n                    </ion-col>\r\n                    <ion-col *ngFor=\"let tecnico of servicio.tecnico\" [size]=\"3/servicio.tecnico.length\">\r\n                        {{tecnico.nombre_tecnico}}\r\n                    </ion-col>\r\n                </ion-row>\r\n            </div>\r\n            <div style=\"min-width:50%;\" *ngFor=\"let equipo of servicio.equipos ; let i = index\">\r\n                <ion-row>\r\n                    <ion-col offset=3 size=\"3\" style=\"text-align:start; border-bottom: 1px solid black;\">\r\n                        <ion-label style=\"color: var(--ion-color-secondary);font-weight: bold;\">{{equipo.nombre_equipo}}: {{equipo.nombre_servicio}}</ion-label>\r\n                    </ion-col>\r\n                    <ion-col style=\"border-bottom: 1px solid;\" *ngFor=\"let tecnico of servicio.tecnico; let t = index\" [size]=\"3/servicio.tecnico.length\">\r\n                        <ion-checkbox (click)=\"prueba(servicio, t,h, i)\" [(ngModel)]=\"tecnico.equipos[h][i].selected\" [checked]=\"servicio.tecnico.length == 1\" ></ion-checkbox>\r\n                    </ion-col>\r\n                </ion-row>\r\n            </div>\r\n        </div>\r\n    </div>\r\n\r\n\r\n    <!-- <ion-item>\r\n        <ion-label fixed style=\"text-align: center;\">Seleccionar técnico a cargo</ion-label>\r\n        <ion-select [(ngModel)]=\"tecnico_elegido\">\r\n            <ion-select-option *ngFor=\"let tecnico of listado_tecnicos\" value=\"{{tecnico.id_tecnico}}\">{{tecnico.nombre_tecnico}} {{tecnico.apellido_tecnico}}</ion-select-option>\r\n        </ion-select>\r\n    </ion-item> -->\r\n\r\n    <ion-item>\r\n        <ion-label fixed style=\"text-align: center;\">Elegir una fecha</ion-label>\r\n        <ion-datetime [(ngModel)]=\"fecha_elegida\" [doneText]=\"'Listo'\"\r\n        [cancelText]=\"'Cancelar'\" [monthNames]=\"monthNames\" [dayNames]=\"dayNames\" displayFormat=\"DDDD D MMMM YYYY HH:mm\" min=\"{{fecha_actual}}\" max=\"2022\" value=\"{{fecha_actual}}\"></ion-datetime>\r\n    </ion-item>\r\n\r\n    <div style=\"width: 100%; text-align: center;\">\r\n        <ion-button (click)=\"programarVisita()\">Agendar</ion-button>\r\n    </div>\r\n        \r\n    <div style=\"margin-top: 25px\">\r\n        <img class=\"imagen_empresa\" src='../../../assets/LogoCPA-01.png'>\r\n    </div>\r\n\r\n</ion-content>\r\n";
     /***/
   },
 
@@ -237,13 +237,20 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
     var _administrar_tecnicos_servicios_servicio_tecnicos_service__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(
     /*! ../administrar-tecnicos/servicios/servicio-tecnicos.service */
     "./src/app/paginas/administrar-tecnicos/servicios/servicio-tecnicos.service.ts");
+    /* harmony import */
+
+
+    var _ionic_angular__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(
+    /*! @ionic/angular */
+    "./node_modules/@ionic/angular/__ivy_ngcc__/fesm2015/ionic-angular.js");
 
     var ProgramarVisitaPage = /*#__PURE__*/function () {
-      function ProgramarVisitaPage(api, api_tecnicos) {
+      function ProgramarVisitaPage(api, api_tecnicos, alertController) {
         _classCallCheck(this, ProgramarVisitaPage);
 
         this.api = api;
         this.api_tecnicos = api_tecnicos;
+        this.alertController = alertController;
         this.serviciosConEquipos = [];
         this.serviciosElegidos = [];
         this.serviciosParaEnviar = [];
@@ -428,6 +435,8 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
       }, {
         key: "programarVisita",
         value: function programarVisita() {
+          var _this4 = this;
+
           var _iterator3 = _createForOfIteratorHelper(this.serviciosElegidos),
               _step3;
 
@@ -459,30 +468,54 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
             _iterator3.f();
           }
 
+          var arrAux = [];
+
           var _iterator4 = _createForOfIteratorHelper(this.grupoWorkStationElegidos),
               _step4;
 
           try {
             for (_iterator4.s(); !(_step4 = _iterator4.n()).done;) {
               var workstation = _step4.value;
+              workstation.tecnico.forEach(function (tecnico) {
+                console.log(1);
 
-              var _iterator6 = _createForOfIteratorHelper(workstation.equipos),
-                  _step6;
+                for (var index = 0; index < tecnico.equipos.length; index++) {
+                  var element = tecnico.equipos[index];
+                  console.warn(element);
+                  console.log(2);
 
-              try {
-                for (_iterator6.s(); !(_step6 = _iterator6.n()).done;) {
-                  var _equipo = _step6.value;
-                  this.serviciosParaEnviar.push({
-                    id_servicio: _equipo.id_servicio,
-                    id_tecnico: workstation.tecnico,
-                    id_equipo: _equipo.id_equipo
-                  });
+                  if ((element === null || element === void 0 ? void 0 : element.length) >= 1) {
+                    var _loop = function _loop(index2) {
+                      console.log(index2, "/", element.length);
+                      var equipo = element[index2];
+
+                      if (equipo === null || equipo === void 0 ? void 0 : equipo.selected) {
+                        if (!arrAux.find(function (equipoAux) {
+                          return equipoAux.id_servicio == equipo.id_servicio && equipoAux.id_equipo == equipo.id_equipo;
+                        })) {
+                          console.log("SI IF");
+                          console.warn(equipo);
+                          arrAux.push({
+                            id_servicio: equipo.id_servicio,
+                            id_tecnico: tecnico.id_tecnico,
+                            id_equipo: equipo.id_equipo
+                          });
+
+                          _this4.serviciosParaEnviar.push({
+                            id_servicio: equipo.id_servicio,
+                            id_tecnico: tecnico.id_tecnico,
+                            id_equipo: equipo.id_equipo
+                          });
+                        }
+                      }
+                    };
+
+                    for (var index2 = 0; index2 < element.length; index2++) {
+                      _loop(index2);
+                    }
+                  }
                 }
-              } catch (err) {
-                _iterator6.e(err);
-              } finally {
-                _iterator6.f();
-              }
+              });
             }
           } catch (err) {
             _iterator4.e(err);
@@ -490,6 +523,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
             _iterator4.f();
           }
 
+          console.log(arrAux);
           console.log(this.serviciosParaEnviar);
           this.api.crear_visita({
             'id_cliente': this.id_cliente_elegido,
@@ -506,38 +540,38 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
       }, {
         key: "serviciosElegidosChange",
         value: function serviciosElegidosChange() {
-          var _this4 = this;
+          var _this5 = this;
 
           this.serviciosElegidos = [];
 
-          var _iterator7 = _createForOfIteratorHelper(this.servicios_elegidosAux),
-              _step7;
+          var _iterator6 = _createForOfIteratorHelper(this.servicios_elegidosAux),
+              _step6;
 
           try {
-            for (_iterator7.s(); !(_step7 = _iterator7.n()).done;) {
-              var servicioID = _step7.value;
+            for (_iterator6.s(); !(_step6 = _iterator6.n()).done;) {
+              var servicioID = _step6.value;
 
-              var _iterator8 = _createForOfIteratorHelper(this.listado_servicios),
-                  _step8;
+              var _iterator7 = _createForOfIteratorHelper(this.listado_servicios),
+                  _step7;
 
               try {
-                for (_iterator8.s(); !(_step8 = _iterator8.n()).done;) {
-                  var servicio = _step8.value;
+                for (_iterator7.s(); !(_step7 = _iterator7.n()).done;) {
+                  var servicio = _step7.value;
 
                   if (servicio.id_servicio == servicioID && servicio.qr == 0) {
                     this.serviciosElegidos.push(servicio);
                   }
                 }
               } catch (err) {
-                _iterator8.e(err);
+                _iterator7.e(err);
               } finally {
-                _iterator8.f();
+                _iterator7.f();
               }
             }
           } catch (err) {
-            _iterator7.e(err);
+            _iterator6.e(err);
           } finally {
-            _iterator7.f();
+            _iterator6.f();
           }
 
           var arrayWorkstation = [{
@@ -553,8 +587,8 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
             workstation.equipos.forEach(function (servicio) {
               var val = servicio.id_servicio.toString();
 
-              if (_this4.servicios_elegidosAux.includes(val)) {
-                if (_this4.checkExist(arrayWorkstation, workstation.nombre_equipo_grupo) || arrayWorkstation[0].nombre_equipo_grupo == null) {
+              if (_this5.servicios_elegidosAux.includes(val)) {
+                if (_this5.checkExist(arrayWorkstation, workstation.nombre_equipo_grupo) || arrayWorkstation[0].nombre_equipo_grupo == null) {
                   if (!first) {
                     console.log('1');
                     i = i + 1;
@@ -664,6 +698,121 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 
           return 0;
         }
+      }, {
+        key: "presentAlertCheckbox",
+        value: function presentAlertCheckbox(servicio, h, tecnicos) {
+          return Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"])(this, void 0, void 0, /*#__PURE__*/regeneratorRuntime.mark(function _callee() {
+            var input, _iterator8, _step8, tecnico, alert;
+
+            return regeneratorRuntime.wrap(function _callee$(_context) {
+              while (1) {
+                switch (_context.prev = _context.next) {
+                  case 0:
+                    if (!tecnicos) {
+                      tecnicos = [];
+                    }
+
+                    input = [];
+                    _iterator8 = _createForOfIteratorHelper(this.listado_tecnicos);
+
+                    try {
+                      for (_iterator8.s(); !(_step8 = _iterator8.n()).done;) {
+                        tecnico = _step8.value;
+                        console.log(tecnico);
+
+                        if (tecnicos.includes(tecnico)) {
+                          input.push({
+                            name: tecnico.nombre_tecnico,
+                            type: 'checkbox',
+                            label: tecnico.nombre_tecnico,
+                            value: tecnico,
+                            checked: true
+                          });
+                        } else {
+                          input.push({
+                            name: tecnico.nombre_tecnico,
+                            type: 'checkbox',
+                            label: tecnico.nombre_tecnico,
+                            value: tecnico
+                          });
+                        }
+                      }
+                    } catch (err) {
+                      _iterator8.e(err);
+                    } finally {
+                      _iterator8.f();
+                    }
+
+                    _context.next = 6;
+                    return this.alertController.create({
+                      cssClass: 'my-custom-class',
+                      header: 'Checkbox',
+                      inputs: input,
+                      buttons: [{
+                        text: 'Cancel',
+                        role: 'cancel',
+                        cssClass: 'secondary',
+                        handler: function handler() {
+                          console.log('Confirm Cancel');
+                        }
+                      }, {
+                        text: 'Ok',
+                        handler: function handler(data) {
+                          console.error(data);
+                          servicio.tecnico = data;
+                          servicio.tecnico.forEach(function (tecnico) {
+                            if (!tecnico.equipos) {
+                              tecnico.equipos = [];
+                            }
+
+                            tecnico.equipos[h] = [];
+
+                            for (var index = 0; index < servicio.equipos.length; index++) {
+                              var element = servicio.equipos[index];
+
+                              if (servicio.tecnico.length == 1) {
+                                element.selected = true;
+                              } else {
+                                element.selected = false;
+                              }
+
+                              tecnico.equipos[h].push(JSON.parse(JSON.stringify(element)));
+                            }
+
+                            console.log(tecnico);
+                          });
+                          console.log(data, "data");
+                          console.log(servicio);
+                        }
+                      }]
+                    });
+
+                  case 6:
+                    alert = _context.sent;
+                    _context.next = 9;
+                    return alert.present();
+
+                  case 9:
+                  case "end":
+                    return _context.stop();
+                }
+              }
+            }, _callee, this);
+          }));
+        }
+      }, {
+        key: "prueba",
+        value: function prueba(servicio, t, h, i) {
+          for (var index = 0; index < servicio.tecnico.length; index++) {
+            var tecnico = servicio.tecnico[index];
+
+            if (t != index) {
+              if (tecnico.equipos[h][i].selected) {
+                tecnico.equipos[h][i].selected = false;
+              }
+            }
+          }
+        }
       }]);
 
       return ProgramarVisitaPage;
@@ -674,6 +823,8 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
         type: _servicios_api_visitas_service__WEBPACK_IMPORTED_MODULE_2__["ApiVisitasService"]
       }, {
         type: _administrar_tecnicos_servicios_servicio_tecnicos_service__WEBPACK_IMPORTED_MODULE_4__["ServicioTecnicosService"]
+      }, {
+        type: _ionic_angular__WEBPACK_IMPORTED_MODULE_5__["AlertController"]
       }];
     };
 

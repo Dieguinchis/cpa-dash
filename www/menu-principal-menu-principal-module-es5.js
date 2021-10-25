@@ -21,7 +21,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
     /* harmony default export */
 
 
-    __webpack_exports__["default"] = "<ion-tabs>\r\n  <ion-tab-bar  slot=\"top\">\r\n\r\n    <ion-tab-button tab=\"administrar-clientes\">\r\n      <ion-icon name=\"people-outline\"></ion-icon>\r\n      <ion-label>Administrar clientes</ion-label>\r\n    </ion-tab-button>\r\n\r\n    <ion-tab-button tab=\"alta-cliente\">\r\n      <ion-icon name=\"person-add-outline\"></ion-icon>\r\n      <ion-label>Dar de alta a un cliente</ion-label>\r\n    </ion-tab-button>\r\n    \r\n    <ion-tab-button tab=\"programar-visita\">\r\n      <ion-icon name=\"calendar-outline\"></ion-icon>\r\n      <ion-label>Programar una visita</ion-label>\r\n    </ion-tab-button>\r\n\r\n    <ion-tab-button tab=\"administrar-servicios\">\r\n      <ion-icon name=\"document-text-outline\"></ion-icon>\r\n      <ion-label>Administrar servicios</ion-label>\r\n    </ion-tab-button>\r\n\r\n    <ion-tab-button tab=\"administrar-tecnicos\">\r\n      <ion-icon name=\"person-circle-outline\"></ion-icon>\r\n      <ion-label>Administrar tecnicos</ion-label>\r\n    </ion-tab-button>\r\n    \r\n    <ion-icon name=\"log-out\" class=\"logout\" (click)=\"logout()\"></ion-icon>\r\n  </ion-tab-bar>\r\n\r\n  \r\n\r\n</ion-tabs>";
+    __webpack_exports__["default"] = "<ion-tabs>\r\n  <ion-tab-bar  slot=\"top\">\r\n\r\n    <ion-tab-button tab=\"administrar-clientes\">\r\n      <ion-icon name=\"people-outline\"></ion-icon>\r\n      <ion-label>Administrar clientes</ion-label>\r\n    </ion-tab-button>\r\n\r\n    <ion-tab-button tab=\"alta-cliente\">\r\n      <ion-icon name=\"person-add-outline\"></ion-icon>\r\n      <ion-label>Dar de alta a un cliente</ion-label>\r\n    </ion-tab-button>\r\n    \r\n    <ion-tab-button tab=\"administrar-visitas\">\r\n      <ion-icon name=\"calendar-outline\"></ion-icon>\r\n      <ion-label>Administrar Visitas</ion-label>\r\n    </ion-tab-button>\r\n\r\n    <ion-tab-button tab=\"administrar-servicios\">\r\n      <ion-icon name=\"document-text-outline\"></ion-icon>\r\n      <ion-label>Administrar servicios</ion-label>\r\n    </ion-tab-button>\r\n\r\n    <ion-tab-button tab=\"administrar-tecnicos\">\r\n      <ion-icon name=\"person-circle-outline\"></ion-icon>\r\n      <ion-label>Administrar tecnicos</ion-label>\r\n    </ion-tab-button>\r\n    \r\n    <ion-icon name=\"log-out\" class=\"logout\" (click)=\"logout()\"></ion-icon>\r\n  </ion-tab-bar>\r\n\r\n  \r\n\r\n</ion-tabs>";
     /***/
   },
 
@@ -75,9 +75,9 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
       children: [{
         path: 'administrar-clientes',
         loadChildren: function loadChildren() {
-          return Promise.all(
+          return __webpack_require__.e(
           /*! import() | paginas-administrar-clientes-administrar-clientes-module */
-          [__webpack_require__.e("common"), __webpack_require__.e("paginas-administrar-clientes-administrar-clientes-module")]).then(__webpack_require__.bind(null,
+          "paginas-administrar-clientes-administrar-clientes-module").then(__webpack_require__.bind(null,
           /*! ../paginas/administrar-clientes/administrar-clientes.module */
           "./src/app/paginas/administrar-clientes/administrar-clientes.module.ts")).then(function (m) {
             return m.AdministrarClientesPageModule;
@@ -90,23 +90,23 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
       }, {
         path: 'administrar-clientes',
         loadChildren: function loadChildren() {
-          return Promise.all(
+          return __webpack_require__.e(
           /*! import() | paginas-administrar-clientes-administrar-clientes-module */
-          [__webpack_require__.e("common"), __webpack_require__.e("paginas-administrar-clientes-administrar-clientes-module")]).then(__webpack_require__.bind(null,
+          "paginas-administrar-clientes-administrar-clientes-module").then(__webpack_require__.bind(null,
           /*! ../paginas/administrar-clientes/administrar-clientes.module */
           "./src/app/paginas/administrar-clientes/administrar-clientes.module.ts")).then(function (m) {
             return m.AdministrarClientesPageModule;
           });
         }
       }, {
-        path: 'programar-visita',
+        path: 'administrar-visitas',
         loadChildren: function loadChildren() {
           return Promise.all(
-          /*! import() | paginas-programar-visita-programar-visita-module */
-          [__webpack_require__.e("default~paginas-administrar-clientes-ver-cliente-ver-cliente-module~paginas-programar-visita-program~2a0c3347"), __webpack_require__.e("paginas-programar-visita-programar-visita-module")]).then(__webpack_require__.bind(null,
-          /*! ../paginas/programar-visita/programar-visita.module */
-          "./src/app/paginas/programar-visita/programar-visita.module.ts")).then(function (m) {
-            return m.ProgramarVisitaPageModule;
+          /*! import() | paginas-administrar-visitas-administrar-visitas-module */
+          [__webpack_require__.e("default~paginas-administrar-clientes-ver-cliente-ver-cliente-module~paginas-administrar-visitas-admi~b66acba8"), __webpack_require__.e("default~paginas-administrar-clientes-ver-cliente-ver-cliente-module~paginas-administrar-visitas-admi~5d227966"), __webpack_require__.e("paginas-administrar-visitas-administrar-visitas-module")]).then(__webpack_require__.bind(null,
+          /*! ../paginas/administrar-visitas/administrar-visitas.module */
+          "./src/app/paginas/administrar-visitas/administrar-visitas.module.ts")).then(function (m) {
+            return m.AdministrarVisitasPageModule;
           });
         }
       }, {
@@ -114,7 +114,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
         loadChildren: function loadChildren() {
           return Promise.all(
           /*! import() | paginas-administrar-clientes-ver-cliente-ver-cliente-module */
-          [__webpack_require__.e("default~paginas-administrar-clientes-ver-cliente-ver-cliente-module~paginas-programar-visita-program~2a0c3347"), __webpack_require__.e("common"), __webpack_require__.e("paginas-administrar-clientes-ver-cliente-ver-cliente-module")]).then(__webpack_require__.bind(null,
+          [__webpack_require__.e("default~paginas-administrar-clientes-ver-cliente-ver-cliente-module~paginas-administrar-visitas-admi~b66acba8"), __webpack_require__.e("default~paginas-administrar-clientes-ver-cliente-ver-cliente-module~paginas-administrar-visitas-admi~5d227966"), __webpack_require__.e("paginas-administrar-clientes-ver-cliente-ver-cliente-module")]).then(__webpack_require__.bind(null,
           /*! ../paginas/administrar-clientes/ver-cliente/ver-cliente.module */
           "./src/app/paginas/administrar-clientes/ver-cliente/ver-cliente.module.ts")).then(function (m) {
             return m.VerClientePageModule;
@@ -134,9 +134,9 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
       }, {
         path: 'administrar-servicios',
         loadChildren: function loadChildren() {
-          return Promise.all(
+          return __webpack_require__.e(
           /*! import() | paginas-administrar-servicios-administrar-servicios-module */
-          [__webpack_require__.e("common"), __webpack_require__.e("paginas-administrar-servicios-administrar-servicios-module")]).then(__webpack_require__.bind(null,
+          "paginas-administrar-servicios-administrar-servicios-module").then(__webpack_require__.bind(null,
           /*! ../paginas/administrar-servicios/administrar-servicios.module */
           "./src/app/paginas/administrar-servicios/administrar-servicios.module.ts")).then(function (m) {
             return m.AdministrarServiciosPageModule;
@@ -151,6 +151,17 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
           /*! ../paginas/administrar-tecnicos/administrar-tecnicos.module */
           "./src/app/paginas/administrar-tecnicos/administrar-tecnicos.module.ts")).then(function (m) {
             return m.AdministrarTecnicosPageModule;
+          });
+        }
+      }, {
+        path: 'programar-visita',
+        loadChildren: function loadChildren() {
+          return Promise.all(
+          /*! import() | paginas-programar-visita-programar-visita-module */
+          [__webpack_require__.e("default~paginas-administrar-clientes-ver-cliente-ver-cliente-module~paginas-administrar-visitas-admi~b66acba8"), __webpack_require__.e("paginas-programar-visita-programar-visita-module")]).then(__webpack_require__.bind(null,
+          /*! ../paginas/programar-visita/programar-visita.module */
+          "./src/app/paginas/programar-visita/programar-visita.module.ts")).then(function (m) {
+            return m.ProgramarVisitaPageModule;
           });
         }
       }]

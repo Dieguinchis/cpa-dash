@@ -9,7 +9,7 @@
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony default export */ __webpack_exports__["default"] = ("<ion-content>\r\n    <!-- <ion-button (click)=\"onClick()\" expand=\"block\" fill=\"clear\" shape=\"round\">\r\n        Click me\r\n    </ion-button> -->\r\n    <ion-item style=\"margin-top: 15px;\">\r\n        <ion-label fixed style=\"text-align: center;\">Seleccionar un cliente</ion-label>\r\n        <ion-select [interfaceOptions]=\"custom\" (ionChange)=\"sucursalesCliente($event.target.value)\">\r\n            <ion-select-option  *ngFor=\"let cliente of listado_clientes\" value=\"{{cliente.id_cliente}}\">{{cliente.razon_social_cliente}}</ion-select-option>\r\n        </ion-select>\r\n    </ion-item>\r\n    \r\n    <ion-item>\r\n        <ion-label fixed style=\"text-align: center;\">Seleccionar una sucursal</ion-label>\r\n        <ion-select [interfaceOptions]=\"custom\" [disabled]=\"id_cliente_elegido == null\" (ionChange)=\"selectSucursal()\" [(ngModel)]=\"sucursal_elegida\">\r\n            <ion-select-option *ngFor=\"let sucursal of listado_sucursales_cliente\" value=\"{{sucursal.id_sucursal}}\">{{sucursal.razon_social_sucursal}}</ion-select-option>\r\n        </ion-select>\r\n    </ion-item>\r\n\r\n    <ion-item>\r\n        <ion-label fixed style=\"text-align: center;\">Seleccionar servicios a ofrecer</ion-label>\r\n        <ion-select [interfaceOptions]=\"custom\" [disabled]=\"(sucursal_elegida == null) && !equiposCargados && !workStationCargados\" [(ngModel)]=\"servicios_elegidosAux\"multiple=\"true\" (ionChange)=\"serviciosElegidosChange()\">\r\n            <ion-select-option *ngFor=\"let servicio of listado_servicios\" value=\"{{servicio.id_servicio}}\">{{servicio.nombre_servicio}}</ion-select-option>\r\n        </ion-select>\r\n    </ion-item>\r\n\r\n    <div *ngFor=\"let servicio of serviciosElegidos\" style=\"text-align: center;\">\r\n        <h2 style=\"text-align: center;\">{{servicio.nombre_servicio}}</h2>\r\n        <div *ngFor=\"let equipo of servicio.equipos\">\r\n            <ion-label fixed style=\"text-align: center;color: var(--ion-color-secondary);font-weight: bold;\">{{equipo.nombre_equipo}}</ion-label>\r\n            <ion-item style=\"margin-top: 10px;\">\r\n                <ion-label fixed style=\"text-align: center;\">Seleccionar técnico a cargo</ion-label>\r\n                <ion-select [interfaceOptions]=\"custom\" [(ngModel)]=\"equipo.tecnico\">\r\n                    <ion-select-option *ngFor=\"let tecnico of listado_tecnicos\" value=\"{{tecnico.id_tecnico}}\">{{tecnico.nombre_tecnico}} {{tecnico.apellido_tecnico}}</ion-select-option>\r\n                </ion-select>\r\n            </ion-item>\r\n        </div>\r\n    </div>\r\n    <div *ngIf=\"show\">\r\n        <div *ngFor=\"let servicio of grupoWorkStationElegidos\" style=\"text-align: center;\">\r\n            <h2 style=\"text-align: center;\">{{servicio.nombre_equipo_grupo}}</h2>\r\n            <div *ngFor=\"let equipo of servicio.equipos\">\r\n                <ion-label fixed style=\"text-align: center;color: var(--ion-color-secondary);font-weight: bold;\">{{equipo.nombre_equipo}}: {{equipo.nombre_servicio}}</ion-label>\r\n            </div>\r\n            <ion-item style=\"margin-top: 10px;\">\r\n                <ion-label fixed style=\"text-align: center;\">Seleccionar técnico a cargo</ion-label>\r\n                <ion-select [interfaceOptions]=\"custom\" [(ngModel)]=\"servicio.tecnico\">\r\n                    <ion-select-option *ngFor=\"let tecnico of listado_tecnicos\" value=\"{{tecnico.id_tecnico}}\">{{tecnico.nombre_tecnico}} {{tecnico.apellido_tecnico}}</ion-select-option>\r\n                </ion-select>\r\n            </ion-item>\r\n        </div>\r\n    </div>\r\n\r\n\r\n    <!-- <ion-item>\r\n        <ion-label fixed style=\"text-align: center;\">Seleccionar técnico a cargo</ion-label>\r\n        <ion-select [(ngModel)]=\"tecnico_elegido\">\r\n            <ion-select-option *ngFor=\"let tecnico of listado_tecnicos\" value=\"{{tecnico.id_tecnico}}\">{{tecnico.nombre_tecnico}} {{tecnico.apellido_tecnico}}</ion-select-option>\r\n        </ion-select>\r\n    </ion-item> -->\r\n\r\n    <ion-item>\r\n        <ion-label fixed style=\"text-align: center;\">Elegir una fecha</ion-label>\r\n        <ion-datetime [(ngModel)]=\"fecha_elegida\" [doneText]=\"'Listo'\"\r\n        [cancelText]=\"'Cancelar'\" [monthNames]=\"monthNames\" [dayNames]=\"dayNames\" displayFormat=\"DDDD D MMMM YYYY HH:mm\" min=\"{{fecha_actual}}\" max=\"2022\" value=\"{{fecha_actual}}\"></ion-datetime>\r\n    </ion-item>\r\n\r\n    <div style=\"width: 100%; text-align: center;\">\r\n        <ion-button (click)=\"programarVisita()\">Agendar</ion-button>\r\n    </div>\r\n\r\n        \r\n    <div style=\"margin-top: 25px\">\r\n        <img class=\"imagen_empresa\" src='../../../assets/LogoCPA-01.png'>\r\n    </div>\r\n\r\n</ion-content>\r\n");
+/* harmony default export */ __webpack_exports__["default"] = ("<ion-content>\r\n    <!-- <ion-button (click)=\"onClick()\" expand=\"block\" fill=\"clear\" shape=\"round\">\r\n        Click me\r\n    </ion-button> -->\r\n    <ion-item style=\"margin-top: 15px;\">\r\n        <ion-label fixed style=\"text-align: center;\">Seleccionar un cliente</ion-label>\r\n        <ion-select [interfaceOptions]=\"custom\" (ionChange)=\"sucursalesCliente($event.target.value)\">\r\n            <ion-select-option  *ngFor=\"let cliente of listado_clientes\" value=\"{{cliente.id_cliente}}\">{{cliente.razon_social_cliente}}</ion-select-option>\r\n        </ion-select>\r\n    </ion-item>\r\n    \r\n    <ion-item>\r\n        <ion-label fixed style=\"text-align: center;\">Seleccionar una sucursal</ion-label>\r\n        <ion-select [interfaceOptions]=\"custom\" [disabled]=\"id_cliente_elegido == null\" (ionChange)=\"selectSucursal()\" [(ngModel)]=\"sucursal_elegida\">\r\n            <ion-select-option *ngFor=\"let sucursal of listado_sucursales_cliente\" value=\"{{sucursal.id_sucursal}}\">{{sucursal.razon_social_sucursal}}</ion-select-option>\r\n        </ion-select>\r\n    </ion-item>\r\n\r\n    <ion-item>\r\n        <ion-label fixed style=\"text-align: center;\">Seleccionar servicios a ofrecer</ion-label>\r\n        <ion-select [interfaceOptions]=\"custom\" [disabled]=\"(sucursal_elegida == null) && !equiposCargados && !workStationCargados\" [(ngModel)]=\"servicios_elegidosAux\"multiple=\"true\" (ionChange)=\"serviciosElegidosChange()\">\r\n            <ion-select-option *ngFor=\"let servicio of listado_servicios\" value=\"{{servicio.id_servicio}}\">{{servicio.nombre_servicio}}</ion-select-option>\r\n        </ion-select>\r\n    </ion-item>\r\n\r\n    <div *ngFor=\"let servicio of serviciosElegidos\" style=\"text-align: center;\">\r\n        <h2 style=\"text-align: center;\">{{servicio.nombre_servicio}}</h2>\r\n        <div *ngFor=\"let equipo of servicio.equipos\">\r\n            <ion-label fixed style=\"text-align: center;color: var(--ion-color-secondary);font-weight: bold;\">{{equipo.nombre_equipo}}</ion-label>\r\n            <ion-item style=\"margin-top: 10px;\">\r\n                <ion-label fixed style=\"text-align: center;\">Seleccionar técnico a cargo</ion-label>\r\n                <ion-select [interfaceOptions]=\"custom\" [(ngModel)]=\"equipo.tecnico\">\r\n                    <ion-select-option *ngFor=\"let tecnico of listado_tecnicos\" value=\"{{tecnico.id_tecnico}}\">{{tecnico.nombre_tecnico}} {{tecnico.apellido_tecnico}}</ion-select-option>\r\n                </ion-select>\r\n            </ion-item>\r\n        </div>\r\n    </div>\r\n    <div *ngIf=\"show\">\r\n        <div *ngFor=\"let servicio of grupoWorkStationElegidos; let h = index\" style=\"text-align: center;\">\r\n            <h2 style=\"text-align: center;\">{{servicio.nombre_equipo_grupo}}</h2>\r\n            <ion-item style=\"margin-top: 10px;\" (click)=\"presentAlertCheckbox(servicio, h, servicio.tecnico)\">\r\n                <ion-label style=\"width: fit-content;\" fixed style=\"text-align: center;\">Seleccionar técnicos a cargo</ion-label>\r\n                <p *ngFor=\"let tecnico of servicio.tecnico\">{{tecnico.nombre_tecnico}}, </p>\r\n            </ion-item>\r\n\r\n            <div>\r\n                <ion-row>\r\n                    <ion-col offset=3 size=\"3\" style=\"text-align:start;\">\r\n                        <ion-label style=\"font-weight: bold;\">Equipo</ion-label>\r\n                    </ion-col>\r\n                    <ion-col *ngFor=\"let tecnico of servicio.tecnico\" [size]=\"3/servicio.tecnico.length\">\r\n                        {{tecnico.nombre_tecnico}}\r\n                    </ion-col>\r\n                </ion-row>\r\n            </div>\r\n            <div style=\"min-width:50%;\" *ngFor=\"let equipo of servicio.equipos ; let i = index\">\r\n                <ion-row>\r\n                    <ion-col offset=3 size=\"3\" style=\"text-align:start; border-bottom: 1px solid black;\">\r\n                        <ion-label style=\"color: var(--ion-color-secondary);font-weight: bold;\">{{equipo.nombre_equipo}}: {{equipo.nombre_servicio}}</ion-label>\r\n                    </ion-col>\r\n                    <ion-col style=\"border-bottom: 1px solid;\" *ngFor=\"let tecnico of servicio.tecnico; let t = index\" [size]=\"3/servicio.tecnico.length\">\r\n                        <ion-checkbox (click)=\"prueba(servicio, t,h, i)\" [(ngModel)]=\"tecnico.equipos[h][i].selected\" [checked]=\"servicio.tecnico.length == 1\" ></ion-checkbox>\r\n                    </ion-col>\r\n                </ion-row>\r\n            </div>\r\n        </div>\r\n    </div>\r\n\r\n\r\n    <!-- <ion-item>\r\n        <ion-label fixed style=\"text-align: center;\">Seleccionar técnico a cargo</ion-label>\r\n        <ion-select [(ngModel)]=\"tecnico_elegido\">\r\n            <ion-select-option *ngFor=\"let tecnico of listado_tecnicos\" value=\"{{tecnico.id_tecnico}}\">{{tecnico.nombre_tecnico}} {{tecnico.apellido_tecnico}}</ion-select-option>\r\n        </ion-select>\r\n    </ion-item> -->\r\n\r\n    <ion-item>\r\n        <ion-label fixed style=\"text-align: center;\">Elegir una fecha</ion-label>\r\n        <ion-datetime [(ngModel)]=\"fecha_elegida\" [doneText]=\"'Listo'\"\r\n        [cancelText]=\"'Cancelar'\" [monthNames]=\"monthNames\" [dayNames]=\"dayNames\" displayFormat=\"DDDD D MMMM YYYY HH:mm\" min=\"{{fecha_actual}}\" max=\"2022\" value=\"{{fecha_actual}}\"></ion-datetime>\r\n    </ion-item>\r\n\r\n    <div style=\"width: 100%; text-align: center;\">\r\n        <ion-button (click)=\"programarVisita()\">Agendar</ion-button>\r\n    </div>\r\n        \r\n    <div style=\"margin-top: 25px\">\r\n        <img class=\"imagen_empresa\" src='../../../assets/LogoCPA-01.png'>\r\n    </div>\r\n\r\n</ion-content>\r\n");
 
 /***/ }),
 
@@ -121,15 +121,18 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var moment__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! moment */ "./node_modules/moment/moment.js");
 /* harmony import */ var moment__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(moment__WEBPACK_IMPORTED_MODULE_3__);
 /* harmony import */ var _administrar_tecnicos_servicios_servicio_tecnicos_service__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../administrar-tecnicos/servicios/servicio-tecnicos.service */ "./src/app/paginas/administrar-tecnicos/servicios/servicio-tecnicos.service.ts");
+/* harmony import */ var _ionic_angular__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! @ionic/angular */ "./node_modules/@ionic/angular/__ivy_ngcc__/fesm2015/ionic-angular.js");
+
 
 
 
 
 
 let ProgramarVisitaPage = class ProgramarVisitaPage {
-    constructor(api, api_tecnicos) {
+    constructor(api, api_tecnicos, alertController) {
         this.api = api;
         this.api_tecnicos = api_tecnicos;
+        this.alertController = alertController;
         this.serviciosConEquipos = [];
         this.serviciosElegidos = [];
         this.serviciosParaEnviar = [];
@@ -246,11 +249,32 @@ let ProgramarVisitaPage = class ProgramarVisitaPage {
                 this.serviciosParaEnviar.push({ id_servicio: servicio.id_servicio, id_tecnico: equipo.tecnico, id_equipo: equipo.id_equipo });
             }
         }
+        var arrAux = [];
         for (let workstation of this.grupoWorkStationElegidos) {
-            for (let equipo of workstation.equipos) {
-                this.serviciosParaEnviar.push({ id_servicio: equipo.id_servicio, id_tecnico: workstation.tecnico, id_equipo: equipo.id_equipo });
-            }
+            workstation.tecnico.forEach(tecnico => {
+                console.log(1);
+                for (let index = 0; index < tecnico.equipos.length; index++) {
+                    const element = tecnico.equipos[index];
+                    console.warn(element);
+                    console.log(2);
+                    if ((element === null || element === void 0 ? void 0 : element.length) >= 1) {
+                        for (let index2 = 0; index2 < element.length; index2++) {
+                            console.log(index2, "/", element.length);
+                            const equipo = element[index2];
+                            if (equipo === null || equipo === void 0 ? void 0 : equipo.selected) {
+                                if (!arrAux.find(equipoAux => (equipoAux.id_servicio == equipo.id_servicio) && (equipoAux.id_equipo == equipo.id_equipo))) {
+                                    console.log("SI IF");
+                                    console.warn(equipo);
+                                    arrAux.push({ id_servicio: equipo.id_servicio, id_tecnico: tecnico.id_tecnico, id_equipo: equipo.id_equipo });
+                                    this.serviciosParaEnviar.push({ id_servicio: equipo.id_servicio, id_tecnico: tecnico.id_tecnico, id_equipo: equipo.id_equipo });
+                                }
+                            }
+                        }
+                    }
+                }
+            });
         }
+        console.log(arrAux);
         console.log(this.serviciosParaEnviar);
         this.api.crear_visita({ 'id_cliente': this.id_cliente_elegido,
             'id_sucursal': this.sucursal_elegida,
@@ -357,10 +381,90 @@ let ProgramarVisitaPage = class ProgramarVisitaPage {
         }
         return 0;
     }
+    presentAlertCheckbox(servicio, h, tecnicos) {
+        return Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"])(this, void 0, void 0, function* () {
+            if (!tecnicos) {
+                tecnicos = [];
+            }
+            var input = [];
+            for (let tecnico of this.listado_tecnicos) {
+                console.log(tecnico);
+                if (tecnicos.includes(tecnico)) {
+                    input.push({
+                        name: tecnico.nombre_tecnico,
+                        type: 'checkbox',
+                        label: tecnico.nombre_tecnico,
+                        value: tecnico,
+                        checked: true
+                    });
+                }
+                else {
+                    input.push({
+                        name: tecnico.nombre_tecnico,
+                        type: 'checkbox',
+                        label: tecnico.nombre_tecnico,
+                        value: tecnico,
+                    });
+                }
+            }
+            const alert = yield this.alertController.create({
+                cssClass: 'my-custom-class',
+                header: 'Checkbox',
+                inputs: input,
+                buttons: [
+                    {
+                        text: 'Cancel',
+                        role: 'cancel',
+                        cssClass: 'secondary',
+                        handler: () => {
+                            console.log('Confirm Cancel');
+                        }
+                    }, {
+                        text: 'Ok',
+                        handler: (data) => {
+                            console.error(data);
+                            servicio.tecnico = data;
+                            servicio.tecnico.forEach(tecnico => {
+                                if (!tecnico.equipos) {
+                                    tecnico.equipos = [];
+                                }
+                                tecnico.equipos[h] = [];
+                                for (let index = 0; index < servicio.equipos.length; index++) {
+                                    const element = servicio.equipos[index];
+                                    if (servicio.tecnico.length == 1) {
+                                        element.selected = true;
+                                    }
+                                    else {
+                                        element.selected = false;
+                                    }
+                                    tecnico.equipos[h].push(JSON.parse(JSON.stringify(element)));
+                                }
+                                console.log(tecnico);
+                            });
+                            console.log(data, "data");
+                            console.log(servicio);
+                        }
+                    }
+                ]
+            });
+            yield alert.present();
+        });
+    }
+    prueba(servicio, t, h, i) {
+        for (let index = 0; index < servicio.tecnico.length; index++) {
+            const tecnico = servicio.tecnico[index];
+            if (t != index) {
+                if (tecnico.equipos[h][i].selected) {
+                    tecnico.equipos[h][i].selected = false;
+                }
+            }
+        }
+    }
 };
 ProgramarVisitaPage.ctorParameters = () => [
     { type: _servicios_api_visitas_service__WEBPACK_IMPORTED_MODULE_2__["ApiVisitasService"] },
-    { type: _administrar_tecnicos_servicios_servicio_tecnicos_service__WEBPACK_IMPORTED_MODULE_4__["ServicioTecnicosService"] }
+    { type: _administrar_tecnicos_servicios_servicio_tecnicos_service__WEBPACK_IMPORTED_MODULE_4__["ServicioTecnicosService"] },
+    { type: _ionic_angular__WEBPACK_IMPORTED_MODULE_5__["AlertController"] }
 ];
 ProgramarVisitaPage = Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"])([
     Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["Component"])({

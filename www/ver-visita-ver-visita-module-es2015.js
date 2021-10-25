@@ -69,7 +69,7 @@ VerVisitaPageModule = Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"])([
             _angular_common__WEBPACK_IMPORTED_MODULE_2__["CommonModule"],
             _angular_forms__WEBPACK_IMPORTED_MODULE_3__["FormsModule"],
             _ionic_angular__WEBPACK_IMPORTED_MODULE_4__["IonicModule"],
-            _ver_visita_routing_module__WEBPACK_IMPORTED_MODULE_5__["VerVisitaPageRoutingModule"]
+            _ver_visita_routing_module__WEBPACK_IMPORTED_MODULE_5__["VerVisitaPageRoutingModule"],
         ],
         declarations: [_ver_visita_page__WEBPACK_IMPORTED_MODULE_6__["VerVisitaPage"]]
     })

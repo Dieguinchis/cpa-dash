@@ -1,4 +1,4 @@
-(window["webpackJsonp"] = window["webpackJsonp"] || []).push([["default~paginas-administrar-clientes-ver-cliente-ver-cliente-module~paginas-programar-visita-program~2a0c3347"],{
+(window["webpackJsonp"] = window["webpackJsonp"] || []).push([["default~paginas-administrar-clientes-ver-cliente-ver-cliente-module~paginas-administrar-visitas-admi~b66acba8"],{
 
 /***/ "./node_modules/moment/locale sync recursive ^\\.\\/.*$":
 /*!**************************************************!*\
@@ -21246,7 +21246,7 @@ __webpack_require__.r(__webpack_exports__);
 let ServicioTecnicosService = class ServicioTecnicosService {
     constructor(http) {
         this.http = http;
-        this.apiDir = "http://192.168.0.71:3000";
+        this.apiDir = "http://157.230.90.222:3001";
         this.requestOptions = {
             headers: new _angular_common_http__WEBPACK_IMPORTED_MODULE_2__["HttpHeaders"]({
                 'Content-Type': 'application/json',
@@ -21278,74 +21278,7 @@ ServicioTecnicosService = Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"
 
 
 
-/***/ }),
-
-/***/ "./src/app/paginas/programar-visita/servicios/api-visitas.service.ts":
-/*!***************************************************************************!*\
-  !*** ./src/app/paginas/programar-visita/servicios/api-visitas.service.ts ***!
-  \***************************************************************************/
-/*! exports provided: ApiVisitasService */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "ApiVisitasService", function() { return ApiVisitasService; });
-/* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! tslib */ "./node_modules/tslib/tslib.es6.js");
-/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/__ivy_ngcc__/fesm2015/core.js");
-/* harmony import */ var _angular_common_http__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @angular/common/http */ "./node_modules/@angular/common/__ivy_ngcc__/fesm2015/http.js");
-/* harmony import */ var _environments_version__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../../../environments/version */ "./src/environments/version.ts");
-
-
-
-
-let ApiVisitasService = class ApiVisitasService {
-    constructor(http) {
-        this.http = http;
-        this.apiDir = "http://192.168.0.71:3000";
-        this.requestOptions = {
-            headers: new _angular_common_http__WEBPACK_IMPORTED_MODULE_2__["HttpHeaders"]({
-                'Content-Type': 'application/json',
-                'version': _environments_version__WEBPACK_IMPORTED_MODULE_3__["version"]
-            })
-        };
-    }
-    listado_clientes() {
-        return this.http.get(this.apiDir + '/clientes', this.requestOptions);
-    }
-    listado_equipos(id) {
-        return this.http.get(this.apiDir + '/servicios/equipos/offline/' + id, this.requestOptions);
-    }
-    listado_equipos_id(id) {
-        return this.http.get(this.apiDir + '/servicios/equipos/sucursal/' + id, this.requestOptions);
-    }
-    informacion_cliente(id) {
-        return this.http.get(this.apiDir + '/clientes/id/' + id, this.requestOptions);
-    }
-    mostrar_servicios() {
-        return this.http.get(this.apiDir + '/servicios', this.requestOptions);
-    }
-    crear_visita(parametros) {
-        return this.http.post(this.apiDir + '/visitas/crear', parametros, this.requestOptions);
-    }
-    modificar_visita(parametros) {
-        return this.http.post(this.apiDir + '/visitas/update', parametros, this.requestOptions);
-    }
-    listado_grupoWorkstations(id) {
-        return this.http.get(this.apiDir + '/servicios/gruposEquipos/sucursal/' + id, this.requestOptions);
-    }
-};
-ApiVisitasService.ctorParameters = () => [
-    { type: _angular_common_http__WEBPACK_IMPORTED_MODULE_2__["HttpClient"] }
-];
-ApiVisitasService = Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"])([
-    Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["Injectable"])({
-        providedIn: 'root'
-    })
-], ApiVisitasService);
-
-
-
 /***/ })
 
 }]);
-//# sourceMappingURL=default~paginas-administrar-clientes-ver-cliente-ver-cliente-module~paginas-programar-visita-program~2a0c3347-es2015.js.map
+//# sourceMappingURL=default~paginas-administrar-clientes-ver-cliente-ver-cliente-module~paginas-administrar-visitas-admi~b66acba8-es2015.js.map
