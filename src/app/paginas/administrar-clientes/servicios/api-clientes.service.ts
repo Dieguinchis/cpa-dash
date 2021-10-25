@@ -130,5 +130,8 @@ export class ApiClientesService {
     return this.http.post(this.apiDir+'/sucursales/actualizar',parametros,this.requestOptions)
   }
 
+  estadisticas(parametros){
+    return this.http.post(this.apiDir+'/clientes/estadisticas/',parametros,this.requestOptions);
+  }
 
 }

@@ -50,17 +50,18 @@
     <ion-col size="3"><b>Estado</b></ion-col>
     <ion-col size="3"><b>Acciones</b></ion-col>
   </ion-item>
-  <ion-item *ngFor="let visita of visitas_filtro">
-    <ion-col size="3">{{visita.fecha_visita | date:  "dd/MM/yyyy HH:mm"}} </ion-col>
-    <ion-col size="3">{{visita.razon_social_sucursal}}</ion-col>
-    <ion-col size="3">{{visita.estado_visitas}}</ion-col>
-    <ion-col size="3">
+  <ion-item class="itemHover" *ngFor="let visita of visitas_filtro">
+    <ion-col (click)="verVisita(visita.id_visita)" size="3">{{visita.fecha_visita | date:  "dd/MM/yyyy HH:mm"}} </ion-col>
+    <ion-col (click)="verVisita(visita.id_visita)" size="3">{{visita.razon_social_sucursal}}</ion-col>
+    <ion-col (click)="verVisita(visita.id_visita)" size="3">{{visita.estado_visitas}}</ion-col>
+    <ion-col size="0.8">
       <ion-icon color="primary" name="enter-outline" (click)="verVisita(visita.id_visita)"></ion-icon>
       <ion-icon *ngIf="visita.estado_visitas == 'pendiente' || visita.estado_visitas == 'en proceso'" color="danger" name="trash-outline" (click)="eliminarVisitaAlert(visita)"></ion-icon>
       <!-- <ion-icon class="no-pointer" name="close-outline" *ngIf="visita.estado_visitas != 'finalizada' && visita.estado_visitas != 'entregado'"></ion-icon> -->
       <ion-icon style="padding-left: 5px;" name="mail-outline" *ngIf="visita.estado_visitas == 'finalizada' " (click)="marcarEntregadoAlert(visita)"></ion-icon>
       <!-- <ion-icon style="padding-left: 5px;color: rgb(52, 183, 241);" name="checkmark-done-outline" *ngIf="visita.estado_visitas == 'entregado'" class="no-pointer"></ion-icon> -->
-</ion-col>
+    </ion-col>
+    <ion-col (click)="verVisita(visita.id_visita)" size="2.2"></ion-col>
   </ion-item>
   <ion-item *ngIf="visitas_filtro?.length == 0">
     <ion-label style="text-align: center;">No se encuentran visitas que cumplan las condiciones</ion-label>

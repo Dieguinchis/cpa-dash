@@ -101,24 +101,40 @@ export class VerSucursalPage implements OnInit {
     await alert.present();
   }
 
-  async borrar_equipo(id_equipo,j,i){
-    this.loading = await this.loadingController.create({
-      message: 'Eliminado, Por favor espere.'
-    });
-    this.loading.pre
-    // console.warn(this.grupoWorkStation[j].equipos[i])
-    // this.loadingController.dismiss()
-    this.api_sucursales.borrar_equipo(id_equipo).subscribe(data => {
-      // console.log(data, id_equipo)
-      // this.actualizar_informacion(false);
-      this.grupoWorkStation[j].equipos.splice(i,1)
-      this.loadingController.dismiss()
+  async borrar_equipo(equipo,j,i){
 
-    }), (error => {
-      this.loadingController.dismiss()
-      alert('Ocurrio un error al eliminar, por favor intente nuevamente')
-      console.log(error)
-    })
+    const alerta = await this.alertController.create({
+      header: 'Eliminar ' + equipo.nombre_equipo,
+      message: 'Estas seguro que deseas eliminar ' + equipo.nombre_equipo,
+      buttons: [
+        'Cancelar',
+        {
+          text:'Borrar',
+          handler: async() =>{
+            this.loading = await this.loadingController.create({
+              message: 'Eliminado, Por favor espere.'
+            });
+            this.loading.present()
+            // console.warn(this.grupoWorkStation[j].equipos[i])
+            // this.loadingController.dismiss()
+            this.api_sucursales.borrar_equipo(equipo.id_equipo).subscribe(data => {
+              // console.log(data, id_equipo)
+              // this.actualizar_informacion(false);
+              this.grupoWorkStation[j].equipos.splice(i,1)
+              this.loadingController.dismiss()
+        
+            }), (error => {
+              this.loadingController.dismiss()
+              alert('Ocurrio un error al eliminar, por favor intente nuevamente')
+              console.log(error)
+            })
+          }
+        }
+      ]
+    });
+  
+    await alerta.present();
+
   }
 
   borrar_equipo_grupo(id, i){
@@ -682,7 +698,12 @@ descargarQrAllWorkstations(){
             equipo.qr = undefined;
             this.api_visitas.actualizar_equipo(equipo).then(resp =>{
               console.log(resp);
-              this.actualizar_informacion(true);
+              var aux ;
+              aux = resp;
+              aux = aux.equipoCreado.retorno;
+              equipo.producto_predeterminado = this.productos.find(producto => producto.id_producto == aux.producto_predeterminado).id_producto;
+              equipo.producto_predeterminado_nombre = this.productos.find(producto => producto.id_producto == aux.producto_predeterminado).nombre_producto +' - '+ this.productos.find(producto => producto.id_producto == aux.producto_predeterminado).tipo_producto;
+              //this.actualizar_informacion(false);
             }).catch(err => {
               console.error(err)
             })

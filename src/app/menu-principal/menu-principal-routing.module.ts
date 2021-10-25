@@ -44,6 +44,10 @@ const routes: Routes = [
     {
       path: 'programar-visita',
       loadChildren: () => import('../paginas/programar-visita/programar-visita.module').then( m => m.ProgramarVisitaPageModule)
+    },
+    {
+      path: 'estadisticas',
+      loadChildren: () => import('../paginas/estadisticas/estadisticas.module').then( m => m.EstadisticasPageModule)
     }
     ]
   },

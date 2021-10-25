@@ -133,7 +133,7 @@
       <ion-spinner style="margin-top: 10px; color: #3b3b3f"></ion-spinner>
     </div>
     <div *ngIf="(grupoWorkStation != undefined) && !loadingEquipos">
-      <ion-item lines="full" *ngFor="let grupoEquipo of grupoWorkStation; let j = index">
+      <div style="background-color: white;" *ngFor="let grupoEquipo of grupoWorkStation; let j = index">
         <ion-grid>
           <ion-row>
             <ion-col class="grupoequipo" size="5.5" >{{grupoEquipo.nombre_equipo_grupo}}</ion-col>
@@ -209,7 +209,7 @@
                   <ion-icon *ngIf="showDeleteQr[j][i].show" [title]="'Eliminar QR de la lista (' + showDeleteQr[j][i].count +')'" style="margin-top:15px; color: red !important;" (click)="deleteImprimirQr(equipo, i, j)" name="print-outline"></ion-icon>
                 </ion-col>
                 <ion-col size="1">
-                  <ion-icon name="trash-outline" color="danger" style="margin-top:15px" (click)="borrar_equipo(equipo.id_equipo,j,i)"></ion-icon>
+                  <ion-icon name="trash-outline" color="danger" style="margin-top:15px" (click)="borrar_equipo(equipo,j,i)"></ion-icon>
                   <ion-icon color="primary" name="create-outline" style="padding-left: 5px;" (click)="editName(equipo)"></ion-icon> 
                 </ion-col>
 
@@ -218,7 +218,7 @@
             </div>
           </div>
         </ion-grid>
-      </ion-item>
+      </div>
     </div>
 
   </div>

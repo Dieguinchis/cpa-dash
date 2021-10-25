@@ -38,7 +38,7 @@
         </div>
       </ion-label>
     </ion-item>
-    <div *ngIf="visita.visitas.horario_salida != 'NULL'">
+    <div *ngIf="(visita.visitas.horario_salida != 'NULL') && (visita.visitas.estado_visitas != 'en proceso')">
       <div *ngIf="!pdf_generado && visita.visitas.pdfGenerado == 0">
         <ion-button expand="full" (click)="generar_pdf()">Generar PDF</ion-button>
       </div>

@@ -11,3 +11,7 @@ ion-icon{
     cursor:default;
     color: gray;
 }
+.itemHover:hover{
+    --background: rgb(236, 236, 236);
+    cursor: pointer;
+}

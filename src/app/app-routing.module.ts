@@ -15,7 +15,11 @@ const routes: Routes = [
   {
     path: 'administrar-visitas',
     loadChildren: () => import('./paginas/administrar-visitas/administrar-visitas.module').then( m => m.AdministrarVisitasPageModule)
+  },  {
+    path: 'estadisticas',
+    loadChildren: () => import('./paginas/estadisticas/estadisticas.module').then( m => m.EstadisticasPageModule)
   }
+
 
 ];
 
