@@ -19,7 +19,8 @@ export class ProgramarVisitaPage implements OnInit {
   public grupoWorkStation = []
   public grupoWorkStationElegidos = []
   public show = false
-  
+  public tecnicoPrincipal;
+
   servicios_elegidosAux: string[] = [];
   id_cliente_elegido: any = null;
   sucursal_elegida: any = null;
@@ -159,7 +160,7 @@ export class ProgramarVisitaPage implements OnInit {
     var arrAux = []
     for(let workstation of this.grupoWorkStationElegidos){
       
-      workstation.tecnico.forEach(tecnico => {
+      workstation.tecnico?.forEach(tecnico => {
         console.log(1)
         for (let index = 0; index < tecnico.equipos.length; index++) {
           const element = tecnico.equipos[index];
@@ -337,7 +338,6 @@ export class ProgramarVisitaPage implements OnInit {
         }, {
           text: 'Ok',
           handler: (data) => {
-            console.error(data)
             servicio.tecnico = data;
             servicio.tecnico.forEach(tecnico => {
               if (!tecnico.equipos) {
@@ -376,6 +376,30 @@ export class ProgramarVisitaPage implements OnInit {
         }
       }
     }
+  }
+
+  selectTecnicoPrincipal(){
+    console.log(this.serviciosElegidos)
+    console.log(this.tecnicoPrincipal)
+    var aux = []
+    for (let servicio of this.serviciosElegidos) {
+      for (let equipo of servicio.equipos) {
+        equipo.tecnico = this.tecnicoPrincipal.id_tecnico.toString();
+      }
+    }
+    for (let grupo of this.grupoWorkStationElegidos) {
+      grupo.equipos.forEach(equipo => {
+        equipo.selected = true;
+      });
+      aux.push(grupo.equipos);
+    }
+    for (let grupo of this.grupoWorkStationElegidos) {
+      grupo.tecnico = [];
+      grupo.tecnico[0] = this.tecnicoPrincipal;
+      grupo.tecnico[0].equipos = aux;
+    }
+
+    console.log(this.grupoWorkStationElegidos)
   }
 
 }

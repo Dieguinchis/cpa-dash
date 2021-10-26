@@ -18,6 +18,7 @@ export class VerVisitaPage implements OnInit {
   public visita: any;
   public url;
   public pdf_generado:boolean = false;
+  public validDate = true;
 
   constructor(private navParams: NavParams, private api_visitas: ApiClientesService, private modalController: ModalController, public loadingController: LoadingController) { }
 
@@ -61,6 +62,11 @@ export class VerVisitaPage implements OnInit {
     this.api_visitas.informacion_visita(this.id_visita).then(data => {
       this.visita = data;
       this.visita = this.visita.result;
+      if (new Date (this.visita.visitas.horario_salida).valueOf()) {
+        this.visita.visitas.horario_salida = new Date (this.visita.visitas.horario_salida)
+      }else{
+        this.validDate = false;
+      }
       console.log(this.visita)
       if (this.visita) {
         this.visita.servicios2 = [];

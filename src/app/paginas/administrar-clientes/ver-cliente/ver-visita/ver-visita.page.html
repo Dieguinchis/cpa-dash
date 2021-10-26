@@ -15,7 +15,8 @@
   <div *ngIf="visita">
     <div *ngIf="visita.visitas.horario_salida != 'NULL'">
       <ion-item lines="full">
-        <ion-label><b>Fecha de concluida la visita:</b> {{visita.visitas.horario_salida | date: 'dd/MM/yyyy hh:mm'}}</ion-label>
+        <ion-label *ngIf="validDate"><b>Fecha de concluida la visita:</b> {{visita.visitas.horario_salida | date: 'dd/MM/yyyy hh:mm a'}}</ion-label>
+        <ion-label *ngIf="!validDate"><b>Fecha de concluida la visita:</b> {{visita.visitas.horario_salida}}</ion-label>
       </ion-item>
     </div>
     <div *ngIf="visita.visitas.horario_salida == 'NULL'">

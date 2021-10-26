@@ -23,6 +23,18 @@
         </ion-select>
     </ion-item>
 
+    <div *ngIf="serviciosElegidos.length > 0">
+        <h2 style="text-align: center;">Tecnico principal</h2>
+        <div>
+            <ion-item style="margin-top: 10px;">
+                <ion-label fixed style="text-align: center;">Tecnico principal</ion-label>
+                <ion-select (ionChange)="selectTecnicoPrincipal()" [interfaceOptions]="custom" [(ngModel)]="tecnicoPrincipal">
+                    <ion-select-option *ngFor="let tecnico of listado_tecnicos" [value]="tecnico">{{tecnico.nombre_tecnico}} {{tecnico.apellido_tecnico}}</ion-select-option>
+                </ion-select>
+            </ion-item>
+        </div>    
+    </div>
+
     <div *ngFor="let servicio of serviciosElegidos" style="text-align: center;">
         <h2 style="text-align: center;">{{servicio.nombre_servicio}}</h2>
         <div *ngFor="let equipo of servicio.equipos">
@@ -35,6 +47,7 @@
             </ion-item>
         </div>
     </div>
+    
     <div *ngIf="show">
         <div *ngFor="let servicio of grupoWorkStationElegidos; let h = index" style="text-align: center;">
             <h2 style="text-align: center;">{{servicio.nombre_equipo_grupo}}</h2>

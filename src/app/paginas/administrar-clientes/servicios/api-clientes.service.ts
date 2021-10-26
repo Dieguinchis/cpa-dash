@@ -39,6 +39,7 @@ export class ApiClientesService {
 
   async informacion_visita(id){
     var data = await this.http.get(this.apiDir+'/visitas/id/'+id,this.requestOptions);
+    console.log(this.apiDir+'/visitas/id/'+id,this.requestOptions)
     return data.toPromise()
   }
 
