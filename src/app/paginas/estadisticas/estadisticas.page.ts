@@ -233,7 +233,7 @@ export class EstadisticasPage implements OnInit {
         this.productosUtilizados = JSON.parse(JSON.stringify(this.productosFiltrados));
         this.respuestas = [];
         var filtro = [this.fecha_desde,this.fecha_hasta,this.filtro_uv, this.filtro_desratizacion, this.clientesElegidos, this.sucursalesElegidas, this.sectoresElegidos, this.equiposElegidos];
-        this.api_clientes.estadisticas(filtro).subscribe(datos =>{
+        this.api_clientes.estadisticas(filtro).subscribe(async (datos) =>{
           var aux;
           console.log(datos);
           aux = datos;
@@ -348,6 +348,15 @@ export class EstadisticasPage implements OnInit {
           this.respuestas.sort((a,b) => a[0].length - b[0].length);
           console.log(this.respuestas);
           loading.dismiss();
+          if (this.respuestas.length == 0){
+            const alert = await this.alertController.create({
+              header: 'Error',
+              message: 'No se encontro ningun dato sobre los filtros aplicados',
+              buttons: ['OK']
+            });
+          
+            await alert.present();
+          }
         })  
       }
     }
