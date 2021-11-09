@@ -168,29 +168,137 @@
       <ion-card-title>Resumen</ion-card-title>
     </ion-card-header>
     <ion-item *ngIf="filtroUtilizado[1]">
-      <ion-label><b>Total Captura:</b> {{capturas}}</ion-label>
+      <ion-col style="padding: 0;" size="6">
+        <ion-label><b>Total Captura:</b> {{contadores.capturas}}</ion-label>
+      </ion-col>
+      <ion-col style="padding: 0;" size="6">
+        <ion-label><b>Total Consumo:</b> {{contadores.consumo}}</ion-label>
+      </ion-col>
     </ion-item>
-    <ion-item  *ngIf="filtroUtilizado[1]">
-      <ion-label><b>Total Consumo:</b> {{consumo}}</ion-label>
+    <ion-item *ngIf="filtroUtilizado[1]">
+      <ion-col style="padding: 0;" size="6">
+        <ion-label><b>Total Intactos:</b> {{contadores.intacto}}</ion-label>
+      </ion-col>
+      <ion-col style="padding: 0;" size="6">
+        <ion-label><b>Total Nuevos:</b> {{contadores.nuevo}}</ion-label>
+      </ion-col>
+    </ion-item>
+    <ion-item *ngIf="filtroUtilizado[1]">
+      <ion-col style="padding: 0;" size="6">
+        <ion-label><b>Total Tapados:</b> {{contadores.tapado}}</ion-label>
+      </ion-col>
+      <ion-col style="padding: 0;" size="6">
+        <ion-label><b>Total Faltantes:</b> {{contadores.faltante}}</ion-label>
+      </ion-col>
+    </ion-item>
+    <ion-item *ngIf="filtroUtilizado[1]">
+      <ion-col style="padding: 0;" size="12">
+        <ion-label><b>Total Mal estado:</b> {{contadores.malEstado}}</ion-label>
+      </ion-col>
     </ion-item>
     <ion-item *ngIf="filtroUtilizado[0]">
       <ion-label ><b>Promedio mediciones UV:</b> {{promedioUV?promedioUV:'No hay mediciones'}}</ion-label>
     </ion-item>
     <ion-item *ngIf="(filtroUtilizado[1]) && (productosUtilizados?.includes(productos[0].id_producto) || productosUtilizados?.length == 0)">
-      <ion-label><b>Captura con Pegamento - Pegamento:</b> {{productos[0].captura}}</ion-label>
-      <ion-label><b>Consumo con Pegamento - Pegamento:</b> {{productos[0].consumo}}</ion-label>
-
+      <ion-label><b>Pegamento - Pegamento:</b></ion-label>
+    </ion-item >
+    <ion-item *ngIf="(filtroUtilizado[1]) && (productosUtilizados?.includes(productos[0].id_producto) || productosUtilizados?.length == 0)">
+      <ion-col size="6">
+        <ion-label>Captura: {{productos[0].captura}}</ion-label>
+      </ion-col>
+      <ion-col size="6">
+        <ion-label>Consumo: {{productos[0].consumo}}</ion-label>
+      </ion-col>
+    </ion-item>
+    <ion-item *ngIf="(filtroUtilizado[1]) && (productosUtilizados?.includes(productos[0].id_producto) || productosUtilizados?.length == 0)">
+      <ion-col size="6">
+        <ion-label>Intactos: {{productos[0].intacto}}</ion-label>
+      </ion-col>
+      <ion-col size="6">
+        <ion-label>Nuevos {{productos[0].nuevo}}</ion-label>
+      </ion-col>
+    </ion-item>
+    <ion-item *ngIf="(filtroUtilizado[1]) && (productosUtilizados?.includes(productos[0].id_producto) || productosUtilizados?.length == 0)">
+      <ion-col size="6">
+        <ion-label>Tapados: {{productos[0].tapado}}</ion-label>
+      </ion-col>
+      <ion-col size="6">
+        <ion-label>Faltantes: {{productos[0].faltante}}</ion-label>
+      </ion-col>
+    </ion-item>
+    <ion-item *ngIf="(filtroUtilizado[1]) && (productosUtilizados?.includes(productos[0].id_producto) || productosUtilizados?.length == 0)"> 
+      <ion-col size="12">
+        <ion-label>Mal estado: {{productos[0].malEstado}}</ion-label>
+      </ion-col>
+    </ion-item>
+    <ion-item *ngIf="(filtroUtilizado[1]) && (productosUtilizados?.includes(productos[1].id_producto) || productosUtilizados?.length == 0)">
+      <ion-label><b>Parafinado - Floucoumafen:</b></ion-label>
     </ion-item >
     <ion-item *ngIf="(filtroUtilizado[1]) && (productosUtilizados?.includes(productos[1].id_producto) || productosUtilizados?.length == 0)">
-      <ion-label><b>Captura con Parafinado - Floucoumafen:</b> {{productos[1].captura}}</ion-label>
-      <ion-label><b>Consumo con Parafinado - Floucoumafen:</b> {{productos[1].consumo}}</ion-label>
-
+      <ion-col size="6">
+        <ion-label>Captura: {{productos[1].captura}}</ion-label>
+      </ion-col>
+      <ion-col size="6">
+        <ion-label>Consumo: {{productos[1].consumo}}</ion-label>
+      </ion-col>
+    </ion-item>
+    <ion-item *ngIf="(filtroUtilizado[1]) && (productosUtilizados?.includes(productos[1].id_producto) || productosUtilizados?.length == 0)">
+      <ion-col size="6">
+        <ion-label>Intactos: {{productos[1].intacto}}</ion-label>
+      </ion-col>
+      <ion-col size="6">
+        <ion-label>Nuevos {{productos[1].nuevo}}</ion-label>
+      </ion-col>
+    </ion-item>
+    <ion-item *ngIf="(filtroUtilizado[1]) && (productosUtilizados?.includes(productos[1].id_producto) || productosUtilizados?.length == 0)">
+      <ion-col size="6">
+        <ion-label>Tapados: {{productos[1].tapado}}</ion-label>
+      </ion-col>
+      <ion-col size="6">
+        <ion-label>Faltantes: {{productos[1].faltante}}</ion-label>
+      </ion-col>
+    </ion-item>
+    <ion-item *ngIf="(filtroUtilizado[1]) && (productosUtilizados?.includes(productos[1].id_producto) || productosUtilizados?.length == 0)"> 
+      <ion-col size="12">
+        <ion-label>Mal estado: {{productos[1].malEstado}}</ion-label>
+      </ion-col>
     </ion-item>
     <ion-item *ngIf="(filtroUtilizado[1]) && (productosUtilizados?.includes(productos[2].id_producto) || productosUtilizados?.length == 0)">
-      <ion-label><b>Captura con Parafinado - Bromadiolone:</b> {{productos[2].captura}}</ion-label>
-      <ion-label><b>Consumo con Parafinado - Bromadiolone:</b> {{productos[2].consumo}}</ion-label>
+      <ion-label><b>Parafinado - Bromadiolone:</b></ion-label>
+    </ion-item >
+    <ion-item *ngIf="(filtroUtilizado[1]) && (productosUtilizados?.includes(productos[2].id_producto) || productosUtilizados?.length == 0)">
+      <ion-col size="6">
+        <ion-label>Captura: {{productos[2].captura}}</ion-label>
+      </ion-col>
+      <ion-col size="6">
+        <ion-label>Consumo: {{productos[2].consumo}}</ion-label>
+      </ion-col>
     </ion-item>
+    <ion-item *ngIf="(filtroUtilizado[1]) && (productosUtilizados?.includes(productos[2].id_producto) || productosUtilizados?.length == 0)">
+      <ion-col size="6">
+        <ion-label>Intactos: {{productos[2].intacto}}</ion-label>
+      </ion-col>
+      <ion-col size="6">
+        <ion-label>Nuevos {{productos[2].nuevo}}</ion-label>
+      </ion-col>
+    </ion-item>
+    <ion-item *ngIf="(filtroUtilizado[1]) && (productosUtilizados?.includes(productos[2].id_producto) || productosUtilizados?.length == 0)">
+      <ion-col size="6">
+        <ion-label>Tapados: {{productos[2].tapado}}</ion-label>
+      </ion-col>
+      <ion-col size="6">
+        <ion-label>Faltantes: {{productos[2].faltante}}</ion-label>
+      </ion-col>
+    </ion-item>
+    <ion-item *ngIf="(filtroUtilizado[1]) && (productosUtilizados?.includes(productos[2].id_producto) || productosUtilizados?.length == 0)"> 
+      <ion-col size="12">
+        <ion-label>Mal estado: {{productos[2].malEstado}}</ion-label>
+      </ion-col>
+    </ion-item> 
   </ion-card>
+  <ion-button *ngIf="respuestas.length > 0" (click)="verPdf()" expand="block"  shape="round">
+    Ver PDF
+  </ion-button>
 </ion-content>
 
 <ion-fab *ngIf="respuestas.length > 0" vertical="bottom" horizontal="end" slot="fixed">
