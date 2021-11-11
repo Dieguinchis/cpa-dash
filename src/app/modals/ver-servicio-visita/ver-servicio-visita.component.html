@@ -5,7 +5,7 @@
 </ion-header>
 <ion-content>
   <ion-item *ngFor="let servicio of servicios" (click)="editarServicio(servicio.id_formulario, servicio.nombre_equipo)">
-    <ion-label>{{servicio.nombre_equipo}}</ion-label>
+    <ion-label>{{servicio.nombre_equipo}}{{(servicio.tecnico.nombre_tecnico)?' - ' + servicio.tecnico.nombre_tecnico + ' ' + servicio.tecnico.apellido_tecnico:''}}{{(servicio?.respuestas[0]?.tapado == 0)?' - (QR)':''}}</ion-label>
   </ion-item>
   <ion-row>
       <ion-col class="ion-text-center">

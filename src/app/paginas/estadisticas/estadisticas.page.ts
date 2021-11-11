@@ -2,8 +2,6 @@ import { Component, OnInit, ViewChild } from '@angular/core';
 import { AlertController, LoadingController } from '@ionic/angular';
 import { ApiClientesService } from '../administrar-clientes/servicios/api-clientes.service';
 import { ApiVisitasService } from '../programar-visita/servicios/api-visitas.service';
-import { jsPDF } from "jspdf";
-import 'jspdf-autotable'
 
 @Component({
   selector: 'app-estadisticas',
@@ -434,45 +432,11 @@ export class EstadisticasPage implements OnInit {
   }
 
   verPdf(){
-
     var params = {
       respuestas: this.respuestas,
       contadores: this.contadores,
       productos: this.productos
     }
-
-    var doc = new jsPDF({
-        orientation: "landscape",
-        format: [330, 216]
-      });
-  
-    doc.setFontSize(18);
-    doc.text('Report ', 11, 8);
-    doc.setFontSize(11);
-    doc.setTextColor(100);
-
-    var head = [['Fecha','Cliente','Sucursal', 'Sector', 'Workstation', 'Producto', 'Estado Puesto', 'Estado cebo']]
-    var data = [{}]
-
-    for (let i = 0; i < this.respuestas.length; i++) {
-        const respuesta = this.respuestas[i];
-        for (let index = 0; index < respuesta.length; index++) {
-          const element = respuesta[index];
-          console.log(element)
-          data.push([element[0]?.fecha_visita, element[0]?.cliente?.razon_social_cliente,element[0]?.sucursal?.razon_social_sucursal, element[0]?.sector?.nombre_equipo_grupo, element[0]?.cliente?.nombre_equipo, element[0]?element[0].nombre_producto:'' + ' - ' + element[0]?element[0].tipo_producto:'', element[1]?.respuesta, element[2]?.respuesta])
-
-        }
-    }
-    
-    (doc as any).autoTable({
-        head: head,
-        body: data,
-        theme: 'grid',
-        didDrawCell: data => {
-          console.log(data.column.index) 
-        }
-    })
-
     this.api_visitas.pdfEstadisticas(params).subscribe(resp => {
       console.log(resp)
     })

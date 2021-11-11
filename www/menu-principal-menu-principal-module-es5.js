@@ -21,7 +21,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
     /* harmony default export */
 
 
-    __webpack_exports__["default"] = "<ion-tabs>\r\n  <ion-tab-bar  slot=\"top\">\r\n\r\n    <ion-tab-button tab=\"administrar-clientes\">\r\n      <ion-icon name=\"people-outline\"></ion-icon>\r\n      <ion-label>Administrar clientes</ion-label>\r\n    </ion-tab-button>\r\n\r\n    <ion-tab-button tab=\"alta-cliente\">\r\n      <ion-icon name=\"person-add-outline\"></ion-icon>\r\n      <ion-label>Dar de alta a un cliente</ion-label>\r\n    </ion-tab-button>\r\n    \r\n    <ion-tab-button tab=\"administrar-visitas\">\r\n      <ion-icon name=\"calendar-outline\"></ion-icon>\r\n      <ion-label>Administrar Visitas</ion-label>\r\n    </ion-tab-button>\r\n\r\n    <ion-tab-button tab=\"administrar-servicios\">\r\n      <ion-icon name=\"document-text-outline\"></ion-icon>\r\n      <ion-label>Administrar servicios</ion-label>\r\n    </ion-tab-button>\r\n\r\n    <ion-tab-button tab=\"administrar-tecnicos\">\r\n      <ion-icon name=\"person-circle-outline\"></ion-icon>\r\n      <ion-label>Administrar tecnicos</ion-label>\r\n    </ion-tab-button>\r\n    \r\n    <ion-icon name=\"log-out\" class=\"logout\" (click)=\"logout()\"></ion-icon>\r\n  </ion-tab-bar>\r\n\r\n  \r\n\r\n</ion-tabs>";
+    __webpack_exports__["default"] = "<ion-tabs>\r\n  <ion-tab-bar  slot=\"top\">\r\n\r\n    <ion-tab-button tab=\"administrar-clientes\">\r\n      <ion-icon name=\"people-outline\"></ion-icon>\r\n      <ion-label>Administrar clientes</ion-label>\r\n    </ion-tab-button>\r\n\r\n    <ion-tab-button tab=\"alta-cliente\">\r\n      <ion-icon name=\"person-add-outline\"></ion-icon>\r\n      <ion-label>Dar de alta a un cliente</ion-label>\r\n    </ion-tab-button>\r\n    \r\n    <ion-tab-button tab=\"administrar-visitas\">\r\n      <ion-icon name=\"calendar-outline\"></ion-icon>\r\n      <ion-label>Administrar Visitas</ion-label>\r\n    </ion-tab-button>\r\n\r\n    <ion-tab-button tab=\"administrar-servicios\">\r\n      <ion-icon name=\"document-text-outline\"></ion-icon>\r\n      <ion-label>Administrar servicios</ion-label>\r\n    </ion-tab-button>\r\n\r\n    <ion-tab-button tab=\"administrar-tecnicos\">\r\n      <ion-icon name=\"person-circle-outline\"></ion-icon>\r\n      <ion-label>Administrar tecnicos</ion-label>\r\n    </ion-tab-button>\r\n\r\n    <ion-tab-button tab=\"estadisticas\">\r\n      <ion-icon name=\"stats-chart-outline\"></ion-icon>\r\n      <ion-label>Estadisticas</ion-label>\r\n    </ion-tab-button>\r\n    \r\n    <ion-icon name=\"log-out\" class=\"logout\" (click)=\"logout()\"></ion-icon>\r\n  </ion-tab-bar>\r\n\r\n  \r\n\r\n</ion-tabs>";
     /***/
   },
 
@@ -164,6 +164,17 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
             return m.ProgramarVisitaPageModule;
           });
         }
+      }, {
+        path: 'estadisticas',
+        loadChildren: function loadChildren() {
+          return __webpack_require__.e(
+          /*! import() | paginas-estadisticas-estadisticas-module */
+          "paginas-estadisticas-estadisticas-module").then(__webpack_require__.bind(null,
+          /*! ../paginas/estadisticas/estadisticas.module */
+          "./src/app/paginas/estadisticas/estadisticas.module.ts")).then(function (m) {
+            return m.EstadisticasPageModule;
+          });
+        }
       }]
     }, {
       path: '',
@@ -271,7 +282,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
     /* harmony default export */
 
 
-    __webpack_exports__["default"] = ".logout {\n  position: absolute;\n  right: 20px;\n  color: white;\n  top: 15px;\n  font-size: 30px;\n  cursor: pointer;\n}\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbInNyYy9hcHAvbWVudS1wcmluY2lwYWwvRTpcXFRyYWJham9cXGNwYVxcZnJvbnRlbmRfY3BhX2FkbWluL3NyY1xcYXBwXFxtZW51LXByaW5jaXBhbFxcbWVudS1wcmluY2lwYWwucGFnZS5zY3NzIiwic3JjL2FwcC9tZW51LXByaW5jaXBhbC9tZW51LXByaW5jaXBhbC5wYWdlLnNjc3MiXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6IkFBQUE7RUFDSSxrQkFBQTtFQUNBLFdBQUE7RUFDQSxZQUFBO0VBQ0EsU0FBQTtFQUNBLGVBQUE7RUFDQSxlQUFBO0FDQ0oiLCJmaWxlIjoic3JjL2FwcC9tZW51LXByaW5jaXBhbC9tZW51LXByaW5jaXBhbC5wYWdlLnNjc3MiLCJzb3VyY2VzQ29udGVudCI6WyIubG9nb3V0e1xyXG4gICAgcG9zaXRpb246IGFic29sdXRlO1xyXG4gICAgcmlnaHQ6IDIwcHg7XHJcbiAgICBjb2xvcjogd2hpdGU7XHJcbiAgICB0b3A6IDE1cHg7XHJcbiAgICBmb250LXNpemU6IDMwcHg7XHJcbiAgICBjdXJzb3I6IHBvaW50ZXI7XHJcbn0iLCIubG9nb3V0IHtcbiAgcG9zaXRpb246IGFic29sdXRlO1xuICByaWdodDogMjBweDtcbiAgY29sb3I6IHdoaXRlO1xuICB0b3A6IDE1cHg7XG4gIGZvbnQtc2l6ZTogMzBweDtcbiAgY3Vyc29yOiBwb2ludGVyO1xufSJdfQ== */";
+    __webpack_exports__["default"] = ".logout {\n  position: absolute;\n  right: 20px;\n  color: white;\n  top: 15px;\n  font-size: 30px;\n  cursor: pointer;\n}\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbInNyYy9hcHAvbWVudS1wcmluY2lwYWwvRDpcXFJlcG9zaXRvcmlvc1xcUFJPRFVDQ0lPTlxcZnJvbnRlbmRfY3BhX2FkbWluL3NyY1xcYXBwXFxtZW51LXByaW5jaXBhbFxcbWVudS1wcmluY2lwYWwucGFnZS5zY3NzIiwic3JjL2FwcC9tZW51LXByaW5jaXBhbC9tZW51LXByaW5jaXBhbC5wYWdlLnNjc3MiXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6IkFBQUE7RUFDSSxrQkFBQTtFQUNBLFdBQUE7RUFDQSxZQUFBO0VBQ0EsU0FBQTtFQUNBLGVBQUE7RUFDQSxlQUFBO0FDQ0oiLCJmaWxlIjoic3JjL2FwcC9tZW51LXByaW5jaXBhbC9tZW51LXByaW5jaXBhbC5wYWdlLnNjc3MiLCJzb3VyY2VzQ29udGVudCI6WyIubG9nb3V0e1xyXG4gICAgcG9zaXRpb246IGFic29sdXRlO1xyXG4gICAgcmlnaHQ6IDIwcHg7XHJcbiAgICBjb2xvcjogd2hpdGU7XHJcbiAgICB0b3A6IDE1cHg7XHJcbiAgICBmb250LXNpemU6IDMwcHg7XHJcbiAgICBjdXJzb3I6IHBvaW50ZXI7XHJcbn0iLCIubG9nb3V0IHtcbiAgcG9zaXRpb246IGFic29sdXRlO1xuICByaWdodDogMjBweDtcbiAgY29sb3I6IHdoaXRlO1xuICB0b3A6IDE1cHg7XG4gIGZvbnQtc2l6ZTogMzBweDtcbiAgY3Vyc29yOiBwb2ludGVyO1xufSJdfQ== */";
     /***/
   },
 

@@ -160,6 +160,6 @@ export class EditarVisitaComponent implements OnInit {
 
   mostrarOtros(){
     var aux = this.respuestas.find(respuesta => respuesta.id_campo == 30)
-    return aux.respuesta.includes('Otros')
+    return aux?.respuesta?.includes('Otros')
   }
 }

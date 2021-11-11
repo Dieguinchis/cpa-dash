@@ -138,7 +138,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
     /* harmony default export */
 
 
-    __webpack_exports__["default"] = "<ion-app>\r\n  <ion-router-outlet></ion-router-outlet>\r\n  <div style=\"color: red; padding: 10px; border: solid red 1px; position: fixed;top: 0px; left: 0px;font-weight: bold;\">\r\n    Version de desarrollo\r\n  </div>\r\n</ion-app>\r\n";
+    __webpack_exports__["default"] = "<ion-app>\r\n  <ion-router-outlet></ion-router-outlet>\r\n  <!-- <div style=\"color: red; padding: 10px; border: solid red 1px; position: fixed;top: 0px; left: 0px;font-weight: bold;\">\r\n    Version de desarrollo\r\n  </div> -->\r\n</ion-app>\r\n";
     /***/
   },
 
@@ -278,6 +278,17 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
         /*! ./paginas/administrar-visitas/administrar-visitas.module */
         "./src/app/paginas/administrar-visitas/administrar-visitas.module.ts")).then(function (m) {
           return m.AdministrarVisitasPageModule;
+        });
+      }
+    }, {
+      path: 'estadisticas',
+      loadChildren: function loadChildren() {
+        return __webpack_require__.e(
+        /*! import() | paginas-estadisticas-estadisticas-module */
+        "paginas-estadisticas-estadisticas-module").then(__webpack_require__.bind(null,
+        /*! ./paginas/estadisticas/estadisticas.module */
+        "./src/app/paginas/estadisticas/estadisticas.module.ts")).then(function (m) {
+          return m.EstadisticasPageModule;
         });
       }
     }];
@@ -742,7 +753,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
         _classCallCheck(this, ServicioLoginService);
 
         this.http = http;
-        this.apiDir = "http://157.230.90.222:3001";
+        this.apiDir = "http://192.168.0.71:3000";
         this.requestOptions = {
           headers: new _angular_common_http__WEBPACK_IMPORTED_MODULE_2__["HttpHeaders"]({
             'Content-Type': 'application/json',
@@ -1362,7 +1373,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
         _classCallCheck(this, ApiServiciosService);
 
         this.http = http;
-        this.apiDir = "http://157.230.90.222:3001";
+        this.apiDir = "http://192.168.0.71:3000";
         this.requestOptions = {
           headers: new _angular_common_http__WEBPACK_IMPORTED_MODULE_2__["HttpHeaders"]({
             'Content-Type': 'application/json',
@@ -1686,7 +1697,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
         _classCallCheck(this, ApiVisitasService);
 
         this.http = http;
-        this.apiDir = "http://157.230.90.222:3001";
+        this.apiDir = "http://192.168.0.71:3000";
         this.requestOptions = {
           headers: new _angular_common_http__WEBPACK_IMPORTED_MODULE_2__["HttpHeaders"]({
             'Content-Type': 'application/json',
@@ -1939,7 +1950,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
   /***/
   function _(module, exports, __webpack_require__) {
     module.exports = __webpack_require__(
-    /*! E:\Trabajo\cpa\frontend_cpa_admin\src\main.ts */
+    /*! D:\Repositorios\PRODUCCION\frontend_cpa_admin\src\main.ts */
     "./src/main.ts");
     /***/
   }

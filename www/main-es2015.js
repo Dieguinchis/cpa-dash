@@ -270,7 +270,7 @@ module.exports = webpackAsyncContext;
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony default export */ __webpack_exports__["default"] = ("<ion-app>\r\n  <ion-router-outlet></ion-router-outlet>\r\n  <div style=\"color: red; padding: 10px; border: solid red 1px; position: fixed;top: 0px; left: 0px;font-weight: bold;\">\r\n    Version de desarrollo\r\n  </div>\r\n</ion-app>\r\n");
+/* harmony default export */ __webpack_exports__["default"] = ("<ion-app>\r\n  <ion-router-outlet></ion-router-outlet>\r\n  <!-- <div style=\"color: red; padding: 10px; border: solid red 1px; position: fixed;top: 0px; left: 0px;font-weight: bold;\">\r\n    Version de desarrollo\r\n  </div> -->\r\n</ion-app>\r\n");
 
 /***/ }),
 
@@ -344,6 +344,10 @@ const routes = [
     {
         path: 'administrar-visitas',
         loadChildren: () => Promise.all(/*! import() | paginas-administrar-visitas-administrar-visitas-module */[__webpack_require__.e("default~paginas-administrar-clientes-ver-cliente-ver-cliente-module~paginas-administrar-visitas-admi~b66acba8"), __webpack_require__.e("default~paginas-administrar-clientes-ver-cliente-ver-cliente-module~paginas-administrar-visitas-admi~5d227966"), __webpack_require__.e("paginas-administrar-visitas-administrar-visitas-module")]).then(__webpack_require__.bind(null, /*! ./paginas/administrar-visitas/administrar-visitas.module */ "./src/app/paginas/administrar-visitas/administrar-visitas.module.ts")).then(m => m.AdministrarVisitasPageModule)
+    },
+    {
+        path: 'estadisticas',
+        loadChildren: () => __webpack_require__.e(/*! import() | paginas-estadisticas-estadisticas-module */ "paginas-estadisticas-estadisticas-module").then(__webpack_require__.bind(null, /*! ./paginas/estadisticas/estadisticas.module */ "./src/app/paginas/estadisticas/estadisticas.module.ts")).then(m => m.EstadisticasPageModule)
     }
 ];
 let AppRoutingModule = class AppRoutingModule {
@@ -596,7 +600,7 @@ __webpack_require__.r(__webpack_exports__);
 let ServicioLoginService = class ServicioLoginService {
     constructor(http) {
         this.http = http;
-        this.apiDir = "http://157.230.90.222:3001";
+        this.apiDir = "http://192.168.0.71:3000";
         this.requestOptions = {
             headers: new _angular_common_http__WEBPACK_IMPORTED_MODULE_2__["HttpHeaders"]({
                 'Content-Type': 'application/json',
@@ -945,7 +949,7 @@ __webpack_require__.r(__webpack_exports__);
 let ApiServiciosService = class ApiServiciosService {
     constructor(http) {
         this.http = http;
-        this.apiDir = "http://157.230.90.222:3001";
+        this.apiDir = "http://192.168.0.71:3000";
         this.requestOptions = {
             headers: new _angular_common_http__WEBPACK_IMPORTED_MODULE_2__["HttpHeaders"]({
                 'Content-Type': 'application/json',
@@ -1134,7 +1138,7 @@ __webpack_require__.r(__webpack_exports__);
 let ApiVisitasService = class ApiVisitasService {
     constructor(http) {
         this.http = http;
-        this.apiDir = "http://157.230.90.222:3001";
+        this.apiDir = "http://192.168.0.71:3000";
         this.requestOptions = {
             headers: new _angular_common_http__WEBPACK_IMPORTED_MODULE_2__["HttpHeaders"]({
                 'Content-Type': 'application/json',
@@ -1302,7 +1306,7 @@ Object(_angular_platform_browser_dynamic__WEBPACK_IMPORTED_MODULE_1__["platformB
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__(/*! E:\Trabajo\cpa\frontend_cpa_admin\src\main.ts */"./src/main.ts");
+module.exports = __webpack_require__(/*! D:\Repositorios\PRODUCCION\frontend_cpa_admin\src\main.ts */"./src/main.ts");
 
 
 /***/ })

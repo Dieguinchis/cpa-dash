@@ -573,7 +573,7 @@ imprimir(qrs){
 
 test($event) {
   console.warn($event)
-  // window.open('http://157.230.90.222:3001/getZip')
+  // window.open('http://192.168.0.71:3000/getZip')
 }
 
 descargar(){
@@ -583,7 +583,7 @@ descargarSucursal(){
   // console.warn(1)
   var link = document.createElement("a");
   link.download = this.sucursal.sucursal[0].id_sucursal + ".png";
-  link.href = "http://157.230.90.222:3001/getfile/sucursales/"+this.sucursal.sucursal[0].id_sucursal ;
+  link.href = "http://192.168.0.71:3000/getfile/sucursales/"+this.sucursal.sucursal[0].id_sucursal ;
   link.click();
 }
 
@@ -592,7 +592,7 @@ descargarQrEquipo(equipo){
   // console.warn(equipo.id_equipo)
   var link = document.createElement("a");
   link.download = equipo.id_equipo + ".png";
-  link.href = "http://157.230.90.222:3001/getfile/equipos/"+equipo.id_equipo;
+  link.href = "http://192.168.0.71:3000/getfile/equipos/"+equipo.id_equipo;
   link.click();
 }
 
@@ -609,7 +609,7 @@ descargarQrThisWorkstation(grupoEquipo){
   }
   var link = document.createElement("a");
   link.download = "qrs.png";
-  link.href = "http://157.230.90.222:3001/getZip?type=equipos&name="+grupoEquipo.nombre_equipo_grupo+"&data="+ids;
+  link.href = "http://192.168.0.71:3000/getZip?type=equipos&name="+grupoEquipo.nombre_equipo_grupo+"&data="+ids;
   link.click();
 }
 
@@ -632,7 +632,7 @@ descargarAllQrSucursal(){
   }
   var link = document.createElement("a");
   link.download = "qrs.png";
-  link.href = "http://157.230.90.222:3001/getZip?type=all&name="+this.sucursal.sucursal[0].razon_social_sucursal+"&data="+ids;
+  link.href = "http://192.168.0.71:3000/getZip?type=all&name="+this.sucursal.sucursal[0].razon_social_sucursal+"&data="+ids;
   link.click();
 
 }
@@ -655,7 +655,7 @@ descargarQrAllWorkstations(){
   }
   var link = document.createElement("a");
   link.download = "qrs.png";
-  link.href = "http://157.230.90.222:3001/getZip?type=equipos&name=equipos_"+this.sucursal.sucursal[0].razon_social_sucursal+"&data="+ids;
+  link.href = "http://192.168.0.71:3000/getZip?type=equipos&name=equipos_"+this.sucursal.sucursal[0].razon_social_sucursal+"&data="+ids;
   link.click();
 }
 
@@ -701,9 +701,15 @@ descargarQrAllWorkstations(){
               var aux ;
               aux = resp;
               aux = aux.equipoCreado.retorno;
-              equipo.producto_predeterminado = this.productos.find(producto => producto.id_producto == aux.producto_predeterminado).id_producto;
-              equipo.producto_predeterminado_nombre = this.productos.find(producto => producto.id_producto == aux.producto_predeterminado).nombre_producto +' - '+ this.productos.find(producto => producto.id_producto == aux.producto_predeterminado).tipo_producto;
-              //this.actualizar_informacion(false);
+              if (aux.producto_predeterminado) {
+                equipo.producto_predeterminado = this.productos.find(producto => producto.id_producto == aux.producto_predeterminado).id_producto;
+                equipo.producto_predeterminado_nombre = this.productos.find(producto => producto.id_producto == aux.producto_predeterminado).nombre_producto +' - '+ this.productos.find(producto => producto.id_producto == aux.producto_predeterminado).tipo_producto;  
+              }else{
+                equipo.producto_predeterminado = null;
+                equipo.producto_predeterminado_nombre = null;
+  
+              }
+              // this.actualizar_informacion(false);
             }).catch(err => {
               console.error(err)
             })
@@ -713,6 +719,73 @@ descargarQrAllWorkstations(){
     });
   
     await alert.present();
+  }
+
+  async cambiarProductoSector(sector){
+    console.log(sector)
+
+    var input = [];
+    for (let producto of this.productos){
+      input.push({
+        label:producto.nombre_producto + ' - ' + producto.tipo_producto,
+        value:producto.id_producto,
+        type:"radio"
+      })
+    }
+    input.push({
+        label:'Sin Producto',
+        value:null,
+        type:"radio"
+    })
+    const alert = await this.alertController.create({
+      subHeader: sector.nombre_equipo_grupo,
+      header:'Producto predeterminado',
+      inputs: input,
+      buttons: [
+        {
+          text:'Cancelar',
+          role:'cancel',
+          cssClass:'secondary'
+        },
+        {
+          text: 'Aceptar',
+          handler: (data) => {
+            for (let index = 0; index < sector.equipos.length; index++) {
+              console.log(index)
+              var equipo = sector.equipos[index];
+              equipo.producto_predeterminado = data;
+              equipo.estado_servicio = undefined;
+              equipo.modificable = undefined;
+              equipo.nombre_equipo_grupo = undefined;
+              equipo.nombre_servicio = undefined;
+              equipo.producto = undefined;
+              equipo.qr = undefined;
+              console.log(equipo)
+              this.api_visitas.actualizar_equipo(equipo).then(resp =>{
+                console.log(resp);
+                var aux ;
+                aux = resp;
+                aux = aux.equipoCreado.retorno;
+                if (aux.producto_predeterminado) {
+                  equipo.producto_predeterminado = this.productos.find(producto => producto.id_producto == aux.producto_predeterminado).id_producto;
+                  equipo.producto_predeterminado_nombre = this.productos.find(producto => producto.id_producto == aux.producto_predeterminado).nombre_producto +' - '+ this.productos.find(producto => producto.id_producto == aux.producto_predeterminado).tipo_producto; 
+                  this.actualizar_informacion(false); 
+                }else{
+                  equipo.producto_predeterminado = null;
+                  equipo.producto_predeterminado_nombre = null;
+                  this.actualizar_informacion(false);
+                }
+              }).catch(err => {
+                console.error(err)
+              })
+            }  
+          }
+        }
+    ]
+    });
+  
+    await alert.present();
+
   }
 
 }
