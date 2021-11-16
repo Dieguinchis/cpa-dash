@@ -12,7 +12,7 @@ import { EditarVisitaComponent } from '../editar-visita/editar-visita.component'
 export class VerServicioVisitaComponent implements OnInit {
 
   public id_servicio;
-  public servicios;
+  public servicios = [];
 
   constructor(
     public navParams: NavParams,

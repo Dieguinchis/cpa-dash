@@ -47,7 +47,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
     /* harmony default export */
 
 
-    __webpack_exports__["default"] = "<ion-header>\r\n  <ion-toolbar style=\"text-align: center;\" color=\"primary\">\r\n    <ion-title>visita</ion-title>\r\n    <ion-buttons slot=\"end\">\r\n      <ion-button (click)=\"close()\">\r\n        <ion-icon name=\"close-outline\"></ion-icon>\r\n        </ion-button>\r\n    </ion-buttons>\r\n  </ion-toolbar>\r\n</ion-header>\r\n<ion-content>\r\n  <div *ngIf=\"!visita\" style=\"text-align: center;\">\r\n    <ion-spinner></ion-spinner>\r\n  </div>\r\n  <div *ngIf=\"visita\">\r\n    <div *ngIf=\"visita.visitas.horario_salida != 'NULL'\">\r\n      <ion-item lines=\"full\">\r\n        <ion-label *ngIf=\"validDate\"><b>Fecha de concluida la visita:</b> {{visita.visitas.horario_salida | date: 'dd/MM/yyyy hh:mm a'}}</ion-label>\r\n        <ion-label *ngIf=\"!validDate\"><b>Fecha de concluida la visita:</b> {{visita.visitas.horario_salida}}</ion-label>\r\n      </ion-item>\r\n    </div>\r\n    <div *ngIf=\"visita.visitas.horario_salida == 'NULL'\">\r\n      <ion-item>\r\n        <ion-label><b>Fecha estimada de la visita:</b> {{visita.visitas.fecha_visita | date: 'dd/MM/yyyy hh:mm'}}</ion-label>\r\n      </ion-item>\r\n    </div>\r\n    <ion-item lines=\"full\">\r\n      <ion-label><b>Cliente:</b> {{visita.visitas.razon_social_cliente}}</ion-label>\r\n    </ion-item>\r\n    <ion-item lines=\"full\">\r\n      <ion-label><b>Sucursal:</b> {{visita.visitas.razon_social_sucursal}}</ion-label>\r\n    </ion-item>\r\n    <ion-item lines=\"full\">\r\n      <ion-label><b>Servicios ofrecidos:</b>\r\n        <div *ngFor=\"let servicio of visita.servicios2; let i = index\" style=\"margin-left:10px; margin-top: 10px\">\r\n          <ion-icon name=\"document-outline\" color=\"primary\"></ion-icon>\r\n          {{servicio.nombre_servicio}}\r\n          <ion-icon name=\"create-outline\" style=\"cursor: pointer;\" *ngIf=\"visita.visitas.estado_visitas == 'finalizada'\" (click)=\"editarServicio(servicio.id_servicio, servicio.id_formulario)\"></ion-icon>\r\n        </div>\r\n      </ion-label>\r\n    </ion-item>\r\n    <div *ngIf=\"(visita.visitas.horario_salida != 'NULL') && (visita.visitas.estado_visitas != 'en proceso')\">\r\n      <div *ngIf=\"!pdf_generado && visita.visitas.pdfGenerado == 0\">\r\n        <ion-button expand=\"full\" (click)=\"generar_pdf()\">Generar PDF</ion-button>\r\n      </div>\r\n      <div *ngIf=\"pdf_generado || visita.visitas.pdfGenerado == 1\">\r\n        <ion-button expand=\"full\" (click)=\"ver_pdf()\" color=\"success\">Ver PDF</ion-button>\r\n      </div>\r\n      <div *ngIf=\"pdf_generado || visita.visitas.pdfGenerado == 1\">\r\n        <ion-button expand=\"full\" (click)=\"generar_pdf()\">Volver a generar PDF</ion-button>\r\n      </div>\r\n    </div>\r\n    <div *ngIf=\"visita.visitas.horario_salida == 'NULL'\">\r\n      <ion-button expand=\"full\" (click)=\"modificar_visita()\">Modificar visita</ion-button>\r\n    </div>\r\n  </div>\r\n\r\n  <div>\r\n    <img class=\"imagen_empresa\" src='../../../assets/LogoCPA-01.png'>\r\n  </div>\r\n\r\n</ion-content>\r\n\r\n\r\n";
+    __webpack_exports__["default"] = "<ion-header>\r\n  <ion-toolbar style=\"text-align: center;\" color=\"primary\">\r\n    <ion-title>visita</ion-title>\r\n    <ion-buttons slot=\"end\">\r\n      <ion-button (click)=\"close()\">\r\n        <ion-icon name=\"close-outline\"></ion-icon>\r\n        </ion-button>\r\n    </ion-buttons>\r\n  </ion-toolbar>\r\n</ion-header>\r\n<ion-content>\r\n  <div *ngIf=\"!visita\" style=\"text-align: center;\">\r\n    <ion-spinner></ion-spinner>\r\n  </div>\r\n  <div *ngIf=\"visita\">\r\n    <div *ngIf=\"visita.visitas.horario_salida != 'NULL'\">\r\n      <ion-item lines=\"full\">\r\n        <ion-label *ngIf=\"validDate\"><b>Fecha de concluida la visita:</b> {{visita.visitas.horario_salida | date: 'dd/MM/yyyy hh:mm a'}}</ion-label>\r\n        <ion-label *ngIf=\"!validDate\"><b>Fecha de concluida la visita:</b> {{visita.visitas.horario_salida}}</ion-label>\r\n      </ion-item>\r\n    </div>\r\n    <div *ngIf=\"visita.visitas.horario_salida == 'NULL'\">\r\n      <ion-item>\r\n        <ion-label><b>Fecha estimada de la visita:</b> {{visita.visitas.fecha_visita | date: 'dd/MM/yyyy hh:mm'}}</ion-label>\r\n      </ion-item>\r\n    </div>\r\n    <ion-item lines=\"full\">\r\n      <ion-label><b>Cliente:</b> {{visita.visitas.razon_social_cliente}}</ion-label>\r\n    </ion-item>\r\n    <ion-item lines=\"full\">\r\n      <ion-label><b>Sucursal:</b> {{visita.visitas.razon_social_sucursal}}</ion-label>\r\n    </ion-item>\r\n    <ion-item lines=\"full\">\r\n      <ion-label><b>Servicios ofrecidos:</b>\r\n        <div *ngFor=\"let servicio of visita.servicios2; let i = index\" style=\"margin-left:10px; margin-top: 10px\">\r\n          <div style=\"cursor: pointer;\" *ngIf=\"visita.visitas.estado_visitas == 'finalizada'\" (click)=\"editarServicio(servicio.id_servicio, servicio.id_formulario)\">\r\n            <ion-icon name=\"document-outline\" color=\"primary\"></ion-icon>\r\n            {{servicio.nombre_servicio}}{{\" - \" + servicio?.tecnicos}}\r\n            <ion-icon name=\"create-outline\" style=\"cursor: pointer;\" *ngIf=\"visita.visitas.estado_visitas == 'finalizada'\" (click)=\"editarServicio(servicio.id_servicio, servicio.id_formulario)\"></ion-icon>  \r\n          </div>\r\n          <div *ngIf=\"visita.visitas.estado_visitas != 'finalizada'\">\r\n            <ion-icon name=\"document-outline\" color=\"primary\"></ion-icon>\r\n            {{servicio.nombre_servicio}}{{\" - \" + servicio?.tecnicos}}\r\n            <ion-icon name=\"create-outline\" style=\"cursor: pointer;\" *ngIf=\"visita.visitas.estado_visitas == 'finalizada'\" (click)=\"editarServicio(servicio.id_servicio, servicio.id_formulario)\"></ion-icon>  \r\n          </div>\r\n        </div>\r\n      </ion-label>\r\n    </ion-item>\r\n    <div *ngIf=\"(visita.visitas.horario_salida != 'NULL') && (visita.visitas.estado_visitas != 'en proceso')\">\r\n      <div *ngIf=\"!pdf_generado && visita.visitas.pdfGenerado == 0\">\r\n        <ion-button expand=\"full\" (click)=\"generar_pdf()\">Generar PDF</ion-button>\r\n      </div>\r\n      <div *ngIf=\"pdf_generado || visita.visitas.pdfGenerado == 1\">\r\n        <ion-button expand=\"full\" (click)=\"ver_pdf()\" color=\"success\">Ver PDF</ion-button>\r\n      </div>\r\n      <div *ngIf=\"pdf_generado || visita.visitas.pdfGenerado == 1\">\r\n        <ion-button expand=\"full\" (click)=\"generar_pdf()\">Volver a generar PDF</ion-button>\r\n      </div>\r\n    </div>\r\n    <div *ngIf=\"visita.visitas.horario_salida == 'NULL'\">\r\n      <ion-button expand=\"full\" (click)=\"modificar_visita()\">Modificar visita</ion-button>\r\n    </div>\r\n  </div>\r\n\r\n  <div>\r\n    <img class=\"imagen_empresa\" src='../../../assets/LogoCPA-01.png'>\r\n  </div>\r\n\r\n\r\n</ion-content>\r\n\r\n\r\n";
     /***/
   },
 
@@ -1006,7 +1006,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
                   _step9;
 
               try {
-                var _loop = function _loop() {
+                var _loop5 = function _loop5() {
                   var servicio = _step9.value;
 
                   if (!((_a = _this10.visita) === null || _a === void 0 ? void 0 : _a.servicios2.find(function (servicioAux) {
@@ -1025,12 +1025,104 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
                 };
 
                 for (_iterator9.s(); !(_step9 = _iterator9.n()).done;) {
-                  _loop();
+                  _loop5();
                 }
               } catch (err) {
                 _iterator9.e(err);
               } finally {
                 _iterator9.f();
+              }
+
+              var aux = [];
+              var aux2 = [];
+
+              var _loop = function _loop(index) {
+                var element = _this10.visita.servicios[index];
+
+                if (!aux.some(function (servicio) {
+                  return servicio.id_servicio == element.id_servicio;
+                })) {
+                  aux.push(element);
+                }
+              };
+
+              for (var index = 0; index < _this10.visita.servicios.length; index++) {
+                _loop(index);
+              }
+
+              var _loop2 = function _loop2(_index) {
+                var element = aux[_index];
+                aux[_index].tecnicos = [];
+                aux[_index] = _this10.visita.servicios.filter(function (servicio) {
+                  return servicio.id_servicio == element.id_servicio;
+                });
+                console.log(element);
+              };
+
+              for (var _index = 0; _index < aux.length; _index++) {
+                _loop2(_index);
+              }
+
+              var _loop3 = function _loop3(_index2) {
+                var element = _this10.visita.servicios[_index2];
+
+                if (!aux2.some(function (servicio) {
+                  var _a, _b;
+
+                  return ((_a = servicio.tecnico) === null || _a === void 0 ? void 0 : _a.id_tecnico) == ((_b = element.tecnico) === null || _b === void 0 ? void 0 : _b.id_tecnico);
+                })) {
+                  aux2.push(element.tecnico);
+                }
+              };
+
+              for (var _index2 = 0; _index2 < _this10.visita.servicios.length; _index2++) {
+                _loop3(_index2);
+              }
+
+              var _loop4 = function _loop4(_index3) {
+                var element = aux2[_index3];
+
+                for (var index2 = 0; index2 < aux.length; index2++) {
+                  var element2 = aux[index2];
+
+                  if (element2.find(function (servicio) {
+                    return servicio.tecnico == element;
+                  }) && !element2[0].tecnicos.some(function (tecnico) {
+                    return tecnico.id_tecnico == element.id_tecnico;
+                  })) {
+                    aux[index2][0].tecnicos.push(element);
+                  }
+                }
+              };
+
+              for (var _index3 = 0; _index3 < aux2.length; _index3++) {
+                _loop4(_index3);
+              }
+
+              for (var _index4 = 0; _index4 < _this10.visita.servicios2.length; _index4++) {
+                var element = _this10.visita.servicios2[_index4];
+                var nombreTecnico = "";
+
+                var _iterator10 = _createForOfIteratorHelper(aux[_index4][0].tecnicos),
+                    _step10;
+
+                try {
+                  for (_iterator10.s(); !(_step10 = _iterator10.n()).done;) {
+                    var tecnico = _step10.value;
+
+                    if (nombreTecnico) {
+                      nombreTecnico = nombreTecnico + ", " + tecnico.nombre_tecnico + " " + tecnico.apellido_tecnico;
+                    } else {
+                      nombreTecnico = tecnico.nombre_tecnico + " " + tecnico.apellido_tecnico;
+                    }
+                  }
+                } catch (err) {
+                  _iterator10.e(err);
+                } finally {
+                  _iterator10.f();
+                }
+
+                element.tecnicos = nombreTecnico;
               }
             }
           }), function (error) {

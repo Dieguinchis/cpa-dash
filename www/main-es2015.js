@@ -296,7 +296,7 @@ __webpack_require__.r(__webpack_exports__);
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony default export */ __webpack_exports__["default"] = ("<ion-header>\r\n  <ion-toolbar color=\"primary\">\r\n    <ion-title>{{servicios?servicios[0].nombre_servicio:null}}</ion-title>\r\n  </ion-toolbar>\r\n</ion-header>\r\n<ion-content>\r\n  <ion-item *ngFor=\"let servicio of servicios\" (click)=\"editarServicio(servicio.id_formulario, servicio.nombre_equipo)\">\r\n    <ion-label>{{servicio.nombre_equipo}}</ion-label>\r\n  </ion-item>\r\n  <ion-row>\r\n      <ion-col class=\"ion-text-center\">\r\n        <div>\r\n         <ion-button (click)=\"modalDismiss()\" style=\"width: 50%\" class = \"button\">Volver</ion-button>\r\n        </div>\r\n      </ion-col>\r\n    </ion-row>\r\n</ion-content>");
+/* harmony default export */ __webpack_exports__["default"] = ("<ion-header>\r\n  <ion-toolbar color=\"primary\">\r\n    <ion-title>{{servicios?servicios[0].nombre_servicio:null}}</ion-title>\r\n  </ion-toolbar>\r\n</ion-header>\r\n<ion-content>\r\n  <ion-item *ngFor=\"let servicio of servicios\" (click)=\"editarServicio(servicio.id_formulario, servicio.nombre_equipo)\">\r\n    <ion-label>{{servicio.nombre_equipo}}{{(servicio.tecnico.nombre_tecnico)?' - ' + servicio.tecnico.nombre_tecnico + ' ' + servicio.tecnico.apellido_tecnico:''}}{{(servicio?.respuestas[0]?.tapado == 0)?' - (QR)':''}}</ion-label>\r\n  </ion-item>\r\n  <ion-row>\r\n      <ion-col class=\"ion-text-center\">\r\n        <div>\r\n         <ion-button (click)=\"modalDismiss()\" style=\"width: 50%\" class = \"button\">Volver</ion-button>\r\n        </div>\r\n      </ion-col>\r\n    </ion-row>\r\n</ion-content>");
 
 /***/ }),
 
@@ -801,8 +801,9 @@ let EditarVisitaComponent = class EditarVisitaComponent {
         });
     }
     mostrarOtros() {
+        var _a;
         var aux = this.respuestas.find(respuesta => respuesta.id_campo == 30);
-        return aux.respuesta.includes('Otros');
+        return (_a = aux === null || aux === void 0 ? void 0 : aux.respuesta) === null || _a === void 0 ? void 0 : _a.includes('Otros');
     }
 };
 EditarVisitaComponent.ctorParameters = () => [
@@ -875,8 +876,10 @@ let VerServicioVisitaComponent = class VerServicioVisitaComponent {
                     this.apiVisitas.getRespuestas(servicio.id_formulario).then((resp) => {
                         servicio.respuestas = resp.respuestas;
                         this.apiVisitas.getEquipo(servicio.respuestas[0].id_equipo).then((response) => {
-                            if (response.result[0]) {
-                                servicio.nombre_equipo = response.result[0].nombre_equipo;
+                            if (response.result) {
+                                if (response.result[0]) {
+                                    servicio.nombre_equipo = response.result[0].nombre_equipo;
+                                }
                             }
                         });
                     }).catch(err => {
@@ -1216,6 +1219,9 @@ let ApiVisitasService = class ApiVisitasService {
             });
         });
     }
+    pdfEstadisticas(parametros) {
+        return this.http.post(this.apiDir + '/pdf/stats-pdf', parametros, this.requestOptions);
+    }
 };
 ApiVisitasService.ctorParameters = () => [
     { type: _angular_common_http__WEBPACK_IMPORTED_MODULE_2__["HttpClient"] }
@@ -1268,7 +1274,7 @@ const environment = {
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "version", function() { return version; });
-const version = '0.0.6';
+const version = '0.0.7';
 
 
 /***/ }),

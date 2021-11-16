@@ -36,12 +36,12 @@
           <div style="cursor: pointer;" *ngIf="visita.visitas.estado_visitas == 'finalizada'" (click)="editarServicio(servicio.id_servicio, servicio.id_formulario)">
             <ion-icon name="document-outline" color="primary"></ion-icon>
             {{servicio.nombre_servicio}}{{" - " + servicio?.tecnicos}}
-            <ion-icon name="create-outline" style="cursor: pointer;" *ngIf="visita.visitas.estado_visitas == 'finalizada'" (click)="editarServicio(servicio.id_servicio, servicio.id_formulario)"></ion-icon>  
+            <ion-icon name="create-outline" style="cursor: pointer;" *ngIf="visita.visitas.estado_visitas == 'finalizada'" ></ion-icon>  
           </div>
           <div *ngIf="visita.visitas.estado_visitas != 'finalizada'">
             <ion-icon name="document-outline" color="primary"></ion-icon>
             {{servicio.nombre_servicio}}{{" - " + servicio?.tecnicos}}
-            <ion-icon name="create-outline" style="cursor: pointer;" *ngIf="visita.visitas.estado_visitas == 'finalizada'" (click)="editarServicio(servicio.id_servicio, servicio.id_formulario)"></ion-icon>  
+            <ion-icon name="create-outline" style="cursor: pointer;" *ngIf="visita.visitas.estado_visitas == 'finalizada'" ></ion-icon>  
           </div>
         </div>
       </ion-label>
