@@ -28,6 +28,8 @@
     "@ionic/storage": "^2.3.0",
     "cordova-android": "8.1.0",
     "cordova-browser": "6.0.0",
+    "jspdf": "^2.4.0",
+    "jspdf-autotable": "^3.5.23",
     "moment": "^2.27.0",
     "ngx-image-compress": "^8.0.4",
     "rxjs": "~6.5.1",

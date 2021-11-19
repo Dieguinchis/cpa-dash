@@ -20115,13 +20115,13 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
 
     var _angular_core__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(
     /*! @angular/core */
-    "./node_modules/@angular/core/__ivy_ngcc__/fesm2015/core.js");
+    "./node_modules/@angular/core/fesm2015/core.js");
     /* harmony import */
 
 
     var _angular_common_http__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(
     /*! @angular/common/http */
-    "./node_modules/@angular/common/__ivy_ngcc__/fesm2015/http.js");
+    "./node_modules/@angular/common/fesm2015/http.js");
     /* harmony import */
 
 
@@ -20134,7 +20134,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
         _classCallCheck(this, ServicioTecnicosService);
 
         this.http = http;
-        this.apiDir = "http://157.230.90.222:3001";
+        this.apiDir = "http://192.168.0.71:3000";
         this.requestOptions = {
           headers: new _angular_common_http__WEBPACK_IMPORTED_MODULE_2__["HttpHeaders"]({
             'Content-Type': 'application/json',

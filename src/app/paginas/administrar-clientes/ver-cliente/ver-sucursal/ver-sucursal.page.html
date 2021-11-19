@@ -136,16 +136,20 @@
       <div style="background-color: white;" *ngFor="let grupoEquipo of grupoWorkStation; let j = index">
         <ion-grid>
           <ion-row>
-            <ion-col class="grupoequipo" size="5.5" >{{grupoEquipo.nombre_equipo_grupo}}</ion-col>
-            <ion-col size="0.5">
+            <ion-col class="grupoequipo" size="2" >
+              {{grupoEquipo.nombre_equipo_grupo}}
               <ion-icon name="trash-outline" color="danger" style="margin-top:15px" (click)="borrar_equipo_grupo(grupoEquipo.id_equipo_grupo,j)"></ion-icon>
             </ion-col>
-            <ion-col size="6">
+            <ion-col size="4.25">
               <ion-item style="text-align: left;" lines="none">
                 <ion-icon color="primary" title="Descargar los QR'S de ESTA Workstation/equipo" (click)="descargarQrThisWorkstation(grupoEquipo)" name="cloud-download-outline"></ion-icon>
                 <ion-icon color="primary" title="Imprimir los QR'S de ESTA Workstation/equipo" (click)="imprimirQrThisWorkstation(grupoEquipo)" name="print-outline"></ion-icon>
-                <ion-button (click)="altaWorkstation(grupoEquipo.id_equipo_grupo,j)">Agregar workstation</ion-button>
+                <ion-button (click)="altaWorkstation(grupoEquipo,j)">Agregar workstation</ion-button>
+                <ion-button (click)="elegirPlano(grupoEquipo)">Asignar plano</ion-button>
               </ion-item>
+            </ion-col>
+            <ion-col size="5.75">
+              <p>{{grupoEquipo.plano?grupoEquipo.plano.name:"Sin plano"}}</p>
             </ion-col>
           </ion-row>
           <ion-item lines="full">
@@ -182,7 +186,7 @@
               <ion-row class="equipos" *ngIf="equipo.nombre_equipo != null">
                 <ion-col size="2" style="margin-top: 15px">
                   <ion-label>
-                    {{equipo.nombre_equipo}}
+                    {{equipo.nombre}}
                   </ion-label>
                 </ion-col>
                 <ion-col size="3" style="margin-top: 15px">
@@ -210,7 +214,7 @@
                 </ion-col>
                 <ion-col size="1">
                   <ion-icon name="trash-outline" color="danger" style="margin-top:15px" (click)="borrar_equipo(equipo,j,i)"></ion-icon>
-                  <ion-icon color="primary" name="create-outline" style="padding-left: 5px;" (click)="editName(equipo)"></ion-icon> 
+                  <ion-icon color="primary" name="create-outline" style="padding-left: 5px;" (click)="editName(equipo, grupoEquipo)"></ion-icon> 
                 </ion-col>
 
 
@@ -225,7 +229,7 @@
   <div *ngIf="sucursal" style="margin-top: 10px;">
     <ion-item style="text-align: center;" lines="none">
       <ion-label><b>Planos de la sucursal</b></ion-label>
-      <input style="visibility: hidden;" id="inputUploadFile" accept=".pdf" title=" " [disabled]="disabled" type="file" name="" (change)="showFile($event.target.files)">
+      <input style="visibility: hidden;" id="inputUploadFile" title=" " [disabled]="disabled" type="file" name="" (change)="showFile($event.target.files)">
       <ion-icon slot="end" name="add-circle-outline" color="primary" (click)="agregar_plano()"></ion-icon>
     </ion-item>
     <div *ngFor="let plano of sucursal.planos">

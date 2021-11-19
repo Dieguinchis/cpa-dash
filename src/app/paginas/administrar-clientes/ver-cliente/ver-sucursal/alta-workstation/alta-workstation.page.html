@@ -4,6 +4,14 @@
     <ion-input [(ngModel)]="nombre_workstation"></ion-input>
   </ion-item>
   <ion-item lines="full">
+    <ion-label>Zona del workstation: </ion-label>
+    <ion-input [(ngModel)]="zona_workstation"></ion-input>
+  </ion-item>
+  <ion-item lines="full">
+    <ion-label>Numero del workstation: </ion-label>
+    <ion-input type="number" [(ngModel)]="nro_workstation"></ion-input>
+  </ion-item>
+  <ion-item lines="full">
     <ion-label>Servicio que cumple</ion-label>
     <ion-select [(ngModel)]="id_servicio" (ionChange)="producto_predeterminado = null">
       <div *ngFor="let servicio of servicios">

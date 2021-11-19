@@ -46,13 +46,13 @@ export class VerSucursalPage implements OnInit {
   }
 
 
-  async altaWorkstation(id_equipo_grupo,j){
+  async altaWorkstation(equipo_grupo,j){
     const modal = await this.modalController.create({
       component: AltaWorkstationPage,
       cssClass: 'modal-chiquito',
       componentProps: {
         'id_sucursal': this.id_sucursal,
-        id_equipo_grupo:id_equipo_grupo
+        equipo_grupo:equipo_grupo
       }
     });
     modal.onDidDismiss().then((data:any) =>{
@@ -156,60 +156,6 @@ export class VerSucursalPage implements OnInit {
     this.api_sucursales.listado_productosServicio(20).subscribe((resp:any)=>{
       console.log(resp)
       this.productos = resp.result
-      this.api_sucursales.listado_grupoWorkstations(this.id_sucursal).subscribe((data:any) =>{
-        console.log('Grupo1',  data.result)
-        var flag = 0
-        var array = []
-        var i = 0
-        var first = true
-        if(data.result != undefined){
-          data.result.forEach((element) => {
-            if(element.id_equipo_grupo == flag){
-              // console.log(element.id_equipo_grupo, ' ' ,flag)
-              this.showDeleteQr[i].push({show: false, count:0})
-              if (element.producto_predeterminado){
-                const product = this.productos.find(producto => producto.id_producto == element.producto_predeterminado)
-
-                element.producto_predeterminado_nombre = product.nombre_producto + ' - '+ product.tipo_producto;
-              }
-              array[i].equipos.push({id_equipo: element.id_equipo, id_servicio:element.id_servicio,id_sucursal:element.id_sucursal, nombre_equipo:element.nombre_equipo,codigo_qr_equipo:element.codigo_qr_equipo,estado_servicio:element.estado_servicio,nombre_servicio:element.nombre_servicio, producto_predeterminado:element.producto_predeterminado, producto_predeterminado_nombre:element.producto_predeterminado_nombre})
-              first = false
-            }else{
-              if(!first){
-                i++
-              }
-              flag = element.id_equipo_grupo
-              array.push({nombre_equipo_grupo:element.nombre_equipo_grupo,id_equipo_grupo:element.id_equipo_grupo,equipos:[]})
-              this.showDeleteQr.push([])
-              if (element.producto_predeterminado){
-                const product = this.productos.find(producto => producto.id_producto == element.producto_predeterminado)
-
-                element.producto_predeterminado_nombre = product.nombre_producto + ' - '+ product.tipo_producto;
-              }
-              array[i].equipos.push({id_equipo: element.id_equipo, id_servicio:element.id_servicio,id_sucursal:element.id_sucursal, nombre_equipo:element.nombre_equipo,codigo_qr_equipo:element.codigo_qr_equipo,estado_servicio:element.estado_servicio,nombre_servicio:element.nombre_servicio, producto_predeterminado:element.producto_predeterminado, producto_predeterminado_nombre:element.producto_predeterminado_nombre})
-              this.showDeleteQr[i].push({show: false, count:0})
-              first = false
-            }
-          });
-          console.log(this.showDeleteQr)
-          this.grupoWorkStation = array
-          console.log('grupo2: ', this.grupoWorkStation)
-          for( let grupoEquipo of this.grupoWorkStation){
-            grupoEquipo.equipos.sort(function (a, b) {
-              if (a.nombre_equipo > b.nombre_equipo) {
-                return 1;
-              }
-              if (a.nombre_equipo < b.nombre_equipo) {
-                return -1;
-              }
-              // a must be equal to b
-              return 0;
-            });
-          }
-        }
-        this.loadingEquipos = false
-  
-      })
     })
     this.loadingEquipos = true
     this.api_sucursales.informacion_sucursal(this.id_sucursal).subscribe(data => {
@@ -222,6 +168,7 @@ export class VerSucursalPage implements OnInit {
         Object.defineProperty(this.sucursal.planos[index],'name',{value:this.sucursal.planos[index].url_imagen_plano.slice(27)});
 
       }
+      console.log('sucursal: ', this.sucursal);
       console.log('sucursal: ', this.sucursal)
       if(loading){
         this.loadingController.dismiss();
@@ -232,6 +179,74 @@ export class VerSucursalPage implements OnInit {
         this.loadingController.dismiss();
       }
       console.log(error)
+    })
+    this.api_sucursales.listado_grupoWorkstations(this.id_sucursal).subscribe((data:any) =>{
+      console.log('Grupo1',  data.result)
+      var flag = 0
+      var array = []
+      var i = 0
+      var first = true
+      if(data.result != undefined){
+        data.result.forEach((element) => {
+          if (element.zona == element.nombre_equipo) {
+            element.nombre = element.nombre_equipo +  ' - ' + element.nro_equipo;
+          }else{
+            element.nombre = element.nombre_equipo +  ' - ' + element.zona + ' - ' + element.nro_equipo;
+          }
+          if(element.id_equipo_grupo == flag){
+            // console.log(element.id_equipo_grupo, ' ' ,flag)
+            this.showDeleteQr[i].push({show: false, count:0})
+            if (element.producto_predeterminado){
+              const product = this.productos.find(producto => producto.id_producto == element.producto_predeterminado)
+
+              element.producto_predeterminado_nombre = product.nombre_producto + ' - '+ product.tipo_producto;
+            }
+            array[i].equipos.push({id_equipo: element.id_equipo, id_servicio:element.id_servicio,id_sucursal:element.id_sucursal, nombre_equipo:element.nombre_equipo,codigo_qr_equipo:element.codigo_qr_equipo,estado_servicio:element.estado_servicio,nombre_servicio:element.nombre_servicio, producto_predeterminado:element.producto_predeterminado, producto_predeterminado_nombre:element.producto_predeterminado_nombre, zona:element.zona, nro_equipo:element.nro_equipo, nombre: element.nombre})
+            first = false
+          }else{
+            if(!first){
+              i++
+            }
+            flag = element.id_equipo_grupo;
+            array.push({nombre_equipo_grupo:element.nombre_equipo_grupo,id_equipo_grupo:element.id_equipo_grupo,equipos:[], plano:this.sucursal.planos.find(plano => plano.id_plano == element.id_plano)})
+            this.showDeleteQr.push([])
+            if (element.producto_predeterminado){
+              const product = this.productos.find(producto => producto.id_producto == element.producto_predeterminado);
+
+              element.producto_predeterminado_nombre = product.nombre_producto + ' - '+ product.tipo_producto;
+            }
+            array[i].equipos.push({id_equipo: element.id_equipo, id_servicio:element.id_servicio,id_sucursal:element.id_sucursal, nombre_equipo:element.nombre_equipo,codigo_qr_equipo:element.codigo_qr_equipo,estado_servicio:element.estado_servicio,nombre_servicio:element.nombre_servicio, producto_predeterminado:element.producto_predeterminado, producto_predeterminado_nombre:element.producto_predeterminado_nombre,zona:element.zona, nro_equipo:element.nro_equipo, nombre: element.nombre})
+            this.showDeleteQr[i].push({show: false, count:0})
+            first = false
+          }
+        });
+        console.log(this.showDeleteQr)
+        this.grupoWorkStation = array
+        console.log('grupo2: ', this.grupoWorkStation)
+        for( let grupoEquipo of this.grupoWorkStation){
+          grupoEquipo.equipos.sort(function (a, b) {
+            var aNoNumber = a.nombre.split(' - ')
+            aNoNumber.pop()
+            aNoNumber = aNoNumber.join(' - ')
+            var bNoNumber = b.nombre.split(' - ')
+            bNoNumber.pop()
+            bNoNumber = bNoNumber.join(' - ')
+            if (aNoNumber > bNoNumber) {
+              return 1;
+            }
+            if (aNoNumber < bNoNumber) {
+              return -1;
+            }
+            if (bNoNumber == aNoNumber) {
+              return (a.nro_equipo) - (b.nro_equipo)
+            }
+            // a must be equal to b
+            return 0;
+          });
+        }
+      }
+      this.loadingEquipos = false
+
     })
     // this.api_sucursales.listado_workstations(this.id_sucursal).subscribe(data => {
     //   console.log(data)
@@ -245,13 +260,24 @@ export class VerSucursalPage implements OnInit {
     
   }
 
-  async editName(equipo) {
+  async editName(equipo,grupoEquipo) {
     const alert = await this.alertController.create({
-      header: 'Modificar Nombre',
+      header: 'Modificar',
       inputs:[
         {
           type:'textarea',
-          value:equipo.nombre_equipo
+          value:equipo.nombre_equipo,
+          placeholder:'Nombre'
+        },
+        {
+          type:'textarea',
+          value:equipo.zona,
+          placeholder:'Zona'
+        },
+        {
+          type:'number',
+          value:equipo.nro_equipo,
+          placeholder:'Numero'
         }
       ],
       buttons: [
@@ -262,19 +288,32 @@ export class VerSucursalPage implements OnInit {
         {
           text:'Guardar',
           handler:(data)=>{
-            this.loadingController.create({ message: "Guardando Cambios" }).then(loader=>{
+            console.log(data)
+            this.loadingController.create({ message: "Guardando Cambios" }).then(async (loader)=>{
               loader.present();
-              equipo.codigo_qr_equipo = null;
-              equipo.nombre_equipo = data[0];
-              console.log(equipo);
-              this.api_visitas.actualizar_equipo(equipo).then((resp: any) =>{
-                console.log(resp.equipoCreado.url);
-                equipo.codigo_qr_equipo = resp.equipoCreado.url;
+              var newEquipo = JSON.parse(JSON.stringify(equipo))
+              newEquipo.nombre_equipo = data[0];
+              newEquipo.zona = data[1];
+              newEquipo.nro_equipo = data[2];
+              console.log("EQUIPO",grupoEquipo)
+              if (grupoEquipo.equipos.some(equip => (equip.nro_equipo == newEquipo.nro_equipo) && (equip.zona == newEquipo.zona))) {
+                const alert = await this.alertController.create({
+                  header: 'Error',
+                  message: 'Ya existe un equipo con ese numero en la zona.',
+                  buttons: ['OK']
+                });
+              
+                await alert.present();
                 loader.dismiss();
-              }).catch(err =>{
-                console.log(err);
-                loader.dismiss();
-              })
+              }else{
+                this.api_visitas.actualizar_equipo(newEquipo).then((resp: any) =>{
+                  loader.dismiss();
+                  console.log(resp)
+                }).catch(err =>{
+                  console.log(err);
+                  loader.dismiss();
+                })
+              }
             });
           }
         }
@@ -288,7 +327,7 @@ export class VerSucursalPage implements OnInit {
     window.open(url)
   }
   agregar_plano(){
-    document.getElementById('inputUploadFile').click()
+    document.getElementById('inputUploadFile').click();
     // this.imageCompress.uploadFile().then(({image, orientation}) => {
     //   console.warn('Size in bytes was:', this.imageCompress.byteCount(image));
     //   this.imageCompress.compressFile(image, orientation, 100, 100).then(
@@ -397,21 +436,21 @@ async eliminar_plano(id_plano){
         Object.defineProperty(this.sucursal.planos[index],'name',{value:this.sucursal.planos[index].url_imagen_plano.slice(27)});
 
       }
-      console.log('sucursal: ', this.sucursal)
-      this.loadingController.dismiss()
+      console.log('sucursal: ', this.sucursal);
+      this.loadingController.dismiss();
 
 
     }), (error => {
-      this.loadingController.dismiss()
-      this.modalController.dismiss()
+      this.loadingController.dismiss();
+      this.modalController.dismiss();
       console.log(error)
     })
   },(error =>{
     this.loading.dismiss();
     console.log('Error al borrar el plano ', error);
-    this.loadingController.dismiss()
+    this.loadingController.dismiss();
 
-    alert('Ocurrio un error')
+    alert('Ocurrio un error');
   }))
 }
 
@@ -573,7 +612,7 @@ imprimir(qrs){
 
 test($event) {
   console.warn($event)
-  // window.open('http://157.230.90.222:3001/getZip')
+  // window.open('http://192.168.0.71:3000/getZip')
 }
 
 descargar(){
@@ -583,7 +622,7 @@ descargarSucursal(){
   // console.warn(1)
   var link = document.createElement("a");
   link.download = this.sucursal.sucursal[0].id_sucursal + ".png";
-  link.href = "http://157.230.90.222:3001/getfile/sucursales/"+this.sucursal.sucursal[0].id_sucursal ;
+  link.href = "http://192.168.0.71:3000/getfile/sucursales/"+this.sucursal.sucursal[0].id_sucursal ;
   link.click();
 }
 
@@ -592,7 +631,7 @@ descargarQrEquipo(equipo){
   // console.warn(equipo.id_equipo)
   var link = document.createElement("a");
   link.download = equipo.id_equipo + ".png";
-  link.href = "http://157.230.90.222:3001/getfile/equipos/"+equipo.id_equipo;
+  link.href = "http://192.168.0.71:3000/getfile/equipos/"+equipo.id_equipo;
   link.click();
 }
 
@@ -609,7 +648,7 @@ descargarQrThisWorkstation(grupoEquipo){
   }
   var link = document.createElement("a");
   link.download = "qrs.png";
-  link.href = "http://157.230.90.222:3001/getZip?type=equipos&name="+grupoEquipo.nombre_equipo_grupo+"&data="+ids;
+  link.href = "http://192.168.0.71:3000/getZip?type=equipos&name="+grupoEquipo.nombre_equipo_grupo+"&data="+ids;
   link.click();
 }
 
@@ -632,7 +671,7 @@ descargarAllQrSucursal(){
   }
   var link = document.createElement("a");
   link.download = "qrs.png";
-  link.href = "http://157.230.90.222:3001/getZip?type=all&name="+this.sucursal.sucursal[0].razon_social_sucursal+"&data="+ids;
+  link.href = "http://192.168.0.71:3000/getZip?type=all&name="+this.sucursal.sucursal[0].razon_social_sucursal+"&data="+ids;
   link.click();
 
 }
@@ -655,7 +694,7 @@ descargarQrAllWorkstations(){
   }
   var link = document.createElement("a");
   link.download = "qrs.png";
-  link.href = "http://157.230.90.222:3001/getZip?type=equipos&name=equipos_"+this.sucursal.sucursal[0].razon_social_sucursal+"&data="+ids;
+  link.href = "http://192.168.0.71:3000/getZip?type=equipos&name=equipos_"+this.sucursal.sucursal[0].razon_social_sucursal+"&data="+ids;
   link.click();
 }
 
@@ -706,6 +745,49 @@ descargarQrAllWorkstations(){
               //this.actualizar_informacion(false);
             }).catch(err => {
               console.error(err)
+            })
+          }
+        }
+    ]
+    });
+  
+    await alert.present();
+  }
+
+  async elegirPlano(grupoEquipo){
+    var input = [];
+    for (let plano of this.sucursal.planos){
+      input.push({
+        label:plano.name,
+        value:plano.id_plano,
+        type:"radio"
+      });
+    }
+    input.push({
+        label:'Sin Plano',
+        value:null,
+        type:"radio"
+    });
+    console.log(input)
+    
+    const alert = await this.alertController.create({
+      subHeader: grupoEquipo.nombre_equipo_grupo,
+      header:'Elegir plano',
+      inputs: input,
+      cssClass: 'wide-alert',
+      buttons: [
+        {
+          text:'Cancelar',
+          role:'cancel',
+          cssClass:'secondary'
+        },
+        {
+          text: 'Aceptar',
+          handler: (data) => {
+            grupoEquipo.id_plano = data;
+            this.api_visitas.setPlano(grupoEquipo).subscribe(resp =>{
+              console.log(resp);
+              this.actualizar_informacion(false);
             })
           }
         }

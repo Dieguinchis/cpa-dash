@@ -158,7 +158,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
     /* harmony default export */
 
 
-    __webpack_exports__["default"] = "<ion-header>\r\n  <ion-toolbar style=\"text-align: center;\" color=\"primary\">\r\n    <ion-title>{{equipo?equipo:servicio?.nombreDelServicio}}</ion-title>\r\n  </ion-toolbar>\r\n</ion-header>\r\n<ion-content>\r\n  <!-- Servicios Sin productos -->\r\n    <div *ngIf=\"servicio\">\r\n      <div *ngFor = \"let campo of servicio.formulario; let i = index\">\r\n        <div *ngIf = \"campo.tipoCampo =='Select' || campo.tipoCampo =='select'\">\r\n          <ion-item>\r\n            <ion-label>{{campo.nombreCampo}}</ion-label>\r\n            <ion-select [(ngModel)] = \"respuestas[i].respuesta\" mode=\"ios\" >\r\n              <ion-select-option *ngFor = \"let campo_opciones of campo.opciones; let h = index\" [value]=\"campo_opciones.name\" >{{campo_opciones.name}}</ion-select-option>\r\n            </ion-select>\r\n          </ion-item>\r\n        </div>\r\n        <div *ngIf = \"campo.tipoCampo =='multiple' || campo.tipoCampo =='Multiple' \">\r\n          <ion-item>\r\n            <ion-label>{{campo.nombreCampo}}</ion-label>\r\n            <ion-select multiple [(ngModel)] = \"respuestas[i].respuesta\" mode=\"ios\">\r\n              <ion-select-option *ngFor = \"let campo_opciones of campo.opciones\" [value]=\"campo_opciones.name\" >{{campo_opciones.name}}</ion-select-option>\r\n            </ion-select>\r\n            </ion-item>\r\n            <div *ngIf = \"(campo.tipoCampo =='multiple' || campo.tipoCampo =='Multiple') && campo.id_campo == 30 && mostrarOtros()\">\r\n            <ion-item>\r\n                  <ion-label>Otros: </ion-label>\r\n                  <ion-input  style = \"margin-left: 10px;\" [(ngModel)] =\"otros\" mode=\"ios\"></ion-input>\r\n            </ion-item>\r\n          </div>\r\n        </div>\r\n  \r\n  \r\n        <div *ngIf = \"campo.tipoCampo == 'input'|| campo.tipoCampo =='Input'\">\r\n          <ion-item>\r\n                <ion-label>{{campo.nombreCampo}}</ion-label>\r\n                <ion-input style = \"margin-left: 10px;\" [(ngModel)] =\"respuestas[i].respuesta\" mode=\"ios\"></ion-input>\r\n          </ion-item>\r\n        </div>\r\n      </div>\r\n    </div>\r\n  \r\n    <ion-row>\r\n      <ion-col class=\"ion-text-center\">\r\n        <div>\r\n         <ion-button (click)=\"modalDissmiss()\" style=\"width: 50%\" class = \"button\">Volver</ion-button>\r\n        </div>\r\n      </ion-col>\r\n      <ion-col class=\"ion-text-center\">\r\n        <div>\r\n         <ion-button  (click)=\"guardar()\" style=\"width: 50%\" class = \"button\">Guardar</ion-button>\r\n        </div>\r\n      </ion-col>\r\n    </ion-row>\r\n\r\n  </ion-content>";
+    __webpack_exports__["default"] = "<ion-header>\n  <ion-toolbar style=\"text-align: center;\" color=\"primary\">\n    <ion-title>{{equipo?equipo:servicio?.nombreDelServicio}}</ion-title>\n  </ion-toolbar>\n</ion-header>\n<ion-content>\n  <!-- Servicios Sin productos -->\n    <div *ngIf=\"servicio\">\n      <div *ngFor = \"let campo of servicio.formulario; let i = index\">\n        <div *ngIf = \"campo.tipoCampo =='Select' || campo.tipoCampo =='select'\">\n          <ion-item>\n            <ion-label>{{campo.nombreCampo}}</ion-label>\n            <ion-select [(ngModel)] = \"respuestas[i].respuesta\" mode=\"ios\" >\n              <ion-select-option *ngFor = \"let campo_opciones of campo.opciones; let h = index\" [value]=\"campo_opciones.name\" >{{campo_opciones.name}}</ion-select-option>\n            </ion-select>\n          </ion-item>\n        </div>\n        <div *ngIf = \"campo.tipoCampo =='multiple' || campo.tipoCampo =='Multiple' \">\n          <ion-item>\n            <ion-label>{{campo.nombreCampo}}</ion-label>\n            <ion-select multiple [(ngModel)] = \"respuestas[i].respuesta\" mode=\"ios\">\n              <ion-select-option *ngFor = \"let campo_opciones of campo.opciones\" [value]=\"campo_opciones.name\" >{{campo_opciones.name}}</ion-select-option>\n            </ion-select>\n            </ion-item>\n            <div *ngIf = \"(campo.tipoCampo =='multiple' || campo.tipoCampo =='Multiple') && campo.id_campo == 30 && mostrarOtros()\">\n            <ion-item>\n                  <ion-label>Otros: </ion-label>\n                  <ion-input  style = \"margin-left: 10px;\" [(ngModel)] =\"otros\" mode=\"ios\"></ion-input>\n            </ion-item>\n          </div>\n        </div>\n  \n  \n        <div *ngIf = \"campo.tipoCampo == 'input'|| campo.tipoCampo =='Input'\">\n          <ion-item>\n                <ion-label>{{campo.nombreCampo}}</ion-label>\n                <ion-input style = \"margin-left: 10px;\" [(ngModel)] =\"respuestas[i].respuesta\" mode=\"ios\"></ion-input>\n          </ion-item>\n        </div>\n      </div>\n    </div>\n  \n    <ion-row>\n      <ion-col class=\"ion-text-center\">\n        <div>\n         <ion-button (click)=\"modalDissmiss()\" style=\"width: 50%\" class = \"button\">Volver</ion-button>\n        </div>\n      </ion-col>\n      <ion-col class=\"ion-text-center\">\n        <div>\n         <ion-button  (click)=\"guardar()\" style=\"width: 50%\" class = \"button\">Guardar</ion-button>\n        </div>\n      </ion-col>\n    </ion-row>\n\n  </ion-content>";
     /***/
   },
 
@@ -178,7 +178,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
     /* harmony default export */
 
 
-    __webpack_exports__["default"] = "<ion-header>\r\n  <ion-toolbar color=\"primary\">\r\n    <ion-title>{{servicios?servicios[0].nombre_servicio:null}}</ion-title>\r\n  </ion-toolbar>\r\n</ion-header>\r\n<ion-content>\r\n  <ion-item *ngFor=\"let servicio of servicios\" (click)=\"editarServicio(servicio.id_formulario, servicio.nombre_equipo)\">\r\n    <ion-label>{{servicio.nombre_equipo}}</ion-label>\r\n  </ion-item>\r\n  <ion-row>\r\n      <ion-col class=\"ion-text-center\">\r\n        <div>\r\n         <ion-button (click)=\"modalDismiss()\" style=\"width: 50%\" class = \"button\">Volver</ion-button>\r\n        </div>\r\n      </ion-col>\r\n    </ion-row>\r\n</ion-content>";
+    __webpack_exports__["default"] = "<ion-header>\n  <ion-toolbar color=\"primary\">\n    <ion-title>{{servicios?servicios[0].nombre_servicio:null}}</ion-title>\n  </ion-toolbar>\n</ion-header>\n<ion-content>\n  <ion-item *ngFor=\"let servicio of servicios\" (click)=\"editarServicio(servicio.id_formulario, servicio.nombre_equipo)\">\n    <ion-label>{{servicio.nombre_equipo}}</ion-label>\n  </ion-item>\n  <ion-row>\n      <ion-col class=\"ion-text-center\">\n        <div>\n         <ion-button (click)=\"modalDismiss()\" style=\"width: 50%\" class = \"button\">Volver</ion-button>\n        </div>\n      </ion-col>\n    </ion-row>\n</ion-content>";
     /***/
   },
 
@@ -198,7 +198,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
     /* harmony default export */
 
 
-    __webpack_exports__["default"] = "<ion-content>\r\n  <ion-item lines=\"full\">\r\n    <ion-label>\r\n      Estado del Puesto:\r\n    </ion-label>\r\n    <ion-select [(ngModel)]=\"opcionPredeterminada[0]\">\r\n      <ion-select-option *ngFor=\"let opcion of opcionesPuesto\" [value]=\"opcion.tipo_opcion\">{{opcion.tipo_opcion}}</ion-select-option>\r\n      <ion-select-option [value]=\"null\" >Sin Preselección</ion-select-option>\r\n    </ion-select>\r\n  </ion-item>\r\n  <ion-item lines=\"full\">\r\n    <ion-label>\r\n      Estado del Cebo:\r\n    </ion-label>\r\n    <ion-select [(ngModel)]=\"opcionPredeterminada[1]\">\r\n      <ion-select-option *ngFor=\"let opcion of opcionesCebo\" [value]=\"opcion.tipo_opcion\">{{opcion.tipo_opcion}}</ion-select-option>\r\n      <ion-select-option [value]=\"null\" >Sin Preselección</ion-select-option>\r\n    </ion-select>\r\n  </ion-item>\r\n  <ion-row>\r\n    <ion-col class=\"ion-text-center\">\r\n      <div>\r\n       <ion-button (click)=\"modalDismiss()\" style=\"width: 50%\" class = \"button\">Volver</ion-button>\r\n      </div>\r\n    </ion-col>\r\n    <ion-col class=\"ion-text-center\">\r\n      <div>\r\n       <ion-button  (click)=\"guardar()\" style=\"width: 50%\" class = \"button\">Guardar</ion-button>\r\n      </div>\r\n    </ion-col>\r\n  </ion-row>\r\n</ion-content>\r\n";
+    __webpack_exports__["default"] = "<ion-content>\n  <ion-item lines=\"full\">\n    <ion-label>\n      Estado del Puesto:\n    </ion-label>\n    <ion-select [(ngModel)]=\"opcionPredeterminada[0]\">\n      <ion-select-option *ngFor=\"let opcion of opcionesPuesto\" [value]=\"opcion.tipo_opcion\">{{opcion.tipo_opcion}}</ion-select-option>\n      <ion-select-option [value]=\"null\" >Sin Preselección</ion-select-option>\n    </ion-select>\n  </ion-item>\n  <ion-item lines=\"full\">\n    <ion-label>\n      Estado del Cebo:\n    </ion-label>\n    <ion-select [(ngModel)]=\"opcionPredeterminada[1]\">\n      <ion-select-option *ngFor=\"let opcion of opcionesCebo\" [value]=\"opcion.tipo_opcion\">{{opcion.tipo_opcion}}</ion-select-option>\n      <ion-select-option [value]=\"null\" >Sin Preselección</ion-select-option>\n    </ion-select>\n  </ion-item>\n  <ion-row>\n    <ion-col class=\"ion-text-center\">\n      <div>\n       <ion-button (click)=\"modalDismiss()\" style=\"width: 50%\" class = \"button\">Volver</ion-button>\n      </div>\n    </ion-col>\n    <ion-col class=\"ion-text-center\">\n      <div>\n       <ion-button  (click)=\"guardar()\" style=\"width: 50%\" class = \"button\">Guardar</ion-button>\n      </div>\n    </ion-col>\n  </ion-row>\n</ion-content>\n";
     /***/
   },
 
@@ -232,13 +232,13 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 
     var _angular_core__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(
     /*! @angular/core */
-    "./node_modules/@angular/core/__ivy_ngcc__/fesm2015/core.js");
+    "./node_modules/@angular/core/fesm2015/core.js");
     /* harmony import */
 
 
     var _angular_router__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(
     /*! @angular/router */
-    "./node_modules/@angular/router/__ivy_ngcc__/fesm2015/router.js");
+    "./node_modules/@angular/router/fesm2015/router.js");
     /* harmony import */
 
 
@@ -278,6 +278,17 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
         /*! ./paginas/administrar-visitas/administrar-visitas.module */
         "./src/app/paginas/administrar-visitas/administrar-visitas.module.ts")).then(function (m) {
           return m.AdministrarVisitasPageModule;
+        });
+      }
+    }, {
+      path: 'estadisticas',
+      loadChildren: function loadChildren() {
+        return __webpack_require__.e(
+        /*! import() | paginas-estadisticas-estadisticas-module */
+        "paginas-estadisticas-estadisticas-module").then(__webpack_require__.bind(null,
+        /*! ./paginas/estadisticas/estadisticas.module */
+        "./src/app/paginas/estadisticas/estadisticas.module.ts")).then(function (m) {
+          return m.EstadisticasPageModule;
         });
       }
     }];
@@ -345,25 +356,25 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 
     var _angular_core__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(
     /*! @angular/core */
-    "./node_modules/@angular/core/__ivy_ngcc__/fesm2015/core.js");
+    "./node_modules/@angular/core/fesm2015/core.js");
     /* harmony import */
 
 
     var _ionic_angular__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(
     /*! @ionic/angular */
-    "./node_modules/@ionic/angular/__ivy_ngcc__/fesm2015/ionic-angular.js");
+    "./node_modules/@ionic/angular/fesm2015/ionic-angular.js");
     /* harmony import */
 
 
     var _ionic_native_splash_screen_ngx__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(
     /*! @ionic-native/splash-screen/ngx */
-    "./node_modules/@ionic-native/splash-screen/__ivy_ngcc__/ngx/index.js");
+    "./node_modules/@ionic-native/splash-screen/ngx/index.js");
     /* harmony import */
 
 
     var _ionic_native_status_bar_ngx__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(
     /*! @ionic-native/status-bar/ngx */
-    "./node_modules/@ionic-native/status-bar/__ivy_ngcc__/ngx/index.js");
+    "./node_modules/@ionic-native/status-bar/ngx/index.js");
     /* harmony import */
 
 
@@ -375,7 +386,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 
     var _angular_router__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(
     /*! @angular/router */
-    "./node_modules/@angular/router/__ivy_ngcc__/fesm2015/router.js");
+    "./node_modules/@angular/router/fesm2015/router.js");
 
     var AppComponent = /*#__PURE__*/function () {
       function AppComponent(platform, splashScreen, statusBar, loginService, router) {
@@ -482,31 +493,31 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 
     var _angular_core__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(
     /*! @angular/core */
-    "./node_modules/@angular/core/__ivy_ngcc__/fesm2015/core.js");
+    "./node_modules/@angular/core/fesm2015/core.js");
     /* harmony import */
 
 
     var _angular_platform_browser__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(
     /*! @angular/platform-browser */
-    "./node_modules/@angular/platform-browser/__ivy_ngcc__/fesm2015/platform-browser.js");
+    "./node_modules/@angular/platform-browser/fesm2015/platform-browser.js");
     /* harmony import */
 
 
     var _ionic_angular__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(
     /*! @ionic/angular */
-    "./node_modules/@ionic/angular/__ivy_ngcc__/fesm2015/ionic-angular.js");
+    "./node_modules/@ionic/angular/fesm2015/ionic-angular.js");
     /* harmony import */
 
 
     var _ionic_native_splash_screen_ngx__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(
     /*! @ionic-native/splash-screen/ngx */
-    "./node_modules/@ionic-native/splash-screen/__ivy_ngcc__/ngx/index.js");
+    "./node_modules/@ionic-native/splash-screen/ngx/index.js");
     /* harmony import */
 
 
     var _ionic_native_status_bar_ngx__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(
     /*! @ionic-native/status-bar/ngx */
-    "./node_modules/@ionic-native/status-bar/__ivy_ngcc__/ngx/index.js");
+    "./node_modules/@ionic-native/status-bar/ngx/index.js");
     /* harmony import */
 
 
@@ -524,19 +535,19 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 
     var _angular_common_http__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(
     /*! @angular/common/http */
-    "./node_modules/@angular/common/__ivy_ngcc__/fesm2015/http.js");
+    "./node_modules/@angular/common/fesm2015/http.js");
     /* harmony import */
 
 
     var _ionic_storage__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(
     /*! @ionic/storage */
-    "./node_modules/@ionic/storage/__ivy_ngcc__/fesm2015/ionic-storage.js");
+    "./node_modules/@ionic/storage/fesm2015/ionic-storage.js");
     /* harmony import */
 
 
     var _angular_service_worker__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(
     /*! @angular/service-worker */
-    "./node_modules/@angular/service-worker/__ivy_ngcc__/fesm2015/service-worker.js");
+    "./node_modules/@angular/service-worker/fesm2015/service-worker.js");
     /* harmony import */
 
 
@@ -548,13 +559,13 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 
     var _angular_common__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(
     /*! @angular/common */
-    "./node_modules/@angular/common/__ivy_ngcc__/fesm2015/common.js");
+    "./node_modules/@angular/common/fesm2015/common.js");
     /* harmony import */
 
 
     var ngx_image_compress__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(
     /*! ngx-image-compress */
-    "./node_modules/ngx-image-compress/__ivy_ngcc__/fesm2015/ngx-image-compress.js");
+    "./node_modules/ngx-image-compress/fesm2015/ngx-image-compress.js");
     /* harmony import */
 
 
@@ -566,7 +577,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 
     var _angular_forms__WEBPACK_IMPORTED_MODULE_15__ = __webpack_require__(
     /*! @angular/forms */
-    "./node_modules/@angular/forms/__ivy_ngcc__/fesm2015/forms.js");
+    "./node_modules/@angular/forms/fesm2015/forms.js");
     /* harmony import */
 
 
@@ -629,19 +640,19 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 
     var _angular_core__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(
     /*! @angular/core */
-    "./node_modules/@angular/core/__ivy_ngcc__/fesm2015/core.js");
+    "./node_modules/@angular/core/fesm2015/core.js");
     /* harmony import */
 
 
     var _angular_router__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(
     /*! @angular/router */
-    "./node_modules/@angular/router/__ivy_ngcc__/fesm2015/router.js");
+    "./node_modules/@angular/router/fesm2015/router.js");
     /* harmony import */
 
 
     var _ionic_storage__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(
     /*! @ionic/storage */
-    "./node_modules/@ionic/storage/__ivy_ngcc__/fesm2015/ionic-storage.js");
+    "./node_modules/@ionic/storage/fesm2015/ionic-storage.js");
 
     var LoginGuardsGuard = /*#__PURE__*/function () {
       function LoginGuardsGuard(storage, router) {
@@ -723,13 +734,13 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 
     var _angular_core__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(
     /*! @angular/core */
-    "./node_modules/@angular/core/__ivy_ngcc__/fesm2015/core.js");
+    "./node_modules/@angular/core/fesm2015/core.js");
     /* harmony import */
 
 
     var _angular_common_http__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(
     /*! @angular/common/http */
-    "./node_modules/@angular/common/__ivy_ngcc__/fesm2015/http.js");
+    "./node_modules/@angular/common/fesm2015/http.js");
     /* harmony import */
 
 
@@ -742,7 +753,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
         _classCallCheck(this, ServicioLoginService);
 
         this.http = http;
-        this.apiDir = "http://157.230.90.222:3001";
+        this.apiDir = "http://192.168.0.71:3000";
         this.requestOptions = {
           headers: new _angular_common_http__WEBPACK_IMPORTED_MODULE_2__["HttpHeaders"]({
             'Content-Type': 'application/json',
@@ -836,13 +847,13 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 
     var _angular_core__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(
     /*! @angular/core */
-    "./node_modules/@angular/core/__ivy_ngcc__/fesm2015/core.js");
+    "./node_modules/@angular/core/fesm2015/core.js");
     /* harmony import */
 
 
     var _ionic_angular__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(
     /*! @ionic/angular */
-    "./node_modules/@ionic/angular/__ivy_ngcc__/fesm2015/ionic-angular.js");
+    "./node_modules/@ionic/angular/fesm2015/ionic-angular.js");
     /* harmony import */
 
 
@@ -1165,13 +1176,13 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 
     var _angular_core__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(
     /*! @angular/core */
-    "./node_modules/@angular/core/__ivy_ngcc__/fesm2015/core.js");
+    "./node_modules/@angular/core/fesm2015/core.js");
     /* harmony import */
 
 
     var _ionic_angular__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(
     /*! @ionic/angular */
-    "./node_modules/@ionic/angular/__ivy_ngcc__/fesm2015/ionic-angular.js");
+    "./node_modules/@ionic/angular/fesm2015/ionic-angular.js");
     /* harmony import */
 
 
@@ -1343,13 +1354,13 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 
     var _angular_core__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(
     /*! @angular/core */
-    "./node_modules/@angular/core/__ivy_ngcc__/fesm2015/core.js");
+    "./node_modules/@angular/core/fesm2015/core.js");
     /* harmony import */
 
 
     var _angular_common_http__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(
     /*! @angular/common/http */
-    "./node_modules/@angular/common/__ivy_ngcc__/fesm2015/http.js");
+    "./node_modules/@angular/common/fesm2015/http.js");
     /* harmony import */
 
 
@@ -1362,7 +1373,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
         _classCallCheck(this, ApiServiciosService);
 
         this.http = http;
-        this.apiDir = "http://157.230.90.222:3001";
+        this.apiDir = "http://192.168.0.71:3000";
         this.requestOptions = {
           headers: new _angular_common_http__WEBPACK_IMPORTED_MODULE_2__["HttpHeaders"]({
             'Content-Type': 'application/json',
@@ -1525,13 +1536,13 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 
     var _angular_core__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(
     /*! @angular/core */
-    "./node_modules/@angular/core/__ivy_ngcc__/fesm2015/core.js");
+    "./node_modules/@angular/core/fesm2015/core.js");
     /* harmony import */
 
 
     var _ionic_angular__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(
     /*! @ionic/angular */
-    "./node_modules/@ionic/angular/__ivy_ngcc__/fesm2015/ionic-angular.js");
+    "./node_modules/@ionic/angular/fesm2015/ionic-angular.js");
     /* harmony import */
 
 
@@ -1667,13 +1678,13 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 
     var _angular_core__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(
     /*! @angular/core */
-    "./node_modules/@angular/core/__ivy_ngcc__/fesm2015/core.js");
+    "./node_modules/@angular/core/fesm2015/core.js");
     /* harmony import */
 
 
     var _angular_common_http__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(
     /*! @angular/common/http */
-    "./node_modules/@angular/common/__ivy_ngcc__/fesm2015/http.js");
+    "./node_modules/@angular/common/fesm2015/http.js");
     /* harmony import */
 
 
@@ -1686,7 +1697,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
         _classCallCheck(this, ApiVisitasService);
 
         this.http = http;
-        this.apiDir = "http://157.230.90.222:3001";
+        this.apiDir = "http://192.168.0.71:3000";
         this.requestOptions = {
           headers: new _angular_common_http__WEBPACK_IMPORTED_MODULE_2__["HttpHeaders"]({
             'Content-Type': 'application/json',
@@ -1898,13 +1909,13 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 
     var _angular_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(
     /*! @angular/core */
-    "./node_modules/@angular/core/__ivy_ngcc__/fesm2015/core.js");
+    "./node_modules/@angular/core/fesm2015/core.js");
     /* harmony import */
 
 
     var _angular_platform_browser_dynamic__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(
     /*! @angular/platform-browser-dynamic */
-    "./node_modules/@angular/platform-browser-dynamic/__ivy_ngcc__/fesm2015/platform-browser-dynamic.js");
+    "./node_modules/@angular/platform-browser-dynamic/fesm2015/platform-browser-dynamic.js");
     /* harmony import */
 
 
@@ -1939,7 +1950,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
   /***/
   function _(module, exports, __webpack_require__) {
     module.exports = __webpack_require__(
-    /*! E:\Trabajo\cpa\frontend_cpa_admin\src\main.ts */
+    /*! D:\Repositorios\frontend_cpa_admin\src\main.ts */
     "./src/main.ts");
     /***/
   }

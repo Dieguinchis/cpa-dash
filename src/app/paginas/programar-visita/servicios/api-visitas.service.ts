@@ -10,7 +10,7 @@ export class ApiVisitasService {
   private requestOptions
   headers : any
 
-  private apiDir = "http://157.230.90.222:3001";
+  private apiDir = "http://192.168.0.71:3000";
 
   constructor(public http: HttpClient) {
     this.requestOptions = {
@@ -105,4 +105,11 @@ export class ApiVisitasService {
     });
   }
 
+  setPlano(parametros){
+    return this.http.post(this.apiDir+'/servicios/gruposEquipos/plano',parametros,this.requestOptions);
+  }
+
+  pdfEstadisticas(parametros){
+    return this.http.post(this.apiDir+'/pdf/stats-pdf',parametros,this.requestOptions)
+  }
 }

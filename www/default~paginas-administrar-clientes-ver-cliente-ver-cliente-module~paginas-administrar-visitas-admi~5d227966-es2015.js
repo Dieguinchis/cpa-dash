@@ -22,7 +22,7 @@ __webpack_require__.r(__webpack_exports__);
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony default export */ __webpack_exports__["default"] = ("<ion-header>\r\n  <ion-toolbar style=\"text-align: center;\" color=\"primary\">\r\n    <ion-title>visita</ion-title>\r\n    <ion-buttons slot=\"end\">\r\n      <ion-button (click)=\"close()\">\r\n        <ion-icon name=\"close-outline\"></ion-icon>\r\n        </ion-button>\r\n    </ion-buttons>\r\n  </ion-toolbar>\r\n</ion-header>\r\n<ion-content>\r\n  <div *ngIf=\"!visita\" style=\"text-align: center;\">\r\n    <ion-spinner></ion-spinner>\r\n  </div>\r\n  <div *ngIf=\"visita\">\r\n    <div *ngIf=\"visita.visitas.horario_salida != 'NULL'\">\r\n      <ion-item lines=\"full\">\r\n        <ion-label><b>Fecha de concluida la visita:</b> {{visita.visitas.horario_salida | date: 'dd/MM/yyyy hh:mm'}}</ion-label>\r\n      </ion-item>\r\n    </div>\r\n    <div *ngIf=\"visita.visitas.horario_salida == 'NULL'\">\r\n      <ion-item>\r\n        <ion-label><b>Fecha estimada de la visita:</b> {{visita.visitas.fecha_visita | date: 'dd/MM/yyyy hh:mm'}}</ion-label>\r\n      </ion-item>\r\n    </div>\r\n    <ion-item lines=\"full\">\r\n      <ion-label><b>Cliente:</b> {{visita.visitas.razon_social_cliente}}</ion-label>\r\n    </ion-item>\r\n    <ion-item lines=\"full\">\r\n      <ion-label><b>Sucursal:</b> {{visita.visitas.razon_social_sucursal}}</ion-label>\r\n    </ion-item>\r\n    <ion-item lines=\"full\">\r\n      <ion-label><b>Servicios ofrecidos:</b>\r\n        <div *ngFor=\"let servicio of visita.servicios2; let i = index\" style=\"margin-left:10px; margin-top: 10px\">\r\n          <ion-icon name=\"document-outline\" color=\"primary\"></ion-icon>\r\n          {{servicio.nombre_servicio}}\r\n          <ion-icon name=\"create-outline\" style=\"cursor: pointer;\" *ngIf=\"visita.visitas.estado_visitas == 'finalizada'\" (click)=\"editarServicio(servicio.id_servicio, servicio.id_formulario)\"></ion-icon>\r\n        </div>\r\n      </ion-label>\r\n    </ion-item>\r\n    <div *ngIf=\"visita.visitas.horario_salida != 'NULL'\">\r\n      <div *ngIf=\"!pdf_generado && visita.visitas.pdfGenerado == 0\">\r\n        <ion-button expand=\"full\" (click)=\"generar_pdf()\">Generar PDF</ion-button>\r\n      </div>\r\n      <div *ngIf=\"pdf_generado || visita.visitas.pdfGenerado == 1\">\r\n        <ion-button expand=\"full\" (click)=\"ver_pdf()\" color=\"success\">Ver PDF</ion-button>\r\n      </div>\r\n      <div *ngIf=\"pdf_generado || visita.visitas.pdfGenerado == 1\">\r\n        <ion-button expand=\"full\" (click)=\"generar_pdf()\">Volver a generar PDF</ion-button>\r\n      </div>\r\n    </div>\r\n    <div *ngIf=\"visita.visitas.horario_salida == 'NULL'\">\r\n      <ion-button expand=\"full\" (click)=\"modificar_visita()\">Modificar visita</ion-button>\r\n    </div>\r\n  </div>\r\n\r\n  <div>\r\n    <img class=\"imagen_empresa\" src='../../../assets/LogoCPA-01.png'>\r\n  </div>\r\n\r\n</ion-content>\r\n\r\n\r\n");
+/* harmony default export */ __webpack_exports__["default"] = ("<ion-header>\r\n  <ion-toolbar style=\"text-align: center;\" color=\"primary\">\r\n    <ion-title>visita</ion-title>\r\n    <ion-buttons slot=\"end\">\r\n      <ion-button (click)=\"close()\">\r\n        <ion-icon name=\"close-outline\"></ion-icon>\r\n        </ion-button>\r\n    </ion-buttons>\r\n  </ion-toolbar>\r\n</ion-header>\r\n<ion-content>\r\n  <div *ngIf=\"!visita\" style=\"text-align: center;\">\r\n    <ion-spinner></ion-spinner>\r\n  </div>\r\n  <div *ngIf=\"visita\">\r\n    <div *ngIf=\"visita.visitas.horario_salida != 'NULL'\">\r\n      <ion-item lines=\"full\">\r\n        <ion-label *ngIf=\"validDate\"><b>Fecha de concluida la visita:</b> {{visita.visitas.horario_salida | date: 'dd/MM/yyyy hh:mm a'}}</ion-label>\r\n        <ion-label *ngIf=\"!validDate\"><b>Fecha de concluida la visita:</b> {{visita.visitas.horario_salida}}</ion-label>\r\n      </ion-item>\r\n    </div>\r\n    <div *ngIf=\"visita.visitas.horario_salida == 'NULL'\">\r\n      <ion-item>\r\n        <ion-label><b>Fecha estimada de la visita:</b> {{visita.visitas.fecha_visita | date: 'dd/MM/yyyy hh:mm'}}</ion-label>\r\n      </ion-item>\r\n    </div>\r\n    <ion-item lines=\"full\">\r\n      <ion-label><b>Cliente:</b> {{visita.visitas.razon_social_cliente}}</ion-label>\r\n    </ion-item>\r\n    <ion-item lines=\"full\">\r\n      <ion-label><b>Sucursal:</b> {{visita.visitas.razon_social_sucursal}}</ion-label>\r\n    </ion-item>\r\n    <ion-item lines=\"full\">\r\n      <ion-label><b>Servicios ofrecidos:</b>\r\n        <div *ngFor=\"let servicio of visita.servicios2; let i = index\" style=\"margin-left:10px; margin-top: 10px\">\r\n          <ion-icon name=\"document-outline\" color=\"primary\"></ion-icon>\r\n          {{servicio.nombre_servicio}}\r\n          <ion-icon name=\"create-outline\" style=\"cursor: pointer;\" *ngIf=\"visita.visitas.estado_visitas == 'finalizada'\" (click)=\"editarServicio(servicio.id_servicio, servicio.id_formulario)\"></ion-icon>\r\n        </div>\r\n      </ion-label>\r\n    </ion-item>\r\n    <div *ngIf=\"(visita.visitas.horario_salida != 'NULL') && (visita.visitas.estado_visitas != 'en proceso')\">\r\n      <div *ngIf=\"!pdf_generado && visita.visitas.pdfGenerado == 0\">\r\n        <ion-button expand=\"full\" (click)=\"generar_pdf()\">Generar PDF</ion-button>\r\n      </div>\r\n      <div *ngIf=\"pdf_generado || visita.visitas.pdfGenerado == 1\">\r\n        <ion-button expand=\"full\" (click)=\"ver_pdf()\" color=\"success\">Ver PDF</ion-button>\r\n      </div>\r\n      <div *ngIf=\"pdf_generado || visita.visitas.pdfGenerado == 1\">\r\n        <ion-button expand=\"full\" (click)=\"generar_pdf()\">Volver a generar PDF</ion-button>\r\n      </div>\r\n    </div>\r\n    <div *ngIf=\"visita.visitas.horario_salida == 'NULL'\">\r\n      <ion-button expand=\"full\" (click)=\"modificar_visita()\">Modificar visita</ion-button>\r\n    </div>\r\n  </div>\r\n\r\n  <div>\r\n    <img class=\"imagen_empresa\" src='../../../assets/LogoCPA-01.png'>\r\n  </div>\r\n\r\n</ion-content>\r\n\r\n\r\n");
 
 /***/ }),
 
@@ -37,8 +37,8 @@ __webpack_require__.r(__webpack_exports__);
 __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "ApiClientesService", function() { return ApiClientesService; });
 /* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! tslib */ "./node_modules/tslib/tslib.es6.js");
-/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/__ivy_ngcc__/fesm2015/core.js");
-/* harmony import */ var _angular_common_http__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @angular/common/http */ "./node_modules/@angular/common/__ivy_ngcc__/fesm2015/http.js");
+/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm2015/core.js");
+/* harmony import */ var _angular_common_http__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @angular/common/http */ "./node_modules/@angular/common/fesm2015/http.js");
 /* harmony import */ var _environments_version__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../../../environments/version */ "./src/environments/version.ts");
 
 
@@ -47,7 +47,7 @@ __webpack_require__.r(__webpack_exports__);
 let ApiClientesService = class ApiClientesService {
     constructor(http) {
         this.http = http;
-        this.apiDir = "http://157.230.90.222:3001";
+        this.apiDir = "http://192.168.0.71:3000";
         this.requestOptions = {
             headers: new _angular_common_http__WEBPACK_IMPORTED_MODULE_2__["HttpHeaders"]({
                 'Content-Type': 'application/json',
@@ -70,6 +70,7 @@ let ApiClientesService = class ApiClientesService {
     informacion_visita(id) {
         return Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"])(this, void 0, void 0, function* () {
             var data = yield this.http.get(this.apiDir + '/visitas/id/' + id, this.requestOptions);
+            console.log(this.apiDir + '/visitas/id/' + id, this.requestOptions);
             return data.toPromise();
         });
     }
@@ -145,6 +146,9 @@ let ApiClientesService = class ApiClientesService {
     modificar_sucursal(parametros) {
         return this.http.post(this.apiDir + '/sucursales/actualizar', parametros, this.requestOptions);
     }
+    estadisticas(parametros) {
+        return this.http.post(this.apiDir + '/clientes/estadisticas/', parametros, this.requestOptions);
+    }
 };
 ApiClientesService.ctorParameters = () => [
     { type: _angular_common_http__WEBPACK_IMPORTED_MODULE_2__["HttpClient"] }
@@ -183,8 +187,8 @@ __webpack_require__.r(__webpack_exports__);
 __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "ModificarVisitaPage", function() { return ModificarVisitaPage; });
 /* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! tslib */ "./node_modules/tslib/tslib.es6.js");
-/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/__ivy_ngcc__/fesm2015/core.js");
-/* harmony import */ var _ionic_angular__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @ionic/angular */ "./node_modules/@ionic/angular/__ivy_ngcc__/fesm2015/ionic-angular.js");
+/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm2015/core.js");
+/* harmony import */ var _ionic_angular__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @ionic/angular */ "./node_modules/@ionic/angular/fesm2015/ionic-angular.js");
 /* harmony import */ var _servicios_api_clientes_service__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../servicios/api-clientes.service */ "./src/app/paginas/administrar-clientes/servicios/api-clientes.service.ts");
 /* harmony import */ var _programar_visita_servicios_api_visitas_service__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../../../programar-visita/servicios/api-visitas.service */ "./src/app/paginas/programar-visita/servicios/api-visitas.service.ts");
 /* harmony import */ var _administrar_tecnicos_servicios_servicio_tecnicos_service__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../../../administrar-tecnicos/servicios/servicio-tecnicos.service */ "./src/app/paginas/administrar-tecnicos/servicios/servicio-tecnicos.service.ts");
@@ -445,8 +449,8 @@ __webpack_require__.r(__webpack_exports__);
 __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "VerVisitaPage", function() { return VerVisitaPage; });
 /* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! tslib */ "./node_modules/tslib/tslib.es6.js");
-/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/__ivy_ngcc__/fesm2015/core.js");
-/* harmony import */ var _ionic_angular__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @ionic/angular */ "./node_modules/@ionic/angular/__ivy_ngcc__/fesm2015/ionic-angular.js");
+/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm2015/core.js");
+/* harmony import */ var _ionic_angular__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @ionic/angular */ "./node_modules/@ionic/angular/fesm2015/ionic-angular.js");
 /* harmony import */ var src_app_modals_editar_visita_editar_visita_component__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! src/app/modals/editar-visita/editar-visita.component */ "./src/app/modals/editar-visita/editar-visita.component.ts");
 /* harmony import */ var src_app_modals_ver_servicio_visita_ver_servicio_visita_component__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! src/app/modals/ver-servicio-visita/ver-servicio-visita.component */ "./src/app/modals/ver-servicio-visita/ver-servicio-visita.component.ts");
 /* harmony import */ var _servicios_api_clientes_service__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../../servicios/api-clientes.service */ "./src/app/paginas/administrar-clientes/servicios/api-clientes.service.ts");
@@ -466,6 +470,7 @@ let VerVisitaPage = class VerVisitaPage {
         this.loadingController = loadingController;
         this.id_visita = this.navParams.get('id_visita');
         this.pdf_generado = false;
+        this.validDate = true;
     }
     ngOnInit() {
         this.actualizar_informacion();
@@ -503,6 +508,12 @@ let VerVisitaPage = class VerVisitaPage {
             var _a;
             this.visita = data;
             this.visita = this.visita.result;
+            if (new Date(this.visita.visitas.horario_salida).valueOf()) {
+                this.visita.visitas.horario_salida = new Date(this.visita.visitas.horario_salida);
+            }
+            else {
+                this.validDate = false;
+            }
             console.log(this.visita);
             if (this.visita) {
                 this.visita.servicios2 = [];

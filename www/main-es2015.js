@@ -283,7 +283,7 @@ __webpack_require__.r(__webpack_exports__);
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony default export */ __webpack_exports__["default"] = ("<ion-header>\r\n  <ion-toolbar style=\"text-align: center;\" color=\"primary\">\r\n    <ion-title>{{equipo?equipo:servicio?.nombreDelServicio}}</ion-title>\r\n  </ion-toolbar>\r\n</ion-header>\r\n<ion-content>\r\n  <!-- Servicios Sin productos -->\r\n    <div *ngIf=\"servicio\">\r\n      <div *ngFor = \"let campo of servicio.formulario; let i = index\">\r\n        <div *ngIf = \"campo.tipoCampo =='Select' || campo.tipoCampo =='select'\">\r\n          <ion-item>\r\n            <ion-label>{{campo.nombreCampo}}</ion-label>\r\n            <ion-select [(ngModel)] = \"respuestas[i].respuesta\" mode=\"ios\" >\r\n              <ion-select-option *ngFor = \"let campo_opciones of campo.opciones; let h = index\" [value]=\"campo_opciones.name\" >{{campo_opciones.name}}</ion-select-option>\r\n            </ion-select>\r\n          </ion-item>\r\n        </div>\r\n        <div *ngIf = \"campo.tipoCampo =='multiple' || campo.tipoCampo =='Multiple' \">\r\n          <ion-item>\r\n            <ion-label>{{campo.nombreCampo}}</ion-label>\r\n            <ion-select multiple [(ngModel)] = \"respuestas[i].respuesta\" mode=\"ios\">\r\n              <ion-select-option *ngFor = \"let campo_opciones of campo.opciones\" [value]=\"campo_opciones.name\" >{{campo_opciones.name}}</ion-select-option>\r\n            </ion-select>\r\n            </ion-item>\r\n            <div *ngIf = \"(campo.tipoCampo =='multiple' || campo.tipoCampo =='Multiple') && campo.id_campo == 30 && mostrarOtros()\">\r\n            <ion-item>\r\n                  <ion-label>Otros: </ion-label>\r\n                  <ion-input  style = \"margin-left: 10px;\" [(ngModel)] =\"otros\" mode=\"ios\"></ion-input>\r\n            </ion-item>\r\n          </div>\r\n        </div>\r\n  \r\n  \r\n        <div *ngIf = \"campo.tipoCampo == 'input'|| campo.tipoCampo =='Input'\">\r\n          <ion-item>\r\n                <ion-label>{{campo.nombreCampo}}</ion-label>\r\n                <ion-input style = \"margin-left: 10px;\" [(ngModel)] =\"respuestas[i].respuesta\" mode=\"ios\"></ion-input>\r\n          </ion-item>\r\n        </div>\r\n      </div>\r\n    </div>\r\n  \r\n    <ion-row>\r\n      <ion-col class=\"ion-text-center\">\r\n        <div>\r\n         <ion-button (click)=\"modalDissmiss()\" style=\"width: 50%\" class = \"button\">Volver</ion-button>\r\n        </div>\r\n      </ion-col>\r\n      <ion-col class=\"ion-text-center\">\r\n        <div>\r\n         <ion-button  (click)=\"guardar()\" style=\"width: 50%\" class = \"button\">Guardar</ion-button>\r\n        </div>\r\n      </ion-col>\r\n    </ion-row>\r\n\r\n  </ion-content>");
+/* harmony default export */ __webpack_exports__["default"] = ("<ion-header>\n  <ion-toolbar style=\"text-align: center;\" color=\"primary\">\n    <ion-title>{{equipo?equipo:servicio?.nombreDelServicio}}</ion-title>\n  </ion-toolbar>\n</ion-header>\n<ion-content>\n  <!-- Servicios Sin productos -->\n    <div *ngIf=\"servicio\">\n      <div *ngFor = \"let campo of servicio.formulario; let i = index\">\n        <div *ngIf = \"campo.tipoCampo =='Select' || campo.tipoCampo =='select'\">\n          <ion-item>\n            <ion-label>{{campo.nombreCampo}}</ion-label>\n            <ion-select [(ngModel)] = \"respuestas[i].respuesta\" mode=\"ios\" >\n              <ion-select-option *ngFor = \"let campo_opciones of campo.opciones; let h = index\" [value]=\"campo_opciones.name\" >{{campo_opciones.name}}</ion-select-option>\n            </ion-select>\n          </ion-item>\n        </div>\n        <div *ngIf = \"campo.tipoCampo =='multiple' || campo.tipoCampo =='Multiple' \">\n          <ion-item>\n            <ion-label>{{campo.nombreCampo}}</ion-label>\n            <ion-select multiple [(ngModel)] = \"respuestas[i].respuesta\" mode=\"ios\">\n              <ion-select-option *ngFor = \"let campo_opciones of campo.opciones\" [value]=\"campo_opciones.name\" >{{campo_opciones.name}}</ion-select-option>\n            </ion-select>\n            </ion-item>\n            <div *ngIf = \"(campo.tipoCampo =='multiple' || campo.tipoCampo =='Multiple') && campo.id_campo == 30 && mostrarOtros()\">\n            <ion-item>\n                  <ion-label>Otros: </ion-label>\n                  <ion-input  style = \"margin-left: 10px;\" [(ngModel)] =\"otros\" mode=\"ios\"></ion-input>\n            </ion-item>\n          </div>\n        </div>\n  \n  \n        <div *ngIf = \"campo.tipoCampo == 'input'|| campo.tipoCampo =='Input'\">\n          <ion-item>\n                <ion-label>{{campo.nombreCampo}}</ion-label>\n                <ion-input style = \"margin-left: 10px;\" [(ngModel)] =\"respuestas[i].respuesta\" mode=\"ios\"></ion-input>\n          </ion-item>\n        </div>\n      </div>\n    </div>\n  \n    <ion-row>\n      <ion-col class=\"ion-text-center\">\n        <div>\n         <ion-button (click)=\"modalDissmiss()\" style=\"width: 50%\" class = \"button\">Volver</ion-button>\n        </div>\n      </ion-col>\n      <ion-col class=\"ion-text-center\">\n        <div>\n         <ion-button  (click)=\"guardar()\" style=\"width: 50%\" class = \"button\">Guardar</ion-button>\n        </div>\n      </ion-col>\n    </ion-row>\n\n  </ion-content>");
 
 /***/ }),
 
@@ -296,7 +296,7 @@ __webpack_require__.r(__webpack_exports__);
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony default export */ __webpack_exports__["default"] = ("<ion-header>\r\n  <ion-toolbar color=\"primary\">\r\n    <ion-title>{{servicios?servicios[0].nombre_servicio:null}}</ion-title>\r\n  </ion-toolbar>\r\n</ion-header>\r\n<ion-content>\r\n  <ion-item *ngFor=\"let servicio of servicios\" (click)=\"editarServicio(servicio.id_formulario, servicio.nombre_equipo)\">\r\n    <ion-label>{{servicio.nombre_equipo}}</ion-label>\r\n  </ion-item>\r\n  <ion-row>\r\n      <ion-col class=\"ion-text-center\">\r\n        <div>\r\n         <ion-button (click)=\"modalDismiss()\" style=\"width: 50%\" class = \"button\">Volver</ion-button>\r\n        </div>\r\n      </ion-col>\r\n    </ion-row>\r\n</ion-content>");
+/* harmony default export */ __webpack_exports__["default"] = ("<ion-header>\n  <ion-toolbar color=\"primary\">\n    <ion-title>{{servicios?servicios[0].nombre_servicio:null}}</ion-title>\n  </ion-toolbar>\n</ion-header>\n<ion-content>\n  <ion-item *ngFor=\"let servicio of servicios\" (click)=\"editarServicio(servicio.id_formulario, servicio.nombre_equipo)\">\n    <ion-label>{{servicio.nombre_equipo}}</ion-label>\n  </ion-item>\n  <ion-row>\n      <ion-col class=\"ion-text-center\">\n        <div>\n         <ion-button (click)=\"modalDismiss()\" style=\"width: 50%\" class = \"button\">Volver</ion-button>\n        </div>\n      </ion-col>\n    </ion-row>\n</ion-content>");
 
 /***/ }),
 
@@ -309,7 +309,7 @@ __webpack_require__.r(__webpack_exports__);
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony default export */ __webpack_exports__["default"] = ("<ion-content>\r\n  <ion-item lines=\"full\">\r\n    <ion-label>\r\n      Estado del Puesto:\r\n    </ion-label>\r\n    <ion-select [(ngModel)]=\"opcionPredeterminada[0]\">\r\n      <ion-select-option *ngFor=\"let opcion of opcionesPuesto\" [value]=\"opcion.tipo_opcion\">{{opcion.tipo_opcion}}</ion-select-option>\r\n      <ion-select-option [value]=\"null\" >Sin Preselección</ion-select-option>\r\n    </ion-select>\r\n  </ion-item>\r\n  <ion-item lines=\"full\">\r\n    <ion-label>\r\n      Estado del Cebo:\r\n    </ion-label>\r\n    <ion-select [(ngModel)]=\"opcionPredeterminada[1]\">\r\n      <ion-select-option *ngFor=\"let opcion of opcionesCebo\" [value]=\"opcion.tipo_opcion\">{{opcion.tipo_opcion}}</ion-select-option>\r\n      <ion-select-option [value]=\"null\" >Sin Preselección</ion-select-option>\r\n    </ion-select>\r\n  </ion-item>\r\n  <ion-row>\r\n    <ion-col class=\"ion-text-center\">\r\n      <div>\r\n       <ion-button (click)=\"modalDismiss()\" style=\"width: 50%\" class = \"button\">Volver</ion-button>\r\n      </div>\r\n    </ion-col>\r\n    <ion-col class=\"ion-text-center\">\r\n      <div>\r\n       <ion-button  (click)=\"guardar()\" style=\"width: 50%\" class = \"button\">Guardar</ion-button>\r\n      </div>\r\n    </ion-col>\r\n  </ion-row>\r\n</ion-content>\r\n");
+/* harmony default export */ __webpack_exports__["default"] = ("<ion-content>\n  <ion-item lines=\"full\">\n    <ion-label>\n      Estado del Puesto:\n    </ion-label>\n    <ion-select [(ngModel)]=\"opcionPredeterminada[0]\">\n      <ion-select-option *ngFor=\"let opcion of opcionesPuesto\" [value]=\"opcion.tipo_opcion\">{{opcion.tipo_opcion}}</ion-select-option>\n      <ion-select-option [value]=\"null\" >Sin Preselección</ion-select-option>\n    </ion-select>\n  </ion-item>\n  <ion-item lines=\"full\">\n    <ion-label>\n      Estado del Cebo:\n    </ion-label>\n    <ion-select [(ngModel)]=\"opcionPredeterminada[1]\">\n      <ion-select-option *ngFor=\"let opcion of opcionesCebo\" [value]=\"opcion.tipo_opcion\">{{opcion.tipo_opcion}}</ion-select-option>\n      <ion-select-option [value]=\"null\" >Sin Preselección</ion-select-option>\n    </ion-select>\n  </ion-item>\n  <ion-row>\n    <ion-col class=\"ion-text-center\">\n      <div>\n       <ion-button (click)=\"modalDismiss()\" style=\"width: 50%\" class = \"button\">Volver</ion-button>\n      </div>\n    </ion-col>\n    <ion-col class=\"ion-text-center\">\n      <div>\n       <ion-button  (click)=\"guardar()\" style=\"width: 50%\" class = \"button\">Guardar</ion-button>\n      </div>\n    </ion-col>\n  </ion-row>\n</ion-content>\n");
 
 /***/ }),
 
@@ -324,8 +324,8 @@ __webpack_require__.r(__webpack_exports__);
 __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "AppRoutingModule", function() { return AppRoutingModule; });
 /* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! tslib */ "./node_modules/tslib/tslib.es6.js");
-/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/__ivy_ngcc__/fesm2015/core.js");
-/* harmony import */ var _angular_router__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @angular/router */ "./node_modules/@angular/router/__ivy_ngcc__/fesm2015/router.js");
+/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm2015/core.js");
+/* harmony import */ var _angular_router__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @angular/router */ "./node_modules/@angular/router/fesm2015/router.js");
 /* harmony import */ var _guards_login_guards_guard__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./guards/login-guards.guard */ "./src/app/guards/login-guards.guard.ts");
 
 
@@ -344,6 +344,10 @@ const routes = [
     {
         path: 'administrar-visitas',
         loadChildren: () => Promise.all(/*! import() | paginas-administrar-visitas-administrar-visitas-module */[__webpack_require__.e("default~paginas-administrar-clientes-ver-cliente-ver-cliente-module~paginas-administrar-visitas-admi~b66acba8"), __webpack_require__.e("default~paginas-administrar-clientes-ver-cliente-ver-cliente-module~paginas-administrar-visitas-admi~5d227966"), __webpack_require__.e("paginas-administrar-visitas-administrar-visitas-module")]).then(__webpack_require__.bind(null, /*! ./paginas/administrar-visitas/administrar-visitas.module */ "./src/app/paginas/administrar-visitas/administrar-visitas.module.ts")).then(m => m.AdministrarVisitasPageModule)
+    },
+    {
+        path: 'estadisticas',
+        loadChildren: () => __webpack_require__.e(/*! import() | paginas-estadisticas-estadisticas-module */ "paginas-estadisticas-estadisticas-module").then(__webpack_require__.bind(null, /*! ./paginas/estadisticas/estadisticas.module */ "./src/app/paginas/estadisticas/estadisticas.module.ts")).then(m => m.EstadisticasPageModule)
     }
 ];
 let AppRoutingModule = class AppRoutingModule {
@@ -385,12 +389,12 @@ __webpack_require__.r(__webpack_exports__);
 __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "AppComponent", function() { return AppComponent; });
 /* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! tslib */ "./node_modules/tslib/tslib.es6.js");
-/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/__ivy_ngcc__/fesm2015/core.js");
-/* harmony import */ var _ionic_angular__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @ionic/angular */ "./node_modules/@ionic/angular/__ivy_ngcc__/fesm2015/ionic-angular.js");
-/* harmony import */ var _ionic_native_splash_screen_ngx__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @ionic-native/splash-screen/ngx */ "./node_modules/@ionic-native/splash-screen/__ivy_ngcc__/ngx/index.js");
-/* harmony import */ var _ionic_native_status_bar_ngx__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @ionic-native/status-bar/ngx */ "./node_modules/@ionic-native/status-bar/__ivy_ngcc__/ngx/index.js");
+/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm2015/core.js");
+/* harmony import */ var _ionic_angular__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @ionic/angular */ "./node_modules/@ionic/angular/fesm2015/ionic-angular.js");
+/* harmony import */ var _ionic_native_splash_screen_ngx__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @ionic-native/splash-screen/ngx */ "./node_modules/@ionic-native/splash-screen/ngx/index.js");
+/* harmony import */ var _ionic_native_status_bar_ngx__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @ionic-native/status-bar/ngx */ "./node_modules/@ionic-native/status-bar/ngx/index.js");
 /* harmony import */ var _login_servicios_servicio_login_service__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./login/servicios/servicio-login.service */ "./src/app/login/servicios/servicio-login.service.ts");
-/* harmony import */ var _angular_router__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! @angular/router */ "./node_modules/@angular/router/__ivy_ngcc__/fesm2015/router.js");
+/* harmony import */ var _angular_router__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! @angular/router */ "./node_modules/@angular/router/fesm2015/router.js");
 
 
 
@@ -462,21 +466,21 @@ AppComponent = Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"])([
 __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "AppModule", function() { return AppModule; });
 /* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! tslib */ "./node_modules/tslib/tslib.es6.js");
-/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/__ivy_ngcc__/fesm2015/core.js");
-/* harmony import */ var _angular_platform_browser__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @angular/platform-browser */ "./node_modules/@angular/platform-browser/__ivy_ngcc__/fesm2015/platform-browser.js");
-/* harmony import */ var _ionic_angular__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @ionic/angular */ "./node_modules/@ionic/angular/__ivy_ngcc__/fesm2015/ionic-angular.js");
-/* harmony import */ var _ionic_native_splash_screen_ngx__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @ionic-native/splash-screen/ngx */ "./node_modules/@ionic-native/splash-screen/__ivy_ngcc__/ngx/index.js");
-/* harmony import */ var _ionic_native_status_bar_ngx__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! @ionic-native/status-bar/ngx */ "./node_modules/@ionic-native/status-bar/__ivy_ngcc__/ngx/index.js");
+/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm2015/core.js");
+/* harmony import */ var _angular_platform_browser__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @angular/platform-browser */ "./node_modules/@angular/platform-browser/fesm2015/platform-browser.js");
+/* harmony import */ var _ionic_angular__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @ionic/angular */ "./node_modules/@ionic/angular/fesm2015/ionic-angular.js");
+/* harmony import */ var _ionic_native_splash_screen_ngx__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @ionic-native/splash-screen/ngx */ "./node_modules/@ionic-native/splash-screen/ngx/index.js");
+/* harmony import */ var _ionic_native_status_bar_ngx__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! @ionic-native/status-bar/ngx */ "./node_modules/@ionic-native/status-bar/ngx/index.js");
 /* harmony import */ var _app_component__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./app.component */ "./src/app/app.component.ts");
 /* harmony import */ var _app_routing_module__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./app-routing.module */ "./src/app/app-routing.module.ts");
-/* harmony import */ var _angular_common_http__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! @angular/common/http */ "./node_modules/@angular/common/__ivy_ngcc__/fesm2015/http.js");
-/* harmony import */ var _ionic_storage__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! @ionic/storage */ "./node_modules/@ionic/storage/__ivy_ngcc__/fesm2015/ionic-storage.js");
-/* harmony import */ var _angular_service_worker__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! @angular/service-worker */ "./node_modules/@angular/service-worker/__ivy_ngcc__/fesm2015/service-worker.js");
+/* harmony import */ var _angular_common_http__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! @angular/common/http */ "./node_modules/@angular/common/fesm2015/http.js");
+/* harmony import */ var _ionic_storage__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! @ionic/storage */ "./node_modules/@ionic/storage/fesm2015/ionic-storage.js");
+/* harmony import */ var _angular_service_worker__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! @angular/service-worker */ "./node_modules/@angular/service-worker/fesm2015/service-worker.js");
 /* harmony import */ var _environments_environment__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! ../environments/environment */ "./src/environments/environment.ts");
-/* harmony import */ var _angular_common__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! @angular/common */ "./node_modules/@angular/common/__ivy_ngcc__/fesm2015/common.js");
-/* harmony import */ var ngx_image_compress__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(/*! ngx-image-compress */ "./node_modules/ngx-image-compress/__ivy_ngcc__/fesm2015/ngx-image-compress.js");
+/* harmony import */ var _angular_common__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! @angular/common */ "./node_modules/@angular/common/fesm2015/common.js");
+/* harmony import */ var ngx_image_compress__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(/*! ngx-image-compress */ "./node_modules/ngx-image-compress/fesm2015/ngx-image-compress.js");
 /* harmony import */ var _modals_editar_visita_editar_visita_component__WEBPACK_IMPORTED_MODULE_14__ = __webpack_require__(/*! ./modals/editar-visita/editar-visita.component */ "./src/app/modals/editar-visita/editar-visita.component.ts");
-/* harmony import */ var _angular_forms__WEBPACK_IMPORTED_MODULE_15__ = __webpack_require__(/*! @angular/forms */ "./node_modules/@angular/forms/__ivy_ngcc__/fesm2015/forms.js");
+/* harmony import */ var _angular_forms__WEBPACK_IMPORTED_MODULE_15__ = __webpack_require__(/*! @angular/forms */ "./node_modules/@angular/forms/fesm2015/forms.js");
 /* harmony import */ var _paginas_administrar_servicios_ver_servicio_modificar_producto_modificar_producto_component__WEBPACK_IMPORTED_MODULE_16__ = __webpack_require__(/*! ./paginas/administrar-servicios/ver-servicio/modificar-producto/modificar-producto.component */ "./src/app/paginas/administrar-servicios/ver-servicio/modificar-producto/modificar-producto.component.ts");
 /* harmony import */ var _modals_ver_servicio_visita_ver_servicio_visita_component__WEBPACK_IMPORTED_MODULE_17__ = __webpack_require__(/*! ./modals/ver-servicio-visita/ver-servicio-visita.component */ "./src/app/modals/ver-servicio-visita/ver-servicio-visita.component.ts");
 
@@ -530,9 +534,9 @@ AppModule = Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"])([
 __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "LoginGuardsGuard", function() { return LoginGuardsGuard; });
 /* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! tslib */ "./node_modules/tslib/tslib.es6.js");
-/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/__ivy_ngcc__/fesm2015/core.js");
-/* harmony import */ var _angular_router__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @angular/router */ "./node_modules/@angular/router/__ivy_ngcc__/fesm2015/router.js");
-/* harmony import */ var _ionic_storage__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @ionic/storage */ "./node_modules/@ionic/storage/__ivy_ngcc__/fesm2015/ionic-storage.js");
+/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm2015/core.js");
+/* harmony import */ var _angular_router__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @angular/router */ "./node_modules/@angular/router/fesm2015/router.js");
+/* harmony import */ var _ionic_storage__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @ionic/storage */ "./node_modules/@ionic/storage/fesm2015/ionic-storage.js");
 
 
 
@@ -586,8 +590,8 @@ LoginGuardsGuard = Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"])([
 __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "ServicioLoginService", function() { return ServicioLoginService; });
 /* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! tslib */ "./node_modules/tslib/tslib.es6.js");
-/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/__ivy_ngcc__/fesm2015/core.js");
-/* harmony import */ var _angular_common_http__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @angular/common/http */ "./node_modules/@angular/common/__ivy_ngcc__/fesm2015/http.js");
+/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm2015/core.js");
+/* harmony import */ var _angular_common_http__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @angular/common/http */ "./node_modules/@angular/common/fesm2015/http.js");
 /* harmony import */ var _environments_version__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../../environments/version */ "./src/environments/version.ts");
 
 
@@ -596,7 +600,7 @@ __webpack_require__.r(__webpack_exports__);
 let ServicioLoginService = class ServicioLoginService {
     constructor(http) {
         this.http = http;
-        this.apiDir = "http://157.230.90.222:3001";
+        this.apiDir = "http://192.168.0.71:3000";
         this.requestOptions = {
             headers: new _angular_common_http__WEBPACK_IMPORTED_MODULE_2__["HttpHeaders"]({
                 'Content-Type': 'application/json',
@@ -654,8 +658,8 @@ __webpack_require__.r(__webpack_exports__);
 __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "EditarVisitaComponent", function() { return EditarVisitaComponent; });
 /* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! tslib */ "./node_modules/tslib/tslib.es6.js");
-/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/__ivy_ngcc__/fesm2015/core.js");
-/* harmony import */ var _ionic_angular__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @ionic/angular */ "./node_modules/@ionic/angular/__ivy_ngcc__/fesm2015/ionic-angular.js");
+/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm2015/core.js");
+/* harmony import */ var _ionic_angular__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @ionic/angular */ "./node_modules/@ionic/angular/fesm2015/ionic-angular.js");
 /* harmony import */ var src_app_paginas_administrar_servicios_servicios_api_servicios_service__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! src/app/paginas/administrar-servicios/servicios/api-servicios.service */ "./src/app/paginas/administrar-servicios/servicios/api-servicios.service.ts");
 /* harmony import */ var src_app_paginas_programar_visita_servicios_api_visitas_service__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! src/app/paginas/programar-visita/servicios/api-visitas.service */ "./src/app/paginas/programar-visita/servicios/api-visitas.service.ts");
 
@@ -843,8 +847,8 @@ __webpack_require__.r(__webpack_exports__);
 __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "VerServicioVisitaComponent", function() { return VerServicioVisitaComponent; });
 /* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! tslib */ "./node_modules/tslib/tslib.es6.js");
-/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/__ivy_ngcc__/fesm2015/core.js");
-/* harmony import */ var _ionic_angular__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @ionic/angular */ "./node_modules/@ionic/angular/__ivy_ngcc__/fesm2015/ionic-angular.js");
+/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm2015/core.js");
+/* harmony import */ var _ionic_angular__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @ionic/angular */ "./node_modules/@ionic/angular/fesm2015/ionic-angular.js");
 /* harmony import */ var src_app_paginas_administrar_servicios_servicios_api_servicios_service__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! src/app/paginas/administrar-servicios/servicios/api-servicios.service */ "./src/app/paginas/administrar-servicios/servicios/api-servicios.service.ts");
 /* harmony import */ var src_app_paginas_programar_visita_servicios_api_visitas_service__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! src/app/paginas/programar-visita/servicios/api-visitas.service */ "./src/app/paginas/programar-visita/servicios/api-visitas.service.ts");
 /* harmony import */ var _editar_visita_editar_visita_component__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../editar-visita/editar-visita.component */ "./src/app/modals/editar-visita/editar-visita.component.ts");
@@ -935,8 +939,8 @@ VerServicioVisitaComponent = Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__decora
 __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "ApiServiciosService", function() { return ApiServiciosService; });
 /* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! tslib */ "./node_modules/tslib/tslib.es6.js");
-/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/__ivy_ngcc__/fesm2015/core.js");
-/* harmony import */ var _angular_common_http__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @angular/common/http */ "./node_modules/@angular/common/__ivy_ngcc__/fesm2015/http.js");
+/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm2015/core.js");
+/* harmony import */ var _angular_common_http__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @angular/common/http */ "./node_modules/@angular/common/fesm2015/http.js");
 /* harmony import */ var _environments_version__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../../../environments/version */ "./src/environments/version.ts");
 
 
@@ -945,7 +949,7 @@ __webpack_require__.r(__webpack_exports__);
 let ApiServiciosService = class ApiServiciosService {
     constructor(http) {
         this.http = http;
-        this.apiDir = "http://157.230.90.222:3001";
+        this.apiDir = "http://192.168.0.71:3000";
         this.requestOptions = {
             headers: new _angular_common_http__WEBPACK_IMPORTED_MODULE_2__["HttpHeaders"]({
                 'Content-Type': 'application/json',
@@ -1044,8 +1048,8 @@ __webpack_require__.r(__webpack_exports__);
 __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "ModificarProductoComponent", function() { return ModificarProductoComponent; });
 /* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! tslib */ "./node_modules/tslib/tslib.es6.js");
-/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/__ivy_ngcc__/fesm2015/core.js");
-/* harmony import */ var _ionic_angular__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @ionic/angular */ "./node_modules/@ionic/angular/__ivy_ngcc__/fesm2015/ionic-angular.js");
+/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm2015/core.js");
+/* harmony import */ var _ionic_angular__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @ionic/angular */ "./node_modules/@ionic/angular/fesm2015/ionic-angular.js");
 /* harmony import */ var _servicios_api_servicios_service__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../servicios/api-servicios.service */ "./src/app/paginas/administrar-servicios/servicios/api-servicios.service.ts");
 
 
@@ -1124,8 +1128,8 @@ ModificarProductoComponent = Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__decora
 __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "ApiVisitasService", function() { return ApiVisitasService; });
 /* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! tslib */ "./node_modules/tslib/tslib.es6.js");
-/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/__ivy_ngcc__/fesm2015/core.js");
-/* harmony import */ var _angular_common_http__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @angular/common/http */ "./node_modules/@angular/common/__ivy_ngcc__/fesm2015/http.js");
+/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm2015/core.js");
+/* harmony import */ var _angular_common_http__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @angular/common/http */ "./node_modules/@angular/common/fesm2015/http.js");
 /* harmony import */ var _environments_version__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../../../environments/version */ "./src/environments/version.ts");
 
 
@@ -1134,7 +1138,7 @@ __webpack_require__.r(__webpack_exports__);
 let ApiVisitasService = class ApiVisitasService {
     constructor(http) {
         this.http = http;
-        this.apiDir = "http://157.230.90.222:3001";
+        this.apiDir = "http://192.168.0.71:3000";
         this.requestOptions = {
             headers: new _angular_common_http__WEBPACK_IMPORTED_MODULE_2__["HttpHeaders"]({
                 'Content-Type': 'application/json',
@@ -1278,8 +1282,8 @@ const version = '0.0.6';
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/__ivy_ngcc__/fesm2015/core.js");
-/* harmony import */ var _angular_platform_browser_dynamic__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @angular/platform-browser-dynamic */ "./node_modules/@angular/platform-browser-dynamic/__ivy_ngcc__/fesm2015/platform-browser-dynamic.js");
+/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm2015/core.js");
+/* harmony import */ var _angular_platform_browser_dynamic__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @angular/platform-browser-dynamic */ "./node_modules/@angular/platform-browser-dynamic/fesm2015/platform-browser-dynamic.js");
 /* harmony import */ var _app_app_module__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./app/app.module */ "./src/app/app.module.ts");
 /* harmony import */ var _environments_environment__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./environments/environment */ "./src/environments/environment.ts");
 
@@ -1302,7 +1306,7 @@ Object(_angular_platform_browser_dynamic__WEBPACK_IMPORTED_MODULE_1__["platformB
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__(/*! E:\Trabajo\cpa\frontend_cpa_admin\src\main.ts */"./src/main.ts");
+module.exports = __webpack_require__(/*! D:\Repositorios\frontend_cpa_admin\src\main.ts */"./src/main.ts");
 
 
 /***/ })

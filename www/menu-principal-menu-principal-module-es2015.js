@@ -9,7 +9,7 @@
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony default export */ __webpack_exports__["default"] = ("<ion-tabs>\r\n  <ion-tab-bar  slot=\"top\">\r\n\r\n    <ion-tab-button tab=\"administrar-clientes\">\r\n      <ion-icon name=\"people-outline\"></ion-icon>\r\n      <ion-label>Administrar clientes</ion-label>\r\n    </ion-tab-button>\r\n\r\n    <ion-tab-button tab=\"alta-cliente\">\r\n      <ion-icon name=\"person-add-outline\"></ion-icon>\r\n      <ion-label>Dar de alta a un cliente</ion-label>\r\n    </ion-tab-button>\r\n    \r\n    <ion-tab-button tab=\"administrar-visitas\">\r\n      <ion-icon name=\"calendar-outline\"></ion-icon>\r\n      <ion-label>Administrar Visitas</ion-label>\r\n    </ion-tab-button>\r\n\r\n    <ion-tab-button tab=\"administrar-servicios\">\r\n      <ion-icon name=\"document-text-outline\"></ion-icon>\r\n      <ion-label>Administrar servicios</ion-label>\r\n    </ion-tab-button>\r\n\r\n    <ion-tab-button tab=\"administrar-tecnicos\">\r\n      <ion-icon name=\"person-circle-outline\"></ion-icon>\r\n      <ion-label>Administrar tecnicos</ion-label>\r\n    </ion-tab-button>\r\n    \r\n    <ion-icon name=\"log-out\" class=\"logout\" (click)=\"logout()\"></ion-icon>\r\n  </ion-tab-bar>\r\n\r\n  \r\n\r\n</ion-tabs>");
+/* harmony default export */ __webpack_exports__["default"] = ("<ion-tabs>\r\n  <ion-tab-bar  slot=\"top\">\r\n\r\n    <ion-tab-button tab=\"administrar-clientes\">\r\n      <ion-icon name=\"people-outline\"></ion-icon>\r\n      <ion-label>Administrar clientes</ion-label>\r\n    </ion-tab-button>\r\n\r\n    <ion-tab-button tab=\"alta-cliente\">\r\n      <ion-icon name=\"person-add-outline\"></ion-icon>\r\n      <ion-label>Dar de alta a un cliente</ion-label>\r\n    </ion-tab-button>\r\n    \r\n    <ion-tab-button tab=\"administrar-visitas\">\r\n      <ion-icon name=\"calendar-outline\"></ion-icon>\r\n      <ion-label>Administrar Visitas</ion-label>\r\n    </ion-tab-button>\r\n\r\n    <ion-tab-button tab=\"administrar-servicios\">\r\n      <ion-icon name=\"document-text-outline\"></ion-icon>\r\n      <ion-label>Administrar servicios</ion-label>\r\n    </ion-tab-button>\r\n\r\n    <ion-tab-button tab=\"administrar-tecnicos\">\r\n      <ion-icon name=\"person-circle-outline\"></ion-icon>\r\n      <ion-label>Administrar tecnicos</ion-label>\r\n    </ion-tab-button>\r\n\r\n    <ion-tab-button tab=\"estadisticas\">\r\n      <ion-icon name=\"stats-chart-outline\"></ion-icon>\r\n      <ion-label>Estadisticas</ion-label>\r\n    </ion-tab-button>\r\n    \r\n    <ion-icon name=\"log-out\" class=\"logout\" (click)=\"logout()\"></ion-icon>\r\n  </ion-tab-bar>\r\n\r\n  \r\n\r\n</ion-tabs>");
 
 /***/ }),
 
@@ -24,8 +24,8 @@ __webpack_require__.r(__webpack_exports__);
 __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "MenuPrincipalPageRoutingModule", function() { return MenuPrincipalPageRoutingModule; });
 /* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! tslib */ "./node_modules/tslib/tslib.es6.js");
-/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/__ivy_ngcc__/fesm2015/core.js");
-/* harmony import */ var _angular_router__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @angular/router */ "./node_modules/@angular/router/__ivy_ngcc__/fesm2015/router.js");
+/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm2015/core.js");
+/* harmony import */ var _angular_router__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @angular/router */ "./node_modules/@angular/router/fesm2015/router.js");
 /* harmony import */ var _menu_principal_page__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./menu-principal.page */ "./src/app/menu-principal/menu-principal.page.ts");
 
 
@@ -72,6 +72,10 @@ const routes = [
             {
                 path: 'programar-visita',
                 loadChildren: () => Promise.all(/*! import() | paginas-programar-visita-programar-visita-module */[__webpack_require__.e("default~paginas-administrar-clientes-ver-cliente-ver-cliente-module~paginas-administrar-visitas-admi~b66acba8"), __webpack_require__.e("paginas-programar-visita-programar-visita-module")]).then(__webpack_require__.bind(null, /*! ../paginas/programar-visita/programar-visita.module */ "./src/app/paginas/programar-visita/programar-visita.module.ts")).then(m => m.ProgramarVisitaPageModule)
+            },
+            {
+                path: 'estadisticas',
+                loadChildren: () => __webpack_require__.e(/*! import() | paginas-estadisticas-estadisticas-module */ "paginas-estadisticas-estadisticas-module").then(__webpack_require__.bind(null, /*! ../paginas/estadisticas/estadisticas.module */ "./src/app/paginas/estadisticas/estadisticas.module.ts")).then(m => m.EstadisticasPageModule)
             }
         ]
     },
@@ -105,10 +109,10 @@ MenuPrincipalPageRoutingModule = Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__de
 __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "MenuPrincipalPageModule", function() { return MenuPrincipalPageModule; });
 /* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! tslib */ "./node_modules/tslib/tslib.es6.js");
-/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/__ivy_ngcc__/fesm2015/core.js");
-/* harmony import */ var _angular_common__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @angular/common */ "./node_modules/@angular/common/__ivy_ngcc__/fesm2015/common.js");
-/* harmony import */ var _angular_forms__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @angular/forms */ "./node_modules/@angular/forms/__ivy_ngcc__/fesm2015/forms.js");
-/* harmony import */ var _ionic_angular__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @ionic/angular */ "./node_modules/@ionic/angular/__ivy_ngcc__/fesm2015/ionic-angular.js");
+/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm2015/core.js");
+/* harmony import */ var _angular_common__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @angular/common */ "./node_modules/@angular/common/fesm2015/common.js");
+/* harmony import */ var _angular_forms__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @angular/forms */ "./node_modules/@angular/forms/fesm2015/forms.js");
+/* harmony import */ var _ionic_angular__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @ionic/angular */ "./node_modules/@ionic/angular/fesm2015/ionic-angular.js");
 /* harmony import */ var _menu_principal_routing_module__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./menu-principal-routing.module */ "./src/app/menu-principal/menu-principal-routing.module.ts");
 /* harmony import */ var _menu_principal_page__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./menu-principal.page */ "./src/app/menu-principal/menu-principal.page.ts");
 
@@ -145,7 +149,7 @@ MenuPrincipalPageModule = Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony default export */ __webpack_exports__["default"] = (".logout {\n  position: absolute;\n  right: 20px;\n  color: white;\n  top: 15px;\n  font-size: 30px;\n  cursor: pointer;\n}\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbInNyYy9hcHAvbWVudS1wcmluY2lwYWwvRTpcXFRyYWJham9cXGNwYVxcZnJvbnRlbmRfY3BhX2FkbWluL3NyY1xcYXBwXFxtZW51LXByaW5jaXBhbFxcbWVudS1wcmluY2lwYWwucGFnZS5zY3NzIiwic3JjL2FwcC9tZW51LXByaW5jaXBhbC9tZW51LXByaW5jaXBhbC5wYWdlLnNjc3MiXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6IkFBQUE7RUFDSSxrQkFBQTtFQUNBLFdBQUE7RUFDQSxZQUFBO0VBQ0EsU0FBQTtFQUNBLGVBQUE7RUFDQSxlQUFBO0FDQ0oiLCJmaWxlIjoic3JjL2FwcC9tZW51LXByaW5jaXBhbC9tZW51LXByaW5jaXBhbC5wYWdlLnNjc3MiLCJzb3VyY2VzQ29udGVudCI6WyIubG9nb3V0e1xyXG4gICAgcG9zaXRpb246IGFic29sdXRlO1xyXG4gICAgcmlnaHQ6IDIwcHg7XHJcbiAgICBjb2xvcjogd2hpdGU7XHJcbiAgICB0b3A6IDE1cHg7XHJcbiAgICBmb250LXNpemU6IDMwcHg7XHJcbiAgICBjdXJzb3I6IHBvaW50ZXI7XHJcbn0iLCIubG9nb3V0IHtcbiAgcG9zaXRpb246IGFic29sdXRlO1xuICByaWdodDogMjBweDtcbiAgY29sb3I6IHdoaXRlO1xuICB0b3A6IDE1cHg7XG4gIGZvbnQtc2l6ZTogMzBweDtcbiAgY3Vyc29yOiBwb2ludGVyO1xufSJdfQ== */");
+/* harmony default export */ __webpack_exports__["default"] = (".logout {\n  position: absolute;\n  right: 20px;\n  color: white;\n  top: 15px;\n  font-size: 30px;\n  cursor: pointer;\n}\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbInNyYy9hcHAvbWVudS1wcmluY2lwYWwvRDpcXFJlcG9zaXRvcmlvc1xcZnJvbnRlbmRfY3BhX2FkbWluL3NyY1xcYXBwXFxtZW51LXByaW5jaXBhbFxcbWVudS1wcmluY2lwYWwucGFnZS5zY3NzIiwic3JjL2FwcC9tZW51LXByaW5jaXBhbC9tZW51LXByaW5jaXBhbC5wYWdlLnNjc3MiXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6IkFBQUE7RUFDSSxrQkFBQTtFQUNBLFdBQUE7RUFDQSxZQUFBO0VBQ0EsU0FBQTtFQUNBLGVBQUE7RUFDQSxlQUFBO0FDQ0oiLCJmaWxlIjoic3JjL2FwcC9tZW51LXByaW5jaXBhbC9tZW51LXByaW5jaXBhbC5wYWdlLnNjc3MiLCJzb3VyY2VzQ29udGVudCI6WyIubG9nb3V0e1xyXG4gICAgcG9zaXRpb246IGFic29sdXRlO1xyXG4gICAgcmlnaHQ6IDIwcHg7XHJcbiAgICBjb2xvcjogd2hpdGU7XHJcbiAgICB0b3A6IDE1cHg7XHJcbiAgICBmb250LXNpemU6IDMwcHg7XHJcbiAgICBjdXJzb3I6IHBvaW50ZXI7XHJcbn0iLCIubG9nb3V0IHtcbiAgcG9zaXRpb246IGFic29sdXRlO1xuICByaWdodDogMjBweDtcbiAgY29sb3I6IHdoaXRlO1xuICB0b3A6IDE1cHg7XG4gIGZvbnQtc2l6ZTogMzBweDtcbiAgY3Vyc29yOiBwb2ludGVyO1xufSJdfQ== */");
 
 /***/ }),
 
@@ -160,9 +164,9 @@ __webpack_require__.r(__webpack_exports__);
 __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "MenuPrincipalPage", function() { return MenuPrincipalPage; });
 /* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! tslib */ "./node_modules/tslib/tslib.es6.js");
-/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/__ivy_ngcc__/fesm2015/core.js");
-/* harmony import */ var _angular_router__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @angular/router */ "./node_modules/@angular/router/__ivy_ngcc__/fesm2015/router.js");
-/* harmony import */ var _ionic_storage__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @ionic/storage */ "./node_modules/@ionic/storage/__ivy_ngcc__/fesm2015/ionic-storage.js");
+/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm2015/core.js");
+/* harmony import */ var _angular_router__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @angular/router */ "./node_modules/@angular/router/fesm2015/router.js");
+/* harmony import */ var _ionic_storage__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @ionic/storage */ "./node_modules/@ionic/storage/fesm2015/ionic-storage.js");
 
 
 
