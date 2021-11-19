@@ -138,7 +138,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
     /* harmony default export */
 
 
-    __webpack_exports__["default"] = "<ion-app>\r\n  <ion-router-outlet></ion-router-outlet>\r\n  <div style=\"color: red; padding: 10px; border: solid red 1px; position: fixed;top: 0px; left: 0px;font-weight: bold;\">\r\n    Version de desarrollo\r\n  </div>\r\n</ion-app>\r\n";
+    __webpack_exports__["default"] = "<ion-app>\r\n  <ion-router-outlet></ion-router-outlet>\r\n  <!-- <div style=\"color: red; padding: 10px; border: solid red 1px; position: fixed;top: 0px; left: 0px;font-weight: bold;\">\r\n    Version de desarrollo\r\n  </div> -->\r\n</ion-app>\r\n";
     /***/
   },
 
@@ -1092,10 +1092,12 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
       }, {
         key: "mostrarOtros",
         value: function mostrarOtros() {
+          var _a;
+
           var aux = this.respuestas.find(function (respuesta) {
             return respuesta.id_campo == 30;
           });
-          return aux.respuesta.includes('Otros');
+          return (_a = aux === null || aux === void 0 ? void 0 : aux.respuesta) === null || _a === void 0 ? void 0 : _a.includes('Otros');
         }
       }]);
 
@@ -1228,8 +1230,10 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
                   servicio.respuestas = resp.respuestas;
 
                   _this7.apiVisitas.getEquipo(servicio.respuestas[0].id_equipo).then(function (response) {
-                    if (response.result[0]) {
-                      servicio.nombre_equipo = response.result[0].nombre_equipo;
+                    if (response.result) {
+                      if (response.result[0]) {
+                        servicio.nombre_equipo = response.result[0].nombre_equipo;
+                      }
                     }
                   });
                 })["catch"](function (err) {
@@ -1812,6 +1816,11 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
             });
           });
         }
+      }, {
+        key: "pdfEstadisticas",
+        value: function pdfEstadisticas(parametros) {
+          return this.http.post(this.apiDir + '/pdf/stats-pdf', parametros, this.requestOptions);
+        }
       }]);
 
       return ApiVisitasService;
@@ -1887,7 +1896,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
       return version;
     });
 
-    var version = '0.0.6';
+    var version = '0.0.7';
     /***/
   },
 

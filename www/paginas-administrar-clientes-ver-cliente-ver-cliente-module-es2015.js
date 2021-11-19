@@ -1398,6 +1398,72 @@ let VerSucursalPage = class VerSucursalPage {
             yield alert.present();
         });
     }
+    cambiarProductoSector(sector) {
+        return Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"])(this, void 0, void 0, function* () {
+            console.log(sector);
+            var input = [];
+            for (let producto of this.productos) {
+                input.push({
+                    label: producto.nombre_producto + ' - ' + producto.tipo_producto,
+                    value: producto.id_producto,
+                    type: "radio"
+                });
+            }
+            input.push({
+                label: 'Sin Producto',
+                value: null,
+                type: "radio"
+            });
+            const alert = yield this.alertController.create({
+                subHeader: sector.nombre_equipo_grupo,
+                header: 'Producto predeterminado',
+                inputs: input,
+                buttons: [
+                    {
+                        text: 'Cancelar',
+                        role: 'cancel',
+                        cssClass: 'secondary'
+                    },
+                    {
+                        text: 'Aceptar',
+                        handler: (data) => {
+                            for (let index = 0; index < sector.equipos.length; index++) {
+                                console.log(index);
+                                var equipo = sector.equipos[index];
+                                equipo.producto_predeterminado = data;
+                                equipo.estado_servicio = undefined;
+                                equipo.modificable = undefined;
+                                equipo.nombre_equipo_grupo = undefined;
+                                equipo.nombre_servicio = undefined;
+                                equipo.producto = undefined;
+                                equipo.qr = undefined;
+                                console.log(equipo);
+                                this.api_visitas.actualizar_equipo(equipo).then(resp => {
+                                    console.log(resp);
+                                    var aux;
+                                    aux = resp;
+                                    aux = aux.equipoCreado.retorno;
+                                    if (aux.producto_predeterminado) {
+                                        equipo.producto_predeterminado = this.productos.find(producto => producto.id_producto == aux.producto_predeterminado).id_producto;
+                                        equipo.producto_predeterminado_nombre = this.productos.find(producto => producto.id_producto == aux.producto_predeterminado).nombre_producto + ' - ' + this.productos.find(producto => producto.id_producto == aux.producto_predeterminado).tipo_producto;
+                                        this.actualizar_informacion(false);
+                                    }
+                                    else {
+                                        equipo.producto_predeterminado = null;
+                                        equipo.producto_predeterminado_nombre = null;
+                                        this.actualizar_informacion(false);
+                                    }
+                                }).catch(err => {
+                                    console.error(err);
+                                });
+                            }
+                        }
+                    }
+                ]
+            });
+            yield alert.present();
+        });
+    }
 };
 VerSucursalPage.ctorParameters = () => [
     { type: _ionic_angular__WEBPACK_IMPORTED_MODULE_2__["NavParams"] },

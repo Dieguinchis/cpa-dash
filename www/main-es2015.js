@@ -270,7 +270,7 @@ module.exports = webpackAsyncContext;
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony default export */ __webpack_exports__["default"] = ("<ion-app>\r\n  <ion-router-outlet></ion-router-outlet>\r\n  <div style=\"color: red; padding: 10px; border: solid red 1px; position: fixed;top: 0px; left: 0px;font-weight: bold;\">\r\n    Version de desarrollo\r\n  </div>\r\n</ion-app>\r\n");
+/* harmony default export */ __webpack_exports__["default"] = ("<ion-app>\r\n  <ion-router-outlet></ion-router-outlet>\r\n  <!-- <div style=\"color: red; padding: 10px; border: solid red 1px; position: fixed;top: 0px; left: 0px;font-weight: bold;\">\r\n    Version de desarrollo\r\n  </div> -->\r\n</ion-app>\r\n");
 
 /***/ }),
 
@@ -801,8 +801,9 @@ let EditarVisitaComponent = class EditarVisitaComponent {
         });
     }
     mostrarOtros() {
+        var _a;
         var aux = this.respuestas.find(respuesta => respuesta.id_campo == 30);
-        return aux.respuesta.includes('Otros');
+        return (_a = aux === null || aux === void 0 ? void 0 : aux.respuesta) === null || _a === void 0 ? void 0 : _a.includes('Otros');
     }
 };
 EditarVisitaComponent.ctorParameters = () => [
@@ -875,8 +876,10 @@ let VerServicioVisitaComponent = class VerServicioVisitaComponent {
                     this.apiVisitas.getRespuestas(servicio.id_formulario).then((resp) => {
                         servicio.respuestas = resp.respuestas;
                         this.apiVisitas.getEquipo(servicio.respuestas[0].id_equipo).then((response) => {
-                            if (response.result[0]) {
-                                servicio.nombre_equipo = response.result[0].nombre_equipo;
+                            if (response.result) {
+                                if (response.result[0]) {
+                                    servicio.nombre_equipo = response.result[0].nombre_equipo;
+                                }
                             }
                         });
                     }).catch(err => {
@@ -1216,6 +1219,9 @@ let ApiVisitasService = class ApiVisitasService {
             });
         });
     }
+    pdfEstadisticas(parametros) {
+        return this.http.post(this.apiDir + '/pdf/stats-pdf', parametros, this.requestOptions);
+    }
 };
 ApiVisitasService.ctorParameters = () => [
     { type: _angular_common_http__WEBPACK_IMPORTED_MODULE_2__["HttpClient"] }
@@ -1268,7 +1274,7 @@ const environment = {
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "version", function() { return version; });
-const version = '0.0.6';
+const version = '0.0.7';
 
 
 /***/ }),

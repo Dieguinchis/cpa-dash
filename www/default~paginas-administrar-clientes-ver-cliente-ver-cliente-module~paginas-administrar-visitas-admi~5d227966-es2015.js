@@ -527,6 +527,48 @@ let VerVisitaPage = class VerVisitaPage {
                         }
                     }
                 }
+                var aux = [];
+                var aux2 = [];
+                for (let index = 0; index < this.visita.servicios.length; index++) {
+                    const element = this.visita.servicios[index];
+                    if (!aux.some(servicio => servicio.id_servicio == element.id_servicio)) {
+                        aux.push(element);
+                    }
+                }
+                for (let index = 0; index < aux.length; index++) {
+                    const element = aux[index];
+                    aux[index].tecnicos = [];
+                    aux[index] = this.visita.servicios.filter(servicio => servicio.id_servicio == element.id_servicio);
+                    console.log(element);
+                }
+                for (let index = 0; index < this.visita.servicios.length; index++) {
+                    const element = this.visita.servicios[index];
+                    if (!aux2.some(servicio => { var _a, _b; return ((_a = servicio.tecnico) === null || _a === void 0 ? void 0 : _a.id_tecnico) == ((_b = element.tecnico) === null || _b === void 0 ? void 0 : _b.id_tecnico); })) {
+                        aux2.push(element.tecnico);
+                    }
+                }
+                for (let index = 0; index < aux2.length; index++) {
+                    const element = aux2[index];
+                    for (let index2 = 0; index2 < aux.length; index2++) {
+                        const element2 = aux[index2];
+                        if ((element2.find(servicio => servicio.tecnico == element) && (!element2[0].tecnicos.some(tecnico => tecnico.id_tecnico == element.id_tecnico)))) {
+                            aux[index2][0].tecnicos.push(element);
+                        }
+                    }
+                }
+                for (let index = 0; index < this.visita.servicios2.length; index++) {
+                    const element = this.visita.servicios2[index];
+                    var nombreTecnico = "";
+                    for (let tecnico of aux[index][0].tecnicos) {
+                        if (nombreTecnico) {
+                            nombreTecnico = nombreTecnico + ", " + tecnico.nombre_tecnico + " " + tecnico.apellido_tecnico;
+                        }
+                        else {
+                            nombreTecnico = tecnico.nombre_tecnico + " " + tecnico.apellido_tecnico;
+                        }
+                    }
+                    element.tecnicos = nombreTecnico;
+                }
             }
         }), (error => {
             console.log(error);

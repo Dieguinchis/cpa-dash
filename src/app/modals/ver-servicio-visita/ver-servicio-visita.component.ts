@@ -12,7 +12,7 @@ import { EditarVisitaComponent } from '../editar-visita/editar-visita.component'
 export class VerServicioVisitaComponent implements OnInit {
 
   public id_servicio;
-  public servicios;
+  public servicios = [];
 
   constructor(
     public navParams: NavParams,
@@ -33,8 +33,10 @@ export class VerServicioVisitaComponent implements OnInit {
           this.apiVisitas.getRespuestas(servicio.id_formulario).then((resp:any) => {
             servicio.respuestas = resp.respuestas;
             this.apiVisitas.getEquipo(servicio.respuestas[0].id_equipo).then((response:any) => {
-              if (response.result[0]){
-                servicio.nombre_equipo = response.result[0].nombre_equipo;
+              if (response.result){
+                if (response.result[0]) {
+                  servicio.nombre_equipo = response.result[0].nombre_equipo;
+                }
               }
             })
           }).catch(err =>{

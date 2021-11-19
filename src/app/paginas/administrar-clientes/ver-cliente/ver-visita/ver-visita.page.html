@@ -33,9 +33,16 @@
     <ion-item lines="full">
       <ion-label><b>Servicios ofrecidos:</b>
         <div *ngFor="let servicio of visita.servicios2; let i = index" style="margin-left:10px; margin-top: 10px">
-          <ion-icon name="document-outline" color="primary"></ion-icon>
-          {{servicio.nombre_servicio}}
-          <ion-icon name="create-outline" style="cursor: pointer;" *ngIf="visita.visitas.estado_visitas == 'finalizada'" (click)="editarServicio(servicio.id_servicio, servicio.id_formulario)"></ion-icon>
+          <div style="cursor: pointer;" *ngIf="visita.visitas.estado_visitas == 'finalizada'" (click)="editarServicio(servicio.id_servicio, servicio.id_formulario)">
+            <ion-icon name="document-outline" color="primary"></ion-icon>
+            {{servicio.nombre_servicio}}{{" - " + servicio?.tecnicos}}
+            <ion-icon name="create-outline" style="cursor: pointer;" *ngIf="visita.visitas.estado_visitas == 'finalizada'" ></ion-icon>  
+          </div>
+          <div *ngIf="visita.visitas.estado_visitas != 'finalizada'">
+            <ion-icon name="document-outline" color="primary"></ion-icon>
+            {{servicio.nombre_servicio}}{{" - " + servicio?.tecnicos}}
+            <ion-icon name="create-outline" style="cursor: pointer;" *ngIf="visita.visitas.estado_visitas == 'finalizada'" ></ion-icon>  
+          </div>
         </div>
       </ion-label>
     </ion-item>
@@ -58,6 +65,7 @@
   <div>
     <img class="imagen_empresa" src='../../../assets/LogoCPA-01.png'>
   </div>
+
 
 </ion-content>
 

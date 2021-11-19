@@ -740,9 +740,15 @@ descargarQrAllWorkstations(){
               var aux ;
               aux = resp;
               aux = aux.equipoCreado.retorno;
-              equipo.producto_predeterminado = this.productos.find(producto => producto.id_producto == aux.producto_predeterminado).id_producto;
-              equipo.producto_predeterminado_nombre = this.productos.find(producto => producto.id_producto == aux.producto_predeterminado).nombre_producto +' - '+ this.productos.find(producto => producto.id_producto == aux.producto_predeterminado).tipo_producto;
-              //this.actualizar_informacion(false);
+              if (aux.producto_predeterminado) {
+                equipo.producto_predeterminado = this.productos.find(producto => producto.id_producto == aux.producto_predeterminado).id_producto;
+                equipo.producto_predeterminado_nombre = this.productos.find(producto => producto.id_producto == aux.producto_predeterminado).nombre_producto +' - '+ this.productos.find(producto => producto.id_producto == aux.producto_predeterminado).tipo_producto;  
+              }else{
+                equipo.producto_predeterminado = null;
+                equipo.producto_predeterminado_nombre = null;
+  
+              }
+              // this.actualizar_informacion(false);
             }).catch(err => {
               console.error(err)
             })
@@ -796,5 +802,70 @@ descargarQrAllWorkstations(){
   
     await alert.present();
   }
+  async cambiarProductoSector(sector){
+    console.log(sector)
 
+    var input = [];
+    for (let producto of this.productos){
+      input.push({
+        label:producto.nombre_producto + ' - ' + producto.tipo_producto,
+        value:producto.id_producto,
+        type:"radio"
+      })
+    }
+    input.push({
+        label:'Sin Producto',
+        value:null,
+        type:"radio"
+    })
+    const alert = await this.alertController.create({
+      subHeader: sector.nombre_equipo_grupo,
+      header:'Producto predeterminado',
+      inputs: input,
+      buttons: [
+        {
+          text:'Cancelar',
+          role:'cancel',
+          cssClass:'secondary'
+        },
+        {
+          text: 'Aceptar',
+          handler: (data) => {
+            for (let index = 0; index < sector.equipos.length; index++) {
+              console.log(index)
+              var equipo = sector.equipos[index];
+              equipo.producto_predeterminado = data;
+              equipo.estado_servicio = undefined;
+              equipo.modificable = undefined;
+              equipo.nombre_equipo_grupo = undefined;
+              equipo.nombre_servicio = undefined;
+              equipo.producto = undefined;
+              equipo.qr = undefined;
+              console.log(equipo)
+              this.api_visitas.actualizar_equipo(equipo).then(resp =>{
+                console.log(resp);
+                var aux ;
+                aux = resp;
+                aux = aux.equipoCreado.retorno;
+                if (aux.producto_predeterminado) {
+                  equipo.producto_predeterminado = this.productos.find(producto => producto.id_producto == aux.producto_predeterminado).id_producto;
+                  equipo.producto_predeterminado_nombre = this.productos.find(producto => producto.id_producto == aux.producto_predeterminado).nombre_producto +' - '+ this.productos.find(producto => producto.id_producto == aux.producto_predeterminado).tipo_producto; 
+                  this.actualizar_informacion(false); 
+                }else{
+                  equipo.producto_predeterminado = null;
+                  equipo.producto_predeterminado_nombre = null;
+                  this.actualizar_informacion(false);
+                }
+              }).catch(err => {
+                console.error(err)
+              })
+            }  
+          }
+        }
+    ]
+    });
+  
+    await alert.present();
+
+  }
 }
