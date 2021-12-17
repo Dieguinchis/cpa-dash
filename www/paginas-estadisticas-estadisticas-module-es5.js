@@ -21,7 +21,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
     /* harmony default export */
 
 
-    __webpack_exports__["default"] = "<ion-header>\n  <ion-toolbar>\n    <ion-item lines=\"none\">\n      <ion-col class=\"ion-no-padding\" size=\"1.2\">\n        <ion-item class=\"ion-no-padding\" lines=\"none\">\n          <ion-label position=\"floating\">Desde</ion-label>\n          <ion-datetime min=\"2021-02-15\"  display-format=\"DD.MM.YYYY\" [(ngModel)]=\"fecha_desde\" (ionChange)=\"revisarMenor()\"></ion-datetime>\n        </ion-item>\n      </ion-col>\n      <ion-col size=\"1.2\">\n        <ion-item lines=\"none\">\n          <ion-label position=\"floating\">Hasta</ion-label>\n          <ion-datetime min=\"2021-02-15\" display-format=\"DD.MM.YYYY\" [(ngModel)]=\"fecha_hasta\" (ionChange)=\"revisarMayor()\"></ion-datetime> \n        </ion-item>     \n      </ion-col>\n      <ion-col size=\"0.7\" class=\"filter-col\">\n        <ion-label class=\"ion-text-wrap\" style=\"padding-right: 5px;\">UV</ion-label>\n        <ion-checkbox [(ngModel)]=\"filtro_uv\"></ion-checkbox>\n      </ion-col>\n      <ion-col size=\"1.25\" class=\"filter-col\">\n        <ion-label class=\"ion-text-wrap\" style=\"padding-right: 5px;\">Desratizacion</ion-label>\n        <ion-checkbox [(ngModel)]=\"filtro_desratizacion\"></ion-checkbox>\n      </ion-col>\n      <ion-col size=\"1.65\">\n        <ion-item>\n          <ion-label position=\"floating\">Cliente</ion-label>\n          <ion-select [interfaceOptions]=\"interfaceOption\" (ionChange)=\"changeCliente()\" [(ngModel)]=\"clientesElegidos\" multiple>\n            <ion-select-option *ngFor=\"let cliente of clientes\" [value]=\"cliente\">{{cliente.razon_social_cliente}}</ion-select-option>\n            <ion-select-option [value]=\"'all'\">Todos</ion-select-option>\n\n          </ion-select>\n        </ion-item>\n      </ion-col>\n      <ion-col size=\"1.65\">\n        <ion-item *ngIf=\"clientesElegidos.length == 1\">\n          <ion-label position=\"floating\">Sucursal</ion-label>\n          <ion-select [interfaceOptions]=\"interfaceOption\" (ionChange)=\"changeSucursal()\" [(ngModel)]=\"sucursalesElegidas\" multiple>\n            <ion-select-option *ngFor=\"let sucursal of sucursales\" [value]=\"sucursal\">{{sucursal.razon_social_sucursal}}</ion-select-option>\n            <ion-select-option [value]=\"'all'\">Todos</ion-select-option>\n          </ion-select>\n        </ion-item>\n      </ion-col>\n      <ion-col size=\"1.65\">\n        <ion-item *ngIf=\"sucursalesElegidas.length == 1\">\n          <ion-label position=\"floating\">Sector</ion-label>\n          <ion-select [interfaceOptions]=\"interfaceOption\" (ionChange)=\"changeSector(sectoresElegidos[0].id_equipo_grupo)\" [(ngModel)]=\"sectoresElegidos\" multiple>\n            <ion-select-option *ngFor=\"let sector of sectores\" [value]=\"sector\">{{sector.nombre_equipo_grupo}}</ion-select-option>\n            <ion-select-option [value]=\"'all'\">Todos</ion-select-option>\n          </ion-select>\n        </ion-item>\n      </ion-col>\n      <ion-col size=\"1.65\">\n        <ion-item *ngIf=\"sectoresElegidos.length == 1\">\n          <ion-label position=\"floating\">Equipo</ion-label>\n          <ion-select (ionChange)=\"equiposChange()\" [interfaceOptions]=\"interfaceOption\" [(ngModel)]=\"equiposElegidos\" multiple>\n            <ion-select-option *ngFor=\"let equipo of equipos\" [value]=\"equipo\">{{equipo.nombre_equipo}}</ion-select-option>\n            <ion-select-option [value]=\"'all'\">Todos</ion-select-option>\n          </ion-select>\n        </ion-item>\n      </ion-col>\n      <ion-col size=\"0.8\">\n        <ion-button (click)=\"buscar()\" expand=\"block\"  shape=\"round\">\n          Buscar\n        </ion-button>\n      </ion-col>\n      <ion-col size=\"0.3\" style=\"text-align: center;\">\n        <ion-icon (click)=\"borrarFiltros()\"  style=\"font-size: 24px; cursor: pointer;\" name=\"close\"></ion-icon>\n      </ion-col>\n    </ion-item>\n  </ion-toolbar>\n  <ion-toolbar *ngIf=\"filtro_desratizacion\">\n    <ion-col size=\"12\" class=\"ion-no-padding\">\n      <ion-item lines=\"none\">\n        <ion-label position=\"fixed\">Productos</ion-label>\n        <ion-select (ionChange)=\"productosChange()\"  [interfaceOptions]=\"interfaceOption\" [(ngModel)]=\"productosFiltrados\" multiple>\n          <ion-select-option *ngFor=\"let producto of productos\" [value]=\"producto.id_producto\">{{producto.nombre_producto}} - {{producto.tipo_producto}}</ion-select-option>\n          <ion-select-option [value]=\"'all'\">Todos</ion-select-option>\n        </ion-select>\n      </ion-item>\n    </ion-col>\n  </ion-toolbar>\n</ion-header>\n\n<ion-content  #content>\n  <div *ngFor=\"let equipos of respuestas\">\n    <ion-item *ngIf=\"equipos[0]?.length == 3\">\n      <ion-col size=\"1\"><b>Fecha</b></ion-col>\n      <ion-col size=\"1.5\"><b>Cliente</b></ion-col>\n      <ion-col size=\"1.5\"><b>Sucursal</b></ion-col>\n      <ion-col size=\"1.5\"><b>Sector</b></ion-col>\n      <ion-col size=\"1.5\"><b>Workstation</b></ion-col>\n      <ion-col size=\"1.5\"><b>Producto</b></ion-col>\n      <ion-col size=\"1.5\"><b>Estado Puesto</b></ion-col>\n      <ion-col size=\"1.5\"><b>Estado cebo</b></ion-col>\n    </ion-item>\n    <ion-item *ngIf=\"equipos[0]?.length == 4\">\n      <ion-col size=\"1\"><b>Fecha</b></ion-col>\n      <ion-col size=\"1.5\"><b>Cliente</b></ion-col>\n      <ion-col size=\"1.5\"><b>Sucursal</b></ion-col>\n      <ion-col size=\"1.5\"><b>Sector</b></ion-col>\n      <ion-col size=\"1.5\"><b>Workstation</b></ion-col>\n      <ion-col size=\"1.25\"><b>Observacion</b></ion-col>\n      <ion-col size=\"1.25\"><b>Conteo / Saturacion</b></ion-col>\n      <ion-col size=\"1.25\"><b>Encendido</b></ion-col>\n      <ion-col size=\"1.25\"><b>Medicion UV</b></ion-col>\n    </ion-item>\n    <div *ngFor=\"let formularios of equipos\">\n      <ion-item *ngIf=\"formularios.length == 3\">\n        <ion-col size=\"1\">\n          {{formularios[0]?.fecha_visita | date:\"dd/MM/yyyy\"}}\n        </ion-col>\n        <ion-col size=\"1.5\">\n          {{formularios[0]?.cliente?.razon_social_cliente}}\n        </ion-col>\n        <ion-col size=\"1.5\">\n          {{formularios[0]?.sucursal?.razon_social_sucursal}}\n        </ion-col>\n        <ion-col size=\"1.5\">\n          {{formularios[0]?.sector?.nombre_equipo_grupo}}\n        </ion-col>\n        <ion-col size=\"1.5\">\n          {{formularios[0]?.nombre_equipo}}\n        </ion-col>\n        <ion-col size=\"1.5\">\n          {{formularios[0]?.nombre_producto}} - {{formularios[0]?.tipo_producto}}\n        </ion-col>\n        <ion-col size=\"1.5\">\n          {{formularios[1]?.respuesta}}\n        </ion-col>\n        <ion-col size=\"1.5\">\n          {{formularios[2]?.respuesta}}\n        </ion-col>\n      </ion-item>\n      <ion-item *ngIf=\"formularios.length == 4\">\n        <ion-col size=\"1\">\n          {{formularios[0]?.fecha_visita | date:\"dd/MM/yyyy\"}}\n        </ion-col>\n        <ion-col size=\"1.5\">\n          {{formularios[0]?.cliente?.razon_social_cliente}}\n        </ion-col>\n        <ion-col size=\"1.5\">\n          {{formularios[0]?.sucursal?.razon_social_sucursal}}\n        </ion-col>\n        <ion-col size=\"1.5\">\n          {{formularios[0]?.sector?.nombre_equipo_grupo}}\n        </ion-col>\n        <ion-col size=\"1.5\">\n          {{formularios[0]?.nombre_equipo}}\n        </ion-col>\n        <ion-col size=\"1.25\">\n          {{formularios[0]?.respuesta}}\n        </ion-col>\n        <ion-col size=\"1.25\">\n          {{formularios[1]?.respuesta}}\n        </ion-col>\n        <ion-col size=\"1.25\">\n          {{formularios[2]?.respuesta}}\n        </ion-col>\n        <ion-col size=\"1.25\">\n          {{formularios[3]?.respuesta}}\n        </ion-col>\n      </ion-item>\n    </div>\n  </div>\n\n  <ion-card *ngIf=\"respuestas.length > 0\">\n    <ion-card-header color=\"primary\">\n      <ion-card-title>Resumen</ion-card-title>\n    </ion-card-header>\n    <ion-item *ngIf=\"filtroUtilizado[1]\">\n      <ion-label><b>Total Captura:</b> {{capturas}}</ion-label>\n    </ion-item>\n    <ion-item  *ngIf=\"filtroUtilizado[1]\">\n      <ion-label><b>Total Consumo:</b> {{consumo}}</ion-label>\n    </ion-item>\n    <ion-item *ngIf=\"filtroUtilizado[0]\">\n      <ion-label ><b>Promedio mediciones UV:</b> {{promedioUV?promedioUV:'No hay mediciones'}}</ion-label>\n    </ion-item>\n    <ion-item *ngIf=\"(filtroUtilizado[1]) && (productosUtilizados?.includes(productos[0].id_producto) || productosUtilizados?.length == 0)\">\n      <ion-label><b>Captura con Pegamento - Pegamento:</b> {{productos[0].captura}}</ion-label>\n      <ion-label><b>Consumo con Pegamento - Pegamento:</b> {{productos[0].consumo}}</ion-label>\n\n    </ion-item >\n    <ion-item *ngIf=\"(filtroUtilizado[1]) && (productosUtilizados?.includes(productos[1].id_producto) || productosUtilizados?.length == 0)\">\n      <ion-label><b>Captura con Parafinado - Floucoumafen:</b> {{productos[1].captura}}</ion-label>\n      <ion-label><b>Consumo con Parafinado - Floucoumafen:</b> {{productos[1].consumo}}</ion-label>\n\n    </ion-item>\n    <ion-item *ngIf=\"(filtroUtilizado[1]) && (productosUtilizados?.includes(productos[2].id_producto) || productosUtilizados?.length == 0)\">\n      <ion-label><b>Captura con Parafinado - Bromadiolone:</b> {{productos[2].captura}}</ion-label>\n      <ion-label><b>Consumo con Parafinado - Bromadiolone:</b> {{productos[2].consumo}}</ion-label>\n    </ion-item>\n  </ion-card>\n</ion-content>\n\n<ion-fab *ngIf=\"respuestas.length > 0\" vertical=\"bottom\" horizontal=\"end\" slot=\"fixed\">\n  <ion-fab-button (click)=\"botonBajar()\">\n    <ion-icon name=\"chevron-down-outline\"></ion-icon>\n  </ion-fab-button>\n</ion-fab>\n";
+    __webpack_exports__["default"] = "<ion-header>\n  <ion-toolbar>\n    <ion-item lines=\"none\">\n      <ion-col class=\"ion-no-padding\" size=\"1.2\">\n        <ion-item class=\"ion-no-padding\" lines=\"none\">\n          <ion-label position=\"floating\">Desde</ion-label>\n          <ion-datetime min=\"2021-02-15\"  display-format=\"DD.MM.YYYY\" [(ngModel)]=\"fecha_desde\" (ionChange)=\"revisarMenor()\"></ion-datetime>\n        </ion-item>\n      </ion-col>\n      <ion-col size=\"1.2\">\n        <ion-item lines=\"none\">\n          <ion-label position=\"floating\">Hasta</ion-label>\n          <ion-datetime min=\"2021-02-15\" display-format=\"DD.MM.YYYY\" [(ngModel)]=\"fecha_hasta\" (ionChange)=\"revisarMayor()\"></ion-datetime> \n        </ion-item>     \n      </ion-col>\n      <ion-col size=\"0.7\" class=\"filter-col\">\n        <ion-label class=\"ion-text-wrap\" style=\"padding-right: 5px;\">UV</ion-label>\n        <ion-checkbox [(ngModel)]=\"filtro_uv\"></ion-checkbox>\n      </ion-col>\n      <ion-col size=\"1.25\" class=\"filter-col\">\n        <ion-label class=\"ion-text-wrap\" style=\"padding-right: 5px;\">Desratizacion</ion-label>\n        <ion-checkbox [(ngModel)]=\"filtro_desratizacion\"></ion-checkbox>\n      </ion-col>\n      <ion-col size=\"1.65\">\n        <ion-item>\n          <ion-label position=\"floating\">Cliente</ion-label>\n          <ion-select [interfaceOptions]=\"interfaceOption\" (ionChange)=\"changeCliente()\" [(ngModel)]=\"clientesElegidos\" multiple>\n            <ion-select-option *ngFor=\"let cliente of clientes\" [value]=\"cliente\">{{cliente.razon_social_cliente}}</ion-select-option>\n            <ion-select-option [value]=\"'all'\">Todos</ion-select-option>\n\n          </ion-select>\n        </ion-item>\n      </ion-col>\n      <ion-col size=\"1.65\">\n        <ion-item *ngIf=\"clientesElegidos.length == 1\">\n          <ion-label position=\"floating\">Sucursal</ion-label>\n          <ion-select [interfaceOptions]=\"interfaceOption\" (ionChange)=\"changeSucursal()\" [(ngModel)]=\"sucursalesElegidas\" multiple>\n            <ion-select-option *ngFor=\"let sucursal of sucursales\" [value]=\"sucursal\">{{sucursal.razon_social_sucursal}}</ion-select-option>\n            <ion-select-option [value]=\"'all'\">Todos</ion-select-option>\n          </ion-select>\n        </ion-item>\n      </ion-col>\n      <ion-col size=\"1.65\">\n        <ion-item *ngIf=\"sucursalesElegidas.length == 1\">\n          <ion-label position=\"floating\">Sector</ion-label>\n          <ion-select [interfaceOptions]=\"interfaceOption\" (ionChange)=\"changeSector(sectoresElegidos[0].id_equipo_grupo)\" [(ngModel)]=\"sectoresElegidos\" multiple>\n            <ion-select-option *ngFor=\"let sector of sectores\" [value]=\"sector\">{{sector.nombre_equipo_grupo}}</ion-select-option>\n            <ion-select-option [value]=\"'all'\">Todos</ion-select-option>\n          </ion-select>\n        </ion-item>\n      </ion-col>\n      <ion-col size=\"1.65\">\n        <ion-item *ngIf=\"sectoresElegidos.length == 1\">\n          <ion-label position=\"floating\">Equipo</ion-label>\n          <ion-select (ionChange)=\"equiposChange()\" [interfaceOptions]=\"interfaceOption\" [(ngModel)]=\"equiposElegidos\" multiple>\n            <ion-select-option *ngFor=\"let equipo of equipos\" [value]=\"equipo\">{{equipo.nombre_equipo}}</ion-select-option>\n            <ion-select-option [value]=\"'all'\">Todos</ion-select-option>\n          </ion-select>\n        </ion-item>\n      </ion-col>\n      <ion-col size=\"0.8\">\n        <ion-button (click)=\"buscar()\" expand=\"block\"  shape=\"round\">\n          Buscar\n        </ion-button>\n      </ion-col>\n      <ion-col size=\"0.3\" style=\"text-align: center;\">\n        <ion-icon (click)=\"borrarFiltros()\"  style=\"font-size: 24px; cursor: pointer;\" name=\"close\"></ion-icon>\n      </ion-col>\n    </ion-item>\n  </ion-toolbar>\n  <ion-toolbar *ngIf=\"filtro_desratizacion\">\n    <ion-col size=\"12\" class=\"ion-no-padding\">\n      <ion-item lines=\"none\">\n        <ion-label position=\"fixed\">Productos</ion-label>\n        <ion-select (ionChange)=\"productosChange()\"  [interfaceOptions]=\"interfaceOption\" [(ngModel)]=\"productosFiltrados\" multiple>\n          <ion-select-option *ngFor=\"let producto of productos\" [value]=\"producto.id_producto\">{{producto.nombre_producto}} - {{producto.tipo_producto}}</ion-select-option>\n          <ion-select-option [value]=\"'all'\">Todos</ion-select-option>\n        </ion-select>\n      </ion-item>\n    </ion-col>\n  </ion-toolbar>\n</ion-header>\n\n<ion-content  #content>\n  <div *ngFor=\"let equipos of respuestas\">\n    <ion-item *ngIf=\"equipos[0]?.length == 3\">\n      <ion-col size=\"1\"><b>Fecha</b></ion-col>\n      <ion-col size=\"1.5\"><b>Cliente</b></ion-col>\n      <ion-col size=\"1.5\"><b>Sucursal</b></ion-col>\n      <ion-col size=\"1.5\"><b>Sector</b></ion-col>\n      <ion-col size=\"1.5\"><b>Workstation</b></ion-col>\n      <ion-col size=\"1.5\"><b>Producto</b></ion-col>\n      <ion-col size=\"1.5\"><b>Estado Puesto</b></ion-col>\n      <ion-col size=\"1.5\"><b>Estado cebo</b></ion-col>\n    </ion-item>\n    <ion-item *ngIf=\"equipos[0]?.length == 4\">\n      <ion-col size=\"1\"><b>Fecha</b></ion-col>\n      <ion-col size=\"1.5\"><b>Cliente</b></ion-col>\n      <ion-col size=\"1.5\"><b>Sucursal</b></ion-col>\n      <ion-col size=\"1.5\"><b>Sector</b></ion-col>\n      <ion-col size=\"1.5\"><b>Workstation</b></ion-col>\n      <ion-col size=\"1.25\"><b>Observacion</b></ion-col>\n      <ion-col size=\"1.25\"><b>Conteo / Saturacion</b></ion-col>\n      <ion-col size=\"1.25\"><b>Encendido</b></ion-col>\n      <ion-col size=\"1.25\"><b>Medicion UV</b></ion-col>\n    </ion-item>\n    <div *ngFor=\"let formularios of equipos\">\n      <ion-item *ngIf=\"formularios.length == 3\">\n        <ion-col size=\"1\">\n          {{formularios[0]?.fecha_visita | date:\"dd/MM/yyyy\"}}\n        </ion-col>\n        <ion-col size=\"1.5\">\n          {{formularios[0]?.cliente?.razon_social_cliente}}\n        </ion-col>\n        <ion-col size=\"1.5\">\n          {{formularios[0]?.sucursal?.razon_social_sucursal}}\n        </ion-col>\n        <ion-col size=\"1.5\">\n          {{formularios[0]?.sector?.nombre_equipo_grupo}}\n        </ion-col>\n        <ion-col size=\"1.5\">\n          {{formularios[0]?.nombre_equipo}}\n        </ion-col>\n        <ion-col size=\"1.5\">\n          {{formularios[0]?.nombre_producto}} - {{formularios[0]?.tipo_producto}}\n        </ion-col>\n        <ion-col size=\"1.5\">\n          {{formularios[1]?.respuesta}}\n        </ion-col>\n        <ion-col size=\"1.5\">\n          {{formularios[2]?.respuesta}}\n        </ion-col>\n      </ion-item>\n      <ion-item *ngIf=\"formularios.length == 4\">\n        <ion-col size=\"1\">\n          {{formularios[0]?.fecha_visita | date:\"dd/MM/yyyy\"}}\n        </ion-col>\n        <ion-col size=\"1.5\">\n          {{formularios[0]?.cliente?.razon_social_cliente}}\n        </ion-col>\n        <ion-col size=\"1.5\">\n          {{formularios[0]?.sucursal?.razon_social_sucursal}}\n        </ion-col>\n        <ion-col size=\"1.5\">\n          {{formularios[0]?.sector?.nombre_equipo_grupo}}\n        </ion-col>\n        <ion-col size=\"1.5\">\n          {{formularios[0]?.nombre_equipo}}\n        </ion-col>\n        <ion-col size=\"1.25\">\n          {{formularios[0]?.respuesta}}\n        </ion-col>\n        <ion-col size=\"1.25\">\n          {{formularios[1]?.respuesta}}\n        </ion-col>\n        <ion-col size=\"1.25\">\n          {{formularios[2]?.respuesta}}\n        </ion-col>\n        <ion-col size=\"1.25\">\n          {{formularios[3]?.respuesta}}\n        </ion-col>\n      </ion-item>\n    </div>\n  </div>\n\n  <ion-card *ngIf=\"respuestas.length > 0\">\n    <ion-card-header color=\"primary\">\n      <ion-card-title>Resumen</ion-card-title>\n    </ion-card-header>\n    <ion-item *ngIf=\"filtroUtilizado[1]\">\n      <ion-col style=\"padding: 0;\" size=\"6\">\n        <ion-label><b>Total Captura:</b> {{contadores.capturas}}</ion-label>\n      </ion-col>\n      <ion-col style=\"padding: 0;\" size=\"6\">\n        <ion-label><b>Total Consumo:</b> {{contadores.consumo}}</ion-label>\n      </ion-col>\n    </ion-item>\n    <ion-item *ngIf=\"filtroUtilizado[1]\">\n      <ion-col style=\"padding: 0;\" size=\"6\">\n        <ion-label><b>Total Intactos:</b> {{contadores.intacto}}</ion-label>\n      </ion-col>\n      <ion-col style=\"padding: 0;\" size=\"6\">\n        <ion-label><b>Total Nuevos:</b> {{contadores.nuevo}}</ion-label>\n      </ion-col>\n    </ion-item>\n    <ion-item *ngIf=\"filtroUtilizado[1]\">\n      <ion-col style=\"padding: 0;\" size=\"6\">\n        <ion-label><b>Total Tapados:</b> {{contadores.tapado}}</ion-label>\n      </ion-col>\n      <ion-col style=\"padding: 0;\" size=\"6\">\n        <ion-label><b>Total Faltantes:</b> {{contadores.faltante}}</ion-label>\n      </ion-col>\n    </ion-item>\n    <ion-item *ngIf=\"filtroUtilizado[1]\">\n      <ion-col style=\"padding: 0;\" size=\"12\">\n        <ion-label><b>Total Mal estado:</b> {{contadores.malEstado}}</ion-label>\n      </ion-col>\n    </ion-item>\n    <ion-item *ngIf=\"filtroUtilizado[0]\">\n      <ion-label ><b>Promedio mediciones UV:</b> {{promedioUV?promedioUV:'No hay mediciones'}}</ion-label>\n    </ion-item>\n    <ion-item *ngIf=\"(filtroUtilizado[1]) && (productosUtilizados?.includes(productos[0].id_producto) || productosUtilizados?.length == 0)\">\n      <ion-label><b>Pegamento - Pegamento:</b></ion-label>\n    </ion-item >\n    <ion-item *ngIf=\"(filtroUtilizado[1]) && (productosUtilizados?.includes(productos[0].id_producto) || productosUtilizados?.length == 0)\">\n      <ion-col size=\"6\">\n        <ion-label>Captura: {{productos[0].captura}}</ion-label>\n      </ion-col>\n      <ion-col size=\"6\">\n        <ion-label>Consumo: {{productos[0].consumo}}</ion-label>\n      </ion-col>\n    </ion-item>\n    <ion-item *ngIf=\"(filtroUtilizado[1]) && (productosUtilizados?.includes(productos[0].id_producto) || productosUtilizados?.length == 0)\">\n      <ion-col size=\"6\">\n        <ion-label>Intactos: {{productos[0].intacto}}</ion-label>\n      </ion-col>\n      <ion-col size=\"6\">\n        <ion-label>Nuevos {{productos[0].nuevo}}</ion-label>\n      </ion-col>\n    </ion-item>\n    <ion-item *ngIf=\"(filtroUtilizado[1]) && (productosUtilizados?.includes(productos[0].id_producto) || productosUtilizados?.length == 0)\">\n      <ion-col size=\"6\">\n        <ion-label>Tapados: {{productos[0].tapado}}</ion-label>\n      </ion-col>\n      <ion-col size=\"6\">\n        <ion-label>Faltantes: {{productos[0].faltante}}</ion-label>\n      </ion-col>\n    </ion-item>\n    <ion-item *ngIf=\"(filtroUtilizado[1]) && (productosUtilizados?.includes(productos[0].id_producto) || productosUtilizados?.length == 0)\"> \n      <ion-col size=\"12\">\n        <ion-label>Mal estado: {{productos[0].malEstado}}</ion-label>\n      </ion-col>\n    </ion-item>\n    <ion-item *ngIf=\"(filtroUtilizado[1]) && (productosUtilizados?.includes(productos[1].id_producto) || productosUtilizados?.length == 0)\">\n      <ion-label><b>Parafinado - Floucoumafen:</b></ion-label>\n    </ion-item >\n    <ion-item *ngIf=\"(filtroUtilizado[1]) && (productosUtilizados?.includes(productos[1].id_producto) || productosUtilizados?.length == 0)\">\n      <ion-col size=\"6\">\n        <ion-label>Captura: {{productos[1].captura}}</ion-label>\n      </ion-col>\n      <ion-col size=\"6\">\n        <ion-label>Consumo: {{productos[1].consumo}}</ion-label>\n      </ion-col>\n    </ion-item>\n    <ion-item *ngIf=\"(filtroUtilizado[1]) && (productosUtilizados?.includes(productos[1].id_producto) || productosUtilizados?.length == 0)\">\n      <ion-col size=\"6\">\n        <ion-label>Intactos: {{productos[1].intacto}}</ion-label>\n      </ion-col>\n      <ion-col size=\"6\">\n        <ion-label>Nuevos {{productos[1].nuevo}}</ion-label>\n      </ion-col>\n    </ion-item>\n    <ion-item *ngIf=\"(filtroUtilizado[1]) && (productosUtilizados?.includes(productos[1].id_producto) || productosUtilizados?.length == 0)\">\n      <ion-col size=\"6\">\n        <ion-label>Tapados: {{productos[1].tapado}}</ion-label>\n      </ion-col>\n      <ion-col size=\"6\">\n        <ion-label>Faltantes: {{productos[1].faltante}}</ion-label>\n      </ion-col>\n    </ion-item>\n    <ion-item *ngIf=\"(filtroUtilizado[1]) && (productosUtilizados?.includes(productos[1].id_producto) || productosUtilizados?.length == 0)\"> \n      <ion-col size=\"12\">\n        <ion-label>Mal estado: {{productos[1].malEstado}}</ion-label>\n      </ion-col>\n    </ion-item>\n    <ion-item *ngIf=\"(filtroUtilizado[1]) && (productosUtilizados?.includes(productos[2].id_producto) || productosUtilizados?.length == 0)\">\n      <ion-label><b>Parafinado - Bromadiolone:</b></ion-label>\n    </ion-item >\n    <ion-item *ngIf=\"(filtroUtilizado[1]) && (productosUtilizados?.includes(productos[2].id_producto) || productosUtilizados?.length == 0)\">\n      <ion-col size=\"6\">\n        <ion-label>Captura: {{productos[2].captura}}</ion-label>\n      </ion-col>\n      <ion-col size=\"6\">\n        <ion-label>Consumo: {{productos[2].consumo}}</ion-label>\n      </ion-col>\n    </ion-item>\n    <ion-item *ngIf=\"(filtroUtilizado[1]) && (productosUtilizados?.includes(productos[2].id_producto) || productosUtilizados?.length == 0)\">\n      <ion-col size=\"6\">\n        <ion-label>Intactos: {{productos[2].intacto}}</ion-label>\n      </ion-col>\n      <ion-col size=\"6\">\n        <ion-label>Nuevos {{productos[2].nuevo}}</ion-label>\n      </ion-col>\n    </ion-item>\n    <ion-item *ngIf=\"(filtroUtilizado[1]) && (productosUtilizados?.includes(productos[2].id_producto) || productosUtilizados?.length == 0)\">\n      <ion-col size=\"6\">\n        <ion-label>Tapados: {{productos[2].tapado}}</ion-label>\n      </ion-col>\n      <ion-col size=\"6\">\n        <ion-label>Faltantes: {{productos[2].faltante}}</ion-label>\n      </ion-col>\n    </ion-item>\n    <ion-item *ngIf=\"(filtroUtilizado[1]) && (productosUtilizados?.includes(productos[2].id_producto) || productosUtilizados?.length == 0)\"> \n      <ion-col size=\"12\">\n        <ion-label>Mal estado: {{productos[2].malEstado}}</ion-label>\n      </ion-col>\n    </ion-item> \n  </ion-card>\n  <ion-button *ngIf=\"respuestas.length > 0\" (click)=\"verPdf()\" expand=\"block\"  shape=\"round\">\n    Ver PDF\n  </ion-button>\n</ion-content>\n\n<ion-fab *ngIf=\"respuestas.length > 0\" vertical=\"bottom\" horizontal=\"end\" slot=\"fixed\">\n  <ion-fab-button (click)=\"botonBajar()\">\n    <ion-icon name=\"chevron-down-outline\"></ion-icon>\n  </ion-fab-button>\n</ion-fab>\n";
     /***/
   },
 
@@ -74,7 +74,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
         _classCallCheck(this, ApiClientesService);
 
         this.http = http;
-        this.apiDir = "http://192.168.0.71:3000";
+        this.apiDir = "http://157.230.90.222:3001";
         this.requestOptions = {
           headers: new _angular_common_http__WEBPACK_IMPORTED_MODULE_2__["HttpHeaders"]({
             'Content-Type': 'application/json',
@@ -484,6 +484,15 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
         this.filtro_desratizacion = true;
         this.filtro_uv = true;
         this.respuestas = [];
+        this.contadores = {
+          capturas: 0,
+          consumo: 0,
+          intacto: 0,
+          nuevo: 0,
+          tapado: 0,
+          faltante: 0,
+          malEstado: 0
+        };
         this.productosFiltrados = [];
         this.productosUtilizados = [];
         this.interfaceOption = {
@@ -495,6 +504,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
             }
           }
         };
+        this.url = "http://157.230.90.222:3001/public/pdfs/informe .pdf";
       }
 
       _createClass(EstadisticasPage, [{
@@ -508,7 +518,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
             _this4.productos = _this4.productos.result;
             console.log(_this4.productos);
           });
-          var dia = new Date().getDate().toString() + 'T00:00:00-03:00';
+          var dia = (new Date().getDate() >= 10 ? new Date().getDate() : '0' + new Date().getDate().toString()) + 'T00:00:00-03:00';
           var mes1 = new Date().getMonth();
           var mes2 = new Date().getMonth() + 1;
           var year = new Date().getFullYear().toString();
@@ -707,7 +717,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
           return Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"])(this, void 0, void 0, /*#__PURE__*/regeneratorRuntime.mark(function _callee3() {
             var _this8 = this;
 
-            var alert, _alert, loading, filtro;
+            var alert, _alert, loading, index, producto, filtro;
 
             return regeneratorRuntime.wrap(function _callee3$(_context3) {
               while (1) {
@@ -731,7 +741,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
                     return alert.present();
 
                   case 6:
-                    _context3.next = 26;
+                    _context3.next = 27;
                     break;
 
                   case 8:
@@ -753,7 +763,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
                     return _alert.present();
 
                   case 14:
-                    _context3.next = 26;
+                    _context3.next = 27;
                     break;
 
                   case 16:
@@ -772,201 +782,55 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
                     this.filtroUtilizado = [this.filtro_uv, this.filtro_desratizacion];
                     this.productosUtilizados = JSON.parse(JSON.stringify(this.productosFiltrados));
                     this.respuestas = [];
-                    filtro = [this.fecha_desde, this.fecha_hasta, this.filtro_uv, this.filtro_desratizacion, this.clientesElegidos, this.sucursalesElegidas, this.sectoresElegidos, this.equiposElegidos];
+
+                    for (index = 0; index < this.productos.length; index++) {
+                      producto = this.productos[index];
+                      producto.captura = 0;
+                      producto.consumo = 0;
+                      producto.faltante = 0;
+                      producto.intacto = 0;
+                      producto.malEstado = 0;
+                      producto.nuevo = 0;
+                      producto.tapado = 0;
+                    }
+
+                    filtro = [this.fecha_desde, this.fecha_hasta, this.filtro_uv, this.filtro_desratizacion, this.clientesElegidos, this.sucursalesElegidas, this.sectoresElegidos, this.equiposElegidos, this.productosUtilizados, this.productos];
                     this.api_clientes.estadisticas(filtro).subscribe(function (datos) {
                       return Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"])(_this8, void 0, void 0, /*#__PURE__*/regeneratorRuntime.mark(function _callee2() {
-                        var _this9 = this;
-
-                        var _a, _b, _c, aux, contador, index, _element, auxPush, _index, element, pastElement, _index2, _element2, _index3, equipo, equipoAux, index2, _element3, _pastElement, _loop, _index4, _index6, _equipo, _index7, rsta, _index8, _alert2;
+                        var aux, _alert2;
 
                         return regeneratorRuntime.wrap(function _callee2$(_context2) {
                           while (1) {
                             switch (_context2.prev = _context2.next) {
                               case 0:
-                                console.log(datos);
                                 aux = datos;
                                 aux = aux.respuestas;
-                                this.capturas = aux.filter(function (respuesta) {
-                                  return respuesta.id_campo == 57 && respuesta.respuesta.toLowerCase() == "captura";
-                                }).length;
-                                this.consumo = aux.filter(function (respuesta) {
-                                  return respuesta.id_campo == 57 && respuesta.respuesta.toLowerCase() == "consumido";
-                                }).length;
-                                aux.sort(function (a, b) {
-                                  return a.id_equipo - b.id_equipo;
-                                });
-                                contador = 0;
-                                this.promedioUV = 0;
-
-                                for (index = 0; index < aux.length; index++) {
-                                  _element = aux[index];
-
-                                  if (_element.id_campo == 62 && Number(_element.respuesta)) {
-                                    contador++;
-                                    this.promedioUV = this.promedioUV + Number(_element.respuesta);
-                                  }
-                                }
-
-                                this.promedioUV = this.promedioUV / contador;
-                                this.promedioUV = Math.round(this.promedioUV * 100) / 100;
-                                auxPush = [];
-
-                                for (_index = 0; _index < aux.length; _index++) {
-                                  element = aux[_index];
-
-                                  if (element.id_campo == 55) {
-                                    element.nombre_producto = (_a = this.productos.find(function (producto) {
-                                      return producto.id_producto == element.respuesta;
-                                    })) === null || _a === void 0 ? void 0 : _a.nombre_producto;
-                                    element.tipo_producto = (_b = this.productos.find(function (producto) {
-                                      return producto.id_producto == element.respuesta;
-                                    })) === null || _b === void 0 ? void 0 : _b.tipo_producto;
-                                  }
-
-                                  if (_index == 0) {
-                                    auxPush.push(element);
-                                  } else {
-                                    pastElement = aux[_index - 1];
-
-                                    if (element.id_equipo == pastElement.id_equipo) {
-                                      if (_index == aux.length - 1) {
-                                        auxPush.push(element);
-                                        this.respuestas.push(auxPush);
-                                      } else {
-                                        auxPush.push(element);
-                                      }
-                                    } else {
-                                      this.respuestas.push(auxPush);
-                                      auxPush = [];
-                                      auxPush.push(element);
-                                    }
-                                  }
-                                }
-
-                                for (_index2 = 0; _index2 < this.respuestas.length; _index2++) {
-                                  _element2 = this.respuestas[_index2];
-
-                                  _element2.sort(function (a, b) {
-                                    return a.id_formulario - b.id_formulario;
-                                  });
-                                }
-
-                                for (_index3 = 0; _index3 < this.respuestas.length; _index3++) {
-                                  equipo = this.respuestas[_index3];
-                                  auxPush = [];
-                                  equipoAux = [];
-
-                                  for (index2 = 0; index2 < equipo.length; index2++) {
-                                    _element3 = equipo[index2];
-
-                                    if (index2 == 0) {
-                                      auxPush.push(_element3);
-                                    } else {
-                                      _pastElement = equipo[index2 - 1];
-
-                                      if (_element3.id_formulario == _pastElement.id_formulario) {
-                                        if (index2 == equipo.length - 1) {
-                                          auxPush.push(_element3);
-                                          equipoAux.push(auxPush);
-                                        } else {
-                                          auxPush.push(_element3);
-                                        }
-                                      } else {
-                                        equipoAux.push(auxPush);
-                                        auxPush = [];
-                                        auxPush.push(_element3);
-                                      }
-                                    }
-                                  }
-
-                                  this.respuestas[_index3] = equipoAux;
-                                }
-
-                                if (this.filtro_desratizacion) {
-                                  _loop = function _loop(_index4) {
-                                    var product = _this9.productos[_index4];
-                                    product.consumo = 0;
-                                    product.captura = 0;
-
-                                    for (var _index5 = 0; _index5 < _this9.respuestas.length; _index5++) {
-                                      var _element4 = _this9.respuestas[_index5];
-
-                                      if (_element4.filter(function (respuesta) {
-                                        return respuesta[0].id_campo == 55 && Number(respuesta[0].respuesta) == product.id_producto && respuesta[2].respuesta.toLowerCase() == "consumido";
-                                      })) {
-                                        product.consumo = product.consumo + _element4.filter(function (respuesta) {
-                                          return respuesta[0].id_campo == 55 && Number(respuesta[0].respuesta) == product.id_producto && respuesta[2].respuesta.toLowerCase() == "consumido";
-                                        }).length;
-                                      }
-
-                                      if (_element4.filter(function (respuesta) {
-                                        return respuesta[0].id_campo == 55 && Number(respuesta[0].respuesta) == product.id_producto && respuesta[2].respuesta.toLowerCase() == "captura";
-                                      })) {
-                                        product.captura = product.captura + _element4.filter(function (respuesta) {
-                                          return respuesta[0].id_campo == 55 && Number(respuesta[0].respuesta) == product.id_producto && respuesta[2].respuesta.toLowerCase() == "captura";
-                                        }).length;
-                                      }
-                                    }
-                                  };
-
-                                  for (_index4 = 0; _index4 < this.productos.length; _index4++) {
-                                    _loop(_index4);
-                                  }
-                                }
-
-                                if (((_c = this.productosFiltrados) === null || _c === void 0 ? void 0 : _c.length) > 0 && this.filtro_desratizacion) {
-                                  for (_index6 = 0; _index6 < this.respuestas.length; _index6++) {
-                                    _equipo = this.respuestas[_index6];
-
-                                    for (_index7 = 0; _index7 < _equipo.length; _index7++) {
-                                      rsta = _equipo[_index7];
-
-                                      if (!this.productosFiltrados.includes(Number(rsta[0].respuesta)) && rsta[0].id_campo == 55) {
-                                        if (rsta[2].respuesta == 'Consumido') {
-                                          this.consumo = this.consumo - 1;
-                                        }
-
-                                        if (rsta[2].respuesta == 'Captura') {
-                                          this.capturas = this.capturas - 1;
-                                        }
-
-                                        rsta.eliminar = true;
-                                      }
-                                    }
-                                  }
-
-                                  for (_index8 = 0; _index8 < this.respuestas.length; _index8++) {
-                                    element = this.respuestas[_index8];
-                                    this.respuestas[_index8] = element.filter(function (resp) {
-                                      return !resp.eliminar;
-                                    });
-                                  }
-                                }
-
-                                this.respuestas.sort(function (a, b) {
-                                  return a[0].length - b[0].length;
-                                });
-                                console.log(this.respuestas);
+                                console.log(datos);
+                                window.open(aux.url, '_blank');
+                                this.contadores = aux.contadores;
+                                console.log(this.contadores);
+                                this.respuestas = aux.respuesta;
+                                this.productos = aux.productos;
                                 loading.dismiss();
 
                                 if (!(this.respuestas.length == 0)) {
-                                  _context2.next = 26;
+                                  _context2.next = 15;
                                   break;
                                 }
 
-                                _context2.next = 23;
+                                _context2.next = 12;
                                 return this.alertController.create({
                                   header: 'Error',
                                   message: 'No se encontro ningun dato sobre los filtros aplicados',
                                   buttons: ['OK']
                                 });
 
-                              case 23:
+                              case 12:
                                 _alert2 = _context2.sent;
-                                _context2.next = 26;
+                                _context2.next = 15;
                                 return _alert2.present();
 
-                              case 26:
+                              case 15:
                               case "end":
                                 return _context2.stop();
                             }
@@ -975,7 +839,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
                       }));
                     });
 
-                  case 26:
+                  case 27:
                   case "end":
                     return _context3.stop();
                 }
@@ -987,7 +851,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
         key: "borrarFiltros",
         value: function borrarFiltros() {
           return Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"])(this, void 0, void 0, /*#__PURE__*/regeneratorRuntime.mark(function _callee4() {
-            var _this10 = this;
+            var _this9 = this;
 
             var alert;
             return regeneratorRuntime.wrap(function _callee4$(_context4) {
@@ -1000,11 +864,11 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
                       buttons: ["Cancelar", {
                         text: 'Si',
                         handler: function handler() {
-                          _this10.clientesElegidos = [];
-                          _this10.sucursalesElegidas = [];
-                          _this10.sectoresElegidos = [];
-                          _this10.equiposElegidos = [];
-                          _this10.productosFiltrados = [];
+                          _this9.clientesElegidos = [];
+                          _this9.sucursalesElegidas = [];
+                          _this9.sectoresElegidos = [];
+                          _this9.equiposElegidos = [];
+                          _this9.productosFiltrados = [];
                         }
                       }]
                     });
@@ -1020,6 +884,39 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
                 }
               }
             }, _callee4, this);
+          }));
+        }
+      }, {
+        key: "verPdf",
+        value: function verPdf() {
+          return Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"])(this, void 0, void 0, /*#__PURE__*/regeneratorRuntime.mark(function _callee5() {
+            return regeneratorRuntime.wrap(function _callee5$(_context5) {
+              while (1) {
+                switch (_context5.prev = _context5.next) {
+                  case 0:
+                    // var params = {
+                    //   respuestas: this.respuestas,
+                    //   contadores: this.contadores,
+                    //   productos: this.productos
+                    // }
+                    // const loading = await this.loadingController.create({
+                    //   message: 'Cargando',
+                    // });
+                    // await loading.present();
+                    // console.log(params)
+                    // this.api_visitas.pdfEstadisticas(params).subscribe((resp:any) => {
+                    //   console.log(resp)
+                    //   loading.dismiss();
+                    //   window.open(resp.url,'_blank')
+                    // })
+                    window.open(this.url, '_blank');
+
+                  case 1:
+                  case "end":
+                    return _context5.stop();
+                }
+              }
+            }, _callee5, this);
           }));
         }
       }]);

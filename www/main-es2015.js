@@ -270,7 +270,7 @@ module.exports = webpackAsyncContext;
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony default export */ __webpack_exports__["default"] = ("<ion-app>\r\n  <ion-router-outlet></ion-router-outlet>\r\n  <!-- <div style=\"color: red; padding: 10px; border: solid red 1px; position: fixed;top: 0px; left: 0px;font-weight: bold;\">\r\n    Version de desarrollo\r\n  </div> -->\r\n</ion-app>\r\n");
+/* harmony default export */ __webpack_exports__["default"] = ("<ion-app>\r\n  <ion-router-outlet></ion-router-outlet>\r\n  <div style=\"color: red; padding: 10px; border: solid red 1px; position: fixed;top: 0px; left: 0px;font-weight: bold;\">\r\n    Version de desarrollo\r\n  </div>\r\n</ion-app>\r\n");
 
 /***/ }),
 
@@ -296,7 +296,7 @@ __webpack_require__.r(__webpack_exports__);
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony default export */ __webpack_exports__["default"] = ("<ion-header>\n  <ion-toolbar color=\"primary\">\n    <ion-title>{{servicios?servicios[0].nombre_servicio:null}}</ion-title>\n  </ion-toolbar>\n</ion-header>\n<ion-content>\n  <ion-item *ngFor=\"let servicio of servicios\" (click)=\"editarServicio(servicio.id_formulario, servicio.nombre_equipo)\">\n    <ion-label>{{servicio.nombre_equipo}}</ion-label>\n  </ion-item>\n  <ion-row>\n      <ion-col class=\"ion-text-center\">\n        <div>\n         <ion-button (click)=\"modalDismiss()\" style=\"width: 50%\" class = \"button\">Volver</ion-button>\n        </div>\n      </ion-col>\n    </ion-row>\n</ion-content>");
+/* harmony default export */ __webpack_exports__["default"] = ("<ion-header>\r\n  <ion-toolbar color=\"primary\">\r\n    <ion-title>{{servicios?servicios[0]?.nombre_servicio:null}}</ion-title>\r\n  </ion-toolbar>\r\n</ion-header>\r\n<ion-content>\r\n  <div *ngIf=\"servicios?.length == 0\" style=\"text-align: center;\">\r\n    <ion-spinner></ion-spinner>\r\n  </div>\r\n  <div *ngIf=\"servicios?.length != 0\">\r\n    <ion-item *ngFor=\"let servicio of servicios\" (click)=\"editarServicio(servicio.id_formulario, servicio.nombre_equipo)\">\r\n      <ion-label>{{servicio.nombre_equipo}} {{servicio.zona}} - {{servicio.nro_equipo}}{{(servicio.tecnico.nombre_tecnico)?' - ' + servicio.tecnico.nombre_tecnico + ' ' + servicio.tecnico.apellido_tecnico:''}}{{(servicio?.respuestas[0]?.tapado == 0)?' - (QR)':''}}</ion-label>\r\n    </ion-item>\r\n    <ion-row>\r\n      <ion-col class=\"ion-text-center\">\r\n        <div>\r\n         <ion-button (click)=\"modalDismiss()\" style=\"width: 50%\" class = \"button\">Volver</ion-button>\r\n        </div>\r\n      </ion-col>\r\n    </ion-row>\r\n  </div>\r\n</ion-content>");
 
 /***/ }),
 
@@ -600,7 +600,7 @@ __webpack_require__.r(__webpack_exports__);
 let ServicioLoginService = class ServicioLoginService {
     constructor(http) {
         this.http = http;
-        this.apiDir = "http://192.168.0.71:3000";
+        this.apiDir = "http://157.230.90.222:3000";
         this.requestOptions = {
             headers: new _angular_common_http__WEBPACK_IMPORTED_MODULE_2__["HttpHeaders"]({
                 'Content-Type': 'application/json',
@@ -865,35 +865,69 @@ let VerServicioVisitaComponent = class VerServicioVisitaComponent {
         this.apiServicios = apiServicios;
         this.apiVisitas = apiVisitas;
         this.modalController = modalController;
+        this.servicios = [];
     }
     ngOnInit() {
         this.id_servicio = this.navParams.get('id_servicio');
         var aux = [];
-        new Promise((resolve, reject) => {
+        new Promise((resolve, reject) => Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"])(this, void 0, void 0, function* () {
             for (let index = 0; index < this.navParams.get('visita').servicios.length; index++) {
                 const servicio = this.navParams.get('visita').servicios[index];
+                console.log('I', index);
                 if ((servicio.id_servicio == 20 || servicio.id_servicio == 22) && (servicio.id_servicio == this.id_servicio)) {
-                    this.apiVisitas.getRespuestas(servicio.id_formulario).then((resp) => {
-                        servicio.respuestas = resp.respuestas;
-                        this.apiVisitas.getEquipo(servicio.respuestas[0].id_equipo).then((response) => {
-                            if (response.result) {
-                                if (response.result[0]) {
-                                    servicio.nombre_equipo = response.result[0].nombre_equipo;
-                                }
-                            }
-                        });
-                    }).catch(err => {
-                        console.error(err);
-                    });
+                    var resp = yield this.apiVisitas.getRespuestas(servicio.id_formulario);
+                    servicio.respuestas = resp;
+                    servicio.respuestas = servicio.respuestas.respuestas;
+                    var response = yield this.apiVisitas.getEquipo(servicio.respuestas[0].id_equipo);
+                    var response2;
+                    response2 = response;
+                    if (index == 100) {
+                        console.warn(response2);
+                    }
+                    if (response2.result) {
+                        if (response2.result[0]) {
+                            servicio.nombre_equipo = response2.result[0].nombre_equipo;
+                            servicio.zona = response2.result[0].zona;
+                            servicio.nro_equipo = response2.result[0].nro_equipo;
+                        }
+                    }
                     aux.push(servicio);
+                    console.log(index == this.navParams.get('visita').servicios.length - 1);
+                    if (index == this.navParams.get('visita').servicios.length - 1) {
+                        console.log("CERRO");
+                        resolve('');
+                    }
                 }
-                if (index == this.navParams.get('visita').servicios.length - 1) {
-                    resolve('');
+                else {
+                    if (index == this.navParams.get('visita').servicios.length - 1) {
+                        console.log("CERRO");
+                        resolve('');
+                    }
                 }
             }
-        }).then(() => {
+        })).then(() => {
             this.servicios = aux;
             console.log(this.servicios);
+            this.servicios.sort(function (a, b) {
+                if (a.nombre_equipo > b.nombre_equipo) {
+                    return 1;
+                }
+                else if (b.nombre_equipo > a.nombre_equipo) {
+                    return -1;
+                }
+                else {
+                    if (a.zona > b.zona) {
+                        return 1;
+                    }
+                    else if (b.zona > a.zona) {
+                        return -1;
+                    }
+                    else {
+                        console.log(a.zona, b.zona);
+                        return a.nro_equipo - b.nro_equipo;
+                    }
+                }
+            });
         }).catch(err => {
             console.error(err);
         });
@@ -952,7 +986,7 @@ __webpack_require__.r(__webpack_exports__);
 let ApiServiciosService = class ApiServiciosService {
     constructor(http) {
         this.http = http;
-        this.apiDir = "http://192.168.0.71:3000";
+        this.apiDir = "http://157.230.90.222:3000";
         this.requestOptions = {
             headers: new _angular_common_http__WEBPACK_IMPORTED_MODULE_2__["HttpHeaders"]({
                 'Content-Type': 'application/json',
@@ -1141,7 +1175,7 @@ __webpack_require__.r(__webpack_exports__);
 let ApiVisitasService = class ApiVisitasService {
     constructor(http) {
         this.http = http;
-        this.apiDir = "http://192.168.0.71:3000";
+        this.apiDir = "http://157.230.90.222:3000";
         this.requestOptions = {
             headers: new _angular_common_http__WEBPACK_IMPORTED_MODULE_2__["HttpHeaders"]({
                 'Content-Type': 'application/json',
@@ -1219,6 +1253,9 @@ let ApiVisitasService = class ApiVisitasService {
             });
         });
     }
+    setPlano(parametros) {
+        return this.http.post(this.apiDir + '/servicios/gruposEquipos/plano', parametros, this.requestOptions);
+    }
     pdfEstadisticas(parametros) {
         return this.http.post(this.apiDir + '/pdf/stats-pdf', parametros, this.requestOptions);
     }
@@ -1274,7 +1311,7 @@ const environment = {
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "version", function() { return version; });
-const version = '0.0.7';
+const version = '0.0.8';
 
 
 /***/ }),

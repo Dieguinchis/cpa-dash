@@ -48,7 +48,7 @@ __webpack_require__.r(__webpack_exports__);
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony default export */ __webpack_exports__["default"] = ("<ion-content>\r\n  <ion-item lines=\"full\">\r\n    <ion-label>Nombre del workstation: </ion-label>\r\n    <ion-input [(ngModel)]=\"nombre_workstation\"></ion-input>\r\n  </ion-item>\r\n  <ion-item lines=\"full\">\r\n    <ion-label>Servicio que cumple</ion-label>\r\n    <ion-select [(ngModel)]=\"id_servicio\" (ionChange)=\"producto_predeterminado = null\">\r\n      <div *ngFor=\"let servicio of servicios\">\r\n        <div *ngIf=\"servicio.qr == 1\">\r\n          <ion-select-option value={{servicio.id_servicio}}>{{servicio.nombre_servicio}}</ion-select-option>\r\n        </div>\r\n      </div>\r\n    </ion-select>\r\n  </ion-item>\r\n  <ion-item *ngIf=\"id_servicio == '20'\">\r\n    <ion-label>Producto Predeterminado</ion-label>\r\n    <ion-select [(ngModel)]=\"producto_predeterminado\">\r\n      <div *ngFor=\"let producto of productos\">\r\n        <div>\r\n          <ion-select-option value={{producto.id_producto}}>{{producto.nombre_producto + ' - ' + producto.tipo_producto}}</ion-select-option>\r\n        </div>\r\n      </div>\r\n      <ion-select-option value=null>Sin Producto</ion-select-option>\r\n    </ion-select>\r\n  </ion-item>\r\n  <div style=\"text-align: center;\">\r\n    <ion-button expand=\"full\" (click)=\"alta_workstation()\">Dar de alta</ion-button>\r\n  </div>\r\n</ion-content>\r\n");
+/* harmony default export */ __webpack_exports__["default"] = ("<ion-content>\r\n  <ion-item lines=\"full\">\r\n    <ion-label>Nombre del workstation: </ion-label>\r\n    <ion-input [(ngModel)]=\"nombre_workstation\"></ion-input>\r\n  </ion-item>\r\n  <ion-item lines=\"full\">\r\n    <ion-label>Zona del workstation: </ion-label>\r\n    <ion-input [(ngModel)]=\"zona_workstation\"></ion-input>\r\n  </ion-item>\r\n  <ion-item lines=\"full\">\r\n    <ion-label>Numero del workstation: </ion-label>\r\n    <ion-input type=\"number\" [(ngModel)]=\"nro_workstation\"></ion-input>\r\n  </ion-item>\r\n  <ion-item lines=\"full\">\r\n    <ion-label>Servicio que cumple</ion-label>\r\n    <ion-select [(ngModel)]=\"id_servicio\" (ionChange)=\"producto_predeterminado = null\">\r\n      <div *ngFor=\"let servicio of servicios\">\r\n        <div *ngIf=\"servicio.qr == 1\">\r\n          <ion-select-option value={{servicio.id_servicio}}>{{servicio.nombre_servicio}}</ion-select-option>\r\n        </div>\r\n      </div>\r\n    </ion-select>\r\n  </ion-item>\r\n  <ion-item *ngIf=\"id_servicio == '20'\">\r\n    <ion-label>Producto Predeterminado</ion-label>\r\n    <ion-select [(ngModel)]=\"producto_predeterminado\">\r\n      <div *ngFor=\"let producto of productos\">\r\n        <div>\r\n          <ion-select-option value={{producto.id_producto}}>{{producto.nombre_producto + ' - ' + producto.tipo_producto}}</ion-select-option>\r\n        </div>\r\n      </div>\r\n      <ion-select-option value=null>Sin Producto</ion-select-option>\r\n    </ion-select>\r\n  </ion-item>\r\n  <div style=\"text-align: center;\">\r\n    <ion-button expand=\"full\" (click)=\"alta_workstation()\">Dar de alta</ion-button>\r\n  </div>\r\n</ion-content>\r\n");
 
 /***/ }),
 
@@ -61,7 +61,7 @@ __webpack_require__.r(__webpack_exports__);
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony default export */ __webpack_exports__["default"] = ("<ion-content>\r\n  <div *ngIf=\"sucursal\">\r\n      <ion-row style=\"text-align: center; background-color: white;padding: 1%;\">\r\n        <ion-col size=\"9\"><b style=\"margin-top:15px\">Informacion de la sucursal</b></ion-col>\r\n        <ion-col size=\"1\">Acciones: </ion-col>\r\n        <ion-col size=\"0.5\" style=\"font-size: 24px !important;\"><ion-icon color=\"primary\" title=\"Descargar Todos los QRs de la sucursal\" (click)=\"descargarAllQrSucursal()\" name=\"cloud-download-outline\"></ion-icon></ion-col>\r\n        <ion-col size=\"0.5\" style=\"font-size: 24px !important;\"><ion-icon color=\"primary\" title=\"Imprimir Toda la informacion de la sucursal\" (click)=\"imprimirAllQrSucursal()\" name=\"print-outline\"></ion-icon></ion-col>\r\n        <ion-col size=\"1\"></ion-col>\r\n      </ion-row>\r\n    <ion-item lines=\"full\">\r\n      <ion-grid>\r\n        <ion-row>\r\n          <!-- <ion-col size=\"3\"></ion-col> -->\r\n          <ion-col size=\"3\">\r\n            <ion-label><b>Sucursal</b></ion-label>\r\n          </ion-col>\r\n          <ion-col size=\"2\">\r\n            <ion-label><b>Telefono</b></ion-label>\r\n          </ion-col>\r\n          <ion-col size=\"3\">\r\n            <ion-label><b>Mail</b></ion-label>\r\n          </ion-col>\r\n          <ion-col size=\"2\">\r\n            <ion-label><b>Codigo QR</b></ion-label>\r\n          </ion-col>\r\n          <ion-col size=\"2\">\r\n            <ion-label><b>Acciones</b></ion-label>\r\n          </ion-col>\r\n          <!-- <ion-col size=\"1\"></ion-col> -->\r\n        </ion-row>\r\n      </ion-grid>\r\n    </ion-item>\r\n    <ion-item lines=\"full\" >\r\n      <ion-grid>\r\n        <ion-row>\r\n          <!-- <ion-col size=\"3\"></ion-col> -->\r\n          <ion-col size=\"3\" style=\"margin-top: 10px;\">\r\n            <ion-label>{{sucursal.sucursal[0].razon_social_sucursal}}</ion-label>\r\n          </ion-col>\r\n          <ion-col size=\"2\" style=\"margin-top: 10px;\">\r\n            <ion-label>{{sucursal.sucursal[0].telefono_sucursal}}</ion-label>\r\n          </ion-col>\r\n          <ion-col size=\"3\" style=\"margin-top: 10px;\">\r\n            <ion-label>{{sucursal.sucursal[0].email_sucursal}}</ion-label>\r\n          </ion-col>\r\n          <ion-col size=\"2\">\r\n            <ion-card style=\"width: 50px; margin-top: 0px;\">\r\n              <div>\r\n                <a (click)=\"descargarSucursal()\">\r\n                  <img style=\"z-index: -1 !important\" [src]='sucursal.sucursal[0].codigo_qr' (click)=\"descargarSucursal()\">\r\n                </a>\r\n                <!-- <ion-button (click)=\"toDataURL(sucursal.sucursal[0].codigo_qr)\" expand=\"block\" fill=\"clear\" shape=\"round\">\r\n                  Click me\r\n                </ion-button> -->\r\n              </div>\r\n            </ion-card>\r\n          </ion-col>\r\n          <ion-col style=\"font-size: 24px !important;\" size=\"2\">\r\n            <ion-icon color=\"primary\" title=\"Descargar este QR\" style=\"margin-top:15px\" (click)=\"descargarSucursal()\" name=\"cloud-download-outline\"></ion-icon>\r\n            <!-- <ion-icon color=\"primary\" title=\"Seleccionar ESTE QR para Imprimir\" style=\"margin-top:15px\" (click)=\"addImprimirQrSucursal()\" name=\"print-outline\"></ion-icon> -->\r\n            <ion-icon *ngIf=\"showDeleteQrSucursal.show\" [title]=\"'Eliminar QR de la lista (' + showDeleteQrSucursal.count +')'\" style=\"margin-top:15px; color: red !important;\" (click)=\"deleteImprimirQrSucursal()\" name=\"print-outline\"></ion-icon>\r\n          </ion-col>\r\n          <!-- <ion-col size=\"1\"></ion-col> -->\r\n        </ion-row>\r\n      </ion-grid>\r\n    </ion-item>\r\n    <div style=\"margin-top: 5px;\"></div>\r\n    <ion-row style=\"background-color: white;\">\r\n      <ion-col size=\"5\">\r\n        <ion-item style=\"text-align: center;\" lines=\"none\">\r\n          <ion-label style=\"font-size: 100% !important;\"><b>Workstations/equipos</b></ion-label>\r\n        </ion-item>\r\n      </ion-col>\r\n      <ion-col size=\"7\">\r\n        <ion-item style=\"text-align: right;\" lines=\"none\">\r\n          <ion-label></ion-label>\r\n          <ion-icon color=\"primary\" (click)=\"descargarQrAllWorkstations()\" title=\"Descargar los QR'S de TODAS las Workstations/equipos\" name=\"cloud-download-outline\"></ion-icon>\r\n          <ion-icon color=\"primary\" (click)=\"imprimirQrAllWorkstations()\" title=\"Imprimir los QR'S de TODAS las Workstations/equipos\" name=\"print-outline\"></ion-icon>\r\n          <ion-button (click)=\"alertAltaGrupoWorkstation()\">Agregar grupo de workstations</ion-button>\r\n        </ion-item>\r\n      </ion-col>\r\n    </ion-row>\r\n\r\n\r\n    <!-- <ion-item lines=\"full\">\r\n      <ion-grid>\r\n        <ion-row>\r\n          <ion-col size=\"7\">\r\n            <ion-label><b>Nombre del workstation</b></ion-label>\r\n          </ion-col>\r\n          <ion-col size=\"2\">\r\n            <ion-label><b>Nombre del servicio</b></ion-label>\r\n          </ion-col>\r\n          <ion-col size=\"2\">\r\n            <ion-label><b>Codigo QR</b></ion-label>\r\n          </ion-col>\r\n          <ion-col size=\"1\">\r\n            <ion-label><b>Eliminar</b></ion-label>\r\n          </ion-col>\r\n        </ion-row>\r\n      </ion-grid>\r\n    </ion-item> -->\r\n    <!-- <ion-item lines=\"full\" *ngFor=\"let equipo of workstations\" class=\"equipos\">\r\n      <ion-grid>\r\n        <ion-row>\r\n          <ion-col size=\"7\" style=\"margin-top: 15px\">\r\n            <ion-label>{{equipo.nombre_equipo}}</ion-label>\r\n          </ion-col>\r\n          <ion-col size=\"2\" style=\"margin-top: 15px\">\r\n            <ion-label>{{equipo.nombre_servicio}}</ion-label>\r\n          </ion-col>\r\n          <ion-col size=\"2\">\r\n            <ion-card style=\"width: 50px; margin-top: 0px;\">\r\n              <div>\r\n                <a [href]=\"equipo.codigo_qr_equipo\" download>\r\n                  <img [src]='equipo.codigo_qr_equipo'>\r\n                </a>\r\n              </div>\r\n            </ion-card>\r\n          </ion-col>\r\n          <ion-col size=\"1\">\r\n            <ion-icon name=\"trash-outline\" color=\"danger\" style=\"margin-top:15px\" (click)=\"borrar_equipo(equipo.id_equipo)\"></ion-icon>\r\n          </ion-col>\r\n        </ion-row>\r\n      </ion-grid>\r\n    </ion-item> -->\r\n    <div *ngIf=\"(grupoWorkStation == undefined) && !loadingEquipos\">\r\n      <ion-item>\r\n        <ion-label style=\"width:  100%; text-align: center;\">No se encontraron WorkStation</ion-label>\r\n      </ion-item>\r\n    </div>\r\n    <div class=\"loadding\" *ngIf=\"loadingEquipos\">\r\n      <ion-spinner style=\"margin-top: 10px; color: #3b3b3f\"></ion-spinner>\r\n    </div>\r\n    <div *ngIf=\"(grupoWorkStation != undefined) && !loadingEquipos\">\r\n      <div style=\"background-color: white;\" *ngFor=\"let grupoEquipo of grupoWorkStation; let j = index\">\r\n        <ion-grid>\r\n          <ion-row>\r\n            <ion-col class=\"grupoequipo\" size=\"5.5\" >{{grupoEquipo.nombre_equipo_grupo}}</ion-col>\r\n            <ion-col size=\"0.5\">\r\n              <ion-icon name=\"trash-outline\" color=\"danger\" style=\"margin-top:15px\" (click)=\"borrar_equipo_grupo(grupoEquipo.id_equipo_grupo,j)\"></ion-icon>\r\n            </ion-col>\r\n            <ion-col size=\"6\">\r\n              <ion-item style=\"text-align: left;\" lines=\"none\">\r\n                <ion-icon color=\"primary\" title=\"Descargar los QR'S de ESTA Workstation/equipo\" (click)=\"descargarQrThisWorkstation(grupoEquipo)\" name=\"cloud-download-outline\"></ion-icon>\r\n                <ion-icon color=\"primary\" title=\"Imprimir los QR'S de ESTA Workstation/equipo\" (click)=\"imprimirQrThisWorkstation(grupoEquipo)\" name=\"print-outline\"></ion-icon>\r\n                <ion-button (click)=\"altaWorkstation(grupoEquipo.id_equipo_grupo,j)\">Agregar workstation</ion-button>\r\n              </ion-item>\r\n            </ion-col>\r\n          </ion-row>\r\n          <ion-item lines=\"full\">\r\n            <ion-grid>\r\n              <ion-row>\r\n                <ion-col size=\"2\">\r\n                  <ion-label><b>Workstation</b></ion-label>\r\n                </ion-col>\r\n                <ion-col size=\"3\">\r\n                  <ion-label *ngIf=\"grupoEquipo?.equipos[0]?.id_servicio == 20\"><b>Producto predeterminado</b></ion-label>\r\n                </ion-col>\r\n                <ion-col size=\"2.5\">\r\n                  <ion-label><b>Servicio</b></ion-label>\r\n                </ion-col>\r\n                <ion-col size=\"1.5\">\r\n                  <ion-label><b>Codigo QR</b></ion-label>\r\n                </ion-col>\r\n                <ion-col size=\"2\">\r\n                  <ion-label></ion-label>\r\n                </ion-col>\r\n                <ion-col size=\"1\">\r\n                  <ion-label><b>Acciones</b></ion-label>\r\n                </ion-col>\r\n              </ion-row>\r\n            </ion-grid>\r\n          </ion-item>\r\n          <div *ngIf=\"(grupoEquipo.equipos.length == 0 || grupoEquipo.length == 0)\">\r\n            <ion-item>\r\n              <ion-label style=\"width:  100%; text-align: center;\">No se encontraron equipos</ion-label>\r\n            </ion-item>\r\n          </div>\r\n          <div *ngIf=\"(grupoEquipo.equipos.length > 0)\">\r\n            <div *ngFor=\"let equipo of grupoEquipo.equipos; let i = index\">\r\n              <ion-row class=\"equipos\" *ngIf=\"equipo.nombre_equipo != null\">\r\n                <ion-col size=\"2\" style=\"margin-top: 15px\">\r\n                  <ion-label>\r\n                    {{equipo.nombre_equipo}}\r\n                  </ion-label>\r\n                </ion-col>\r\n                <ion-col size=\"3\" style=\"margin-top: 15px\">\r\n                  <ion-label *ngIf=\"equipo.id_servicio == 20\">\r\n                    {{equipo.producto_predeterminado_nombre?equipo.producto_predeterminado_nombre:\"Sin producto\"}}\r\n                    <ion-icon color=\"primary\" slot=\"start\" name=\"create-outline\" (click)=\"elegirProducto(equipo)\"></ion-icon>\r\n                  </ion-label>\r\n                </ion-col>\r\n                <ion-col size=\"2.5\" style=\"margin-top: 15px\">\r\n                  <ion-label>{{equipo.nombre_servicio}}</ion-label>\r\n                </ion-col>\r\n                <ion-col size=\"1.5\">\r\n                  <ion-card style=\"width: 50px; margin-top: 0px;\">\r\n                    <div>\r\n                      <a  (click)=\"descargarQrEquipo(equipo)\">\r\n                        <img [src]='equipo.codigo_qr_equipo'  (click)=\"descargarQrEquipo(equipo)\">\r\n                      </a>\r\n                    </div>\r\n                  </ion-card>\r\n                </ion-col>\r\n                <ion-col size=\"2\">\r\n                  <ion-icon color=\"primary\" title=\"Descargar este QR\" style=\"margin-top:15px\" (click)=\"descargarQrEquipo(equipo)\" name=\"cloud-download-outline\"></ion-icon>\r\n                  <ion-icon color=\"primary\" title=\"Seleccionar ESTE QR para Imprimir\" style=\"margin-top:15px\" (click)=\"addmprimirQr(equipo, i, j)\" name=\"print-outline\"></ion-icon>\r\n                  <ion-icon *ngIf=\"showDeleteQr[j][i].show\" [title]=\"'Eliminar QR de la lista (' + showDeleteQr[j][i].count +')'\" style=\"margin-top:15px; color: red !important;\" (click)=\"deleteImprimirQr(equipo, i, j)\" name=\"print-outline\"></ion-icon>\r\n                </ion-col>\r\n                <ion-col size=\"1\">\r\n                  <ion-icon name=\"trash-outline\" color=\"danger\" style=\"margin-top:15px\" (click)=\"borrar_equipo(equipo,j,i)\"></ion-icon>\r\n                  <ion-icon color=\"primary\" name=\"create-outline\" style=\"padding-left: 5px;\" (click)=\"editName(equipo)\"></ion-icon> \r\n                </ion-col>\r\n\r\n\r\n              </ion-row>\r\n            </div>\r\n          </div>\r\n        </ion-grid>\r\n      </div>\r\n    </div>\r\n\r\n  </div>\r\n  <div *ngIf=\"sucursal\" style=\"margin-top: 10px;\">\r\n    <ion-item style=\"text-align: center;\" lines=\"none\">\r\n      <ion-label><b>Planos de la sucursal</b></ion-label>\r\n      <input style=\"visibility: hidden;\" id=\"inputUploadFile\" accept=\".pdf\" title=\" \" [disabled]=\"disabled\" type=\"file\" name=\"\" (change)=\"showFile($event.target.files)\">\r\n      <ion-icon slot=\"end\" name=\"add-circle-outline\" color=\"primary\" (click)=\"agregar_plano()\"></ion-icon>\r\n    </ion-item>\r\n    <div *ngFor=\"let plano of sucursal.planos\">\r\n      <ion-item button *ngIf=\"sucursal.planos.length > 0\">\r\n        <ion-icon (click)=\"openPdf(plano.url_imagen_plano)\" name=\"eye\" slot=\"start\"></ion-icon>\r\n        <ion-label (click)=\"openPdf(plano.url_imagen_plano)\">{{plano.name}}</ion-label>\r\n        <ion-icon slot=\"end\" style=\"color: red;\" name=\"trash-outline\" (click)=\"alert_eliminar_plano(plano.id_plano)\"></ion-icon>\r\n      </ion-item>\r\n\r\n    </div>\r\n    <ion-item button *ngIf=\"sucursal.planos.length == 0\">\r\n      <ion-label>No hay planos cargados</ion-label>\r\n    </ion-item>\r\n    <!-- <ion-slides pager=\"true\" style=\"background-color: secondary\">\r\n      <ion-slide *ngFor= \"let plano of sucursal.planos\">\r\n        <ion-card class=\"cardPlanos\">\r\n\r\n          <img src={{plano.url_imagen_plano}}  class=\"planos\">\r\n          <ion-button class=\"deletePlano\" style=\"position:absolute; right: 0%; bottom: 0%;\" (click)=\"alert_eliminar_plano(plano.id_plano)\">\r\n            <ion-icon style=\"color: red;\" name=\"trash-outline\" (click)=\"alert_eliminar_plano(plano.id_plano)\"></ion-icon>\r\n          </ion-button>\r\n        </ion-card>\r\n      </ion-slide>\r\n    </ion-slides> -->\r\n  </div>\r\n\r\n</ion-content>\r\n\r\n<ion-footer *ngIf=\"qrsToPrint.length > 0\">\r\n  <ion-toolbar color=\"primary\">\r\n    <ion-title>QR'S Seleccionados ({{qrsToPrint.length}})</ion-title>\r\n    <ion-buttons slot=\"end\">\r\n      <ion-button class=\"printButton\" (click)=\"printSelect()\">Imprimir</ion-button>\r\n      <ion-button class=\"printButtonCancel\" (click)=\"deletePrintSelect()\">Cancelar</ion-button>\r\n    </ion-buttons>\r\n  </ion-toolbar>\r\n</ion-footer>\r\n");
+/* harmony default export */ __webpack_exports__["default"] = ("<ion-content>\r\n  <div *ngIf=\"sucursal\">\r\n      <ion-row style=\"text-align: center; background-color: white;padding: 1%;\">\r\n        <ion-col size=\"9\"><b style=\"margin-top:15px\">Informacion de la sucursal</b></ion-col>\r\n        <ion-col size=\"1\">Acciones: </ion-col>\r\n        <ion-col size=\"0.5\" style=\"font-size: 24px !important;\"><ion-icon color=\"primary\" title=\"Descargar Todos los QRs de la sucursal\" (click)=\"descargarAllQrSucursal()\" name=\"cloud-download-outline\"></ion-icon></ion-col>\r\n        <ion-col size=\"0.5\" style=\"font-size: 24px !important;\"><ion-icon color=\"primary\" title=\"Imprimir Toda la informacion de la sucursal\" (click)=\"imprimirAllQrSucursal()\" name=\"print-outline\"></ion-icon></ion-col>\r\n        <ion-col size=\"1\"></ion-col>\r\n      </ion-row>\r\n    <ion-item lines=\"full\">\r\n      <ion-grid>\r\n        <ion-row>\r\n          <!-- <ion-col size=\"3\"></ion-col> -->\r\n          <ion-col size=\"3\">\r\n            <ion-label><b>Sucursal</b></ion-label>\r\n          </ion-col>\r\n          <ion-col size=\"2\">\r\n            <ion-label><b>Telefono</b></ion-label>\r\n          </ion-col>\r\n          <ion-col size=\"3\">\r\n            <ion-label><b>Mail</b></ion-label>\r\n          </ion-col>\r\n          <ion-col size=\"2\">\r\n            <ion-label><b>Codigo QR</b></ion-label>\r\n          </ion-col>\r\n          <ion-col size=\"2\">\r\n            <ion-label><b>Acciones</b></ion-label>\r\n          </ion-col>\r\n          <!-- <ion-col size=\"1\"></ion-col> -->\r\n        </ion-row>\r\n      </ion-grid>\r\n    </ion-item>\r\n    <ion-item lines=\"full\" >\r\n      <ion-grid>\r\n        <ion-row>\r\n          <!-- <ion-col size=\"3\"></ion-col> -->\r\n          <ion-col size=\"3\" style=\"margin-top: 10px;\">\r\n            <ion-label>{{sucursal.sucursal[0].razon_social_sucursal}}</ion-label>\r\n          </ion-col>\r\n          <ion-col size=\"2\" style=\"margin-top: 10px;\">\r\n            <ion-label>{{sucursal.sucursal[0].telefono_sucursal}}</ion-label>\r\n          </ion-col>\r\n          <ion-col size=\"3\" style=\"margin-top: 10px;\">\r\n            <ion-label>{{sucursal.sucursal[0].email_sucursal}}</ion-label>\r\n          </ion-col>\r\n          <ion-col size=\"2\">\r\n            <ion-card style=\"width: 50px; margin-top: 0px;\">\r\n              <div>\r\n                <a (click)=\"descargarSucursal()\">\r\n                  <img style=\"z-index: -1 !important\" [src]='sucursal.sucursal[0].codigo_qr' (click)=\"descargarSucursal()\">\r\n                </a>\r\n                <!-- <ion-button (click)=\"toDataURL(sucursal.sucursal[0].codigo_qr)\" expand=\"block\" fill=\"clear\" shape=\"round\">\r\n                  Click me\r\n                </ion-button> -->\r\n              </div>\r\n            </ion-card>\r\n          </ion-col>\r\n          <ion-col style=\"font-size: 24px !important;\" size=\"2\">\r\n            <ion-icon color=\"primary\" title=\"Descargar este QR\" style=\"margin-top:15px\" (click)=\"descargarSucursal()\" name=\"cloud-download-outline\"></ion-icon>\r\n            <!-- <ion-icon color=\"primary\" title=\"Seleccionar ESTE QR para Imprimir\" style=\"margin-top:15px\" (click)=\"addImprimirQrSucursal()\" name=\"print-outline\"></ion-icon> -->\r\n            <ion-icon *ngIf=\"showDeleteQrSucursal.show\" [title]=\"'Eliminar QR de la lista (' + showDeleteQrSucursal.count +')'\" style=\"margin-top:15px; color: red !important;\" (click)=\"deleteImprimirQrSucursal()\" name=\"print-outline\"></ion-icon>\r\n          </ion-col>\r\n          <!-- <ion-col size=\"1\"></ion-col> -->\r\n        </ion-row>\r\n      </ion-grid>\r\n    </ion-item>\r\n    <div style=\"margin-top: 5px;\"></div>\r\n    <ion-row style=\"background-color: white;\">\r\n      <ion-col size=\"5\">\r\n        <ion-item style=\"text-align: center;\" lines=\"none\">\r\n          <ion-label style=\"font-size: 100% !important;\"><b>Workstations/equipos</b></ion-label>\r\n        </ion-item>\r\n      </ion-col>\r\n      <ion-col size=\"7\">\r\n        <ion-item style=\"text-align: right;\" lines=\"none\">\r\n          <ion-label></ion-label>\r\n          <ion-icon color=\"primary\" (click)=\"descargarQrAllWorkstations()\" title=\"Descargar los QR'S de TODAS las Workstations/equipos\" name=\"cloud-download-outline\"></ion-icon>\r\n          <ion-icon color=\"primary\" (click)=\"imprimirQrAllWorkstations()\" title=\"Imprimir los QR'S de TODAS las Workstations/equipos\" name=\"print-outline\"></ion-icon>\r\n          <ion-button (click)=\"alertAltaGrupoWorkstation()\">Agregar grupo de workstations</ion-button>\r\n        </ion-item>\r\n      </ion-col>\r\n    </ion-row>\r\n\r\n\r\n    <!-- <ion-item lines=\"full\">\r\n      <ion-grid>\r\n        <ion-row>\r\n          <ion-col size=\"7\">\r\n            <ion-label><b>Nombre del workstation</b></ion-label>\r\n          </ion-col>\r\n          <ion-col size=\"2\">\r\n            <ion-label><b>Nombre del servicio</b></ion-label>\r\n          </ion-col>\r\n          <ion-col size=\"2\">\r\n            <ion-label><b>Codigo QR</b></ion-label>\r\n          </ion-col>\r\n          <ion-col size=\"1\">\r\n            <ion-label><b>Eliminar</b></ion-label>\r\n          </ion-col>\r\n        </ion-row>\r\n      </ion-grid>\r\n    </ion-item> -->\r\n    <!-- <ion-item lines=\"full\" *ngFor=\"let equipo of workstations\" class=\"equipos\">\r\n      <ion-grid>\r\n        <ion-row>\r\n          <ion-col size=\"7\" style=\"margin-top: 15px\">\r\n            <ion-label>{{equipo.nombre_equipo}}</ion-label>\r\n          </ion-col>\r\n          <ion-col size=\"2\" style=\"margin-top: 15px\">\r\n            <ion-label>{{equipo.nombre_servicio}}</ion-label>\r\n          </ion-col>\r\n          <ion-col size=\"2\">\r\n            <ion-card style=\"width: 50px; margin-top: 0px;\">\r\n              <div>\r\n                <a [href]=\"equipo.codigo_qr_equipo\" download>\r\n                  <img [src]='equipo.codigo_qr_equipo'>\r\n                </a>\r\n              </div>\r\n            </ion-card>\r\n          </ion-col>\r\n          <ion-col size=\"1\">\r\n            <ion-icon name=\"trash-outline\" color=\"danger\" style=\"margin-top:15px\" (click)=\"borrar_equipo(equipo.id_equipo)\"></ion-icon>\r\n          </ion-col>\r\n        </ion-row>\r\n      </ion-grid>\r\n    </ion-item> -->\r\n    <div *ngIf=\"(grupoWorkStation == undefined) && !loadingEquipos\">\r\n      <ion-item>\r\n        <ion-label style=\"width:  100%; text-align: center;\">No se encontraron WorkStation</ion-label>\r\n      </ion-item>\r\n    </div>\r\n    <div class=\"loadding\" *ngIf=\"loadingEquipos\">\r\n      <ion-spinner style=\"margin-top: 10px; color: #3b3b3f\"></ion-spinner>\r\n    </div>\r\n    <div *ngIf=\"(grupoWorkStation != undefined) && !loadingEquipos\">\r\n      <div style=\"background-color: white;\" *ngFor=\"let grupoEquipo of grupoWorkStation; let j = index\">\r\n        <ion-grid>\r\n          <ion-row>\r\n            <ion-col class=\"grupoequipo\" size=\"1.25\" >\r\n              {{grupoEquipo.nombre_equipo_grupo}}\r\n              <ion-icon name=\"trash-outline\" color=\"danger\" style=\"margin-top:15px\" (click)=\"borrar_equipo_grupo(grupoEquipo.id_equipo_grupo,j)\"></ion-icon>\r\n            </ion-col>\r\n            <ion-col size=\"6.5\">\r\n              <ion-item style=\"text-align: left;\" lines=\"none\">\r\n                <ion-icon color=\"primary\" title=\"Descargar los QR'S de ESTA Workstation/equipo\" (click)=\"descargarQrThisWorkstation(grupoEquipo)\" name=\"cloud-download-outline\"></ion-icon>\r\n                <ion-icon color=\"primary\" title=\"Imprimir los QR'S de ESTA Workstation/equipo\" (click)=\"imprimirQrThisWorkstation(grupoEquipo)\" name=\"print-outline\"></ion-icon>\r\n                <ion-button (click)=\"altaWorkstation(grupoEquipo,j)\">Agregar workstation</ion-button>\r\n                <ion-button (click)=\"elegirPlano(grupoEquipo)\">Asignar plano</ion-button>\r\n                <ion-button (click)=\"cambiarProductoSector(grupoEquipo)\">Producto predeterminado</ion-button>\r\n              </ion-item>\r\n            </ion-col>\r\n            <ion-col size=\"4.25\">\r\n              <p>{{grupoEquipo.plano?grupoEquipo.plano.name:\"Sin plano\"}}</p>\r\n            </ion-col>\r\n          </ion-row>\r\n          <ion-item lines=\"full\">\r\n            <ion-grid>\r\n              <ion-row>\r\n                <ion-col size=\"2\">\r\n                  <ion-label><b>Workstation</b></ion-label>\r\n                </ion-col>\r\n                <ion-col size=\"3\">\r\n                  <ion-label *ngIf=\"grupoEquipo?.equipos[0]?.id_servicio == 20\"><b>Producto predeterminado</b></ion-label>\r\n                </ion-col>\r\n                <ion-col size=\"2.5\">\r\n                  <ion-label><b>Servicio</b></ion-label>\r\n                </ion-col>\r\n                <ion-col size=\"1.5\">\r\n                  <ion-label><b>Codigo QR</b></ion-label>\r\n                </ion-col>\r\n                <ion-col size=\"2\">\r\n                  <ion-label></ion-label>\r\n                </ion-col>\r\n                <ion-col size=\"1\">\r\n                  <ion-label><b>Acciones</b></ion-label>\r\n                </ion-col>\r\n              </ion-row>\r\n            </ion-grid>\r\n          </ion-item>\r\n          <div *ngIf=\"(grupoEquipo.equipos.length == 0 || grupoEquipo.length == 0)\">\r\n            <ion-item>\r\n              <ion-label style=\"width:  100%; text-align: center;\">No se encontraron equipos</ion-label>\r\n            </ion-item>\r\n          </div>\r\n          <div *ngIf=\"(grupoEquipo.equipos.length > 0)\">\r\n            <div *ngFor=\"let equipo of grupoEquipo.equipos; let i = index\">\r\n              <ion-row class=\"equipos\" *ngIf=\"equipo.nombre_equipo != null\">\r\n                <ion-col size=\"2\" style=\"margin-top: 15px\">\r\n                  <ion-label>\r\n                    {{equipo.nombre}}\r\n                  </ion-label>\r\n                </ion-col>\r\n                <ion-col size=\"3\" style=\"margin-top: 15px\">\r\n                  <ion-label *ngIf=\"equipo.id_servicio == 20\">\r\n                    {{equipo.producto_predeterminado_nombre?equipo.producto_predeterminado_nombre:\"Sin producto\"}}\r\n                    <ion-icon color=\"primary\" slot=\"start\" name=\"create-outline\" (click)=\"elegirProducto(equipo)\"></ion-icon>\r\n                  </ion-label>\r\n                </ion-col>\r\n                <ion-col size=\"2.5\" style=\"margin-top: 15px\">\r\n                  <ion-label>{{equipo.nombre_servicio}}</ion-label>\r\n                </ion-col>\r\n                <ion-col size=\"1.5\">\r\n                  <ion-card style=\"width: 50px; margin-top: 0px;\">\r\n                    <div>\r\n                      <a  (click)=\"descargarQrEquipo(equipo)\">\r\n                        <img [src]='equipo.codigo_qr_equipo'  (click)=\"descargarQrEquipo(equipo)\">\r\n                      </a>\r\n                    </div>\r\n                  </ion-card>\r\n                </ion-col>\r\n                <ion-col size=\"2\">\r\n                  <ion-icon color=\"primary\" title=\"Descargar este QR\" style=\"margin-top:15px\" (click)=\"descargarQrEquipo(equipo)\" name=\"cloud-download-outline\"></ion-icon>\r\n                  <ion-icon color=\"primary\" title=\"Seleccionar ESTE QR para Imprimir\" style=\"margin-top:15px\" (click)=\"addmprimirQr(equipo, i, j)\" name=\"print-outline\"></ion-icon>\r\n                  <ion-icon *ngIf=\"showDeleteQr[j][i].show\" [title]=\"'Eliminar QR de la lista (' + showDeleteQr[j][i].count +')'\" style=\"margin-top:15px; color: red !important;\" (click)=\"deleteImprimirQr(equipo, i, j)\" name=\"print-outline\"></ion-icon>\r\n                </ion-col>\r\n                <ion-col size=\"1\">\r\n                  <ion-icon name=\"trash-outline\" color=\"danger\" style=\"margin-top:15px\" (click)=\"borrar_equipo(equipo,j,i)\"></ion-icon>\r\n                  <ion-icon color=\"primary\" name=\"create-outline\" style=\"padding-left: 5px;\" (click)=\"editName(equipo, grupoEquipo)\"></ion-icon> \r\n                </ion-col>\r\n\r\n\r\n              </ion-row>\r\n            </div>\r\n          </div>\r\n        </ion-grid>\r\n      </div>\r\n    </div>\r\n\r\n  </div>\r\n  <div *ngIf=\"sucursal\" style=\"margin-top: 10px;\">\r\n    <ion-item style=\"text-align: center;\" lines=\"none\">\r\n      <ion-label><b>Planos de la sucursal</b></ion-label>\r\n      <input style=\"visibility: hidden;\" id=\"inputUploadFile\" title=\" \" [disabled]=\"disabled\" type=\"file\" name=\"\" (change)=\"showFile($event.target.files)\">\r\n      <ion-icon slot=\"end\" name=\"add-circle-outline\" color=\"primary\" (click)=\"agregar_plano()\"></ion-icon>\r\n    </ion-item>\r\n    <div *ngFor=\"let plano of sucursal.planos\">\r\n      <ion-item button *ngIf=\"sucursal.planos.length > 0\">\r\n        <ion-icon (click)=\"openPdf(plano.url_imagen_plano)\" name=\"eye\" slot=\"start\"></ion-icon>\r\n        <ion-label (click)=\"openPdf(plano.url_imagen_plano)\">{{plano.name}}</ion-label>\r\n        <ion-icon slot=\"end\" style=\"color: red;\" name=\"trash-outline\" (click)=\"alert_eliminar_plano(plano.id_plano)\"></ion-icon>\r\n      </ion-item>\r\n\r\n    </div>\r\n    <ion-item button *ngIf=\"sucursal.planos.length == 0\">\r\n      <ion-label>No hay planos cargados</ion-label>\r\n    </ion-item>\r\n    <!-- <ion-slides pager=\"true\" style=\"background-color: secondary\">\r\n      <ion-slide *ngFor= \"let plano of sucursal.planos\">\r\n        <ion-card class=\"cardPlanos\">\r\n\r\n          <img src={{plano.url_imagen_plano}}  class=\"planos\">\r\n          <ion-button class=\"deletePlano\" style=\"position:absolute; right: 0%; bottom: 0%;\" (click)=\"alert_eliminar_plano(plano.id_plano)\">\r\n            <ion-icon style=\"color: red;\" name=\"trash-outline\" (click)=\"alert_eliminar_plano(plano.id_plano)\"></ion-icon>\r\n          </ion-button>\r\n        </ion-card>\r\n      </ion-slide>\r\n    </ion-slides> -->\r\n  </div>\r\n\r\n</ion-content>\r\n\r\n<ion-footer *ngIf=\"qrsToPrint.length > 0\">\r\n  <ion-toolbar color=\"primary\">\r\n    <ion-title>QR'S Seleccionados ({{qrsToPrint.length}})</ion-title>\r\n    <ion-buttons slot=\"end\">\r\n      <ion-button class=\"printButton\" (click)=\"printSelect()\">Imprimir</ion-button>\r\n      <ion-button class=\"printButtonCancel\" (click)=\"deletePrintSelect()\">Cancelar</ion-button>\r\n    </ion-buttons>\r\n  </ion-toolbar>\r\n</ion-footer>\r\n");
 
 /***/ }),
 
@@ -636,9 +636,10 @@ let AltaWorkstationPage = class AltaWorkstationPage {
         this.modalCtrl = modalCtrl;
         this.alertController = alertController;
         this.id_sucursal = this.navParams.get('id_sucursal');
-        this.id_equipo_grupo = this.navParams.get('id_equipo_grupo');
+        this.equipo_grupo = this.navParams.get('equipo_grupo');
     }
     ngOnInit() {
+        console.log(this.equipo_grupo);
         this.api_clientes.listado_productosServicio(20).subscribe((resp) => {
             console.log(resp);
             this.productos = resp.result;
@@ -653,47 +654,84 @@ let AltaWorkstationPage = class AltaWorkstationPage {
         });
     }
     alta_workstation() {
-        var data = null;
-        if (this.id_servicio == '20') {
-            if (this.id_servicio) {
-                this.object = { nombre_equipos: this.nombre_workstation, id_servicio: this.id_servicio, id_sucursal: this.id_sucursal, id_equipo_grupo: this.id_equipo_grupo, producto_predeterminado: Number(this.producto_predeterminado) };
-                console.log(this.object);
-                this.api_servicios.alta_workstation(this.object).subscribe((resp) => {
-                    console.log(resp.equipoCreado.insertId);
-                    data = { qr: 1, nombre_equipos: this.nombre_workstation, id_servicio: this.id_servicio, id_equipo: resp.equipoCreado.insertId, id_sucursal: this.id_sucursal, id_equipo_grupo: this.id_equipo_grupo, estado_servicio: 'alta', modificable: 0, producto_predeterminado: this.producto_predeterminado };
-                    this.modalCtrl.dismiss({
-                        'dismissed': true,
-                        data: data,
-                        id: resp.equipoCreado.insertId
-                    });
-                }), (error => {
-                    console.log(error);
-                });
+        return Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"])(this, void 0, void 0, function* () {
+            var data = null;
+            if (this.id_servicio == '20') {
+                if (this.id_servicio) {
+                    var equipos_zona = this.equipo_grupo.equipos.filter(equipo => equipo.zona == this.zona_workstation);
+                    if (equipos_zona.every(equipo => equipo.nro_equipo == this.nro_workstation)) {
+                        const alert = yield this.alertController.create({
+                            header: 'Error',
+                            message: 'Ya existe un equipo con ese numero en la zona.',
+                            buttons: ['OK']
+                        });
+                        yield alert.present();
+                    }
+                    else {
+                        if (!this.zona_workstation) {
+                            this.zona_workstation = this.nombre_workstation;
+                        }
+                        if (!this.nombre_workstation) {
+                            this.nombre_workstation = this.zona_workstation;
+                        }
+                        this.object = { nombre_equipos: this.nombre_workstation, id_servicio: this.id_servicio, id_sucursal: this.id_sucursal, id_equipo_grupo: this.equipo_grupo.id_equipo_grupo, producto_predeterminado: Number(this.producto_predeterminado), zona: this.zona_workstation, nro_equipo: this.nro_workstation };
+                        console.log(this.object);
+                        this.api_servicios.alta_workstation(this.object).subscribe((resp) => {
+                            console.log(resp.equipoCreado.insertId);
+                            data = { qr: 1, nombre_equipos: this.nombre_workstation, id_servicio: this.id_servicio, id_equipo: resp.equipoCreado.insertId, id_sucursal: this.id_sucursal, id_equipo_grupo: this.equipo_grupo.id_equipo_grupo, estado_servicio: 'alta', modificable: 0, producto_predeterminado: this.producto_predeterminado };
+                            this.modalCtrl.dismiss({
+                                'dismissed': true,
+                                data: data,
+                                id: resp.equipoCreado.insertId
+                            });
+                        }), (error => {
+                            console.log(error);
+                        });
+                    }
+                }
+                else {
+                    this.presentAlert();
+                }
             }
             else {
-                this.presentAlert();
+                if (this.id_servicio) {
+                    var equipos_zona = this.equipo_grupo.equipos.filter(equipo => equipo.zona == this.zona_workstation);
+                    if (equipos_zona.some(equipo => equipo.nro_equipo == this.nro_workstation)) {
+                        const alert = yield this.alertController.create({
+                            header: 'Error',
+                            message: 'Ya existe un equipo con ese numero en la zona.',
+                            buttons: ['OK']
+                        });
+                        yield alert.present();
+                    }
+                    else {
+                        if (!this.zona_workstation) {
+                            this.zona_workstation = this.nombre_workstation;
+                        }
+                        if (!this.nombre_workstation) {
+                            this.nombre_workstation = this.zona_workstation;
+                        }
+                        this.object = { nombre_equipos: this.nombre_workstation, id_servicio: this.id_servicio, id_sucursal: this.id_sucursal, id_equipo_grupo: this.equipo_grupo.id_equipo_grupo, zona: this.zona_workstation, nro_equipo: this.nro_workstation };
+                        console.log(this.object);
+                        // data = this.object
+                        this.api_servicios.alta_workstation(this.object).subscribe((resp) => {
+                            console.log(resp.equipoCreado.insertId);
+                            data = { qr: 1, nombre_equipos: this.nombre_workstation, id_servicio: this.id_servicio, id_equipo: resp.equipoCreado.insertId, id_sucursal: this.id_sucursal, id_equipo_grupo: this.equipo_grupo.id_equipo_grupo, estado_servicio: 'alta', modificable: 0 };
+                            this.modalCtrl.dismiss({
+                                'dismissed': true,
+                                data: data,
+                                id: resp.equipoCreado.insertId
+                            });
+                        }), (error => {
+                            console.log(error);
+                        });
+                    }
+                }
+                else {
+                    this.presentAlert();
+                }
             }
-        }
-        else {
-            if (this.id_servicio) {
-                this.object = { nombre_equipos: this.nombre_workstation, id_servicio: this.id_servicio, id_sucursal: this.id_sucursal, id_equipo_grupo: this.id_equipo_grupo };
-                // data = this.object
-                this.api_servicios.alta_workstation(this.object).subscribe((resp) => {
-                    console.log(resp.equipoCreado.insertId);
-                    data = { qr: 1, nombre_equipos: this.nombre_workstation, id_servicio: this.id_servicio, id_equipo: resp.equipoCreado.insertId, id_sucursal: this.id_sucursal, id_equipo_grupo: this.id_equipo_grupo, estado_servicio: 'alta', modificable: 0 };
-                    this.modalCtrl.dismiss({
-                        'dismissed': true,
-                        data: data,
-                        id: resp.equipoCreado.insertId
-                    });
-                }), (error => {
-                    console.log(error);
-                });
-            }
-            else {
-                this.presentAlert();
-            }
-        }
+        });
     }
     presentAlert() {
         return Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"])(this, void 0, void 0, function* () {
@@ -787,14 +825,14 @@ let VerSucursalPage = class VerSucursalPage {
     ngOnInit() {
         this.actualizar_informacion(false);
     }
-    altaWorkstation(id_equipo_grupo, j) {
+    altaWorkstation(equipo_grupo, j) {
         return Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"])(this, void 0, void 0, function* () {
             const modal = yield this.modalController.create({
                 component: _alta_workstation_alta_workstation_page__WEBPACK_IMPORTED_MODULE_4__["AltaWorkstationPage"],
                 cssClass: 'modal-chiquito',
                 componentProps: {
                     'id_sucursal': this.id_sucursal,
-                    id_equipo_grupo: id_equipo_grupo
+                    equipo_grupo: equipo_grupo
                 }
             });
             modal.onDidDismiss().then((data) => {
@@ -834,6 +872,7 @@ let VerSucursalPage = class VerSucursalPage {
                         text: 'Crear',
                         handler: (input) => {
                             this.altaGrupoWorkstation(input.nombre);
+                            this.actualizar_informacion(true);
                         }
                     }
                 ]
@@ -891,58 +930,6 @@ let VerSucursalPage = class VerSucursalPage {
         this.api_sucursales.listado_productosServicio(20).subscribe((resp) => {
             console.log(resp);
             this.productos = resp.result;
-            this.api_sucursales.listado_grupoWorkstations(this.id_sucursal).subscribe((data) => {
-                console.log('Grupo1', data.result);
-                var flag = 0;
-                var array = [];
-                var i = 0;
-                var first = true;
-                if (data.result != undefined) {
-                    data.result.forEach((element) => {
-                        if (element.id_equipo_grupo == flag) {
-                            // console.log(element.id_equipo_grupo, ' ' ,flag)
-                            this.showDeleteQr[i].push({ show: false, count: 0 });
-                            if (element.producto_predeterminado) {
-                                const product = this.productos.find(producto => producto.id_producto == element.producto_predeterminado);
-                                element.producto_predeterminado_nombre = product.nombre_producto + ' - ' + product.tipo_producto;
-                            }
-                            array[i].equipos.push({ id_equipo: element.id_equipo, id_servicio: element.id_servicio, id_sucursal: element.id_sucursal, nombre_equipo: element.nombre_equipo, codigo_qr_equipo: element.codigo_qr_equipo, estado_servicio: element.estado_servicio, nombre_servicio: element.nombre_servicio, producto_predeterminado: element.producto_predeterminado, producto_predeterminado_nombre: element.producto_predeterminado_nombre });
-                            first = false;
-                        }
-                        else {
-                            if (!first) {
-                                i++;
-                            }
-                            flag = element.id_equipo_grupo;
-                            array.push({ nombre_equipo_grupo: element.nombre_equipo_grupo, id_equipo_grupo: element.id_equipo_grupo, equipos: [] });
-                            this.showDeleteQr.push([]);
-                            if (element.producto_predeterminado) {
-                                const product = this.productos.find(producto => producto.id_producto == element.producto_predeterminado);
-                                element.producto_predeterminado_nombre = product.nombre_producto + ' - ' + product.tipo_producto;
-                            }
-                            array[i].equipos.push({ id_equipo: element.id_equipo, id_servicio: element.id_servicio, id_sucursal: element.id_sucursal, nombre_equipo: element.nombre_equipo, codigo_qr_equipo: element.codigo_qr_equipo, estado_servicio: element.estado_servicio, nombre_servicio: element.nombre_servicio, producto_predeterminado: element.producto_predeterminado, producto_predeterminado_nombre: element.producto_predeterminado_nombre });
-                            this.showDeleteQr[i].push({ show: false, count: 0 });
-                            first = false;
-                        }
-                    });
-                    console.log(this.showDeleteQr);
-                    this.grupoWorkStation = array;
-                    console.log('grupo2: ', this.grupoWorkStation);
-                    for (let grupoEquipo of this.grupoWorkStation) {
-                        grupoEquipo.equipos.sort(function (a, b) {
-                            if (a.nombre_equipo > b.nombre_equipo) {
-                                return 1;
-                            }
-                            if (a.nombre_equipo < b.nombre_equipo) {
-                                return -1;
-                            }
-                            // a must be equal to b
-                            return 0;
-                        });
-                    }
-                }
-                this.loadingEquipos = false;
-            });
         });
         this.loadingEquipos = true;
         this.api_sucursales.informacion_sucursal(this.id_sucursal).subscribe(data => {
@@ -955,6 +942,7 @@ let VerSucursalPage = class VerSucursalPage {
                 Object.defineProperty(this.sucursal.planos[index], 'name', { value: this.sucursal.planos[index].url_imagen_plano.slice(27) });
             }
             console.log('sucursal: ', this.sucursal);
+            console.log('sucursal: ', this.sucursal);
             if (loading) {
                 this.loadingController.dismiss();
             }
@@ -963,6 +951,73 @@ let VerSucursalPage = class VerSucursalPage {
                 this.loadingController.dismiss();
             }
             console.log(error);
+        });
+        this.api_sucursales.listado_grupoWorkstations(this.id_sucursal).subscribe((data) => {
+            console.log('Grupo1', data.result);
+            var flag = 0;
+            var array = [];
+            var i = 0;
+            var first = true;
+            if (data.result != undefined) {
+                data.result.forEach((element) => {
+                    if (element.zona == element.nombre_equipo) {
+                        element.nombre = element.nombre_equipo + ' - ' + element.nro_equipo;
+                    }
+                    else {
+                        element.nombre = element.nombre_equipo + ' - ' + element.zona + ' - ' + element.nro_equipo;
+                    }
+                    if (element.id_equipo_grupo == flag) {
+                        // console.log(element.id_equipo_grupo, ' ' ,flag)
+                        this.showDeleteQr[i].push({ show: false, count: 0 });
+                        if (element.producto_predeterminado) {
+                            const product = this.productos.find(producto => producto.id_producto == element.producto_predeterminado);
+                            element.producto_predeterminado_nombre = product.nombre_producto + ' - ' + product.tipo_producto;
+                        }
+                        array[i].equipos.push({ id_equipo: element.id_equipo, id_servicio: element.id_servicio, id_sucursal: element.id_sucursal, nombre_equipo: element.nombre_equipo, codigo_qr_equipo: element.codigo_qr_equipo, estado_servicio: element.estado_servicio, nombre_servicio: element.nombre_servicio, producto_predeterminado: element.producto_predeterminado, producto_predeterminado_nombre: element.producto_predeterminado_nombre, zona: element.zona, nro_equipo: element.nro_equipo, nombre: element.nombre });
+                        first = false;
+                    }
+                    else {
+                        if (!first) {
+                            i++;
+                        }
+                        flag = element.id_equipo_grupo;
+                        array.push({ nombre_equipo_grupo: element.nombre_equipo_grupo, id_equipo_grupo: element.id_equipo_grupo, equipos: [], plano: this.sucursal.planos.find(plano => plano.id_plano == element.id_plano) });
+                        this.showDeleteQr.push([]);
+                        if (element.producto_predeterminado) {
+                            const product = this.productos.find(producto => producto.id_producto == element.producto_predeterminado);
+                            element.producto_predeterminado_nombre = product.nombre_producto + ' - ' + product.tipo_producto;
+                        }
+                        array[i].equipos.push({ id_equipo: element.id_equipo, id_servicio: element.id_servicio, id_sucursal: element.id_sucursal, nombre_equipo: element.nombre_equipo, codigo_qr_equipo: element.codigo_qr_equipo, estado_servicio: element.estado_servicio, nombre_servicio: element.nombre_servicio, producto_predeterminado: element.producto_predeterminado, producto_predeterminado_nombre: element.producto_predeterminado_nombre, zona: element.zona, nro_equipo: element.nro_equipo, nombre: element.nombre });
+                        this.showDeleteQr[i].push({ show: false, count: 0 });
+                        first = false;
+                    }
+                });
+                console.log(this.showDeleteQr);
+                this.grupoWorkStation = array;
+                console.log('grupo2: ', this.grupoWorkStation);
+                for (let grupoEquipo of this.grupoWorkStation) {
+                    grupoEquipo.equipos.sort(function (a, b) {
+                        var aNoNumber = a.nombre.split(' - ');
+                        aNoNumber.pop();
+                        aNoNumber = aNoNumber.join(' - ');
+                        var bNoNumber = b.nombre.split(' - ');
+                        bNoNumber.pop();
+                        bNoNumber = bNoNumber.join(' - ');
+                        if (aNoNumber > bNoNumber) {
+                            return 1;
+                        }
+                        if (aNoNumber < bNoNumber) {
+                            return -1;
+                        }
+                        if (bNoNumber == aNoNumber) {
+                            return (a.nro_equipo) - (b.nro_equipo);
+                        }
+                        // a must be equal to b
+                        return 0;
+                    });
+                }
+            }
+            this.loadingEquipos = false;
         });
         // this.api_sucursales.listado_workstations(this.id_sucursal).subscribe(data => {
         //   console.log(data)
@@ -973,14 +1028,25 @@ let VerSucursalPage = class VerSucursalPage {
         //   console.log(error)
         // })
     }
-    editName(equipo) {
+    editName(equipo, grupoEquipo) {
         return Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"])(this, void 0, void 0, function* () {
             const alert = yield this.alertController.create({
-                header: 'Modificar Nombre',
+                header: 'Modificar',
                 inputs: [
                     {
                         type: 'textarea',
-                        value: equipo.nombre_equipo
+                        value: equipo.nombre_equipo,
+                        placeholder: 'Nombre'
+                    },
+                    {
+                        type: 'textarea',
+                        value: equipo.zona,
+                        placeholder: 'Zona'
+                    },
+                    {
+                        type: 'number',
+                        value: equipo.nro_equipo,
+                        placeholder: 'Numero'
                     }
                 ],
                 buttons: [
@@ -991,20 +1057,33 @@ let VerSucursalPage = class VerSucursalPage {
                     {
                         text: 'Guardar',
                         handler: (data) => {
-                            this.loadingController.create({ message: "Guardando Cambios" }).then(loader => {
+                            console.log(data);
+                            this.loadingController.create({ message: "Guardando Cambios" }).then((loader) => Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"])(this, void 0, void 0, function* () {
                                 loader.present();
-                                equipo.codigo_qr_equipo = null;
-                                equipo.nombre_equipo = data[0];
-                                console.log(equipo);
-                                this.api_visitas.actualizar_equipo(equipo).then((resp) => {
-                                    console.log(resp.equipoCreado.url);
-                                    equipo.codigo_qr_equipo = resp.equipoCreado.url;
+                                var newEquipo = JSON.parse(JSON.stringify(equipo));
+                                newEquipo.nombre_equipo = data[0];
+                                newEquipo.zona = data[1];
+                                newEquipo.nro_equipo = data[2];
+                                console.log("EQUIPO", grupoEquipo);
+                                if (grupoEquipo.equipos.some(equip => (equip.nro_equipo == newEquipo.nro_equipo) && (equip.zona == newEquipo.zona))) {
+                                    const alert = yield this.alertController.create({
+                                        header: 'Error',
+                                        message: 'Ya existe un equipo con ese numero en la zona.',
+                                        buttons: ['OK']
+                                    });
+                                    yield alert.present();
                                     loader.dismiss();
-                                }).catch(err => {
-                                    console.log(err);
-                                    loader.dismiss();
-                                });
-                            });
+                                }
+                                else {
+                                    this.api_visitas.actualizar_equipo(newEquipo).then((resp) => {
+                                        loader.dismiss();
+                                        console.log(resp);
+                                    }).catch(err => {
+                                        console.log(err);
+                                        loader.dismiss();
+                                    });
+                                }
+                            }));
                         }
                     }
                 ]
@@ -1263,7 +1342,7 @@ let VerSucursalPage = class VerSucursalPage {
     }
     test($event) {
         console.warn($event);
-        // window.open('http://192.168.0.71:3000/getZip')
+        // window.open('http://157.230.90.222:3000/getZip')
     }
     descargar() {
     }
@@ -1271,7 +1350,7 @@ let VerSucursalPage = class VerSucursalPage {
         // console.warn(1)
         var link = document.createElement("a");
         link.download = this.sucursal.sucursal[0].id_sucursal + ".png";
-        link.href = "http://192.168.0.71:3000/getfile/sucursales/" + this.sucursal.sucursal[0].id_sucursal;
+        link.href = "http://157.230.90.222:3000/getfile/sucursales/" + this.sucursal.sucursal[0].id_sucursal;
         link.click();
     }
     descargarQrEquipo(equipo) {
@@ -1279,7 +1358,7 @@ let VerSucursalPage = class VerSucursalPage {
         // console.warn(equipo.id_equipo)
         var link = document.createElement("a");
         link.download = equipo.id_equipo + ".png";
-        link.href = "http://192.168.0.71:3000/getfile/equipos/" + equipo.id_equipo;
+        link.href = "http://157.230.90.222:3000/getfile/equipos/" + equipo.id_equipo;
         link.click();
     }
     descargarQrThisWorkstation(grupoEquipo) {
@@ -1296,7 +1375,7 @@ let VerSucursalPage = class VerSucursalPage {
         }
         var link = document.createElement("a");
         link.download = "qrs.png";
-        link.href = "http://192.168.0.71:3000/getZip?type=equipos&name=" + grupoEquipo.nombre_equipo_grupo + "&data=" + ids;
+        link.href = "http://157.230.90.222:3000/getZip?type=equipos&name=" + grupoEquipo.nombre_equipo_grupo + "&data=" + ids;
         link.click();
     }
     descargarAllQrSucursal() {
@@ -1319,7 +1398,7 @@ let VerSucursalPage = class VerSucursalPage {
         }
         var link = document.createElement("a");
         link.download = "qrs.png";
-        link.href = "http://192.168.0.71:3000/getZip?type=all&name=" + this.sucursal.sucursal[0].razon_social_sucursal + "&data=" + ids;
+        link.href = "http://157.230.90.222:3000/getZip?type=all&name=" + this.sucursal.sucursal[0].razon_social_sucursal + "&data=" + ids;
         link.click();
     }
     descargarQrAllWorkstations() {
@@ -1341,7 +1420,7 @@ let VerSucursalPage = class VerSucursalPage {
         }
         var link = document.createElement("a");
         link.download = "qrs.png";
-        link.href = "http://192.168.0.71:3000/getZip?type=equipos&name=equipos_" + this.sucursal.sucursal[0].razon_social_sucursal + "&data=" + ids;
+        link.href = "http://157.230.90.222:3000/getZip?type=equipos&name=equipos_" + this.sucursal.sucursal[0].razon_social_sucursal + "&data=" + ids;
         link.click();
     }
     elegirProducto(equipo) {
@@ -1385,11 +1464,59 @@ let VerSucursalPage = class VerSucursalPage {
                                 var aux;
                                 aux = resp;
                                 aux = aux.equipoCreado.retorno;
-                                equipo.producto_predeterminado = this.productos.find(producto => producto.id_producto == aux.producto_predeterminado).id_producto;
-                                equipo.producto_predeterminado_nombre = this.productos.find(producto => producto.id_producto == aux.producto_predeterminado).nombre_producto + ' - ' + this.productos.find(producto => producto.id_producto == aux.producto_predeterminado).tipo_producto;
-                                //this.actualizar_informacion(false);
+                                if (aux.producto_predeterminado) {
+                                    equipo.producto_predeterminado = this.productos.find(producto => producto.id_producto == aux.producto_predeterminado).id_producto;
+                                    equipo.producto_predeterminado_nombre = this.productos.find(producto => producto.id_producto == aux.producto_predeterminado).nombre_producto + ' - ' + this.productos.find(producto => producto.id_producto == aux.producto_predeterminado).tipo_producto;
+                                }
+                                else {
+                                    equipo.producto_predeterminado = null;
+                                    equipo.producto_predeterminado_nombre = null;
+                                }
+                                // this.actualizar_informacion(false);
                             }).catch(err => {
                                 console.error(err);
+                            });
+                        }
+                    }
+                ]
+            });
+            yield alert.present();
+        });
+    }
+    elegirPlano(grupoEquipo) {
+        return Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"])(this, void 0, void 0, function* () {
+            var input = [];
+            for (let plano of this.sucursal.planos) {
+                input.push({
+                    label: plano.name,
+                    value: plano.id_plano,
+                    type: "radio"
+                });
+            }
+            input.push({
+                label: 'Sin Plano',
+                value: null,
+                type: "radio"
+            });
+            console.log(input);
+            const alert = yield this.alertController.create({
+                subHeader: grupoEquipo.nombre_equipo_grupo,
+                header: 'Elegir plano',
+                inputs: input,
+                cssClass: 'wide-alert',
+                buttons: [
+                    {
+                        text: 'Cancelar',
+                        role: 'cancel',
+                        cssClass: 'secondary'
+                    },
+                    {
+                        text: 'Aceptar',
+                        handler: (data) => {
+                            grupoEquipo.id_plano = data;
+                            this.api_visitas.setPlano(grupoEquipo).subscribe(resp => {
+                                console.log(resp);
+                                this.actualizar_informacion(false);
                             });
                         }
                     }

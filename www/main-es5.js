@@ -138,7 +138,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
     /* harmony default export */
 
 
-    __webpack_exports__["default"] = "<ion-app>\r\n  <ion-router-outlet></ion-router-outlet>\r\n  <!-- <div style=\"color: red; padding: 10px; border: solid red 1px; position: fixed;top: 0px; left: 0px;font-weight: bold;\">\r\n    Version de desarrollo\r\n  </div> -->\r\n</ion-app>\r\n";
+    __webpack_exports__["default"] = "<ion-app>\r\n  <ion-router-outlet></ion-router-outlet>\r\n  <div style=\"color: red; padding: 10px; border: solid red 1px; position: fixed;top: 0px; left: 0px;font-weight: bold;\">\r\n    Version de desarrollo\r\n  </div>\r\n</ion-app>\r\n";
     /***/
   },
 
@@ -178,7 +178,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
     /* harmony default export */
 
 
-    __webpack_exports__["default"] = "<ion-header>\n  <ion-toolbar color=\"primary\">\n    <ion-title>{{servicios?servicios[0].nombre_servicio:null}}</ion-title>\n  </ion-toolbar>\n</ion-header>\n<ion-content>\n  <ion-item *ngFor=\"let servicio of servicios\" (click)=\"editarServicio(servicio.id_formulario, servicio.nombre_equipo)\">\n    <ion-label>{{servicio.nombre_equipo}}</ion-label>\n  </ion-item>\n  <ion-row>\n      <ion-col class=\"ion-text-center\">\n        <div>\n         <ion-button (click)=\"modalDismiss()\" style=\"width: 50%\" class = \"button\">Volver</ion-button>\n        </div>\n      </ion-col>\n    </ion-row>\n</ion-content>";
+    __webpack_exports__["default"] = "<ion-header>\r\n  <ion-toolbar color=\"primary\">\r\n    <ion-title>{{servicios?servicios[0]?.nombre_servicio:null}}</ion-title>\r\n  </ion-toolbar>\r\n</ion-header>\r\n<ion-content>\r\n  <div *ngIf=\"servicios?.length == 0\" style=\"text-align: center;\">\r\n    <ion-spinner></ion-spinner>\r\n  </div>\r\n  <div *ngIf=\"servicios?.length != 0\">\r\n    <ion-item *ngFor=\"let servicio of servicios\" (click)=\"editarServicio(servicio.id_formulario, servicio.nombre_equipo)\">\r\n      <ion-label>{{servicio.nombre_equipo}} {{servicio.zona}} - {{servicio.nro_equipo}}{{(servicio.tecnico.nombre_tecnico)?' - ' + servicio.tecnico.nombre_tecnico + ' ' + servicio.tecnico.apellido_tecnico:''}}{{(servicio?.respuestas[0]?.tapado == 0)?' - (QR)':''}}</ion-label>\r\n    </ion-item>\r\n    <ion-row>\r\n      <ion-col class=\"ion-text-center\">\r\n        <div>\r\n         <ion-button (click)=\"modalDismiss()\" style=\"width: 50%\" class = \"button\">Volver</ion-button>\r\n        </div>\r\n      </ion-col>\r\n    </ion-row>\r\n  </div>\r\n</ion-content>";
     /***/
   },
 
@@ -753,7 +753,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
         _classCallCheck(this, ServicioLoginService);
 
         this.http = http;
-        this.apiDir = "http://192.168.0.71:3000";
+        this.apiDir = "http://157.230.90.222:3000";
         this.requestOptions = {
           headers: new _angular_common_http__WEBPACK_IMPORTED_MODULE_2__["HttpHeaders"]({
             'Content-Type': 'application/json',
@@ -1212,6 +1212,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
         this.apiServicios = apiServicios;
         this.apiVisitas = apiVisitas;
         this.modalController = modalController;
+        this.servicios = [];
       }
 
       _createClass(VerServicioVisitaComponent, [{
@@ -1222,38 +1223,103 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
           this.id_servicio = this.navParams.get('id_servicio');
           var aux = [];
           new Promise(function (resolve, reject) {
-            var _loop4 = function _loop4(index) {
-              var servicio = _this7.navParams.get('visita').servicios[index];
+            return Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"])(_this7, void 0, void 0, /*#__PURE__*/regeneratorRuntime.mark(function _callee() {
+              var index, servicio, resp, response, response2;
+              return regeneratorRuntime.wrap(function _callee$(_context) {
+                while (1) {
+                  switch (_context.prev = _context.next) {
+                    case 0:
+                      index = 0;
 
-              if ((servicio.id_servicio == 20 || servicio.id_servicio == 22) && servicio.id_servicio == _this7.id_servicio) {
-                _this7.apiVisitas.getRespuestas(servicio.id_formulario).then(function (resp) {
-                  servicio.respuestas = resp.respuestas;
-
-                  _this7.apiVisitas.getEquipo(servicio.respuestas[0].id_equipo).then(function (response) {
-                    if (response.result) {
-                      if (response.result[0]) {
-                        servicio.nombre_equipo = response.result[0].nombre_equipo;
+                    case 1:
+                      if (!(index < this.navParams.get('visita').servicios.length)) {
+                        _context.next = 25;
+                        break;
                       }
-                    }
-                  });
-                })["catch"](function (err) {
-                  console.error(err);
-                });
 
-                aux.push(servicio);
-              }
+                      servicio = this.navParams.get('visita').servicios[index];
+                      console.log('I', index);
 
-              if (index == _this7.navParams.get('visita').servicios.length - 1) {
-                resolve('');
-              }
-            };
+                      if (!((servicio.id_servicio == 20 || servicio.id_servicio == 22) && servicio.id_servicio == this.id_servicio)) {
+                        _context.next = 21;
+                        break;
+                      }
 
-            for (var index = 0; index < _this7.navParams.get('visita').servicios.length; index++) {
-              _loop4(index);
-            }
+                      _context.next = 7;
+                      return this.apiVisitas.getRespuestas(servicio.id_formulario);
+
+                    case 7:
+                      resp = _context.sent;
+                      servicio.respuestas = resp;
+                      servicio.respuestas = servicio.respuestas.respuestas;
+                      _context.next = 12;
+                      return this.apiVisitas.getEquipo(servicio.respuestas[0].id_equipo);
+
+                    case 12:
+                      response = _context.sent;
+                      response2 = response;
+
+                      if (index == 100) {
+                        console.warn(response2);
+                      }
+
+                      if (response2.result) {
+                        if (response2.result[0]) {
+                          servicio.nombre_equipo = response2.result[0].nombre_equipo;
+                          servicio.zona = response2.result[0].zona;
+                          servicio.nro_equipo = response2.result[0].nro_equipo;
+                        }
+                      }
+
+                      aux.push(servicio);
+                      console.log(index == this.navParams.get('visita').servicios.length - 1);
+
+                      if (index == this.navParams.get('visita').servicios.length - 1) {
+                        console.log("CERRO");
+                        resolve('');
+                      }
+
+                      _context.next = 22;
+                      break;
+
+                    case 21:
+                      if (index == this.navParams.get('visita').servicios.length - 1) {
+                        console.log("CERRO");
+                        resolve('');
+                      }
+
+                    case 22:
+                      index++;
+                      _context.next = 1;
+                      break;
+
+                    case 25:
+                    case "end":
+                      return _context.stop();
+                  }
+                }
+              }, _callee, this);
+            }));
           }).then(function () {
             _this7.servicios = aux;
             console.log(_this7.servicios);
+
+            _this7.servicios.sort(function (a, b) {
+              if (a.nombre_equipo > b.nombre_equipo) {
+                return 1;
+              } else if (b.nombre_equipo > a.nombre_equipo) {
+                return -1;
+              } else {
+                if (a.zona > b.zona) {
+                  return 1;
+                } else if (b.zona > a.zona) {
+                  return -1;
+                } else {
+                  console.log(a.zona, b.zona);
+                  return a.nro_equipo - b.nro_equipo;
+                }
+              }
+            });
           })["catch"](function (err) {
             console.error(err);
           });
@@ -1264,13 +1330,13 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
       }, {
         key: "editarServicio",
         value: function editarServicio(id_formulario, equipo) {
-          return Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"])(this, void 0, void 0, /*#__PURE__*/regeneratorRuntime.mark(function _callee() {
+          return Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"])(this, void 0, void 0, /*#__PURE__*/regeneratorRuntime.mark(function _callee2() {
             var modal;
-            return regeneratorRuntime.wrap(function _callee$(_context) {
+            return regeneratorRuntime.wrap(function _callee2$(_context2) {
               while (1) {
-                switch (_context.prev = _context.next) {
+                switch (_context2.prev = _context2.next) {
                   case 0:
-                    _context.next = 2;
+                    _context2.next = 2;
                     return this.modalController.create({
                       component: _editar_visita_editar_visita_component__WEBPACK_IMPORTED_MODULE_5__["EditarVisitaComponent"],
                       componentProps: {
@@ -1282,16 +1348,16 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
                     });
 
                   case 2:
-                    modal = _context.sent;
-                    _context.next = 5;
+                    modal = _context2.sent;
+                    _context2.next = 5;
                     return modal.present();
 
                   case 5:
                   case "end":
-                    return _context.stop();
+                    return _context2.stop();
                 }
               }
-            }, _callee, this);
+            }, _callee2, this);
           }));
         }
       }, {
@@ -1377,7 +1443,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
         _classCallCheck(this, ApiServiciosService);
 
         this.http = http;
-        this.apiDir = "http://192.168.0.71:3000";
+        this.apiDir = "http://157.230.90.222:3000";
         this.requestOptions = {
           headers: new _angular_common_http__WEBPACK_IMPORTED_MODULE_2__["HttpHeaders"]({
             'Content-Type': 'application/json',
@@ -1701,7 +1767,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
         _classCallCheck(this, ApiVisitasService);
 
         this.http = http;
-        this.apiDir = "http://192.168.0.71:3000";
+        this.apiDir = "http://157.230.90.222:3000";
         this.requestOptions = {
           headers: new _angular_common_http__WEBPACK_IMPORTED_MODULE_2__["HttpHeaders"]({
             'Content-Type': 'application/json',
@@ -1817,6 +1883,11 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
           });
         }
       }, {
+        key: "setPlano",
+        value: function setPlano(parametros) {
+          return this.http.post(this.apiDir + '/servicios/gruposEquipos/plano', parametros, this.requestOptions);
+        }
+      }, {
         key: "pdfEstadisticas",
         value: function pdfEstadisticas(parametros) {
           return this.http.post(this.apiDir + '/pdf/stats-pdf', parametros, this.requestOptions);
@@ -1896,7 +1967,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
       return version;
     });
 
-    var version = '0.0.7';
+    var version = '0.0.8';
     /***/
   },
 
