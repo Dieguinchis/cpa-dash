@@ -74,7 +74,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
         _classCallCheck(this, ApiClientesService);
 
         this.http = http;
-        this.apiDir = "http://157.230.90.222:3001";
+        this.apiDir = "http://192.168.0.71:3000";
         this.requestOptions = {
           headers: new _angular_common_http__WEBPACK_IMPORTED_MODULE_2__["HttpHeaders"]({
             'Content-Type': 'application/json',
@@ -504,7 +504,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
             }
           }
         };
-        this.url = "http://157.230.90.222:3001/public/pdfs/informe .pdf";
+        this.url = "http://192.168.0.71:3000/public/pdfs/informe .pdf";
       }
 
       _createClass(EstadisticasPage, [{

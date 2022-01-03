@@ -69,15 +69,32 @@
     </ion-item>
   </ion-toolbar>
   <ion-toolbar *ngIf="filtro_desratizacion">
-    <ion-col size="12" class="ion-no-padding">
-      <ion-item lines="none">
-        <ion-label position="fixed">Productos</ion-label>
-        <ion-select (ionChange)="productosChange()"  [interfaceOptions]="interfaceOption" [(ngModel)]="productosFiltrados" multiple>
-          <ion-select-option *ngFor="let producto of productos" [value]="producto.id_producto">{{producto.nombre_producto}} - {{producto.tipo_producto}}</ion-select-option>
-          <ion-select-option [value]="'all'">Todos</ion-select-option>
-        </ion-select>
-      </ion-item>
-    </ion-col>
+    <ion-row>
+      <ion-col size="6" class="ion-no-padding">
+        <ion-item lines="none">
+          <ion-label position="fixed">Productos</ion-label>
+          <ion-select (ionChange)="productosChange()"  [interfaceOptions]="interfaceOption" [(ngModel)]="productosFiltrados" multiple>
+            <ion-select-option *ngFor="let producto of productos" [value]="producto.id_producto">{{producto.nombre_producto}} - {{producto.tipo_producto}}</ion-select-option>
+            <ion-select-option [value]="'all'">Todos</ion-select-option>
+          </ion-select>
+        </ion-item>
+      </ion-col>
+      <ion-col size="6" class="ion-no-padding">
+        <ion-item lines="none">
+          <ion-label position="fixed">Campos Grafico de barra</ion-label>
+          <ion-select (ionChange)="graficoBarrasChange()"  [interfaceOptions]="interfaceOption" [(ngModel)]="graficoBarra" multiple>
+            <ion-select-option [value]="'Capturas'">Capturas</ion-select-option>
+            <ion-select-option [value]="'Consumo'">Consumo</ion-select-option>
+            <ion-select-option [value]="'Faltante'">Faltante</ion-select-option>
+            <ion-select-option [value]="'Intacto'">Intacto</ion-select-option>
+            <ion-select-option [value]="'malEstado'">Mal estado</ion-select-option>
+            <ion-select-option [value]="'Nuevo'">Nuevo</ion-select-option>
+            <ion-select-option [value]="'Tapado'">Tapado</ion-select-option>
+            <ion-select-option [value]="'all'">Todos</ion-select-option>
+          </ion-select>
+        </ion-item>
+      </ion-col>
+    </ion-row>
   </ion-toolbar>
 </ion-header>
 
@@ -197,7 +214,7 @@
       </ion-col>
     </ion-item>
     <ion-item *ngIf="filtroUtilizado[0]">
-      <ion-label ><b>Promedio mediciones UV:</b> {{promedioUV?promedioUV:'No hay mediciones'}}</ion-label>
+      <ion-label ><b>Promedio Conteo/Saturacion UV:</b> {{promedioUV?promedioUV:'No hay mediciones'}}</ion-label>
     </ion-item>
     <ion-item *ngIf="(filtroUtilizado[1]) && (productosUtilizados?.includes(productos[0].id_producto) || productosUtilizados?.length == 0)">
       <ion-label><b>Pegamento - Pegamento:</b></ion-label>
