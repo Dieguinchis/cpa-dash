@@ -338,7 +338,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
         _classCallCheck(this, AltaClientesApiService);
 
         this.http = http;
-        this.apiDir = "http://192.168.0.71:3000";
+        this.apiDir = "http://157.230.90.222:3000";
         this.requestOptions = {
           headers: new _angular_common_http__WEBPACK_IMPORTED_MODULE_2__["HttpHeaders"]({
             'Content-Type': 'application/json',
@@ -350,6 +350,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
       _createClass(AltaClientesApiService, [{
         key: "alta_cliente",
         value: function alta_cliente(datos) {
+          console.log(this.apiDir);
           return this.http.post(this.apiDir + '/clientes/crear', datos, this.requestOptions);
         }
       }]);

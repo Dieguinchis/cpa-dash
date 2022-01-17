@@ -578,9 +578,10 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
       }, {
         key: "filtroHoy",
         value: function filtroHoy() {
-          var aux = new Date().getFullYear().toString() + '-' + (new Date().getMonth() + 1).toString() + '-' + (new Date().getDate() >= 10 ? new Date().getDate() : '0' + new Date().getDate().toString()) + 'T00:00:00-03:00';
+          var aux = new Date().getFullYear().toString() + '-' + (new Date().getMonth() + 1 >= 10 ? (new Date().getMonth() + 1).toString() : '0' + (new Date().getMonth() + 1).toString()) + '-' + (new Date().getDate() >= 10 ? new Date().getDate() : '0' + new Date().getDate().toString()) + 'T00:00:00-03:00';
           this.fecha_hasta = aux;
           this.fecha_desde = aux;
+          console.log("filtroHoy", aux);
           this.filtrar_fecha = false;
         }
       }, {

@@ -10,7 +10,7 @@ export class AltaClientesApiService {
   private requestOptions
   headers : any
 
-  private apiDir = "http://157.230.90.222:3001";
+  private apiDir = "http://157.230.90.222:3000";
 
 
   constructor(public http: HttpClient) {
@@ -23,6 +23,8 @@ export class AltaClientesApiService {
    }
    
    alta_cliente(datos){
+    console.log(this.apiDir)
+
     return this.http.post(this.apiDir+'/clientes/crear',datos,this.requestOptions);
   }
 }

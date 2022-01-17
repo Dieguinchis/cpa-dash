@@ -46,7 +46,8 @@ export class AltaWorkstationPage implements OnInit {
     if (this.id_servicio == '20'){
       if(this.id_servicio){
         var equipos_zona = this.equipo_grupo.equipos.filter(equipo => equipo.zona == this.zona_workstation)
-        if (equipos_zona.every(equipo => equipo.nro_equipo == this.nro_workstation)) {
+        console.log("EQUIPOSZONA",equipos_zona, (equipos_zona.some(equipo => equipo.nro_equipo == this.nro_workstation)) )
+        if ((equipos_zona.some(equipo => equipo.nro_equipo == this.nro_workstation)) && (equipos_zona.length != 0)) {
           const alert = await this.alertController.create({
             header: 'Error',
             message: 'Ya existe un equipo con ese numero en la zona.',

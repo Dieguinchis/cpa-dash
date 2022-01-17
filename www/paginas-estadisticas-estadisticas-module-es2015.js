@@ -9,7 +9,7 @@
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony default export */ __webpack_exports__["default"] = ("<ion-header>\n  <ion-toolbar>\n    <ion-item lines=\"none\">\n      <ion-col class=\"ion-no-padding\" size=\"1.2\">\n        <ion-item class=\"ion-no-padding\" lines=\"none\">\n          <ion-label position=\"floating\">Desde</ion-label>\n          <ion-datetime min=\"2021-02-15\"  display-format=\"DD.MM.YYYY\" [(ngModel)]=\"fecha_desde\" (ionChange)=\"revisarMenor()\"></ion-datetime>\n        </ion-item>\n      </ion-col>\n      <ion-col size=\"1.2\">\n        <ion-item lines=\"none\">\n          <ion-label position=\"floating\">Hasta</ion-label>\n          <ion-datetime min=\"2021-02-15\" display-format=\"DD.MM.YYYY\" [(ngModel)]=\"fecha_hasta\" (ionChange)=\"revisarMayor()\"></ion-datetime> \n        </ion-item>     \n      </ion-col>\n      <ion-col size=\"0.7\" class=\"filter-col\">\n        <ion-label class=\"ion-text-wrap\" style=\"padding-right: 5px;\">UV</ion-label>\n        <ion-checkbox [(ngModel)]=\"filtro_uv\"></ion-checkbox>\n      </ion-col>\n      <ion-col size=\"1.25\" class=\"filter-col\">\n        <ion-label class=\"ion-text-wrap\" style=\"padding-right: 5px;\">Desratizacion</ion-label>\n        <ion-checkbox [(ngModel)]=\"filtro_desratizacion\"></ion-checkbox>\n      </ion-col>\n      <ion-col size=\"1.65\">\n        <ion-item>\n          <ion-label position=\"floating\">Cliente</ion-label>\n          <ion-select [interfaceOptions]=\"interfaceOption\" (ionChange)=\"changeCliente()\" [(ngModel)]=\"clientesElegidos\" multiple>\n            <ion-select-option *ngFor=\"let cliente of clientes\" [value]=\"cliente\">{{cliente.razon_social_cliente}}</ion-select-option>\n            <ion-select-option [value]=\"'all'\">Todos</ion-select-option>\n\n          </ion-select>\n        </ion-item>\n      </ion-col>\n      <ion-col size=\"1.65\">\n        <ion-item *ngIf=\"clientesElegidos.length == 1\">\n          <ion-label position=\"floating\">Sucursal</ion-label>\n          <ion-select [interfaceOptions]=\"interfaceOption\" (ionChange)=\"changeSucursal()\" [(ngModel)]=\"sucursalesElegidas\" multiple>\n            <ion-select-option *ngFor=\"let sucursal of sucursales\" [value]=\"sucursal\">{{sucursal.razon_social_sucursal}}</ion-select-option>\n            <ion-select-option [value]=\"'all'\">Todos</ion-select-option>\n          </ion-select>\n        </ion-item>\n      </ion-col>\n      <ion-col size=\"1.65\">\n        <ion-item *ngIf=\"sucursalesElegidas.length == 1\">\n          <ion-label position=\"floating\">Sector</ion-label>\n          <ion-select [interfaceOptions]=\"interfaceOption\" (ionChange)=\"changeSector(sectoresElegidos[0].id_equipo_grupo)\" [(ngModel)]=\"sectoresElegidos\" multiple>\n            <ion-select-option *ngFor=\"let sector of sectores\" [value]=\"sector\">{{sector.nombre_equipo_grupo}}</ion-select-option>\n            <ion-select-option [value]=\"'all'\">Todos</ion-select-option>\n          </ion-select>\n        </ion-item>\n      </ion-col>\n      <ion-col size=\"1.65\">\n        <ion-item *ngIf=\"sectoresElegidos.length == 1\">\n          <ion-label position=\"floating\">Equipo</ion-label>\n          <ion-select (ionChange)=\"equiposChange()\" [interfaceOptions]=\"interfaceOption\" [(ngModel)]=\"equiposElegidos\" multiple>\n            <ion-select-option *ngFor=\"let equipo of equipos\" [value]=\"equipo\">{{equipo.nombre_equipo}}</ion-select-option>\n            <ion-select-option [value]=\"'all'\">Todos</ion-select-option>\n          </ion-select>\n        </ion-item>\n      </ion-col>\n      <ion-col size=\"0.8\">\n        <ion-button (click)=\"buscar()\" expand=\"block\"  shape=\"round\">\n          Buscar\n        </ion-button>\n      </ion-col>\n      <ion-col size=\"0.3\" style=\"text-align: center;\">\n        <ion-icon (click)=\"borrarFiltros()\"  style=\"font-size: 24px; cursor: pointer;\" name=\"close\"></ion-icon>\n      </ion-col>\n    </ion-item>\n  </ion-toolbar>\n  <ion-toolbar *ngIf=\"filtro_desratizacion\">\n    <ion-col size=\"12\" class=\"ion-no-padding\">\n      <ion-item lines=\"none\">\n        <ion-label position=\"fixed\">Productos</ion-label>\n        <ion-select (ionChange)=\"productosChange()\"  [interfaceOptions]=\"interfaceOption\" [(ngModel)]=\"productosFiltrados\" multiple>\n          <ion-select-option *ngFor=\"let producto of productos\" [value]=\"producto.id_producto\">{{producto.nombre_producto}} - {{producto.tipo_producto}}</ion-select-option>\n          <ion-select-option [value]=\"'all'\">Todos</ion-select-option>\n        </ion-select>\n      </ion-item>\n    </ion-col>\n  </ion-toolbar>\n</ion-header>\n\n<ion-content  #content>\n  <div *ngFor=\"let equipos of respuestas\">\n    <ion-item *ngIf=\"equipos[0]?.length == 3\">\n      <ion-col size=\"1\"><b>Fecha</b></ion-col>\n      <ion-col size=\"1.5\"><b>Cliente</b></ion-col>\n      <ion-col size=\"1.5\"><b>Sucursal</b></ion-col>\n      <ion-col size=\"1.5\"><b>Sector</b></ion-col>\n      <ion-col size=\"1.5\"><b>Workstation</b></ion-col>\n      <ion-col size=\"1.5\"><b>Producto</b></ion-col>\n      <ion-col size=\"1.5\"><b>Estado Puesto</b></ion-col>\n      <ion-col size=\"1.5\"><b>Estado cebo</b></ion-col>\n    </ion-item>\n    <ion-item *ngIf=\"equipos[0]?.length == 4\">\n      <ion-col size=\"1\"><b>Fecha</b></ion-col>\n      <ion-col size=\"1.5\"><b>Cliente</b></ion-col>\n      <ion-col size=\"1.5\"><b>Sucursal</b></ion-col>\n      <ion-col size=\"1.5\"><b>Sector</b></ion-col>\n      <ion-col size=\"1.5\"><b>Workstation</b></ion-col>\n      <ion-col size=\"1.25\"><b>Observacion</b></ion-col>\n      <ion-col size=\"1.25\"><b>Conteo / Saturacion</b></ion-col>\n      <ion-col size=\"1.25\"><b>Encendido</b></ion-col>\n      <ion-col size=\"1.25\"><b>Medicion UV</b></ion-col>\n    </ion-item>\n    <div *ngFor=\"let formularios of equipos\">\n      <ion-item *ngIf=\"formularios.length == 3\">\n        <ion-col size=\"1\">\n          {{formularios[0]?.fecha_visita | date:\"dd/MM/yyyy\"}}\n        </ion-col>\n        <ion-col size=\"1.5\">\n          {{formularios[0]?.cliente?.razon_social_cliente}}\n        </ion-col>\n        <ion-col size=\"1.5\">\n          {{formularios[0]?.sucursal?.razon_social_sucursal}}\n        </ion-col>\n        <ion-col size=\"1.5\">\n          {{formularios[0]?.sector?.nombre_equipo_grupo}}\n        </ion-col>\n        <ion-col size=\"1.5\">\n          {{formularios[0]?.nombre_equipo}}\n        </ion-col>\n        <ion-col size=\"1.5\">\n          {{formularios[0]?.nombre_producto}} - {{formularios[0]?.tipo_producto}}\n        </ion-col>\n        <ion-col size=\"1.5\">\n          {{formularios[1]?.respuesta}}\n        </ion-col>\n        <ion-col size=\"1.5\">\n          {{formularios[2]?.respuesta}}\n        </ion-col>\n      </ion-item>\n      <ion-item *ngIf=\"formularios.length == 4\">\n        <ion-col size=\"1\">\n          {{formularios[0]?.fecha_visita | date:\"dd/MM/yyyy\"}}\n        </ion-col>\n        <ion-col size=\"1.5\">\n          {{formularios[0]?.cliente?.razon_social_cliente}}\n        </ion-col>\n        <ion-col size=\"1.5\">\n          {{formularios[0]?.sucursal?.razon_social_sucursal}}\n        </ion-col>\n        <ion-col size=\"1.5\">\n          {{formularios[0]?.sector?.nombre_equipo_grupo}}\n        </ion-col>\n        <ion-col size=\"1.5\">\n          {{formularios[0]?.nombre_equipo}}\n        </ion-col>\n        <ion-col size=\"1.25\">\n          {{formularios[0]?.respuesta}}\n        </ion-col>\n        <ion-col size=\"1.25\">\n          {{formularios[1]?.respuesta}}\n        </ion-col>\n        <ion-col size=\"1.25\">\n          {{formularios[2]?.respuesta}}\n        </ion-col>\n        <ion-col size=\"1.25\">\n          {{formularios[3]?.respuesta}}\n        </ion-col>\n      </ion-item>\n    </div>\n  </div>\n\n  <ion-card *ngIf=\"respuestas.length > 0\">\n    <ion-card-header color=\"primary\">\n      <ion-card-title>Resumen</ion-card-title>\n    </ion-card-header>\n    <ion-item *ngIf=\"filtroUtilizado[1]\">\n      <ion-col style=\"padding: 0;\" size=\"6\">\n        <ion-label><b>Total Captura:</b> {{contadores.capturas}}</ion-label>\n      </ion-col>\n      <ion-col style=\"padding: 0;\" size=\"6\">\n        <ion-label><b>Total Consumo:</b> {{contadores.consumo}}</ion-label>\n      </ion-col>\n    </ion-item>\n    <ion-item *ngIf=\"filtroUtilizado[1]\">\n      <ion-col style=\"padding: 0;\" size=\"6\">\n        <ion-label><b>Total Intactos:</b> {{contadores.intacto}}</ion-label>\n      </ion-col>\n      <ion-col style=\"padding: 0;\" size=\"6\">\n        <ion-label><b>Total Nuevos:</b> {{contadores.nuevo}}</ion-label>\n      </ion-col>\n    </ion-item>\n    <ion-item *ngIf=\"filtroUtilizado[1]\">\n      <ion-col style=\"padding: 0;\" size=\"6\">\n        <ion-label><b>Total Tapados:</b> {{contadores.tapado}}</ion-label>\n      </ion-col>\n      <ion-col style=\"padding: 0;\" size=\"6\">\n        <ion-label><b>Total Faltantes:</b> {{contadores.faltante}}</ion-label>\n      </ion-col>\n    </ion-item>\n    <ion-item *ngIf=\"filtroUtilizado[1]\">\n      <ion-col style=\"padding: 0;\" size=\"12\">\n        <ion-label><b>Total Mal estado:</b> {{contadores.malEstado}}</ion-label>\n      </ion-col>\n    </ion-item>\n    <ion-item *ngIf=\"filtroUtilizado[0]\">\n      <ion-label ><b>Promedio mediciones UV:</b> {{promedioUV?promedioUV:'No hay mediciones'}}</ion-label>\n    </ion-item>\n    <ion-item *ngIf=\"(filtroUtilizado[1]) && (productosUtilizados?.includes(productos[0].id_producto) || productosUtilizados?.length == 0)\">\n      <ion-label><b>Pegamento - Pegamento:</b></ion-label>\n    </ion-item >\n    <ion-item *ngIf=\"(filtroUtilizado[1]) && (productosUtilizados?.includes(productos[0].id_producto) || productosUtilizados?.length == 0)\">\n      <ion-col size=\"6\">\n        <ion-label>Captura: {{productos[0].captura}}</ion-label>\n      </ion-col>\n      <ion-col size=\"6\">\n        <ion-label>Consumo: {{productos[0].consumo}}</ion-label>\n      </ion-col>\n    </ion-item>\n    <ion-item *ngIf=\"(filtroUtilizado[1]) && (productosUtilizados?.includes(productos[0].id_producto) || productosUtilizados?.length == 0)\">\n      <ion-col size=\"6\">\n        <ion-label>Intactos: {{productos[0].intacto}}</ion-label>\n      </ion-col>\n      <ion-col size=\"6\">\n        <ion-label>Nuevos {{productos[0].nuevo}}</ion-label>\n      </ion-col>\n    </ion-item>\n    <ion-item *ngIf=\"(filtroUtilizado[1]) && (productosUtilizados?.includes(productos[0].id_producto) || productosUtilizados?.length == 0)\">\n      <ion-col size=\"6\">\n        <ion-label>Tapados: {{productos[0].tapado}}</ion-label>\n      </ion-col>\n      <ion-col size=\"6\">\n        <ion-label>Faltantes: {{productos[0].faltante}}</ion-label>\n      </ion-col>\n    </ion-item>\n    <ion-item *ngIf=\"(filtroUtilizado[1]) && (productosUtilizados?.includes(productos[0].id_producto) || productosUtilizados?.length == 0)\"> \n      <ion-col size=\"12\">\n        <ion-label>Mal estado: {{productos[0].malEstado}}</ion-label>\n      </ion-col>\n    </ion-item>\n    <ion-item *ngIf=\"(filtroUtilizado[1]) && (productosUtilizados?.includes(productos[1].id_producto) || productosUtilizados?.length == 0)\">\n      <ion-label><b>Parafinado - Floucoumafen:</b></ion-label>\n    </ion-item >\n    <ion-item *ngIf=\"(filtroUtilizado[1]) && (productosUtilizados?.includes(productos[1].id_producto) || productosUtilizados?.length == 0)\">\n      <ion-col size=\"6\">\n        <ion-label>Captura: {{productos[1].captura}}</ion-label>\n      </ion-col>\n      <ion-col size=\"6\">\n        <ion-label>Consumo: {{productos[1].consumo}}</ion-label>\n      </ion-col>\n    </ion-item>\n    <ion-item *ngIf=\"(filtroUtilizado[1]) && (productosUtilizados?.includes(productos[1].id_producto) || productosUtilizados?.length == 0)\">\n      <ion-col size=\"6\">\n        <ion-label>Intactos: {{productos[1].intacto}}</ion-label>\n      </ion-col>\n      <ion-col size=\"6\">\n        <ion-label>Nuevos {{productos[1].nuevo}}</ion-label>\n      </ion-col>\n    </ion-item>\n    <ion-item *ngIf=\"(filtroUtilizado[1]) && (productosUtilizados?.includes(productos[1].id_producto) || productosUtilizados?.length == 0)\">\n      <ion-col size=\"6\">\n        <ion-label>Tapados: {{productos[1].tapado}}</ion-label>\n      </ion-col>\n      <ion-col size=\"6\">\n        <ion-label>Faltantes: {{productos[1].faltante}}</ion-label>\n      </ion-col>\n    </ion-item>\n    <ion-item *ngIf=\"(filtroUtilizado[1]) && (productosUtilizados?.includes(productos[1].id_producto) || productosUtilizados?.length == 0)\"> \n      <ion-col size=\"12\">\n        <ion-label>Mal estado: {{productos[1].malEstado}}</ion-label>\n      </ion-col>\n    </ion-item>\n    <ion-item *ngIf=\"(filtroUtilizado[1]) && (productosUtilizados?.includes(productos[2].id_producto) || productosUtilizados?.length == 0)\">\n      <ion-label><b>Parafinado - Bromadiolone:</b></ion-label>\n    </ion-item >\n    <ion-item *ngIf=\"(filtroUtilizado[1]) && (productosUtilizados?.includes(productos[2].id_producto) || productosUtilizados?.length == 0)\">\n      <ion-col size=\"6\">\n        <ion-label>Captura: {{productos[2].captura}}</ion-label>\n      </ion-col>\n      <ion-col size=\"6\">\n        <ion-label>Consumo: {{productos[2].consumo}}</ion-label>\n      </ion-col>\n    </ion-item>\n    <ion-item *ngIf=\"(filtroUtilizado[1]) && (productosUtilizados?.includes(productos[2].id_producto) || productosUtilizados?.length == 0)\">\n      <ion-col size=\"6\">\n        <ion-label>Intactos: {{productos[2].intacto}}</ion-label>\n      </ion-col>\n      <ion-col size=\"6\">\n        <ion-label>Nuevos {{productos[2].nuevo}}</ion-label>\n      </ion-col>\n    </ion-item>\n    <ion-item *ngIf=\"(filtroUtilizado[1]) && (productosUtilizados?.includes(productos[2].id_producto) || productosUtilizados?.length == 0)\">\n      <ion-col size=\"6\">\n        <ion-label>Tapados: {{productos[2].tapado}}</ion-label>\n      </ion-col>\n      <ion-col size=\"6\">\n        <ion-label>Faltantes: {{productos[2].faltante}}</ion-label>\n      </ion-col>\n    </ion-item>\n    <ion-item *ngIf=\"(filtroUtilizado[1]) && (productosUtilizados?.includes(productos[2].id_producto) || productosUtilizados?.length == 0)\"> \n      <ion-col size=\"12\">\n        <ion-label>Mal estado: {{productos[2].malEstado}}</ion-label>\n      </ion-col>\n    </ion-item> \n  </ion-card>\n  <ion-button *ngIf=\"respuestas.length > 0\" (click)=\"verPdf()\" expand=\"block\"  shape=\"round\">\n    Ver PDF\n  </ion-button>\n</ion-content>\n\n<ion-fab *ngIf=\"respuestas.length > 0\" vertical=\"bottom\" horizontal=\"end\" slot=\"fixed\">\n  <ion-fab-button (click)=\"botonBajar()\">\n    <ion-icon name=\"chevron-down-outline\"></ion-icon>\n  </ion-fab-button>\n</ion-fab>\n");
+/* harmony default export */ __webpack_exports__["default"] = ("<ion-header>\n  <ion-toolbar>\n    <ion-item lines=\"none\">\n      <ion-col class=\"ion-no-padding\" size=\"1.2\">\n        <ion-item class=\"ion-no-padding\" lines=\"none\">\n          <ion-label position=\"floating\">Desde</ion-label>\n          <ion-datetime min=\"2021-02-15\"  display-format=\"DD.MM.YYYY\" [(ngModel)]=\"fecha_desde\" (ionChange)=\"revisarMenor()\"></ion-datetime>\n        </ion-item>\n      </ion-col>\n      <ion-col size=\"1.2\">\n        <ion-item lines=\"none\">\n          <ion-label position=\"floating\">Hasta</ion-label>\n          <ion-datetime min=\"2021-02-15\" display-format=\"DD.MM.YYYY\" [(ngModel)]=\"fecha_hasta\" (ionChange)=\"revisarMayor()\"></ion-datetime> \n        </ion-item>     \n      </ion-col>\n      <ion-col size=\"0.7\" class=\"filter-col\">\n        <ion-label class=\"ion-text-wrap\" style=\"padding-right: 5px;\">UV</ion-label>\n        <ion-checkbox [(ngModel)]=\"filtro_uv\"></ion-checkbox>\n      </ion-col>\n      <ion-col size=\"1.25\" class=\"filter-col\">\n        <ion-label class=\"ion-text-wrap\" style=\"padding-right: 5px;\">Desratizacion</ion-label>\n        <ion-checkbox [(ngModel)]=\"filtro_desratizacion\"></ion-checkbox>\n      </ion-col>\n      <ion-col size=\"1.65\">\n        <ion-item>\n          <ion-label position=\"floating\">Cliente</ion-label>\n          <ion-select [interfaceOptions]=\"interfaceOption\" (ionChange)=\"changeCliente()\" [(ngModel)]=\"clientesElegidos\" multiple>\n            <ion-select-option *ngFor=\"let cliente of clientes\" [value]=\"cliente\">{{cliente.razon_social_cliente}}</ion-select-option>\n            <ion-select-option [value]=\"'all'\">Todos</ion-select-option>\n\n          </ion-select>\n        </ion-item>\n      </ion-col>\n      <ion-col size=\"1.65\">\n        <ion-item *ngIf=\"clientesElegidos.length == 1\">\n          <ion-label position=\"floating\">Sucursal</ion-label>\n          <ion-select [interfaceOptions]=\"interfaceOption\" (ionChange)=\"changeSucursal()\" [(ngModel)]=\"sucursalesElegidas\" multiple>\n            <ion-select-option *ngFor=\"let sucursal of sucursales\" [value]=\"sucursal\">{{sucursal.razon_social_sucursal}}</ion-select-option>\n            <ion-select-option [value]=\"'all'\">Todos</ion-select-option>\n          </ion-select>\n        </ion-item>\n      </ion-col>\n      <ion-col size=\"1.65\">\n        <ion-item *ngIf=\"sucursalesElegidas.length == 1\">\n          <ion-label position=\"floating\">Sector</ion-label>\n          <ion-select [interfaceOptions]=\"interfaceOption\" (ionChange)=\"changeSector(sectoresElegidos[0].id_equipo_grupo)\" [(ngModel)]=\"sectoresElegidos\" multiple>\n            <ion-select-option *ngFor=\"let sector of sectores\" [value]=\"sector\">{{sector.nombre_equipo_grupo}}</ion-select-option>\n            <ion-select-option [value]=\"'all'\">Todos</ion-select-option>\n          </ion-select>\n        </ion-item>\n      </ion-col>\n      <ion-col size=\"1.65\">\n        <ion-item *ngIf=\"sectoresElegidos.length == 1\">\n          <ion-label position=\"floating\">Equipo</ion-label>\n          <ion-select (ionChange)=\"equiposChange()\" [interfaceOptions]=\"interfaceOption\" [(ngModel)]=\"equiposElegidos\" multiple>\n            <ion-select-option *ngFor=\"let equipo of equipos\" [value]=\"equipo\">{{equipo.nombre_equipo}}</ion-select-option>\n            <ion-select-option [value]=\"'all'\">Todos</ion-select-option>\n          </ion-select>\n        </ion-item>\n      </ion-col>\n      <ion-col size=\"0.8\">\n        <ion-button (click)=\"buscar()\" expand=\"block\"  shape=\"round\">\n          Buscar\n        </ion-button>\n      </ion-col>\n      <ion-col size=\"0.3\" style=\"text-align: center;\">\n        <ion-icon (click)=\"borrarFiltros()\"  style=\"font-size: 24px; cursor: pointer;\" name=\"close\"></ion-icon>\n      </ion-col>\n    </ion-item>\n  </ion-toolbar>\n  <ion-toolbar *ngIf=\"filtro_desratizacion\">\n    <ion-row>\n      <ion-col size=\"6\" class=\"ion-no-padding\">\n        <ion-item lines=\"none\">\n          <ion-label position=\"fixed\">Productos</ion-label>\n          <ion-select (ionChange)=\"productosChange()\"  [interfaceOptions]=\"interfaceOption\" [(ngModel)]=\"productosFiltrados\" multiple>\n            <ion-select-option *ngFor=\"let producto of productos\" [value]=\"producto.id_producto\">{{producto.nombre_producto}} - {{producto.tipo_producto}}</ion-select-option>\n            <ion-select-option [value]=\"'all'\">Todos</ion-select-option>\n          </ion-select>\n        </ion-item>\n      </ion-col>\n      <ion-col size=\"6\" class=\"ion-no-padding\">\n        <ion-item lines=\"none\">\n          <ion-label position=\"fixed\">Campos Grafico de barra</ion-label>\n          <ion-select (ionChange)=\"graficoBarrasChange()\"  [interfaceOptions]=\"interfaceOption\" [(ngModel)]=\"graficoBarra\" multiple>\n            <ion-select-option [value]=\"'Capturas'\">Capturas</ion-select-option>\n            <ion-select-option [value]=\"'Consumo'\">Consumo</ion-select-option>\n            <ion-select-option [value]=\"'Faltante'\">Faltante</ion-select-option>\n            <ion-select-option [value]=\"'Intacto'\">Intacto</ion-select-option>\n            <ion-select-option [value]=\"'malEstado'\">Mal estado</ion-select-option>\n            <ion-select-option [value]=\"'Nuevo'\">Nuevo</ion-select-option>\n            <ion-select-option [value]=\"'Tapado'\">Tapado</ion-select-option>\n            <ion-select-option [value]=\"'all'\">Todos</ion-select-option>\n          </ion-select>\n        </ion-item>\n      </ion-col>\n    </ion-row>\n  </ion-toolbar>\n</ion-header>\n\n<ion-content  #content>\n  <div *ngFor=\"let equipos of respuestas\">\n    <ion-item *ngIf=\"equipos[0]?.length == 3\">\n      <ion-col size=\"1\"><b>Fecha</b></ion-col>\n      <ion-col size=\"1.5\"><b>Cliente</b></ion-col>\n      <ion-col size=\"1.5\"><b>Sucursal</b></ion-col>\n      <ion-col size=\"1.5\"><b>Sector</b></ion-col>\n      <ion-col size=\"1.5\"><b>Workstation</b></ion-col>\n      <ion-col size=\"1.5\"><b>Producto</b></ion-col>\n      <ion-col size=\"1.5\"><b>Estado Puesto</b></ion-col>\n      <ion-col size=\"1.5\"><b>Estado cebo</b></ion-col>\n    </ion-item>\n    <ion-item *ngIf=\"equipos[0]?.length == 4\">\n      <ion-col size=\"1\"><b>Fecha</b></ion-col>\n      <ion-col size=\"1.5\"><b>Cliente</b></ion-col>\n      <ion-col size=\"1.5\"><b>Sucursal</b></ion-col>\n      <ion-col size=\"1.5\"><b>Sector</b></ion-col>\n      <ion-col size=\"1.5\"><b>Workstation</b></ion-col>\n      <ion-col size=\"1.25\"><b>Observacion</b></ion-col>\n      <ion-col size=\"1.25\"><b>Conteo / Saturacion</b></ion-col>\n      <ion-col size=\"1.25\"><b>Encendido</b></ion-col>\n      <ion-col size=\"1.25\"><b>Medicion UV</b></ion-col>\n    </ion-item>\n    <div *ngFor=\"let formularios of equipos\">\n      <ion-item *ngIf=\"formularios.length == 3\">\n        <ion-col size=\"1\">\n          {{formularios[0]?.fecha_visita | date:\"dd/MM/yyyy\"}}\n        </ion-col>\n        <ion-col size=\"1.5\">\n          {{formularios[0]?.cliente?.razon_social_cliente}}\n        </ion-col>\n        <ion-col size=\"1.5\">\n          {{formularios[0]?.sucursal?.razon_social_sucursal}}\n        </ion-col>\n        <ion-col size=\"1.5\">\n          {{formularios[0]?.sector?.nombre_equipo_grupo}}\n        </ion-col>\n        <ion-col size=\"1.5\">\n          {{formularios[0]?.nombre_equipo}}\n        </ion-col>\n        <ion-col size=\"1.5\">\n          {{formularios[0]?.nombre_producto}} - {{formularios[0]?.tipo_producto}}\n        </ion-col>\n        <ion-col size=\"1.5\">\n          {{formularios[1]?.respuesta}}\n        </ion-col>\n        <ion-col size=\"1.5\">\n          {{formularios[2]?.respuesta}}\n        </ion-col>\n      </ion-item>\n      <ion-item *ngIf=\"formularios.length == 4\">\n        <ion-col size=\"1\">\n          {{formularios[0]?.fecha_visita | date:\"dd/MM/yyyy\"}}\n        </ion-col>\n        <ion-col size=\"1.5\">\n          {{formularios[0]?.cliente?.razon_social_cliente}}\n        </ion-col>\n        <ion-col size=\"1.5\">\n          {{formularios[0]?.sucursal?.razon_social_sucursal}}\n        </ion-col>\n        <ion-col size=\"1.5\">\n          {{formularios[0]?.sector?.nombre_equipo_grupo}}\n        </ion-col>\n        <ion-col size=\"1.5\">\n          {{formularios[0]?.nombre_equipo}}\n        </ion-col>\n        <ion-col size=\"1.25\">\n          {{formularios[0]?.respuesta}}\n        </ion-col>\n        <ion-col size=\"1.25\">\n          {{formularios[1]?.respuesta}}\n        </ion-col>\n        <ion-col size=\"1.25\">\n          {{formularios[2]?.respuesta}}\n        </ion-col>\n        <ion-col size=\"1.25\">\n          {{formularios[3]?.respuesta}}\n        </ion-col>\n      </ion-item>\n    </div>\n  </div>\n\n  <ion-card *ngIf=\"respuestas.length > 0\">\n    <ion-card-header color=\"primary\">\n      <ion-card-title>Resumen</ion-card-title>\n    </ion-card-header>\n    <ion-item *ngIf=\"filtroUtilizado[1]\">\n      <ion-col style=\"padding: 0;\" size=\"6\">\n        <ion-label><b>Total Captura:</b> {{contadores.capturas}}</ion-label>\n      </ion-col>\n      <ion-col style=\"padding: 0;\" size=\"6\">\n        <ion-label><b>Total Consumo:</b> {{contadores.consumo}}</ion-label>\n      </ion-col>\n    </ion-item>\n    <ion-item *ngIf=\"filtroUtilizado[1]\">\n      <ion-col style=\"padding: 0;\" size=\"6\">\n        <ion-label><b>Total Intactos:</b> {{contadores.intacto}}</ion-label>\n      </ion-col>\n      <ion-col style=\"padding: 0;\" size=\"6\">\n        <ion-label><b>Total Nuevos:</b> {{contadores.nuevo}}</ion-label>\n      </ion-col>\n    </ion-item>\n    <ion-item *ngIf=\"filtroUtilizado[1]\">\n      <ion-col style=\"padding: 0;\" size=\"6\">\n        <ion-label><b>Total Tapados:</b> {{contadores.tapado}}</ion-label>\n      </ion-col>\n      <ion-col style=\"padding: 0;\" size=\"6\">\n        <ion-label><b>Total Faltantes:</b> {{contadores.faltante}}</ion-label>\n      </ion-col>\n    </ion-item>\n    <ion-item *ngIf=\"filtroUtilizado[1]\">\n      <ion-col style=\"padding: 0;\" size=\"12\">\n        <ion-label><b>Total Mal estado:</b> {{contadores.malEstado}}</ion-label>\n      </ion-col>\n    </ion-item>\n    <ion-item *ngIf=\"filtroUtilizado[0]\">\n      <ion-label ><b>Promedio Conteo/Saturacion UV:</b> {{promedioUV?promedioUV:'No hay mediciones'}}</ion-label>\n    </ion-item>\n    <ion-item *ngIf=\"(filtroUtilizado[1]) && (productosUtilizados?.includes(productos[0].id_producto) || productosUtilizados?.length == 0)\">\n      <ion-label><b>Pegamento - Pegamento:</b></ion-label>\n    </ion-item >\n    <ion-item *ngIf=\"(filtroUtilizado[1]) && (productosUtilizados?.includes(productos[0].id_producto) || productosUtilizados?.length == 0)\">\n      <ion-col size=\"6\">\n        <ion-label>Captura: {{productos[0].captura}}</ion-label>\n      </ion-col>\n      <ion-col size=\"6\">\n        <ion-label>Consumo: {{productos[0].consumo}}</ion-label>\n      </ion-col>\n    </ion-item>\n    <ion-item *ngIf=\"(filtroUtilizado[1]) && (productosUtilizados?.includes(productos[0].id_producto) || productosUtilizados?.length == 0)\">\n      <ion-col size=\"6\">\n        <ion-label>Intactos: {{productos[0].intacto}}</ion-label>\n      </ion-col>\n      <ion-col size=\"6\">\n        <ion-label>Nuevos {{productos[0].nuevo}}</ion-label>\n      </ion-col>\n    </ion-item>\n    <ion-item *ngIf=\"(filtroUtilizado[1]) && (productosUtilizados?.includes(productos[0].id_producto) || productosUtilizados?.length == 0)\">\n      <ion-col size=\"6\">\n        <ion-label>Tapados: {{productos[0].tapado}}</ion-label>\n      </ion-col>\n      <ion-col size=\"6\">\n        <ion-label>Faltantes: {{productos[0].faltante}}</ion-label>\n      </ion-col>\n    </ion-item>\n    <ion-item *ngIf=\"(filtroUtilizado[1]) && (productosUtilizados?.includes(productos[0].id_producto) || productosUtilizados?.length == 0)\"> \n      <ion-col size=\"12\">\n        <ion-label>Mal estado: {{productos[0].malEstado}}</ion-label>\n      </ion-col>\n    </ion-item>\n    <ion-item *ngIf=\"(filtroUtilizado[1]) && (productosUtilizados?.includes(productos[1].id_producto) || productosUtilizados?.length == 0)\">\n      <ion-label><b>Parafinado - Floucoumafen:</b></ion-label>\n    </ion-item >\n    <ion-item *ngIf=\"(filtroUtilizado[1]) && (productosUtilizados?.includes(productos[1].id_producto) || productosUtilizados?.length == 0)\">\n      <ion-col size=\"6\">\n        <ion-label>Captura: {{productos[1].captura}}</ion-label>\n      </ion-col>\n      <ion-col size=\"6\">\n        <ion-label>Consumo: {{productos[1].consumo}}</ion-label>\n      </ion-col>\n    </ion-item>\n    <ion-item *ngIf=\"(filtroUtilizado[1]) && (productosUtilizados?.includes(productos[1].id_producto) || productosUtilizados?.length == 0)\">\n      <ion-col size=\"6\">\n        <ion-label>Intactos: {{productos[1].intacto}}</ion-label>\n      </ion-col>\n      <ion-col size=\"6\">\n        <ion-label>Nuevos {{productos[1].nuevo}}</ion-label>\n      </ion-col>\n    </ion-item>\n    <ion-item *ngIf=\"(filtroUtilizado[1]) && (productosUtilizados?.includes(productos[1].id_producto) || productosUtilizados?.length == 0)\">\n      <ion-col size=\"6\">\n        <ion-label>Tapados: {{productos[1].tapado}}</ion-label>\n      </ion-col>\n      <ion-col size=\"6\">\n        <ion-label>Faltantes: {{productos[1].faltante}}</ion-label>\n      </ion-col>\n    </ion-item>\n    <ion-item *ngIf=\"(filtroUtilizado[1]) && (productosUtilizados?.includes(productos[1].id_producto) || productosUtilizados?.length == 0)\"> \n      <ion-col size=\"12\">\n        <ion-label>Mal estado: {{productos[1].malEstado}}</ion-label>\n      </ion-col>\n    </ion-item>\n    <ion-item *ngIf=\"(filtroUtilizado[1]) && (productosUtilizados?.includes(productos[2].id_producto) || productosUtilizados?.length == 0)\">\n      <ion-label><b>Parafinado - Bromadiolone:</b></ion-label>\n    </ion-item >\n    <ion-item *ngIf=\"(filtroUtilizado[1]) && (productosUtilizados?.includes(productos[2].id_producto) || productosUtilizados?.length == 0)\">\n      <ion-col size=\"6\">\n        <ion-label>Captura: {{productos[2].captura}}</ion-label>\n      </ion-col>\n      <ion-col size=\"6\">\n        <ion-label>Consumo: {{productos[2].consumo}}</ion-label>\n      </ion-col>\n    </ion-item>\n    <ion-item *ngIf=\"(filtroUtilizado[1]) && (productosUtilizados?.includes(productos[2].id_producto) || productosUtilizados?.length == 0)\">\n      <ion-col size=\"6\">\n        <ion-label>Intactos: {{productos[2].intacto}}</ion-label>\n      </ion-col>\n      <ion-col size=\"6\">\n        <ion-label>Nuevos {{productos[2].nuevo}}</ion-label>\n      </ion-col>\n    </ion-item>\n    <ion-item *ngIf=\"(filtroUtilizado[1]) && (productosUtilizados?.includes(productos[2].id_producto) || productosUtilizados?.length == 0)\">\n      <ion-col size=\"6\">\n        <ion-label>Tapados: {{productos[2].tapado}}</ion-label>\n      </ion-col>\n      <ion-col size=\"6\">\n        <ion-label>Faltantes: {{productos[2].faltante}}</ion-label>\n      </ion-col>\n    </ion-item>\n    <ion-item *ngIf=\"(filtroUtilizado[1]) && (productosUtilizados?.includes(productos[2].id_producto) || productosUtilizados?.length == 0)\"> \n      <ion-col size=\"12\">\n        <ion-label>Mal estado: {{productos[2].malEstado}}</ion-label>\n      </ion-col>\n    </ion-item> \n  </ion-card>\n  <ion-button *ngIf=\"respuestas.length > 0\" (click)=\"verPdf()\" expand=\"block\"  shape=\"round\">\n    Ver PDF\n  </ion-button>\n</ion-content>\n\n<ion-fab *ngIf=\"respuestas.length > 0\" vertical=\"bottom\" horizontal=\"end\" slot=\"fixed\">\n  <ion-fab-button (click)=\"botonBajar()\">\n    <ion-icon name=\"chevron-down-outline\"></ion-icon>\n  </ion-fab-button>\n</ion-fab>\n");
 
 /***/ }),
 
@@ -34,7 +34,7 @@ __webpack_require__.r(__webpack_exports__);
 let ApiClientesService = class ApiClientesService {
     constructor(http) {
         this.http = http;
-        this.apiDir = "http://192.168.0.71:3000";
+        this.apiDir = "http://157.230.90.222:3000";
         this.requestOptions = {
             headers: new _angular_common_http__WEBPACK_IMPORTED_MODULE_2__["HttpHeaders"]({
                 'Content-Type': 'application/json',
@@ -43,34 +43,43 @@ let ApiClientesService = class ApiClientesService {
         };
     }
     listado_clientes() {
+        console.log(this.apiDir);
         return this.http.get(this.apiDir + '/clientes', this.requestOptions);
     }
     informacion_cliente(id) {
+        console.log(this.apiDir);
         return this.http.get(this.apiDir + '/clientes/id/' + id, this.requestOptions);
     }
     alta_sucursal(datos) {
+        console.log(this.apiDir);
         return this.http.post(this.apiDir + '/sucursales/crear', datos, this.requestOptions);
     }
     informacion_sucursal(id) {
+        console.log(this.apiDir);
         return this.http.get(this.apiDir + '/sucursales/id/' + id, this.requestOptions);
     }
     informacion_visita(id) {
         return Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"])(this, void 0, void 0, function* () {
+            console.log(this.apiDir);
             var data = yield this.http.get(this.apiDir + '/visitas/id/' + id, this.requestOptions);
             console.log(this.apiDir + '/visitas/id/' + id, this.requestOptions);
             return data.toPromise();
         });
     }
     listado_workstations(id) {
+        console.log(this.apiDir);
         return this.http.get(this.apiDir + '/servicios/equipos/sucursal/' + id, this.requestOptions);
     }
     listado_grupoWorkstations(id) {
+        console.log(this.apiDir);
         return this.http.get(this.apiDir + '/servicios/gruposEquipos/sucursal/' + id, this.requestOptions);
     }
     borrar_equipo(id_equipo) {
+        console.log(this.apiDir);
         return this.http.post(this.apiDir + '/servicios/eliminarEquipos/' + id_equipo, null, this.requestOptions);
     }
     listado_productosServicio(id_servicio) {
+        console.log(this.apiDir);
         return this.http.get(this.apiDir + '/productos/idServicio/' + id_servicio, this.requestOptions);
     }
     cambiar_estado_visita(id_visita, estado) {
@@ -87,12 +96,15 @@ let ApiClientesService = class ApiClientesService {
     }
     eliminar_Grupo_workstation(id_producto) {
         console.log('delete2', id_producto);
+        console.log(this.apiDir);
         return this.http.post(this.apiDir + '/servicios/eliminarGrupoEquipos/' + id_producto, this.requestOptions);
     }
     subir_planos(parametros) {
+        console.log(this.apiDir);
         return this.http.post(this.apiDir + '/planos/crear', parametros, this.requestOptions);
     }
     upload(params, bodyP = {}) {
+        console.log(this.apiDir);
         return new Promise((resolve, reject) => {
             this.http.post(this.apiDir + params, bodyP)
                 // this.http.post(this.url + params, bodyP,{headers: header})
@@ -104,36 +116,46 @@ let ApiClientesService = class ApiClientesService {
         });
     }
     ver_sucursal(id_sucursal) {
+        console.log(this.apiDir);
         return this.http.get(this.apiDir + '/sucursales/id/' + id_sucursal, this.requestOptions);
     }
     crear_pdf(id_visita) {
+        console.log(this.apiDir);
         return this.http.post(this.apiDir + '/pdf/create-pdf', id_visita, this.requestOptions);
     }
     ver_pdf(id_visita) {
+        console.log(this.apiDir);
         return this.http.get(this.apiDir + '/pdf/fetch-pdf/' + id_visita, this.requestOptions);
     }
     modificar_cliente(parametros) {
+        console.log(this.apiDir);
         return this.http.post(this.apiDir + '/clientes/actualizar', parametros, this.requestOptions);
     }
     subir_logo_cliente(parametros) {
+        console.log(this.apiDir);
         return this.http.post(this.apiDir + '/clientes/actualizarLogo', parametros, this.requestOptions);
     }
     eliminar_Logo_Cliente(parametros) {
+        console.log(this.apiDir);
         return this.http.post(this.apiDir + '/clientes/eliminarLogo', parametros, this.requestOptions);
     }
     eliminar_cliente(id_cliente) {
+        console.log(this.apiDir);
         return this.http.post(this.apiDir + '/clientes/eliminar/' + id_cliente, this.requestOptions);
     }
     eliminar_sucursal(id_sucursal) {
+        console.log(this.apiDir);
         return this.http.post(this.apiDir + '/sucursales/eliminar/' + id_sucursal, this.requestOptions);
     }
     eliminar_plano(id_plano) {
         return this.http.post(this.apiDir + '/planos/eliminar/' + id_plano, this.requestOptions);
     }
     modificar_sucursal(parametros) {
+        console.log(this.apiDir);
         return this.http.post(this.apiDir + '/sucursales/actualizar', parametros, this.requestOptions);
     }
     estadisticas(parametros) {
+        console.log(this.apiDir);
         return this.http.post(this.apiDir + '/clientes/estadisticas/', parametros, this.requestOptions);
     }
 };
@@ -275,6 +297,7 @@ let EstadisticasPage = class EstadisticasPage {
         this.filtro_desratizacion = true;
         this.filtro_uv = true;
         this.respuestas = [];
+        this.graficoBarra = [];
         this.contadores = {
             capturas: 0,
             consumo: 0,
@@ -295,7 +318,7 @@ let EstadisticasPage = class EstadisticasPage {
                 }
             }
         };
-        this.url = "http://192.168.0.71:3000/public/pdfs/informe .pdf";
+        this.url = "http://157.230.90.222:3000/public/pdfs/informe .pdf";
     }
     ngOnInit() {
         this.actualizar_informacion();
@@ -308,20 +331,27 @@ let EstadisticasPage = class EstadisticasPage {
         var mes1 = (new Date().getMonth());
         var mes2 = (new Date().getMonth() + 1);
         var year = new Date().getFullYear().toString();
-        if (mes1 <= 9) {
-            mes1 = '0' + mes1.toString();
+        if (mes1 == 0) {
+            year = new Date().getFullYear();
+            this.fecha_desde = (year - 1).toString() + '-' + '12' + '-' + dia;
+            this.fecha_hasta = year.toString() + '-' + '01' + '-' + dia;
         }
         else {
-            mes1 = mes1.toString();
+            if (mes1 <= 9) {
+                mes1 = '0' + mes1.toString();
+            }
+            else {
+                mes1 = mes1.toString();
+            }
+            if (mes2 <= 9) {
+                mes2 = '0' + mes2.toString();
+            }
+            else {
+                mes2 = mes2.toString();
+            }
+            this.fecha_desde = year + '-' + mes1 + '-' + dia;
+            this.fecha_hasta = year + '-' + mes2 + '-' + dia;
         }
-        if (mes2 <= 9) {
-            mes2 = '0' + mes2.toString();
-        }
-        else {
-            mes2 = mes2.toString();
-        }
-        this.fecha_desde = year + '-' + mes1 + '-' + dia;
-        this.fecha_hasta = year + '-' + mes2 + '-' + dia;
     }
     revisarMenor() {
         if (new Date(this.fecha_desde).valueOf() > new Date(this.fecha_hasta).valueOf()) {
@@ -434,6 +464,12 @@ let EstadisticasPage = class EstadisticasPage {
         }
         console.log(this.productosFiltrados);
     }
+    graficoBarrasChange() {
+        if (this.graficoBarra.includes('all')) {
+            this.graficoBarra = ['Captura', 'Consumido', 'Faltante', 'Intacto', 'Mal estado', 'Nuevo', 'Tapado'];
+        }
+        console.log(this.graficoBarra);
+    }
     buscar() {
         return Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"])(this, void 0, void 0, function* () {
             if (this.clientesElegidos.length == 0) {
@@ -472,7 +508,7 @@ let EstadisticasPage = class EstadisticasPage {
                         producto.nuevo = 0;
                         producto.tapado = 0;
                     }
-                    var filtro = [this.fecha_desde, this.fecha_hasta, this.filtro_uv, this.filtro_desratizacion, this.clientesElegidos, this.sucursalesElegidas, this.sectoresElegidos, this.equiposElegidos, this.productosUtilizados, this.productos];
+                    var filtro = [this.fecha_desde, this.fecha_hasta, this.filtro_uv, this.filtro_desratizacion, this.clientesElegidos, this.sucursalesElegidas, this.sectoresElegidos, this.equiposElegidos, this.productosUtilizados, this.productos, this.graficoBarra];
                     this.api_clientes.estadisticas(filtro).subscribe((datos) => Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"])(this, void 0, void 0, function* () {
                         var aux;
                         aux = datos;
@@ -483,6 +519,18 @@ let EstadisticasPage = class EstadisticasPage {
                         console.log(this.contadores);
                         this.respuestas = aux.respuesta;
                         this.productos = aux.productos;
+                        this.promedioUV = 0;
+                        var contadorUV = 0;
+                        for (let index = 0; index < aux.equiposUV.length; index++) {
+                            const uv = aux.equiposUV[index];
+                            if (uv) {
+                                this.promedioUV = this.promedioUV + uv;
+                                contadorUV++;
+                            }
+                        }
+                        if (contadorUV > 0) {
+                            this.promedioUV = this.promedioUV / contadorUV;
+                        }
                         loading.dismiss();
                         if (this.respuestas.length == 0) {
                             const alert = yield this.alertController.create({

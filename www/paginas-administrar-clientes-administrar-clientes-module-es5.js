@@ -760,7 +760,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
         _classCallCheck(this, ApiClientesService);
 
         this.http = http;
-        this.apiDir = "http://157.230.90.222:3001";
+        this.apiDir = "http://157.230.90.222:3000";
         this.requestOptions = {
           headers: new _angular_common_http__WEBPACK_IMPORTED_MODULE_2__["HttpHeaders"]({
             'Content-Type': 'application/json',
@@ -772,21 +772,25 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
       _createClass(ApiClientesService, [{
         key: "listado_clientes",
         value: function listado_clientes() {
+          console.log(this.apiDir);
           return this.http.get(this.apiDir + '/clientes', this.requestOptions);
         }
       }, {
         key: "informacion_cliente",
         value: function informacion_cliente(id) {
+          console.log(this.apiDir);
           return this.http.get(this.apiDir + '/clientes/id/' + id, this.requestOptions);
         }
       }, {
         key: "alta_sucursal",
         value: function alta_sucursal(datos) {
+          console.log(this.apiDir);
           return this.http.post(this.apiDir + '/sucursales/crear', datos, this.requestOptions);
         }
       }, {
         key: "informacion_sucursal",
         value: function informacion_sucursal(id) {
+          console.log(this.apiDir);
           return this.http.get(this.apiDir + '/sucursales/id/' + id, this.requestOptions);
         }
       }, {
@@ -798,15 +802,16 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
               while (1) {
                 switch (_context6.prev = _context6.next) {
                   case 0:
-                    _context6.next = 2;
+                    console.log(this.apiDir);
+                    _context6.next = 3;
                     return this.http.get(this.apiDir + '/visitas/id/' + id, this.requestOptions);
 
-                  case 2:
+                  case 3:
                     data = _context6.sent;
                     console.log(this.apiDir + '/visitas/id/' + id, this.requestOptions);
                     return _context6.abrupt("return", data.toPromise());
 
-                  case 5:
+                  case 6:
                   case "end":
                     return _context6.stop();
                 }
@@ -817,21 +822,25 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
       }, {
         key: "listado_workstations",
         value: function listado_workstations(id) {
+          console.log(this.apiDir);
           return this.http.get(this.apiDir + '/servicios/equipos/sucursal/' + id, this.requestOptions);
         }
       }, {
         key: "listado_grupoWorkstations",
         value: function listado_grupoWorkstations(id) {
+          console.log(this.apiDir);
           return this.http.get(this.apiDir + '/servicios/gruposEquipos/sucursal/' + id, this.requestOptions);
         }
       }, {
         key: "borrar_equipo",
         value: function borrar_equipo(id_equipo) {
+          console.log(this.apiDir);
           return this.http.post(this.apiDir + '/servicios/eliminarEquipos/' + id_equipo, null, this.requestOptions);
         }
       }, {
         key: "listado_productosServicio",
         value: function listado_productosServicio(id_servicio) {
+          console.log(this.apiDir);
           return this.http.get(this.apiDir + '/productos/idServicio/' + id_servicio, this.requestOptions);
         }
       }, {
@@ -856,11 +865,13 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
         key: "eliminar_Grupo_workstation",
         value: function eliminar_Grupo_workstation(id_producto) {
           console.log('delete2', id_producto);
+          console.log(this.apiDir);
           return this.http.post(this.apiDir + '/servicios/eliminarGrupoEquipos/' + id_producto, this.requestOptions);
         }
       }, {
         key: "subir_planos",
         value: function subir_planos(parametros) {
+          console.log(this.apiDir);
           return this.http.post(this.apiDir + '/planos/crear', parametros, this.requestOptions);
         }
       }, {
@@ -869,6 +880,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
           var _this11 = this;
 
           var bodyP = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : {};
+          console.log(this.apiDir);
           return new Promise(function (resolve, reject) {
             _this11.http.post(_this11.apiDir + params, bodyP) // this.http.post(this.url + params, bodyP,{headers: header})
             .subscribe(function (response) {
@@ -881,41 +893,49 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
       }, {
         key: "ver_sucursal",
         value: function ver_sucursal(id_sucursal) {
+          console.log(this.apiDir);
           return this.http.get(this.apiDir + '/sucursales/id/' + id_sucursal, this.requestOptions);
         }
       }, {
         key: "crear_pdf",
         value: function crear_pdf(id_visita) {
+          console.log(this.apiDir);
           return this.http.post(this.apiDir + '/pdf/create-pdf', id_visita, this.requestOptions);
         }
       }, {
         key: "ver_pdf",
         value: function ver_pdf(id_visita) {
+          console.log(this.apiDir);
           return this.http.get(this.apiDir + '/pdf/fetch-pdf/' + id_visita, this.requestOptions);
         }
       }, {
         key: "modificar_cliente",
         value: function modificar_cliente(parametros) {
+          console.log(this.apiDir);
           return this.http.post(this.apiDir + '/clientes/actualizar', parametros, this.requestOptions);
         }
       }, {
         key: "subir_logo_cliente",
         value: function subir_logo_cliente(parametros) {
+          console.log(this.apiDir);
           return this.http.post(this.apiDir + '/clientes/actualizarLogo', parametros, this.requestOptions);
         }
       }, {
         key: "eliminar_Logo_Cliente",
         value: function eliminar_Logo_Cliente(parametros) {
+          console.log(this.apiDir);
           return this.http.post(this.apiDir + '/clientes/eliminarLogo', parametros, this.requestOptions);
         }
       }, {
         key: "eliminar_cliente",
         value: function eliminar_cliente(id_cliente) {
+          console.log(this.apiDir);
           return this.http.post(this.apiDir + '/clientes/eliminar/' + id_cliente, this.requestOptions);
         }
       }, {
         key: "eliminar_sucursal",
         value: function eliminar_sucursal(id_sucursal) {
+          console.log(this.apiDir);
           return this.http.post(this.apiDir + '/sucursales/eliminar/' + id_sucursal, this.requestOptions);
         }
       }, {
@@ -926,11 +946,13 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
       }, {
         key: "modificar_sucursal",
         value: function modificar_sucursal(parametros) {
+          console.log(this.apiDir);
           return this.http.post(this.apiDir + '/sucursales/actualizar', parametros, this.requestOptions);
         }
       }, {
         key: "estadisticas",
         value: function estadisticas(parametros) {
+          console.log(this.apiDir);
           return this.http.post(this.apiDir + '/clientes/estadisticas/', parametros, this.requestOptions);
         }
       }]);

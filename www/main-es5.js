@@ -138,7 +138,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
     /* harmony default export */
 
 
-    __webpack_exports__["default"] = "<ion-app>\r\n  <ion-router-outlet></ion-router-outlet>\r\n  <!-- <div style=\"color: red; padding: 10px; border: solid red 1px; position: fixed;top: 0px; left: 0px;font-weight: bold;\">\r\n    Version de desarrollo\r\n  </div> -->\r\n</ion-app>\r\n";
+    __webpack_exports__["default"] = "<ion-app>\r\n  <ion-router-outlet></ion-router-outlet>\r\n  <div style=\"color: red; padding: 10px; border: solid red 1px; position: fixed;top: 0px; left: 0px;font-weight: bold;\">\r\n    Version de desarrollo\r\n  </div>\r\n</ion-app>\r\n";
     /***/
   },
 
@@ -753,7 +753,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
         _classCallCheck(this, ServicioLoginService);
 
         this.http = http;
-        this.apiDir = "http://157.230.90.222:3001";
+        this.apiDir = "http://157.230.90.222:3000";
         this.requestOptions = {
           headers: new _angular_common_http__WEBPACK_IMPORTED_MODULE_2__["HttpHeaders"]({
             'Content-Type': 'application/json',
@@ -1443,7 +1443,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
         _classCallCheck(this, ApiServiciosService);
 
         this.http = http;
-        this.apiDir = "http://157.230.90.222:3001";
+        this.apiDir = "http://157.230.90.222:3000";
         this.requestOptions = {
           headers: new _angular_common_http__WEBPACK_IMPORTED_MODULE_2__["HttpHeaders"]({
             'Content-Type': 'application/json',
@@ -1456,68 +1456,81 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
         key: "crear_servicio",
         value: function crear_servicio(parametros) {
           console.log(parametros);
+          console.log(this.apiDir);
           return this.http.post(this.apiDir + '/servicios/crear', parametros, this.requestOptions);
         }
       }, {
         key: "mostrar_servicios",
         value: function mostrar_servicios() {
+          console.log(this.apiDir);
           return this.http.get(this.apiDir + '/servicios', this.requestOptions);
         }
       }, {
         key: "getZpl",
         value: function getZpl(parametros) {
+          console.log(this.apiDir);
           return this.http.post(this.apiDir + '/servicios/imprimir', parametros, this.requestOptions);
         }
       }, {
         key: "alta_producto",
         value: function alta_producto(parametros) {
+          console.log(this.apiDir);
           return this.http.post(this.apiDir + '/productos/crear', parametros, this.requestOptions);
         }
       }, {
         key: "alta_workstation",
         value: function alta_workstation(parametros) {
+          console.log(this.apiDir);
           return this.http.post(this.apiDir + '/servicios/equipos/crear', parametros, this.requestOptions);
         }
       }, {
         key: "alta_Grupo_workstation",
         value: function alta_Grupo_workstation(parametros) {
+          console.log(this.apiDir);
           return this.http.post(this.apiDir + '/servicios/gruposEquipos/crear', parametros, this.requestOptions);
         }
       }, {
         key: "eliminar_Grupo_workstation",
         value: function eliminar_Grupo_workstation(id_producto) {
           console.log('delete2', id_producto);
+          console.log(this.apiDir);
           return this.http.post(this.apiDir + '/servicios/eliminarGrupoEquipos/' + id_producto, null, this.requestOptions);
         }
       }, {
         key: "modificar_Grupo_workstation",
         value: function modificar_Grupo_workstation(parametros) {
+          console.log(this.apiDir);
           return this.http.post(this.apiDir + '/servicios/gruposEquipos/crear', parametros, this.requestOptions);
         }
       }, {
         key: "ver_servicio",
         value: function ver_servicio(id_servicio) {
+          console.log(this.apiDir);
           return this.http.get(this.apiDir + '/servicios/id/' + id_servicio, this.requestOptions);
         }
       }, {
         key: "baja_producto",
         value: function baja_producto(id_producto) {
+          console.log(this.apiDir);
           return this.http.post(this.apiDir + '/productos/eliminar/' + id_producto, null, this.requestOptions);
         }
       }, {
         key: "baja_servicio",
         value: function baja_servicio(id_servicio) {
+          console.log(this.apiDir);
           return this.http.post(this.apiDir + '/servicios/eliminar/' + id_servicio, null, this.requestOptions);
         }
       }, {
         key: "update_servicio",
         value: function update_servicio(parametros) {
           // console.log(parametros)
+          console.log(this.apiDir);
           return this.http.post(this.apiDir + '/servicios/update', parametros, this.requestOptions);
         }
       }, {
         key: "baja_opcion",
         value: function baja_opcion(id) {
+          console.log(this.apiDir);
           return this.http.post(this.apiDir + '/servicios/opcion/delete/', {
             id: id
           }, this.requestOptions);
@@ -1526,17 +1539,20 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
         key: "ver_opciones_producto",
         value: function ver_opciones_producto(id_servicio) {
           console.log(id_servicio);
+          console.log(this.apiDir);
           return this.http.get(this.apiDir + '/servicios/producto/opciones/' + id_servicio, this.requestOptions);
         }
       }, {
         key: "producto_update",
         value: function producto_update(producto) {
           console.log(producto);
+          console.log(this.apiDir);
           return this.http.post(this.apiDir + '/productos/actualizar', producto, this.requestOptions);
         }
       }, {
         key: "getProductos",
         value: function getProductos() {
+          console.log(this.apiDir);
           return this.http.get(this.apiDir + '/productos/', this.requestOptions);
         }
       }]);
@@ -1767,7 +1783,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
         _classCallCheck(this, ApiVisitasService);
 
         this.http = http;
-        this.apiDir = "http://157.230.90.222:3001";
+        this.apiDir = "http://157.230.90.222:3000";
         this.requestOptions = {
           headers: new _angular_common_http__WEBPACK_IMPORTED_MODULE_2__["HttpHeaders"]({
             'Content-Type': 'application/json',
@@ -1779,42 +1795,50 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
       _createClass(ApiVisitasService, [{
         key: "listado_clientes",
         value: function listado_clientes() {
+          console.log(this.apiDir);
           return this.http.get(this.apiDir + '/clientes', this.requestOptions);
         }
       }, {
         key: "listado_equipos",
         value: function listado_equipos(id) {
+          console.log(this.apiDir);
           return this.http.get(this.apiDir + '/servicios/equipos/offline/' + id, this.requestOptions);
         }
       }, {
         key: "listado_equipos_id",
         value: function listado_equipos_id(id) {
+          console.log(this.apiDir);
           return this.http.get(this.apiDir + '/servicios/equipos/sucursal/' + id, this.requestOptions);
         }
       }, {
         key: "informacion_cliente",
         value: function informacion_cliente(id) {
+          console.log(this.apiDir);
           return this.http.get(this.apiDir + '/clientes/id/' + id, this.requestOptions);
         }
       }, {
         key: "mostrar_servicios",
         value: function mostrar_servicios() {
+          console.log(this.apiDir);
           return this.http.get(this.apiDir + '/servicios', this.requestOptions);
         }
       }, {
         key: "crear_visita",
         value: function crear_visita(parametros) {
+          console.log(this.apiDir);
           return this.http.post(this.apiDir + '/visitas/crear', parametros, this.requestOptions);
         }
       }, {
         key: "modificar_visita",
         value: function modificar_visita(parametros) {
+          console.log(this.apiDir);
           console.log(this.apiDir + '/visitas/update', parametros);
           return this.http.post(this.apiDir + '/visitas/update', parametros, this.requestOptions);
         }
       }, {
         key: "listado_grupoWorkstations",
         value: function listado_grupoWorkstations(id) {
+          console.log(this.apiDir);
           return this.http.get(this.apiDir + '/servicios/gruposEquipos/sucursal/' + id, this.requestOptions);
         }
       }, {
@@ -1822,6 +1846,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
         value: function getAllVisitas() {
           var _this10 = this;
 
+          console.log(this.apiDir);
           return new Promise(function (resolve, reject) {
             _this10.http.get(_this10.apiDir + '/visitas/', _this10.requestOptions).subscribe(function (response) {
               resolve(response);
@@ -1835,6 +1860,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
         value: function getRespuestas(id_formulario) {
           var _this11 = this;
 
+          console.log(this.apiDir);
           return new Promise(function (resolve, reject) {
             _this11.http.get(_this11.apiDir + '/formularios/respuestas/' + id_formulario.toString(), _this11.requestOptions).subscribe(function (response) {
               resolve(response);
@@ -1848,6 +1874,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
         value: function cambiarRespuestas(respuesta) {
           var _this12 = this;
 
+          console.log(this.apiDir);
           return new Promise(function (resolve, reject) {
             _this12.http.put(_this12.apiDir + '/formularios/respuestas', respuesta, _this12.requestOptions).subscribe(function (response) {
               resolve(response);
@@ -1861,6 +1888,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
         value: function actualizar_equipo(parametros) {
           var _this13 = this;
 
+          console.log(this.apiDir);
           return new Promise(function (resolve, reject) {
             _this13.http.post(_this13.apiDir + '/servicios/equipos/update', parametros, _this13.requestOptions).subscribe(function (response) {
               resolve(response);
@@ -1874,6 +1902,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
         value: function getEquipo(id_equipo) {
           var _this14 = this;
 
+          console.log(this.apiDir);
           return new Promise(function (resolve, reject) {
             _this14.http.get(_this14.apiDir + '/servicios/equipos/' + id_equipo, _this14.requestOptions).subscribe(function (response) {
               resolve(response);
@@ -1885,11 +1914,13 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
       }, {
         key: "setPlano",
         value: function setPlano(parametros) {
+          console.log(this.apiDir);
           return this.http.post(this.apiDir + '/servicios/gruposEquipos/plano', parametros, this.requestOptions);
         }
       }, {
         key: "pdfEstadisticas",
         value: function pdfEstadisticas(parametros) {
+          console.log(this.apiDir);
           return this.http.post(this.apiDir + '/pdf/stats-pdf', parametros, this.requestOptions);
         }
       }]);
@@ -1967,7 +1998,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
       return version;
     });
 
-    var version = '0.0.8';
+    var version = '0.0.9';
     /***/
   },
 

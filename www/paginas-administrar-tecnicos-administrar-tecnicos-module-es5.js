@@ -669,7 +669,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
         _classCallCheck(this, ServicioTecnicosService);
 
         this.http = http;
-        this.apiDir = "http://157.230.90.222:3001";
+        this.apiDir = "http://157.230.90.222:3000";
         this.requestOptions = {
           headers: new _angular_common_http__WEBPACK_IMPORTED_MODULE_2__["HttpHeaders"]({
             'Content-Type': 'application/json',
@@ -681,21 +681,25 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
       _createClass(ServicioTecnicosService, [{
         key: "listado_tecnicos",
         value: function listado_tecnicos() {
+          console.log(this.apiDir);
           return this.http.get(this.apiDir + '/tecnicos', this.requestOptions);
         }
       }, {
         key: "alta_tecnico",
         value: function alta_tecnico(datos) {
+          console.log(this.apiDir);
           return this.http.post(this.apiDir + '/tecnicos/crear', datos, this.requestOptions);
         }
       }, {
         key: "modificar_tecnico",
         value: function modificar_tecnico(datos) {
+          console.log(this.apiDir);
           return this.http.post(this.apiDir + '/tecnicos/update', datos, this.requestOptions);
         }
       }, {
         key: "baja_tecnico",
         value: function baja_tecnico(id_tecnico) {
+          console.log(this.apiDir);
           return this.http["delete"](this.apiDir + '/tecnicos/eliminar/' + id_tecnico, this.requestOptions);
         }
       }]);
