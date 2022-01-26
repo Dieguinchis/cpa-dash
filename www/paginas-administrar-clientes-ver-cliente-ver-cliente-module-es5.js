@@ -1239,43 +1239,46 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
                     data = null;
 
                     if (!(this.id_servicio == '20')) {
-                      _context10.next = 22;
+                      _context10.next = 23;
                       break;
                     }
 
                     if (!this.id_servicio) {
-                      _context10.next = 19;
+                      _context10.next = 20;
                       break;
                     }
 
                     equipos_zona = this.equipo_grupo.equipos.filter(function (equipo) {
                       return equipo.zona == _this11.zona_workstation;
                     });
-
-                    if (!equipos_zona.every(function (equipo) {
+                    console.log("EQUIPOSZONA", equipos_zona, equipos_zona.some(function (equipo) {
                       return equipo.nro_equipo == _this11.nro_workstation;
-                    })) {
-                      _context10.next = 12;
+                    }));
+
+                    if (!(equipos_zona.some(function (equipo) {
+                      return equipo.nro_equipo == _this11.nro_workstation;
+                    }) && equipos_zona.length != 0)) {
+                      _context10.next = 13;
                       break;
                     }
 
-                    _context10.next = 7;
+                    _context10.next = 8;
                     return this.alertController.create({
                       header: 'Error',
                       message: 'Ya existe un equipo con ese numero en la zona.',
                       buttons: ['OK']
                     });
 
-                  case 7:
+                  case 8:
                     _alert = _context10.sent;
-                    _context10.next = 10;
+                    _context10.next = 11;
                     return _alert.present();
 
-                  case 10:
-                    _context10.next = 17;
+                  case 11:
+                    _context10.next = 18;
                     break;
 
-                  case 12:
+                  case 13:
                     if (!this.zona_workstation) {
                       this.zona_workstation = this.nombre_workstation;
                     }
@@ -1317,20 +1320,20 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
                       console.log(error);
                     };
 
-                  case 17:
-                    _context10.next = 20;
+                  case 18:
+                    _context10.next = 21;
                     break;
-
-                  case 19:
-                    this.presentAlert();
 
                   case 20:
-                    _context10.next = 40;
+                    this.presentAlert();
+
+                  case 21:
+                    _context10.next = 41;
                     break;
 
-                  case 22:
+                  case 23:
                     if (!this.id_servicio) {
-                      _context10.next = 39;
+                      _context10.next = 40;
                       break;
                     }
 
@@ -1341,27 +1344,27 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
                     if (!equipos_zona.some(function (equipo) {
                       return equipo.nro_equipo == _this11.nro_workstation;
                     })) {
-                      _context10.next = 32;
+                      _context10.next = 33;
                       break;
                     }
 
-                    _context10.next = 27;
+                    _context10.next = 28;
                     return this.alertController.create({
                       header: 'Error',
                       message: 'Ya existe un equipo con ese numero en la zona.',
                       buttons: ['OK']
                     });
 
-                  case 27:
+                  case 28:
                     _alert2 = _context10.sent;
-                    _context10.next = 30;
+                    _context10.next = 31;
                     return _alert2.present();
 
-                  case 30:
-                    _context10.next = 37;
+                  case 31:
+                    _context10.next = 38;
                     break;
 
-                  case 32:
+                  case 33:
                     if (!this.zona_workstation) {
                       this.zona_workstation = this.nombre_workstation;
                     }
@@ -1402,14 +1405,14 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
                       console.log(error);
                     };
 
-                  case 37:
-                    _context10.next = 40;
+                  case 38:
+                    _context10.next = 41;
                     break;
 
-                  case 39:
+                  case 40:
                     this.presentAlert();
 
-                  case 40:
+                  case 41:
                   case "end":
                     return _context10.stop();
                 }
@@ -2441,7 +2444,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
       }, {
         key: "test",
         value: function test($event) {
-          console.warn($event); // window.open('http://157.230.90.222:3000/getZip')
+          console.warn($event); // window.open('http://192.168.0.71:3000/getZip')
         }
       }, {
         key: "descargar",
@@ -2452,7 +2455,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
           // console.warn(1)
           var link = document.createElement("a");
           link.download = this.sucursal.sucursal[0].id_sucursal + ".png";
-          link.href = "http://157.230.90.222:3000/getfile/sucursales/" + this.sucursal.sucursal[0].id_sucursal;
+          link.href = "http://192.168.0.71:3000/getfile/sucursales/" + this.sucursal.sucursal[0].id_sucursal;
           link.click();
         }
       }, {
@@ -2462,7 +2465,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
           // console.warn(equipo.id_equipo)
           var link = document.createElement("a");
           link.download = equipo.id_equipo + ".png";
-          link.href = "http://157.230.90.222:3000/getfile/equipos/" + equipo.id_equipo;
+          link.href = "http://192.168.0.71:3000/getfile/equipos/" + equipo.id_equipo;
           link.click();
         }
       }, {
@@ -2483,7 +2486,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
 
           var link = document.createElement("a");
           link.download = "qrs.png";
-          link.href = "http://157.230.90.222:3000/getZip?type=equipos&name=" + grupoEquipo.nombre_equipo_grupo + "&data=" + ids;
+          link.href = "http://192.168.0.71:3000/getZip?type=equipos&name=" + grupoEquipo.nombre_equipo_grupo + "&data=" + ids;
           link.click();
         }
       }, {
@@ -2510,7 +2513,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
 
           var link = document.createElement("a");
           link.download = "qrs.png";
-          link.href = "http://157.230.90.222:3000/getZip?type=all&name=" + this.sucursal.sucursal[0].razon_social_sucursal + "&data=" + ids;
+          link.href = "http://192.168.0.71:3000/getZip?type=all&name=" + this.sucursal.sucursal[0].razon_social_sucursal + "&data=" + ids;
           link.click();
         }
       }, {
@@ -2536,7 +2539,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
 
           var link = document.createElement("a");
           link.download = "qrs.png";
-          link.href = "http://157.230.90.222:3000/getZip?type=equipos&name=equipos_" + this.sucursal.sucursal[0].razon_social_sucursal + "&data=" + ids;
+          link.href = "http://192.168.0.71:3000/getZip?type=equipos&name=equipos_" + this.sucursal.sucursal[0].razon_social_sucursal + "&data=" + ids;
           link.click();
         }
       }, {

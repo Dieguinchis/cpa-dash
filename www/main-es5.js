@@ -138,7 +138,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
     /* harmony default export */
 
 
-    __webpack_exports__["default"] = "<ion-app>\r\n  <ion-router-outlet></ion-router-outlet>\r\n  <div style=\"color: red; padding: 10px; border: solid red 1px; position: fixed;top: 0px; left: 0px;font-weight: bold;\">\r\n    Version de desarrollo\r\n  </div>\r\n</ion-app>\r\n";
+    __webpack_exports__["default"] = "<ion-app>\r\n  <ion-router-outlet></ion-router-outlet>\r\n  <!-- <div style=\"color: red; padding: 10px; border: solid red 1px; position: fixed;top: 0px; left: 0px;font-weight: bold;\">\r\n    Version de desarrollo\r\n  </div> -->\r\n</ion-app>\r\n";
     /***/
   },
 
@@ -753,7 +753,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
         _classCallCheck(this, ServicioLoginService);
 
         this.http = http;
-        this.apiDir = "http://157.230.90.222:3000";
+        this.apiDir = "http://192.168.0.71:3000";
         this.requestOptions = {
           headers: new _angular_common_http__WEBPACK_IMPORTED_MODULE_2__["HttpHeaders"]({
             'Content-Type': 'application/json',
@@ -1443,7 +1443,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
         _classCallCheck(this, ApiServiciosService);
 
         this.http = http;
-        this.apiDir = "http://157.230.90.222:3000";
+        this.apiDir = "http://192.168.0.71:3000";
         this.requestOptions = {
           headers: new _angular_common_http__WEBPACK_IMPORTED_MODULE_2__["HttpHeaders"]({
             'Content-Type': 'application/json',
@@ -1783,7 +1783,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
         _classCallCheck(this, ApiVisitasService);
 
         this.http = http;
-        this.apiDir = "http://157.230.90.222:3000";
+        this.apiDir = "http://192.168.0.71:3000";
         this.requestOptions = {
           headers: new _angular_common_http__WEBPACK_IMPORTED_MODULE_2__["HttpHeaders"]({
             'Content-Type': 'application/json',
@@ -1998,7 +1998,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
       return version;
     });
 
-    var version = '0.0.9';
+    var version = '0.0.10';
     /***/
   },
 
