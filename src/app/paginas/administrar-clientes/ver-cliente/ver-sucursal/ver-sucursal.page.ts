@@ -296,7 +296,8 @@ export class VerSucursalPage implements OnInit {
               newEquipo.nombre_equipo = data[0];
               newEquipo.zona = data[1];
               newEquipo.nro_equipo = data[2];
-              console.log("EQUIPO",grupoEquipo)
+              newEquipo.nombre = newEquipo.nombre_equipo + ' - ' + newEquipo.zona + ' - ' + newEquipo.nro_equipo;
+              console.log("EQUIPO",equipo)
               if (grupoEquipo.equipos.some(equip => (equip.nro_equipo == newEquipo.nro_equipo) && (equip.zona == newEquipo.zona))) {
                 const alert = await this.alertController.create({
                   header: 'Error',
@@ -308,6 +309,10 @@ export class VerSucursalPage implements OnInit {
                 loader.dismiss();
               }else{
                 this.api_visitas.actualizar_equipo(newEquipo).then((resp: any) =>{
+                  equipo.nombre_equipo = data[0];
+                  equipo.zona = data[1];
+                  equipo.nro_equipo = data[2];
+                  equipo.nombre = equipo.nombre_equipo + ' - ' + equipo.zona + ' - ' + equipo.nro_equipo;
                   loader.dismiss();
                   console.log(resp)
                 }).catch(err =>{
