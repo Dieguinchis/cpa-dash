@@ -708,6 +708,8 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
         key: "presentAlertCheckbox",
         value: function presentAlertCheckbox(servicio, h, tecnicos) {
           return Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"])(this, void 0, void 0, /*#__PURE__*/regeneratorRuntime.mark(function _callee() {
+            var _this6 = this;
+
             var input, _iterator8, _step8, tecnico, alert;
 
             return regeneratorRuntime.wrap(function _callee$(_context) {
@@ -786,8 +788,26 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 
                             console.log(tecnico);
                           });
+
+                          if (_this6.tecnicoPrincipal) {
+                            _this6.tecnicoPrincipal = _this6.listado_tecnicos.find(function (tec) {
+                              return tec.id_tecnico == _this6.tecnicoPrincipal.id_tecnico;
+                            });
+
+                            if (!servicio.tecnico.find(function (tec) {
+                              return tec.id_tecnico == _this6.tecnicoPrincipal.id_tecnico;
+                            })) {
+                              _this6.tecnicoPrincipal.equipos[h] = [];
+                              _this6.listado_tecnicos[_this6.listado_tecnicos.findIndex(function (tec) {
+                                return tec.id_tecnico == _this6.tecnicoPrincipal.id_tecnico;
+                              })] = _this6.tecnicoPrincipal;
+                            }
+                          }
+
                           console.log(data, "data");
                           console.log(servicio);
+                          console.log(_this6.grupoWorkStationElegidos);
+                          console.log(_this6.listado_tecnicos, "TECNISO");
                         }
                       }]
                     });
@@ -885,6 +905,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
             _iterator11.f();
           }
 
+          console.log(this.tecnicoPrincipal);
           console.log(this.grupoWorkStationElegidos);
         }
       }]);

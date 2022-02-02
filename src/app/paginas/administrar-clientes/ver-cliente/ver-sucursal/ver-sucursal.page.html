@@ -203,7 +203,8 @@
                   <ion-card style="width: 50px; margin-top: 0px;">
                     <div>
                       <a  (click)="descargarQrEquipo(equipo)">
-                        <img [src]='equipo.codigo_qr_equipo'  (click)="descargarQrEquipo(equipo)">
+                        <img *ngIf='equipo.actualizado' [src]='equipo.codigo_qr_equipo'  (click)="descargarQrEquipo(equipo)">
+                        <img *ngIf='!equipo.actualizado' [src]='equipo.codigo_qr_equipo'  (click)="descargarQrEquipo(equipo)">
                       </a>
                     </div>
                   </ion-card>
@@ -216,6 +217,7 @@
                 <ion-col size="1">
                   <ion-icon name="trash-outline" color="danger" style="margin-top:15px" (click)="borrar_equipo(equipo,j,i)"></ion-icon>
                   <ion-icon color="primary" name="create-outline" style="padding-left: 5px;" (click)="editName(equipo, grupoEquipo)"></ion-icon> 
+                  <ion-icon name="refresh-outline" (click)="actualizarEquipo(equipo)"></ion-icon>
                 </ion-col>
 
 

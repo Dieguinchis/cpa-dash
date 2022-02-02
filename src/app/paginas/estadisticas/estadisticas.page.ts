@@ -52,7 +52,7 @@ export class EstadisticasPage implements OnInit {
       }
     }
   };
-  public url = "http://192.168.0.71:3000/public/pdfs/informe .pdf"
+  public url = "http://157.230.90.222:3000/public/pdfs/informe .pdf"
 
   constructor(
     public api_clientes: ApiClientesService,

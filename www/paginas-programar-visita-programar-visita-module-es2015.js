@@ -441,8 +441,17 @@ let ProgramarVisitaPage = class ProgramarVisitaPage {
                                 }
                                 console.log(tecnico);
                             });
+                            if (this.tecnicoPrincipal) {
+                                this.tecnicoPrincipal = this.listado_tecnicos.find(tec => tec.id_tecnico == this.tecnicoPrincipal.id_tecnico);
+                                if (!servicio.tecnico.find(tec => tec.id_tecnico == this.tecnicoPrincipal.id_tecnico)) {
+                                    this.tecnicoPrincipal.equipos[h] = [];
+                                    this.listado_tecnicos[this.listado_tecnicos.findIndex(tec => tec.id_tecnico == this.tecnicoPrincipal.id_tecnico)] = this.tecnicoPrincipal;
+                                }
+                            }
                             console.log(data, "data");
                             console.log(servicio);
+                            console.log(this.grupoWorkStationElegidos);
+                            console.log(this.listado_tecnicos, "TECNISO");
                         }
                     }
                 ]
@@ -480,6 +489,7 @@ let ProgramarVisitaPage = class ProgramarVisitaPage {
             grupo.tecnico[0] = this.tecnicoPrincipal;
             grupo.tecnico[0].equipos = aux;
         }
+        console.log(this.tecnicoPrincipal);
         console.log(this.grupoWorkStationElegidos);
     }
 };
