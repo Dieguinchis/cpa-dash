@@ -1342,7 +1342,7 @@ const environment = {
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "version", function() { return version; });
-const version = '0.0.10';
+const version = '0.1.0';
 
 
 /***/ }),

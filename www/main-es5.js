@@ -1998,7 +1998,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
       return version;
     });
 
-    var version = '0.0.10';
+    var version = '0.1.0';
     /***/
   },
 
