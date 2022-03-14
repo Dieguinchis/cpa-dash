@@ -35,7 +35,7 @@ export class EditarVisitaComponent implements OnInit {
     console.log(this.id_formulario);
     this.apiVisitas.getRespuestas(this.id_formulario).then((resp:any) => {
       this.respuestas = resp.respuestas;
-      console.log(this.respuestas);
+      console.log('respuestas',this.respuestas);
       this.apiServicios.ver_servicio(this.id_servicio).subscribe((resp:any) =>{
         this.servicio = resp.result;
         for (let index = 0; index < this.servicio.formulario.length; index++) {

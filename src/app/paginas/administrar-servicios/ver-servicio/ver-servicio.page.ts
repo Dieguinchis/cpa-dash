@@ -81,8 +81,12 @@ export class VerServicioPage implements OnInit {
       showBackdrop:true,
       componentProps: {
         'producto': producto,
+        'servicio': this.servicio
       }
     });
+    modal.onDidDismiss().then(data =>{
+      this.actualizar_informacion();
+    })
     return await modal.present();
   }
 }
