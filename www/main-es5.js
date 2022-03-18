@@ -1,9 +1,3 @@
-function _createForOfIteratorHelper(o, allowArrayLike) { var it; if (typeof Symbol === "undefined" || o[Symbol.iterator] == null) { if (Array.isArray(o) || (it = _unsupportedIterableToArray(o)) || allowArrayLike && o && typeof o.length === "number") { if (it) o = it; var i = 0; var F = function F() {}; return { s: F, n: function n() { if (i >= o.length) return { done: true }; return { done: false, value: o[i++] }; }, e: function e(_e) { throw _e; }, f: F }; } throw new TypeError("Invalid attempt to iterate non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); } var normalCompletion = true, didErr = false, err; return { s: function s() { it = o[Symbol.iterator](); }, n: function n() { var step = it.next(); normalCompletion = step.done; return step; }, e: function e(_e2) { didErr = true; err = _e2; }, f: function f() { try { if (!normalCompletion && it["return"] != null) it["return"](); } finally { if (didErr) throw err; } } }; }
-
-function _unsupportedIterableToArray(o, minLen) { if (!o) return; if (typeof o === "string") return _arrayLikeToArray(o, minLen); var n = Object.prototype.toString.call(o).slice(8, -1); if (n === "Object" && o.constructor) n = o.constructor.name; if (n === "Map" || n === "Set") return Array.from(o); if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return _arrayLikeToArray(o, minLen); }
-
-function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len = arr.length; for (var i = 0, arr2 = new Array(len); i < len; i++) { arr2[i] = arr[i]; } return arr2; }
-
 function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
 
 function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
@@ -198,7 +192,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
     /* harmony default export */
 
 
-    __webpack_exports__["default"] = "<ion-content>\n  <ion-item lines=\"full\">\n    <ion-label>\n      Estado del Puesto:\n    </ion-label>\n    <ion-select [(ngModel)]=\"opcionPredeterminada[0]\">\n      <ion-select-option *ngFor=\"let opcion of opcionesPuesto\" [value]=\"opcion.tipo_opcion\">{{opcion.tipo_opcion}}</ion-select-option>\n      <ion-select-option [value]=\"null\" >Sin Preselección</ion-select-option>\n    </ion-select>\n  </ion-item>\n  <ion-item lines=\"full\">\n    <ion-label>\n      Estado del Cebo:\n    </ion-label>\n    <ion-select [(ngModel)]=\"opcionPredeterminada[1]\">\n      <ion-select-option *ngFor=\"let opcion of opcionesCebo\" [value]=\"opcion.tipo_opcion\">{{opcion.tipo_opcion}}</ion-select-option>\n      <ion-select-option [value]=\"null\" >Sin Preselección</ion-select-option>\n    </ion-select>\n  </ion-item>\n  <ion-row>\n    <ion-col class=\"ion-text-center\">\n      <div>\n       <ion-button (click)=\"modalDismiss()\" style=\"width: 50%\" class = \"button\">Volver</ion-button>\n      </div>\n    </ion-col>\n    <ion-col class=\"ion-text-center\">\n      <div>\n       <ion-button  (click)=\"guardar()\" style=\"width: 50%\" class = \"button\">Guardar</ion-button>\n      </div>\n    </ion-col>\n  </ion-row>\n</ion-content>\n";
+    __webpack_exports__["default"] = "<ion-header>\n  <ion-toolbar color=\"primary\">\n    <ion-title>Modificar Producto</ion-title>\n  </ion-toolbar>\n</ion-header>\n<ion-content>\n  <ion-item lines=\"full\">\n    <ion-label class=\"titulos\">\n      Nombre del producto:\n    </ion-label>\n    <ion-input [(ngModel)]=\"producto.nombre_producto\">\n    </ion-input>\n  </ion-item>\n\n  <ion-item lines=\"full\">\n    <ion-label class=\"titulos\" >\n      Fecha de vencimiento:\n    </ion-label>\n    <ion-input [(ngModel)]=\"producto.fecha_vencimiento\" type=\"date\">\n    </ion-input>\n  </ion-item>\n\n  <ion-item lines=\"full\">\n    <ion-label class=\"titulos\" >\n      Lote:\n    </ion-label>\n    <ion-input [(ngModel)]=\"producto.lote\">\n    </ion-input>\n  </ion-item>\n\n  <ion-item lines=\"full\">\n    <ion-label class=\"titulos\">\n      Tipo de producto:\n    </ion-label>\n    <ion-select [(ngModel)]=\"producto.tipo_producto\" (ionChange)=\"select_tipo_producto()\">\n      <ion-select-option *ngFor=\"let opcion of servicio.formulario[indexTipoProducto].opciones\" [value]=\"opcion\">{{opcion.name}}</ion-select-option>\n      <ion-select-option value=\"nuevo\">Nuevo tipo</ion-select-option>\n    </ion-select>\n  </ion-item>\n\n  <div style=\"width: 100%; text-align: center; margin-top: 25px;\">\n    <ion-button (click)=\"modificar()\">Modificar</ion-button>   \n  </div>\n\n  <div style=\"margin-top: 25px\">\n    <img class=\"imagen_empresa\" src='../../../assets/LogoCPA-01.png'>\n  </div>\n</ion-content>";
     /***/
   },
 
@@ -893,7 +887,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
           console.log(this.id_formulario);
           this.apiVisitas.getRespuestas(this.id_formulario).then(function (resp) {
             _this5.respuestas = resp.respuestas;
-            console.log(_this5.respuestas);
+            console.log('respuestas', _this5.respuestas);
 
             _this5.apiServicios.ver_servicio(_this5.id_servicio).subscribe(function (resp) {
               _this5.servicio = resp.result;
@@ -1637,7 +1631,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
     "./src/app/paginas/administrar-servicios/servicios/api-servicios.service.ts");
 
     var ModificarProductoComponent = /*#__PURE__*/function () {
-      function ModificarProductoComponent(apiServicios, navParams, modalController) {
+      function ModificarProductoComponent(apiServicios, navParams, modalController, alertController) {
         var _this8 = this;
 
         _classCallCheck(this, ModificarProductoComponent);
@@ -1645,44 +1639,27 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
         this.apiServicios = apiServicios;
         this.navParams = navParams;
         this.modalController = modalController;
+        this.alertController = alertController;
         this.opcionesCebo = [];
         this.opcionesPuesto = [];
         this.opcionPredeterminada = [];
         this.producto = navParams.get('producto');
-        apiServicios.ver_opciones_producto(this.producto.id_servicio).subscribe(function (resp) {
-          var opciones;
-          console.log(resp);
-          opciones = resp.result;
+        this.servicio = navParams.get('servicio');
 
-          var _iterator = _createForOfIteratorHelper(opciones),
-              _step;
-
-          try {
-            for (_iterator.s(); !(_step = _iterator.n()).done;) {
-              var opcion = _step.value;
-
-              if (opcion.id_campo == 56) {
-                _this8.opcionesPuesto.push(opcion);
-              } else {
-                _this8.opcionesCebo.push(opcion);
-              }
-            }
-          } catch (err) {
-            _iterator.e(err);
-          } finally {
-            _iterator.f();
+        for (var i = 0; i < this.servicio.formulario.length; i++) {
+          if (this.servicio.formulario[i].nombreCampo == 'Tipo de producto') {
+            this.indexTipoProducto = i;
           }
+        }
 
-          if (_this8.producto.opcion_predeterminada) {
-            _this8.opcionPredeterminada[0] = _this8.producto.opcion_predeterminada.split(' - ')[0];
-            _this8.opcionPredeterminada[1] = _this8.producto.opcion_predeterminada.split(' - ')[1];
-          }
-
-          console.log(_this8.opcionPredeterminada);
-          console.log("PRODUCTO", _this8.producto);
-          console.log("CEBO", _this8.opcionesCebo);
-          console.log("PUESTO", _this8.opcionesPuesto);
+        var year = this.producto.fecha_vencimiento.split('-')[2];
+        var day = this.producto.fecha_vencimiento.split('-')[0];
+        var month = this.producto.fecha_vencimiento.split('-')[1];
+        this.producto.fecha_vencimiento = year + '-' + month + '-' + day;
+        this.producto.tipo_producto = this.servicio.formulario[this.indexTipoProducto].opciones.find(function (opt) {
+          return opt.name == _this8.producto.tipo_producto;
         });
+        console.log('servide', this.servicio);
       }
 
       _createClass(ModificarProductoComponent, [{
@@ -1707,6 +1684,116 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
         value: function modalDismiss() {
           this.modalController.dismiss();
         }
+      }, {
+        key: "select_tipo_producto",
+        value: function select_tipo_producto() {
+          if (this.producto.tipo_producto == 'nuevo') {
+            this.alert_nuevo_tipo();
+          }
+        }
+      }, {
+        key: "alert_nuevo_tipo",
+        value: function alert_nuevo_tipo() {
+          return Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"])(this, void 0, void 0, /*#__PURE__*/regeneratorRuntime.mark(function _callee3() {
+            var _this10 = this;
+
+            var alert;
+            return regeneratorRuntime.wrap(function _callee3$(_context3) {
+              while (1) {
+                switch (_context3.prev = _context3.next) {
+                  case 0:
+                    _context3.next = 2;
+                    return this.alertController.create({
+                      header: 'Crear nuevo tipo de producto',
+                      // message: 'Ingrese el nombre',
+                      inputs: [{
+                        name: 'name',
+                        type: 'text',
+                        placeholder: 'Ingrese el nombre'
+                      }],
+                      buttons: [{
+                        text: 'Crear',
+                        handler: function handler(data) {
+                          console.log(data);
+
+                          _this10.crear_tipo_producto(data.name);
+                        }
+                      }, {
+                        text: 'Cancelar',
+                        role: 'cancel',
+                        cssClass: 'secondary',
+                        handler: function handler() {
+                          console.log('Confirm Cancel');
+                        }
+                      }]
+                    });
+
+                  case 2:
+                    alert = _context3.sent;
+                    _context3.next = 5;
+                    return alert.present();
+
+                  case 5:
+                  case "end":
+                    return _context3.stop();
+                }
+              }
+            }, _callee3, this);
+          }));
+        }
+      }, {
+        key: "crear_tipo_producto",
+        value: function crear_tipo_producto(nombre) {
+          var _this11 = this;
+
+          this.servicio.formulario.forEach(function (element) {
+            if (element.nombreCampo == "Tipo de producto") {
+              element.opciones.push({
+                name: nombre
+              });
+            }
+          });
+          this.apiServicios.update_servicio(this.servicio).subscribe(function (data) {
+            console.log(data); // location.reload();
+
+            _this11.ngOnInit();
+          }), function (error) {
+            return console.log(error);
+          };
+        }
+      }, {
+        key: "modificar",
+        value: function modificar() {
+          var _this12 = this;
+
+          var year = this.producto.fecha_vencimiento.split('-')[0];
+          var day = this.producto.fecha_vencimiento.split('-')[2];
+          var month = this.producto.fecha_vencimiento.split('-')[1];
+          this.producto.fecha_vencimiento = day + "-" + month + "-" + year;
+          var id_serv = Number(JSON.stringify(this.servicio.listaProductos[0].id_servicio));
+          console.log({
+            id_servicio: id_serv,
+            nombre_producto: this.producto.nombre_producto,
+            fecha_vencimiento: this.producto.fecha_vencimiento,
+            lote: this.producto.lote,
+            tipo_producto: this.producto.tipo_producto.name,
+            id_producto: this.producto.id_producto
+          });
+          this.apiServicios.producto_update({
+            id_servicio: id_serv,
+            nombre_producto: this.producto.nombre_producto,
+            fecha_vencimiento: this.producto.fecha_vencimiento,
+            lote: this.producto.lote,
+            tipo_producto: this.producto.tipo_producto.name,
+            id_producto: this.producto.id_producto
+          }).subscribe(function (data) {
+            console.log(data);
+
+            _this12.modalController.dismiss();
+          }, function (error) {
+            console.log(error);
+          });
+        }
       }]);
 
       return ModificarProductoComponent;
@@ -1719,6 +1806,8 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
         type: _ionic_angular__WEBPACK_IMPORTED_MODULE_2__["NavParams"]
       }, {
         type: _ionic_angular__WEBPACK_IMPORTED_MODULE_2__["ModalController"]
+      }, {
+        type: _ionic_angular__WEBPACK_IMPORTED_MODULE_2__["AlertController"]
       }];
     };
 
@@ -1844,11 +1933,11 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
       }, {
         key: "getAllVisitas",
         value: function getAllVisitas() {
-          var _this10 = this;
+          var _this13 = this;
 
           console.log(this.apiDir);
           return new Promise(function (resolve, reject) {
-            _this10.http.get(_this10.apiDir + '/visitas/', _this10.requestOptions).subscribe(function (response) {
+            _this13.http.get(_this13.apiDir + '/visitas/', _this13.requestOptions).subscribe(function (response) {
               resolve(response);
             }, function (error) {
               reject(error);
@@ -1858,11 +1947,11 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
       }, {
         key: "getRespuestas",
         value: function getRespuestas(id_formulario) {
-          var _this11 = this;
+          var _this14 = this;
 
           console.log(this.apiDir);
           return new Promise(function (resolve, reject) {
-            _this11.http.get(_this11.apiDir + '/formularios/respuestas/' + id_formulario.toString(), _this11.requestOptions).subscribe(function (response) {
+            _this14.http.get(_this14.apiDir + '/formularios/respuestas/' + id_formulario.toString(), _this14.requestOptions).subscribe(function (response) {
               resolve(response);
             }, function (error) {
               reject(error);
@@ -1872,11 +1961,11 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
       }, {
         key: "cambiarRespuestas",
         value: function cambiarRespuestas(respuesta) {
-          var _this12 = this;
+          var _this15 = this;
 
           console.log(this.apiDir);
           return new Promise(function (resolve, reject) {
-            _this12.http.put(_this12.apiDir + '/formularios/respuestas', respuesta, _this12.requestOptions).subscribe(function (response) {
+            _this15.http.put(_this15.apiDir + '/formularios/respuestas', respuesta, _this15.requestOptions).subscribe(function (response) {
               resolve(response);
             }, function (error) {
               reject(error);
@@ -1886,11 +1975,11 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
       }, {
         key: "actualizar_equipo",
         value: function actualizar_equipo(parametros) {
-          var _this13 = this;
+          var _this16 = this;
 
           console.log(this.apiDir);
           return new Promise(function (resolve, reject) {
-            _this13.http.post(_this13.apiDir + '/servicios/equipos/update', parametros, _this13.requestOptions).subscribe(function (response) {
+            _this16.http.post(_this16.apiDir + '/servicios/equipos/update', parametros, _this16.requestOptions).subscribe(function (response) {
               resolve(response);
             }, function (error) {
               reject(error);
@@ -1900,11 +1989,11 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
       }, {
         key: "getEquipo",
         value: function getEquipo(id_equipo) {
-          var _this14 = this;
+          var _this17 = this;
 
           console.log(this.apiDir);
           return new Promise(function (resolve, reject) {
-            _this14.http.get(_this14.apiDir + '/servicios/equipos/' + id_equipo, _this14.requestOptions).subscribe(function (response) {
+            _this17.http.get(_this17.apiDir + '/servicios/equipos/' + id_equipo, _this17.requestOptions).subscribe(function (response) {
               resolve(response);
             }, function (error) {
               reject(error);

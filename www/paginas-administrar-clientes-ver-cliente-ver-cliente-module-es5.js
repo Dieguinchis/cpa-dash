@@ -1835,6 +1835,8 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
 
             if (data.result != undefined) {
               data.result.forEach(function (element) {
+                var _a;
+
                 if (element.zona == element.nombre_equipo) {
                   element.nombre = element.nombre_equipo + ' - ' + element.nro_equipo;
                 } else {
@@ -1853,7 +1855,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
                       return producto.id_producto == element.producto_predeterminado;
                     });
 
-                    element.producto_predeterminado_nombre = product.nombre_producto + ' - ' + product.tipo_producto;
+                    element.producto_predeterminado_nombre = (product === null || product === void 0 ? void 0 : product.nombre_producto) + ' - ' + (product === null || product === void 0 ? void 0 : product.tipo_producto);
                   }
 
                   array[i].equipos.push({
@@ -1877,12 +1879,13 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
                   }
 
                   flag = element.id_equipo_grupo;
+                  console.log('element?', element);
                   array.push({
-                    nombre_equipo_grupo: element.nombre_equipo_grupo,
-                    id_equipo_grupo: element.id_equipo_grupo,
+                    nombre_equipo_grupo: element.nombre_equipo_grupo ? element.nombre_equipo_grupo : null,
+                    id_equipo_grupo: element.id_equipo_grupo ? element.id_equipo_grupo : null,
                     equipos: [],
-                    plano: _this18.sucursal.planos.find(function (plano) {
-                      return plano.id_plano == element.id_plano;
+                    plano: (_a = _this18.sucursal) === null || _a === void 0 ? void 0 : _a.planos.find(function (plano) {
+                      return plano.id_plano == (element.id_plano ? element.id_plano : null);
                     })
                   });
 
@@ -1893,7 +1896,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
                       return producto.id_producto == element.producto_predeterminado;
                     });
 
-                    element.producto_predeterminado_nombre = _product.nombre_producto + ' - ' + _product.tipo_producto;
+                    element.producto_predeterminado_nombre = (_product === null || _product === void 0 ? void 0 : _product.nombre_producto) + ' - ' + (_product === null || _product === void 0 ? void 0 : _product.tipo_producto);
                   }
 
                   array[i].equipos.push({

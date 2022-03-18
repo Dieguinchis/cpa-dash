@@ -961,6 +961,7 @@ let VerSucursalPage = class VerSucursalPage {
             var first = true;
             if (data.result != undefined) {
                 data.result.forEach((element) => {
+                    var _a;
                     if (element.zona == element.nombre_equipo) {
                         element.nombre = element.nombre_equipo + ' - ' + element.nro_equipo;
                     }
@@ -972,7 +973,7 @@ let VerSucursalPage = class VerSucursalPage {
                         this.showDeleteQr[i].push({ show: false, count: 0 });
                         if (element.producto_predeterminado) {
                             const product = this.productos.find(producto => producto.id_producto == element.producto_predeterminado);
-                            element.producto_predeterminado_nombre = product.nombre_producto + ' - ' + product.tipo_producto;
+                            element.producto_predeterminado_nombre = (product === null || product === void 0 ? void 0 : product.nombre_producto) + ' - ' + (product === null || product === void 0 ? void 0 : product.tipo_producto);
                         }
                         array[i].equipos.push({ id_equipo: element.id_equipo, id_servicio: element.id_servicio, id_sucursal: element.id_sucursal, nombre_equipo: element.nombre_equipo, codigo_qr_equipo: element.codigo_qr_equipo, estado_servicio: element.estado_servicio, nombre_servicio: element.nombre_servicio, producto_predeterminado: element.producto_predeterminado, producto_predeterminado_nombre: element.producto_predeterminado_nombre, zona: element.zona, nro_equipo: element.nro_equipo, nombre: element.nombre });
                         first = false;
@@ -982,11 +983,12 @@ let VerSucursalPage = class VerSucursalPage {
                             i++;
                         }
                         flag = element.id_equipo_grupo;
-                        array.push({ nombre_equipo_grupo: element.nombre_equipo_grupo, id_equipo_grupo: element.id_equipo_grupo, equipos: [], plano: this.sucursal.planos.find(plano => plano.id_plano == element.id_plano) });
+                        console.log('element?', element);
+                        array.push({ nombre_equipo_grupo: (element.nombre_equipo_grupo ? element.nombre_equipo_grupo : null), id_equipo_grupo: (element.id_equipo_grupo ? element.id_equipo_grupo : null), equipos: [], plano: (_a = this.sucursal) === null || _a === void 0 ? void 0 : _a.planos.find(plano => plano.id_plano == (element.id_plano ? element.id_plano : null)) });
                         this.showDeleteQr.push([]);
                         if (element.producto_predeterminado) {
                             const product = this.productos.find(producto => producto.id_producto == element.producto_predeterminado);
-                            element.producto_predeterminado_nombre = product.nombre_producto + ' - ' + product.tipo_producto;
+                            element.producto_predeterminado_nombre = (product === null || product === void 0 ? void 0 : product.nombre_producto) + ' - ' + (product === null || product === void 0 ? void 0 : product.tipo_producto);
                         }
                         array[i].equipos.push({ id_equipo: element.id_equipo, id_servicio: element.id_servicio, id_sucursal: element.id_sucursal, nombre_equipo: element.nombre_equipo, codigo_qr_equipo: element.codigo_qr_equipo, estado_servicio: element.estado_servicio, nombre_servicio: element.nombre_servicio, producto_predeterminado: element.producto_predeterminado, producto_predeterminado_nombre: element.producto_predeterminado_nombre, zona: element.zona, nro_equipo: element.nro_equipo, nombre: element.nombre });
                         this.showDeleteQr[i].push({ show: false, count: 0 });

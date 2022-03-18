@@ -726,11 +726,21 @@ descargarQrAllWorkstations(){
   async elegirProducto(equipo){
     var input = [];
     for (let producto of this.productos){
-      input.push({
-        label:producto.nombre_producto + ' - ' + producto.tipo_producto,
-        value:producto.id_producto,
-        type:"radio"
-      })
+      if (equipo.producto_predeterminado == producto.id_producto) {
+        input.push({
+          label:producto.nombre_producto + ' - ' + producto.tipo_producto,
+          value:producto.id_producto,
+          checked:true,
+          type:"radio"
+        })
+      }else{
+        input.push({
+          label:producto.nombre_producto + ' - ' + producto.tipo_producto,
+          value:producto.id_producto,
+          type:"radio"
+        })
+      }
+
     }
     input.push({
         label:'Sin Producto',
@@ -752,6 +762,7 @@ descargarQrAllWorkstations(){
         {
           text: 'Aceptar',
           handler: (data) => {
+            var equipoAux = JSON.parse(JSON.stringify(equipo))
             equipo.producto_predeterminado = data;
             equipo.estado_servicio = undefined;
             equipo.modificable = undefined;
@@ -765,9 +776,11 @@ descargarQrAllWorkstations(){
               aux = resp;
               aux = aux.equipoCreado.retorno;
               if (aux.producto_predeterminado) {
+                equipo.nombre_servicio = equipoAux.nombre_servicio;
                 equipo.producto_predeterminado = this.productos.find(producto => producto.id_producto == aux.producto_predeterminado).id_producto;
                 equipo.producto_predeterminado_nombre = this.productos.find(producto => producto.id_producto == aux.producto_predeterminado).nombre_producto +' - '+ this.productos.find(producto => producto.id_producto == aux.producto_predeterminado).tipo_producto;  
               }else{
+                equipo.nombre_servicio = equipoAux.nombre_servicio;
                 equipo.producto_predeterminado = null;
                 equipo.producto_predeterminado_nombre = null;
   

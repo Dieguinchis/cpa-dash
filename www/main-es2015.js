@@ -309,7 +309,7 @@ __webpack_require__.r(__webpack_exports__);
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony default export */ __webpack_exports__["default"] = ("<ion-content>\n  <ion-item lines=\"full\">\n    <ion-label>\n      Estado del Puesto:\n    </ion-label>\n    <ion-select [(ngModel)]=\"opcionPredeterminada[0]\">\n      <ion-select-option *ngFor=\"let opcion of opcionesPuesto\" [value]=\"opcion.tipo_opcion\">{{opcion.tipo_opcion}}</ion-select-option>\n      <ion-select-option [value]=\"null\" >Sin Preselección</ion-select-option>\n    </ion-select>\n  </ion-item>\n  <ion-item lines=\"full\">\n    <ion-label>\n      Estado del Cebo:\n    </ion-label>\n    <ion-select [(ngModel)]=\"opcionPredeterminada[1]\">\n      <ion-select-option *ngFor=\"let opcion of opcionesCebo\" [value]=\"opcion.tipo_opcion\">{{opcion.tipo_opcion}}</ion-select-option>\n      <ion-select-option [value]=\"null\" >Sin Preselección</ion-select-option>\n    </ion-select>\n  </ion-item>\n  <ion-row>\n    <ion-col class=\"ion-text-center\">\n      <div>\n       <ion-button (click)=\"modalDismiss()\" style=\"width: 50%\" class = \"button\">Volver</ion-button>\n      </div>\n    </ion-col>\n    <ion-col class=\"ion-text-center\">\n      <div>\n       <ion-button  (click)=\"guardar()\" style=\"width: 50%\" class = \"button\">Guardar</ion-button>\n      </div>\n    </ion-col>\n  </ion-row>\n</ion-content>\n");
+/* harmony default export */ __webpack_exports__["default"] = ("<ion-header>\n  <ion-toolbar color=\"primary\">\n    <ion-title>Modificar Producto</ion-title>\n  </ion-toolbar>\n</ion-header>\n<ion-content>\n  <ion-item lines=\"full\">\n    <ion-label class=\"titulos\">\n      Nombre del producto:\n    </ion-label>\n    <ion-input [(ngModel)]=\"producto.nombre_producto\">\n    </ion-input>\n  </ion-item>\n\n  <ion-item lines=\"full\">\n    <ion-label class=\"titulos\" >\n      Fecha de vencimiento:\n    </ion-label>\n    <ion-input [(ngModel)]=\"producto.fecha_vencimiento\" type=\"date\">\n    </ion-input>\n  </ion-item>\n\n  <ion-item lines=\"full\">\n    <ion-label class=\"titulos\" >\n      Lote:\n    </ion-label>\n    <ion-input [(ngModel)]=\"producto.lote\">\n    </ion-input>\n  </ion-item>\n\n  <ion-item lines=\"full\">\n    <ion-label class=\"titulos\">\n      Tipo de producto:\n    </ion-label>\n    <ion-select [(ngModel)]=\"producto.tipo_producto\" (ionChange)=\"select_tipo_producto()\">\n      <ion-select-option *ngFor=\"let opcion of servicio.formulario[indexTipoProducto].opciones\" [value]=\"opcion\">{{opcion.name}}</ion-select-option>\n      <ion-select-option value=\"nuevo\">Nuevo tipo</ion-select-option>\n    </ion-select>\n  </ion-item>\n\n  <div style=\"width: 100%; text-align: center; margin-top: 25px;\">\n    <ion-button (click)=\"modificar()\">Modificar</ion-button>   \n  </div>\n\n  <div style=\"margin-top: 25px\">\n    <img class=\"imagen_empresa\" src='../../../assets/LogoCPA-01.png'>\n  </div>\n</ion-content>");
 
 /***/ }),
 
@@ -684,7 +684,7 @@ let EditarVisitaComponent = class EditarVisitaComponent {
         console.log(this.id_formulario);
         this.apiVisitas.getRespuestas(this.id_formulario).then((resp) => {
             this.respuestas = resp.respuestas;
-            console.log(this.respuestas);
+            console.log('respuestas', this.respuestas);
             this.apiServicios.ver_servicio(this.id_servicio).subscribe((resp) => {
                 this.servicio = resp.result;
                 for (let index = 0; index < this.servicio.formulario.length; index++) {
@@ -1109,35 +1109,27 @@ __webpack_require__.r(__webpack_exports__);
 
 
 let ModificarProductoComponent = class ModificarProductoComponent {
-    constructor(apiServicios, navParams, modalController) {
+    constructor(apiServicios, navParams, modalController, alertController) {
         this.apiServicios = apiServicios;
         this.navParams = navParams;
         this.modalController = modalController;
+        this.alertController = alertController;
         this.opcionesCebo = [];
         this.opcionesPuesto = [];
         this.opcionPredeterminada = [];
         this.producto = navParams.get('producto');
-        apiServicios.ver_opciones_producto(this.producto.id_servicio).subscribe((resp) => {
-            var opciones;
-            console.log(resp);
-            opciones = resp.result;
-            for (let opcion of opciones) {
-                if (opcion.id_campo == 56) {
-                    this.opcionesPuesto.push(opcion);
-                }
-                else {
-                    this.opcionesCebo.push(opcion);
-                }
+        this.servicio = navParams.get('servicio');
+        for (let i = 0; i < this.servicio.formulario.length; i++) {
+            if (this.servicio.formulario[i].nombreCampo == 'Tipo de producto') {
+                this.indexTipoProducto = i;
             }
-            if (this.producto.opcion_predeterminada) {
-                this.opcionPredeterminada[0] = this.producto.opcion_predeterminada.split(' - ')[0];
-                this.opcionPredeterminada[1] = this.producto.opcion_predeterminada.split(' - ')[1];
-            }
-            console.log(this.opcionPredeterminada);
-            console.log("PRODUCTO", this.producto);
-            console.log("CEBO", this.opcionesCebo);
-            console.log("PUESTO", this.opcionesPuesto);
-        });
+        }
+        var year = this.producto.fecha_vencimiento.split('-')[2];
+        var day = this.producto.fecha_vencimiento.split('-')[0];
+        var month = this.producto.fecha_vencimiento.split('-')[1];
+        this.producto.fecha_vencimiento = year + '-' + month + '-' + day;
+        this.producto.tipo_producto = this.servicio.formulario[this.indexTipoProducto].opciones.find(opt => opt.name == this.producto.tipo_producto);
+        console.log('servide', this.servicio);
     }
     ngOnInit() { }
     guardar() {
@@ -1152,11 +1144,75 @@ let ModificarProductoComponent = class ModificarProductoComponent {
     modalDismiss() {
         this.modalController.dismiss();
     }
+    select_tipo_producto() {
+        if (this.producto.tipo_producto == 'nuevo') {
+            this.alert_nuevo_tipo();
+        }
+    }
+    alert_nuevo_tipo() {
+        return Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"])(this, void 0, void 0, function* () {
+            const alert = yield this.alertController.create({
+                header: 'Crear nuevo tipo de producto',
+                // message: 'Ingrese el nombre',
+                inputs: [
+                    {
+                        name: 'name',
+                        type: 'text',
+                        placeholder: 'Ingrese el nombre'
+                    }
+                ],
+                buttons: [
+                    {
+                        text: 'Crear',
+                        handler: (data) => {
+                            console.log(data);
+                            this.crear_tipo_producto(data.name);
+                        }
+                    }, {
+                        text: 'Cancelar',
+                        role: 'cancel',
+                        cssClass: 'secondary',
+                        handler: () => {
+                            console.log('Confirm Cancel');
+                        }
+                    }
+                ]
+            });
+            yield alert.present();
+        });
+    }
+    crear_tipo_producto(nombre) {
+        this.servicio.formulario.forEach(element => {
+            if (element.nombreCampo == "Tipo de producto") {
+                element.opciones.push({ name: nombre });
+            }
+        });
+        this.apiServicios.update_servicio(this.servicio).subscribe(data => {
+            console.log(data);
+            // location.reload();
+            this.ngOnInit();
+        }), (error => console.log(error));
+    }
+    modificar() {
+        var year = this.producto.fecha_vencimiento.split('-')[0];
+        var day = this.producto.fecha_vencimiento.split('-')[2];
+        var month = this.producto.fecha_vencimiento.split('-')[1];
+        this.producto.fecha_vencimiento = day + "-" + month + "-" + year;
+        var id_serv = Number(JSON.stringify(this.servicio.listaProductos[0].id_servicio));
+        console.log({ id_servicio: id_serv, nombre_producto: this.producto.nombre_producto, fecha_vencimiento: this.producto.fecha_vencimiento, lote: this.producto.lote, tipo_producto: this.producto.tipo_producto.name, id_producto: this.producto.id_producto });
+        this.apiServicios.producto_update({ id_servicio: id_serv, nombre_producto: this.producto.nombre_producto, fecha_vencimiento: this.producto.fecha_vencimiento, lote: this.producto.lote, tipo_producto: this.producto.tipo_producto.name, id_producto: this.producto.id_producto }).subscribe(data => {
+            console.log(data);
+            this.modalController.dismiss();
+        }, (error => {
+            console.log(error);
+        }));
+    }
 };
 ModificarProductoComponent.ctorParameters = () => [
     { type: _servicios_api_servicios_service__WEBPACK_IMPORTED_MODULE_3__["ApiServiciosService"] },
     { type: _ionic_angular__WEBPACK_IMPORTED_MODULE_2__["NavParams"] },
-    { type: _ionic_angular__WEBPACK_IMPORTED_MODULE_2__["ModalController"] }
+    { type: _ionic_angular__WEBPACK_IMPORTED_MODULE_2__["ModalController"] },
+    { type: _ionic_angular__WEBPACK_IMPORTED_MODULE_2__["AlertController"] }
 ];
 ModificarProductoComponent = Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"])([
     Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["Component"])({
