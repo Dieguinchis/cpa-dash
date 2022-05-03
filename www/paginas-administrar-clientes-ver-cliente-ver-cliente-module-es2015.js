@@ -1368,7 +1368,7 @@ let VerSucursalPage = class VerSucursalPage {
     }
     test($event) {
         console.warn($event);
-        // window.open('http://192.168.0.71:3000/getZip')
+        // window.open('http://157.230.90.222:3000/getZip')
     }
     descargar() {
     }
@@ -1376,7 +1376,7 @@ let VerSucursalPage = class VerSucursalPage {
         // console.warn(1)
         var link = document.createElement("a");
         link.download = this.sucursal.sucursal[0].id_sucursal + ".png";
-        link.href = "http://192.168.0.71:3000/getfile/sucursales/" + this.sucursal.sucursal[0].id_sucursal;
+        link.href = "http://157.230.90.222:3000/getfile/sucursales/" + this.sucursal.sucursal[0].id_sucursal;
         link.click();
     }
     descargarQrEquipo(equipo) {
@@ -1384,7 +1384,7 @@ let VerSucursalPage = class VerSucursalPage {
         // console.warn(equipo.id_equipo)
         var link = document.createElement("a");
         link.download = equipo.id_equipo + ".png";
-        link.href = "http://192.168.0.71:3000/getfile/equipos/" + equipo.id_equipo;
+        link.href = "http://157.230.90.222:3000/getfile/equipos/" + equipo.id_equipo;
         link.click();
     }
     descargarQrThisWorkstation(grupoEquipo) {
@@ -1401,7 +1401,7 @@ let VerSucursalPage = class VerSucursalPage {
         }
         var link = document.createElement("a");
         link.download = "qrs.png";
-        link.href = "http://192.168.0.71:3000/getZip?type=equipos&name=" + grupoEquipo.nombre_equipo_grupo + "&data=" + ids;
+        link.href = "http://157.230.90.222:3000/getZip?type=equipos&name=" + grupoEquipo.nombre_equipo_grupo + "&data=" + ids;
         link.click();
     }
     descargarAllQrSucursal() {
@@ -1424,7 +1424,7 @@ let VerSucursalPage = class VerSucursalPage {
         }
         var link = document.createElement("a");
         link.download = "qrs.png";
-        link.href = "http://192.168.0.71:3000/getZip?type=all&name=" + this.sucursal.sucursal[0].razon_social_sucursal + "&data=" + ids;
+        link.href = "http://157.230.90.222:3000/getZip?type=all&name=" + this.sucursal.sucursal[0].razon_social_sucursal + "&data=" + ids;
         link.click();
     }
     descargarQrAllWorkstations() {
@@ -1446,18 +1446,28 @@ let VerSucursalPage = class VerSucursalPage {
         }
         var link = document.createElement("a");
         link.download = "qrs.png";
-        link.href = "http://192.168.0.71:3000/getZip?type=equipos&name=equipos_" + this.sucursal.sucursal[0].razon_social_sucursal + "&data=" + ids;
+        link.href = "http://157.230.90.222:3000/getZip?type=equipos&name=equipos_" + this.sucursal.sucursal[0].razon_social_sucursal + "&data=" + ids;
         link.click();
     }
     elegirProducto(equipo) {
         return Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"])(this, void 0, void 0, function* () {
             var input = [];
             for (let producto of this.productos) {
-                input.push({
-                    label: producto.nombre_producto + ' - ' + producto.tipo_producto,
-                    value: producto.id_producto,
-                    type: "radio"
-                });
+                if (equipo.producto_predeterminado == producto.id_producto) {
+                    input.push({
+                        label: producto.nombre_producto + ' - ' + producto.tipo_producto,
+                        value: producto.id_producto,
+                        checked: true,
+                        type: "radio"
+                    });
+                }
+                else {
+                    input.push({
+                        label: producto.nombre_producto + ' - ' + producto.tipo_producto,
+                        value: producto.id_producto,
+                        type: "radio"
+                    });
+                }
             }
             input.push({
                 label: 'Sin Producto',
@@ -1478,6 +1488,7 @@ let VerSucursalPage = class VerSucursalPage {
                     {
                         text: 'Aceptar',
                         handler: (data) => {
+                            var equipoAux = JSON.parse(JSON.stringify(equipo));
                             equipo.producto_predeterminado = data;
                             equipo.estado_servicio = undefined;
                             equipo.modificable = undefined;
@@ -1491,10 +1502,12 @@ let VerSucursalPage = class VerSucursalPage {
                                 aux = resp;
                                 aux = aux.equipoCreado.retorno;
                                 if (aux.producto_predeterminado) {
+                                    equipo.nombre_servicio = equipoAux.nombre_servicio;
                                     equipo.producto_predeterminado = this.productos.find(producto => producto.id_producto == aux.producto_predeterminado).id_producto;
                                     equipo.producto_predeterminado_nombre = this.productos.find(producto => producto.id_producto == aux.producto_predeterminado).nombre_producto + ' - ' + this.productos.find(producto => producto.id_producto == aux.producto_predeterminado).tipo_producto;
                                 }
                                 else {
+                                    equipo.nombre_servicio = equipoAux.nombre_servicio;
                                     equipo.producto_predeterminado = null;
                                     equipo.producto_predeterminado_nombre = null;
                                 }

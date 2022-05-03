@@ -600,7 +600,7 @@ __webpack_require__.r(__webpack_exports__);
 let ServicioLoginService = class ServicioLoginService {
     constructor(http) {
         this.http = http;
-        this.apiDir = "http://192.168.0.71:3000";
+        this.apiDir = "http://157.230.90.222:3000";
         this.requestOptions = {
             headers: new _angular_common_http__WEBPACK_IMPORTED_MODULE_2__["HttpHeaders"]({
                 'Content-Type': 'application/json',
@@ -986,7 +986,7 @@ __webpack_require__.r(__webpack_exports__);
 let ApiServiciosService = class ApiServiciosService {
     constructor(http) {
         this.http = http;
-        this.apiDir = "http://192.168.0.71:3000";
+        this.apiDir = "http://157.230.90.222:3000";
         this.requestOptions = {
             headers: new _angular_common_http__WEBPACK_IMPORTED_MODULE_2__["HttpHeaders"]({
                 'Content-Type': 'application/json',
@@ -1247,7 +1247,7 @@ __webpack_require__.r(__webpack_exports__);
 let ApiVisitasService = class ApiVisitasService {
     constructor(http) {
         this.http = http;
-        this.apiDir = "http://192.168.0.71:3000";
+        this.apiDir = "http://157.230.90.222:3000";
         this.requestOptions = {
             headers: new _angular_common_http__WEBPACK_IMPORTED_MODULE_2__["HttpHeaders"]({
                 'Content-Type': 'application/json',
@@ -1398,7 +1398,7 @@ const environment = {
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "version", function() { return version; });
-const version = '0.1.0';
+const version = '0.1.1';
 
 
 /***/ }),

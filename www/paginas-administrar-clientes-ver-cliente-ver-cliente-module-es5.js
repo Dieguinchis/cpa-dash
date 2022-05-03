@@ -2491,7 +2491,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
       }, {
         key: "test",
         value: function test($event) {
-          console.warn($event); // window.open('http://192.168.0.71:3000/getZip')
+          console.warn($event); // window.open('http://157.230.90.222:3000/getZip')
         }
       }, {
         key: "descargar",
@@ -2502,7 +2502,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
           // console.warn(1)
           var link = document.createElement("a");
           link.download = this.sucursal.sucursal[0].id_sucursal + ".png";
-          link.href = "http://192.168.0.71:3000/getfile/sucursales/" + this.sucursal.sucursal[0].id_sucursal;
+          link.href = "http://157.230.90.222:3000/getfile/sucursales/" + this.sucursal.sucursal[0].id_sucursal;
           link.click();
         }
       }, {
@@ -2512,7 +2512,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
           // console.warn(equipo.id_equipo)
           var link = document.createElement("a");
           link.download = equipo.id_equipo + ".png";
-          link.href = "http://192.168.0.71:3000/getfile/equipos/" + equipo.id_equipo;
+          link.href = "http://157.230.90.222:3000/getfile/equipos/" + equipo.id_equipo;
           link.click();
         }
       }, {
@@ -2533,7 +2533,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
 
           var link = document.createElement("a");
           link.download = "qrs.png";
-          link.href = "http://192.168.0.71:3000/getZip?type=equipos&name=" + grupoEquipo.nombre_equipo_grupo + "&data=" + ids;
+          link.href = "http://157.230.90.222:3000/getZip?type=equipos&name=" + grupoEquipo.nombre_equipo_grupo + "&data=" + ids;
           link.click();
         }
       }, {
@@ -2560,7 +2560,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
 
           var link = document.createElement("a");
           link.download = "qrs.png";
-          link.href = "http://192.168.0.71:3000/getZip?type=all&name=" + this.sucursal.sucursal[0].razon_social_sucursal + "&data=" + ids;
+          link.href = "http://157.230.90.222:3000/getZip?type=all&name=" + this.sucursal.sucursal[0].razon_social_sucursal + "&data=" + ids;
           link.click();
         }
       }, {
@@ -2586,7 +2586,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
 
           var link = document.createElement("a");
           link.download = "qrs.png";
-          link.href = "http://192.168.0.71:3000/getZip?type=equipos&name=equipos_" + this.sucursal.sucursal[0].razon_social_sucursal + "&data=" + ids;
+          link.href = "http://157.230.90.222:3000/getZip?type=equipos&name=equipos_" + this.sucursal.sucursal[0].razon_social_sucursal + "&data=" + ids;
           link.click();
         }
       }, {
@@ -2607,11 +2607,21 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
                     try {
                       for (_iterator2.s(); !(_step2 = _iterator2.n()).done;) {
                         producto = _step2.value;
-                        input.push({
-                          label: producto.nombre_producto + ' - ' + producto.tipo_producto,
-                          value: producto.id_producto,
-                          type: "radio"
-                        });
+
+                        if (equipo.producto_predeterminado == producto.id_producto) {
+                          input.push({
+                            label: producto.nombre_producto + ' - ' + producto.tipo_producto,
+                            value: producto.id_producto,
+                            checked: true,
+                            type: "radio"
+                          });
+                        } else {
+                          input.push({
+                            label: producto.nombre_producto + ' - ' + producto.tipo_producto,
+                            value: producto.id_producto,
+                            type: "radio"
+                          });
+                        }
                       }
                     } catch (err) {
                       _iterator2.e(err);
@@ -2637,6 +2647,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
                       }, {
                         text: 'Aceptar',
                         handler: function handler(data) {
+                          var equipoAux = JSON.parse(JSON.stringify(equipo));
                           equipo.producto_predeterminado = data;
                           equipo.estado_servicio = undefined;
                           equipo.modificable = undefined;
@@ -2652,6 +2663,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
                             aux = aux.equipoCreado.retorno;
 
                             if (aux.producto_predeterminado) {
+                              equipo.nombre_servicio = equipoAux.nombre_servicio;
                               equipo.producto_predeterminado = _this23.productos.find(function (producto) {
                                 return producto.id_producto == aux.producto_predeterminado;
                               }).id_producto;
@@ -2661,6 +2673,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
                                 return producto.id_producto == aux.producto_predeterminado;
                               }).tipo_producto;
                             } else {
+                              equipo.nombre_servicio = equipoAux.nombre_servicio;
                               equipo.producto_predeterminado = null;
                               equipo.producto_predeterminado_nombre = null;
                             } // this.actualizar_informacion(false);
