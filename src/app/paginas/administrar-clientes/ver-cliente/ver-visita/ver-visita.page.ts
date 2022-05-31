@@ -43,6 +43,16 @@ export class VerVisitaPage implements OnInit {
     })
   }
 
+  async verificarVisita(){
+    var loader = await this.loadingController.create({ message: "Actualizando visita" });
+    loader.present();
+    this.api_visitas.verificarVisit(this.id_visita).then(data => {
+      loader.dismiss()
+      console.log("DATA",data)
+      this.actualizar_informacion();
+    })
+  }
+
   ver_pdf(){
     this.api_visitas.ver_pdf(this.id_visita).subscribe(data => {
       this.url = data;
@@ -62,6 +72,7 @@ export class VerVisitaPage implements OnInit {
     this.api_visitas.informacion_visita(this.id_visita).then(data => {
       this.visita = data;
       this.visita = this.visita.result;
+      console.log(this.visita.visitas.estado_visitas)
       if (new Date (this.visita.visitas.horario_salida).valueOf()) {
         this.visita.visitas.horario_salida = new Date (this.visita.visitas.horario_salida)
       }else{

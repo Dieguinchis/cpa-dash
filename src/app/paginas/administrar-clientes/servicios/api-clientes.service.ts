@@ -31,6 +31,18 @@ export class ApiClientesService {
     return this.http.get(this.apiDir+'/clientes/id/'+id,this.requestOptions);
   }
 
+  verificarVisit(id){
+    console.log(this.apiDir+'/visitas/verificarVisita',{id:id},this.requestOptions)
+    return new Promise((resolve, reject) => {
+      this.http.post(this.apiDir+'/visitas/verificarVisita',{id:id},this.requestOptions)       
+      .subscribe(response => {
+        resolve(response);
+      }, (error) => {
+        reject(error);
+      });
+    });
+  }
+
   alta_sucursal(datos){
     console.log(this.apiDir)
     return this.http.post(this.apiDir+'/sucursales/crear',datos,this.requestOptions);

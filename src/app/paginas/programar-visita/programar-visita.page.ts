@@ -213,6 +213,7 @@ export class ProgramarVisitaPage implements OnInit {
     // console.log(this.servicios_elegidosAux)
     this.grupoWorkStation.forEach((workstation:any) =>{
       workstation.equipos.forEach((servicio) => {
+        console.log(servicio)
         var val = servicio.id_servicio.toString()
         if(this.servicios_elegidosAux.includes(val)){
           if(this.checkExist(arrayWorkstation,workstation.nombre_equipo_grupo) || arrayWorkstation[0].nombre_equipo_grupo == null){

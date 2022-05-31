@@ -1,5 +1,10 @@
 <ion-header>
   <ion-toolbar style="text-align: center;" color="primary">
+    <ion-buttons slot="start" *ngIf="visita?.visitas?.estado_visitas != 'finalizada'">
+      <ion-button (click)="verificarVisita()">
+        <ion-icon name="refresh"></ion-icon>
+        </ion-button>
+    </ion-buttons>
     <ion-title>visita</ion-title>
     <ion-buttons slot="end">
       <ion-button (click)="close()">
