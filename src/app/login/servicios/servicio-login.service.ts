@@ -4,6 +4,7 @@ import { HttpClientModule } from '@angular/common/http'
 import {version} from '../../../environments/version'
 import { promise } from 'protractor';
 import { error } from 'console';
+import { environment } from 'src/environments/environment';
 
 @Injectable({
   providedIn: 'root'
@@ -12,7 +13,7 @@ export class ServicioLoginService {
   private requestOptions
   headers : any
 
-  private apiDir = "http://157.230.90.222:3000";
+  private apiDir = environment.api.base_url;
 
 
   constructor(public http: HttpClient) {
@@ -25,13 +26,13 @@ export class ServicioLoginService {
    }
 
   login(parametros){
-    return this.http.post(this.apiDir+'/auth/signin',parametros,this.requestOptions);
+    return this.http.post(this.apiDir+'auth/signin',parametros,this.requestOptions);
   }
 
   
   checkVersion(){
     return new Promise((resolve,reject)=>{
-      this.http.get(this.apiDir+'/',this.requestOptions).subscribe(resp =>{
+      this.http.get(this.apiDir+'',this.requestOptions).subscribe(resp =>{
         resolve(resp)
       },err =>{
         reject(err)

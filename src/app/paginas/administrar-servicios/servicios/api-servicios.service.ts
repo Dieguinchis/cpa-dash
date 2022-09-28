@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http'
 import { HttpClientModule } from '@angular/common/http'
 import {version} from '../../../../environments/version'
+import { environment } from 'src/environments/environment';
 
 @Injectable({
   providedIn: 'root'
@@ -11,7 +12,7 @@ export class ApiServiciosService {
   private requestOptions
   headers : any
 
-  private apiDir = "http://157.230.90.222:3000";
+  private apiDir = environment.api.base_url;
 
 
   constructor(public http: HttpClient) {
@@ -27,37 +28,37 @@ export class ApiServiciosService {
     console.log(parametros)
     console.log(this.apiDir)
 
-    return this.http.post(this.apiDir+'/servicios/crear',parametros,this.requestOptions);
+    return this.http.post(this.apiDir+'servicios/crear',parametros,this.requestOptions);
   }
 
   mostrar_servicios(){
     console.log(this.apiDir)
 
-    return this.http.get(this.apiDir+'/servicios',this.requestOptions);
+    return this.http.get(this.apiDir+'servicios',this.requestOptions);
   }
 
   getZpl(parametros){
     console.log(this.apiDir)
 
-    return this.http.post(this.apiDir+'/servicios/imprimir',parametros,this.requestOptions);
+    return this.http.post(this.apiDir+'servicios/imprimir',parametros,this.requestOptions);
   }
 
   alta_producto(parametros){
     console.log(this.apiDir)
 
-    return this.http.post(this.apiDir+'/productos/crear',parametros,this.requestOptions);
+    return this.http.post(this.apiDir+'productos/crear',parametros,this.requestOptions);
   }
 
   alta_workstation(parametros){
     console.log(this.apiDir)
 
-    return this.http.post(this.apiDir+'/servicios/equipos/crear',parametros,this.requestOptions);
+    return this.http.post(this.apiDir+'servicios/equipos/crear',parametros,this.requestOptions);
   }
 
   alta_Grupo_workstation(parametros){
     console.log(this.apiDir)
 
-    return this.http.post(this.apiDir+'/servicios/gruposEquipos/crear',parametros,this.requestOptions);
+    return this.http.post(this.apiDir+'servicios/gruposEquipos/crear',parametros,this.requestOptions);
   }
 
   
@@ -65,44 +66,44 @@ export class ApiServiciosService {
     console.log('delete2',id_producto)
     console.log(this.apiDir)
 
-    return this.http.post(this.apiDir+'/servicios/eliminarGrupoEquipos/'+id_producto, null, this.requestOptions);
+    return this.http.post(this.apiDir+'servicios/eliminarGrupoEquipos/'+id_producto, null, this.requestOptions);
   }
 
   
   modificar_Grupo_workstation(parametros){
     console.log(this.apiDir)
 
-    return this.http.post(this.apiDir+'/servicios/gruposEquipos/crear',parametros,this.requestOptions);
+    return this.http.post(this.apiDir+'servicios/gruposEquipos/crear',parametros,this.requestOptions);
   }
 
   ver_servicio(id_servicio){
     console.log(this.apiDir)
 
-    return this.http.get(this.apiDir+'/servicios/id/'+id_servicio,this.requestOptions);
+    return this.http.get(this.apiDir+'servicios/id/'+id_servicio,this.requestOptions);
   }
 
   baja_producto(id_producto){
     console.log(this.apiDir)
 
-    return this.http.post(this.apiDir+'/productos/eliminar/'+id_producto, null, this.requestOptions);
+    return this.http.post(this.apiDir+'productos/eliminar/'+id_producto, null, this.requestOptions);
   }
 
   baja_servicio(id_servicio){
     console.log(this.apiDir)
 
-    return this.http.post(this.apiDir+'/servicios/eliminar/'+id_servicio, null, this.requestOptions);
+    return this.http.post(this.apiDir+'servicios/eliminar/'+id_servicio, null, this.requestOptions);
   }
   update_servicio(parametros){
     // console.log(parametros)
     console.log(this.apiDir)
 
-    return this.http.post(this.apiDir+'/servicios/update',parametros, this.requestOptions);
+    return this.http.post(this.apiDir+'servicios/update',parametros, this.requestOptions);
   }
 
   baja_opcion(id){
     console.log(this.apiDir)
 
-    return this.http.post(this.apiDir+'/servicios/opcion/delete/',{id:id}, this.requestOptions);
+    return this.http.post(this.apiDir+'servicios/opcion/delete/',{id:id}, this.requestOptions);
 
   }
 
@@ -110,7 +111,7 @@ export class ApiServiciosService {
     console.log(id_servicio);
     console.log(this.apiDir)
 
-    return this.http.get(this.apiDir+'/servicios/producto/opciones/'+id_servicio, this.requestOptions);
+    return this.http.get(this.apiDir+'servicios/producto/opciones/'+id_servicio, this.requestOptions);
 
   }
 
@@ -118,13 +119,13 @@ export class ApiServiciosService {
     console.log(producto);
     console.log(this.apiDir)
 
-    return this.http.post(this.apiDir+'/productos/actualizar',producto, this.requestOptions);
+    return this.http.post(this.apiDir+'productos/actualizar',producto, this.requestOptions);
   }
 
   getProductos(){
     console.log(this.apiDir)
 
-    return this.http.get(this.apiDir+'/productos/', this.requestOptions);
+    return this.http.get(this.apiDir+'productos/', this.requestOptions);
   }
   
    

@@ -1,5 +1,6 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { AlertController, LoadingController } from '@ionic/angular';
+import { environment } from 'src/environments/environment';
 import { ApiClientesService } from '../administrar-clientes/servicios/api-clientes.service';
 import { ApiVisitasService } from '../programar-visita/servicios/api-visitas.service';
 
@@ -52,7 +53,7 @@ export class EstadisticasPage implements OnInit {
       }
     }
   };
-  public url = "http://157.230.90.222:3000/public/pdfs/informe .pdf"
+  public url = environment.api.base_url+"public/pdfs/informe .pdf"
 
   constructor(
     public api_clientes: ApiClientesService,

@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http'
 import { HttpClientModule } from '@angular/common/http'
 import {version} from '../../../../environments/version'
+import { environment } from 'src/environments/environment';
 
 @Injectable({
   providedIn: 'root'
@@ -10,7 +11,7 @@ export class AltaClientesApiService {
   private requestOptions
   headers : any
 
-  private apiDir = "http://157.230.90.222:3000";
+  private apiDir = environment.api.base_url;
 
 
   constructor(public http: HttpClient) {
@@ -25,6 +26,6 @@ export class AltaClientesApiService {
    alta_cliente(datos){
     console.log(this.apiDir)
 
-    return this.http.post(this.apiDir+'/clientes/crear',datos,this.requestOptions);
+    return this.http.post(this.apiDir+'clientes/crear',datos,this.requestOptions);
   }
 }
