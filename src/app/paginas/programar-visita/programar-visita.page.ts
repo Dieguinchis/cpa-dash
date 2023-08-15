@@ -34,6 +34,7 @@ export class ProgramarVisitaPage implements OnInit {
   listado_tecnicos: any;
 
   fecha_actual: any;
+  fecha_maxima:any;
   dayNames= ['Domingo','Lunes','Martes','Miercoles','Jueves','Viernes','Sabado']
   monthNames = ['Enero','Febrero','Marzo','Abril','Mayo','Junio','Julio','Agosto','Septiembre','Octubre','Noviembre','Diciembre']
 
@@ -49,7 +50,6 @@ export class ProgramarVisitaPage implements OnInit {
     console.warn(1)
     this.api.mostrar_servicios().subscribe(data =>{
       console.warn(2)
-
       this.listado_servicios = data;
       this.listado_servicios = this.listado_servicios.result;
       console.log(this.listado_servicios,'servicios')
@@ -79,6 +79,7 @@ export class ProgramarVisitaPage implements OnInit {
     }))
 
     this.fecha_actual = moment().format();
+    this.fecha_maxima = moment().add(1, 'years').format();
 
   }
 

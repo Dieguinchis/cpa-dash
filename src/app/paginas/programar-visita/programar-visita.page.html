@@ -90,7 +90,7 @@
     <ion-item>
         <ion-label fixed style="text-align: center;">Elegir una fecha</ion-label>
         <ion-datetime [(ngModel)]="fecha_elegida" [doneText]="'Listo'"
-        [cancelText]="'Cancelar'" [monthNames]="monthNames" [dayNames]="dayNames" displayFormat="DDDD D MMMM YYYY HH:mm" min="{{fecha_actual}}" max="2022" value="{{fecha_actual}}"></ion-datetime>
+        [cancelText]="'Cancelar'" [monthNames]="monthNames" [dayNames]="dayNames" displayFormat="DDDD D MMMM YYYY HH:mm" [max]="fecha_maxima" value="{{fecha_actual}}"></ion-datetime>
     </ion-item>
 
     <div style="width: 100%; text-align: center;">
