@@ -21,9 +21,19 @@
             <b>Email</b>
           </ion-label>
         </ion-col>
-        <ion-col size="3">
+        <ion-col size="2">
           <ion-label>
             <b>Direccion</b>
+          </ion-label>
+        </ion-col>
+        <ion-col size="1">
+          <ion-label>
+            <b>Estado</b>
+          </ion-label>
+        </ion-col>
+        <ion-col size="1">
+          <ion-label>
+            <b></b>
           </ion-label>
         </ion-col>
       </ion-row>
@@ -48,10 +58,15 @@
                 {{cliente.email}}
               </ion-label>
             </ion-col>
-            <ion-col size="3">
+            <ion-col size="2">
               <ion-label>
                 {{cliente.direccion}}
               </ion-label>
+            </ion-col>
+            <ion-col size="1">
+              <ion-badge [color]="cliente.estado === 'Activo' ? 'success' : 'danger'">
+                {{ cliente.estado }}
+              </ion-badge>
             </ion-col>
             <ion-col size="1">
               <ion-icon name="create-outline" style="margin-right: 15px" (click)="modificar_cliente(cliente.id_cliente)"></ion-icon>

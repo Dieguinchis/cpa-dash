@@ -1,3 +1,35 @@
 .titulos{
     color: rgb(131, 131, 131)
 }
+
+ion-icon {
+  cursor: pointer;
+  transition: transform 0.2s ease, color 0.2s ease;
+}
+
+ion-icon:hover {
+  transform: scale(1.2);
+  color: var(--ion-color-primary);
+}
+
+/* Para íconos de eliminación, mantener el rojo al hover */
+ion-icon[color="danger"]:hover {
+  color: var(--ion-color-danger);
+  transform: scale(1.2);
+}
+
+/* Si querés animar los ion-button también */
+ion-button {
+  cursor: pointer;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+ion-button:hover {
+  transform: scale(1.05);
+  box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+}
+
+/* Y si querés un efecto de “click” suave */
+ion-button:active {
+  transform: scale(0.97);
+}

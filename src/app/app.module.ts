@@ -8,7 +8,7 @@ import { StatusBar } from '@ionic-native/status-bar/ngx';
 
 import { AppComponent } from './app.component';
 import { AppRoutingModule } from './app-routing.module';
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { IonicStorageModule } from '@ionic/storage';
 import { ServiceWorkerModule } from '@angular/service-worker';
 import { environment } from '../environments/environment';
@@ -18,17 +18,30 @@ import { EditarVisitaComponent } from './modals/editar-visita/editar-visita.comp
 import { FormsModule } from '@angular/forms';
 import { ModificarProductoComponent } from './paginas/administrar-servicios/ver-servicio/modificar-producto/modificar-producto.component';
 import { VerServicioVisitaComponent } from './modals/ver-servicio-visita/ver-servicio-visita.component';
+import { NgrokSkipInterceptor } from './interceptors/ngrok-skip.interceptor';
 
 @NgModule({
-  declarations: [AppComponent,EditarVisitaComponent, ModificarProductoComponent, VerServicioVisitaComponent],
+  declarations: [AppComponent, EditarVisitaComponent, ModificarProductoComponent, VerServicioVisitaComponent],
   entryComponents: [EditarVisitaComponent, ModificarProductoComponent, VerServicioVisitaComponent],
-  imports: [FormsModule,BrowserModule, IonicModule.forRoot(),
-    IonicStorageModule.forRoot(), AppRoutingModule, HttpClientModule, ServiceWorkerModule.register('ngsw-worker.js', { enabled: environment.production })],
+  imports: [
+    FormsModule,
+    BrowserModule,
+    IonicModule.forRoot(),
+    IonicStorageModule.forRoot(),
+    AppRoutingModule,
+    HttpClientModule,
+    ServiceWorkerModule.register('ngsw-worker.js', { enabled: environment.production })
+  ],
   providers: [
     StatusBar,
     SplashScreen,
     NgxImageCompressService,
-    { provide: LocationStrategy, useClass: HashLocationStrategy }
+    { provide: LocationStrategy, useClass: HashLocationStrategy },
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: NgrokSkipInterceptor,
+      multi: true
+    }
   ],
   bootstrap: [AppComponent]
 })

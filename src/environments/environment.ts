@@ -6,7 +6,7 @@ export const environment = {
   production: false,
   api:{
     //base_url:"http://45.227.161.79:3000/"
-     base_url:"http://localhost:3000/"
+     base_url: "https://alison-unresistant-flourishingly.ngrok-free.dev/cpa-api/"
     // base_url:"https://backend.desinfeccionescpa.com.ar/"
   }
 };
