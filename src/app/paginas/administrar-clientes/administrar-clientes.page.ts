@@ -16,51 +16,51 @@ export class AdministrarClientesPage implements OnInit {
   public temp;
 
   ngOnInit() {
-   this.actualizar_informacion();
+    this.actualizar_informacion();
   }
 
-  async baja_cliente(id_cliente){
+  async baja_cliente(id_cliente) {
     const alert = await this.alertController.create({
       header: 'Seguro que desea eliminar el cliente?',
-      buttons: 
-      [
-       { 
-          text: 'No',
-          handler: () => {
+      buttons:
+        [
+          {
+            text: 'No',
+            handler: () => {
+            }
+          },
+          {
+            text: 'Si',
+            handler: () => {
+              this.eliminar_cliente(id_cliente);
+            }
           }
-        },
-        {
-          text: 'Si',
-          handler: () => {
-            this.eliminar_cliente(id_cliente);
-          }
-        }
-      ]
+        ]
     });
     await alert.present();
   }
 
-  eliminar_cliente(id_cliente){
-    this.api_clientes.eliminar_cliente(id_cliente).subscribe(data =>{
-      this.actualizar_informacion(), (error =>{
-      console.log(error)
+  eliminar_cliente(id_cliente) {
+    this.api_clientes.eliminar_cliente(id_cliente).subscribe(data => {
+      this.actualizar_informacion(), (error => {
+        console.log(error)
       })
     })
   }
 
-  actualizar_informacion(){
+  actualizar_informacion() {
     this.api_clientes.listado_clientes().subscribe(data => {
       this.clientes = data;
       this.clientes = this.clientes.result;
       this.clientes.sort(this.ordenarClientes);
       this.temp = this.clientes;
     }),
-    (error => {
-      console.log(error)
-    })
+      (error => {
+        console.log(error)
+      })
   }
 
-  ordenarClientes(a,b){
+  ordenarClientes(a, b) {
     if (a.razon_social_cliente.toLowerCase() > b.razon_social_cliente.toLowerCase()) {
       return 1
     }
@@ -70,14 +70,14 @@ export class AdministrarClientesPage implements OnInit {
     return 0
   }
 
-  async modificar_cliente(id_cliente){
+  async modificar_cliente(id_cliente) {
     const modal = await this.modalController.create({
       component: ModificarClientePage,
       componentProps: {
         'id_cliente': id_cliente
       }
     });
-    modal.onDidDismiss().then(data =>{
+    modal.onDidDismiss().then(data => {
       this.actualizar_informacion();
     })
     return await modal.present();
@@ -90,14 +90,14 @@ export class AdministrarClientesPage implements OnInit {
     const temp = this.temp.filter(function (d) {
 
       return d.razon_social_cliente?.toLowerCase().includes(val) || d.direccion?.toLowerCase().includes(val) || d.email?.toLowerCase().includes(val) || d.telefono?.toString().toLowerCase().includes(val)
-      
+
     });
 
     // update the rows
     this.clientes = temp;
   }
 
-  searchClear(){
+  searchClear() {
     this.clientes = this.temp
   }
 

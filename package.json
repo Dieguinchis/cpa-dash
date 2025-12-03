@@ -33,7 +33,7 @@
     "moment": "^2.27.0",
     "ngx-image-compress": "^8.0.4",
     "rxjs": "~6.5.1",
-    "tslib": "^1.10.0",
+    "tslib": "^1.14.1",
     "zone.js": "~0.10.2"
   },
   "devDependencies": {

@@ -32,7 +32,7 @@
         </ion-item>
       </ion-col>
       <ion-col size="1.65">
-        <ion-item *ngIf="clientesElegidos.length == 1">
+        <ion-item *ngIf="clientesElegidos?.length == 1">
           <ion-label position="floating">Sucursal</ion-label>
           <ion-select [interfaceOptions]="interfaceOption" (ionChange)="changeSucursal()" [(ngModel)]="sucursalesElegidas" multiple>
             <ion-select-option *ngFor="let sucursal of sucursales" [value]="sucursal">{{sucursal.razon_social_sucursal}}</ion-select-option>
@@ -41,7 +41,7 @@
         </ion-item>
       </ion-col>
       <ion-col size="1.65">
-        <ion-item *ngIf="sucursalesElegidas.length == 1">
+        <ion-item *ngIf="sucursalesElegidas?.length == 1">
           <ion-label position="floating">Sector</ion-label>
           <ion-select [interfaceOptions]="interfaceOption" (ionChange)="changeSector(sectoresElegidos[0].id_equipo_grupo)" [(ngModel)]="sectoresElegidos" multiple>
             <ion-select-option *ngFor="let sector of sectores" [value]="sector">{{sector.nombre_equipo_grupo}}</ion-select-option>
@@ -50,7 +50,7 @@
         </ion-item>
       </ion-col>
       <ion-col size="1.65">
-        <ion-item *ngIf="sectoresElegidos.length == 1">
+        <ion-item *ngIf="sectoresElegidos?.length == 1">
           <ion-label position="floating">Equipo</ion-label>
           <ion-select (ionChange)="equiposChange()" [interfaceOptions]="interfaceOption" [(ngModel)]="equiposElegidos" multiple>
             <ion-select-option *ngFor="let equipo of equipos" [value]="equipo">{{equipo.nombre_equipo}}</ion-select-option>
@@ -122,7 +122,7 @@
       <ion-col size="1.25"><b>Medicion UV</b></ion-col>
     </ion-item>
     <div *ngFor="let formularios of equipos">
-      <ion-item *ngIf="formularios.length == 3">
+      <ion-item *ngIf="formularios?.length == 3">
         <ion-col size="1">
           {{formularios[0]?.fecha_visita | date:"dd/MM/yyyy"}}
         </ion-col>
@@ -148,7 +148,7 @@
           {{formularios[2]?.respuesta}}
         </ion-col>
       </ion-item>
-      <ion-item *ngIf="formularios.length == 4">
+      <ion-item *ngIf="formularios?.length == 4">
         <ion-col size="1">
           {{formularios[0]?.fecha_visita | date:"dd/MM/yyyy"}}
         </ion-col>
@@ -180,7 +180,7 @@
     </div>
   </div>
 
-  <ion-card *ngIf="respuestas.length > 0">
+  <ion-card *ngIf="respuestas?.length > 0">
     <ion-card-header color="primary">
       <ion-card-title>Resumen</ion-card-title>
     </ion-card-header>
@@ -313,12 +313,12 @@
       </ion-col>
     </ion-item> 
   </ion-card>
-  <ion-button *ngIf="respuestas.length > 0" (click)="verPdf()" expand="block"  shape="round">
+  <ion-button *ngIf="respuestas?.length > 0" (click)="verPdf()" expand="block"  shape="round">
     Ver PDF
   </ion-button>
 </ion-content>
 
-<ion-fab *ngIf="respuestas.length > 0" vertical="bottom" horizontal="end" slot="fixed">
+<ion-fab *ngIf="respuestas?.length > 0" vertical="bottom" horizontal="end" slot="fixed">
   <ion-fab-button (click)="botonBajar()">
     <ion-icon name="chevron-down-outline"></ion-icon>
   </ion-fab-button>

@@ -37,6 +37,14 @@
     </ion-input>
   </ion-item>
 
+   <ion-item lines="full">
+    <ion-label class="titulos">Estado:</ion-label>
+    <ion-select [(ngModel)]="estado" interface="alert" placeholder="Seleccionar estado">
+      <ion-select-option value="activo">activo</ion-select-option>
+      <ion-select-option value="inactivo">inactivo</ion-select-option>
+    </ion-select>
+  </ion-item>
+
   <ion-item lines="full">
     <!-- <img [src]="cliente.clienteDatos[0].logo_cliente" alt="" *ngIf="cliente.clienteDatos[0].logo_cliente"> -->
     <img [src]="logo" alt="" style="width: 50%;margin-left: 25%;padding: 5px;">
